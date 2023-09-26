@@ -9,17 +9,14 @@ const App = () => {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          {
-            routes.map((route, idx) => {
-              return (
-                <Route 
-                  key={idx}
-                  path={route.path}
-                  element={route.page}
-                ></Route>
-              )
-            })
-          }
+          {routes.map((route, idx) => {
+            return (<Route 
+                      key={idx}
+                      exact={route.exact}
+                      path={route.path}
+                      element={route.page}
+                    ></Route>
+                  )})}
         </Routes>
       </BrowserRouter>
     </>

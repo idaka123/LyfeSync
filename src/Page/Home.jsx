@@ -1,9 +1,15 @@
+import styled from "styled-components";
+
 const Home = () => {
     return ( 
-        <div> 
-            Home 
-        </div>
+        <Container> 
+            Home
+        </Container>
      );
 }
  
 export default Home;
+
+const Container = styled.div`
+    width: 100%;
+`

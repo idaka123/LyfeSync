@@ -30,7 +30,6 @@ const GlobalStyles = createGlobalStyle`
     .icon {
         cursor: pointer;
         color: var(--secondary_admin);
-        transition: all .2s ease-in-out;
         &:hover {
             color: var(--hover-icon);
         }
