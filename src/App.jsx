@@ -1,19 +1,27 @@
-import { useState } from 'react'
 import GlobalStyles from './GlobalStyle'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { routes } from './Routes/route';
 
 const App = () => {
-  const [count, setCount] = useState(0)
-
-  const update = () => {
-    const count = Math.floor(Math.random() * 10)
-    setCount(count)
-  }
 
   return (
     <>
       <GlobalStyles />
-      <button onClick={update}>{count}</button>
-
+      <BrowserRouter>
+        <Routes>
+          {
+            routes.map((route, idx) => {
+              return (
+                <Route 
+                  key={idx}
+                  path={route.path}
+                  element={route.page}
+                ></Route>
+              )
+            })
+          }
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
