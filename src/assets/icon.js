@@ -1,7 +1,7 @@
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai';
 import { MdSecurity, MdOutlineAdminPanelSettings, MdNotificationsNone, MdDelete } from 'react-icons/md'
-import { FiUser, FiSettings } from 'react-icons/fi'
+import { FiUser, FiSettings, FiMenu } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
@@ -16,7 +16,7 @@ import { SiGumtree } from 'react-icons/si'
 
 
 
-export const icon = {
+export const Icon = {
     passHide: AiFillEyeInvisible,
     passUnHide: AiFillEye,
     managerRole: MdSecurity,
@@ -39,5 +39,6 @@ export const icon = {
     plus: ImPlus,
     home: BiHomeAlt2,
     tree: SiGumtree,
-    setting: FiSettings
+    setting: FiSettings,
+    menu: FiMenu
 }

@@ -3,7 +3,8 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
     :root {
-        
+        --sidebar-wt: 60px;
+        --header-ht: 94px;
     }
     
     *, *:before, *:after {
@@ -14,7 +15,13 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: 'Roboto', sans-serif;
-        font-size: 1.3rem;
+
+        @media screen and (min-width: 769px) {
+            font-size: 1.3rem;          
+        }
+        @media screen and (max-width: 768px) {
+            font-size: 1.6rem;
+        }
     }
     html {
         font-size: 62.5%;
@@ -26,22 +33,6 @@ const GlobalStyles = createGlobalStyle`
     a {
         color: var(--text-color);
         text-decoration: none;
-    }
-    .icon {
-        cursor: pointer;
-        color: var(--secondary_admin);
-        &:hover {
-            color: var(--hover-icon);
-        }
-    }
-    label {
-        font-size: 1.2rem;
-    }
-    .mt-8{
-        margin-top: 8px!important;
-    }
-    .mb-8{
-        margin-bottom: 8px!important;
     }
 `
 
