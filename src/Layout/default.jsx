@@ -49,7 +49,14 @@ const DftLaySty = styled.div`
         .page-content {
             margin-left: ${({device}) => device === "desktop" ? "var(--sidebar-wt)" : "0px" };
             width: 100%;
-            height: calc(100vh - var(--header-ht));
+
+            @media (max-width: 768px) {
+                height: calc(100vh - var(--header-ht));
+            }
+
+            @media (min-width: 769px) {
+                height: 100vh;
+            }
         }
     }
 

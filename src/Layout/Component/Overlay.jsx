@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const overlayVariant = {
     hidden: { opacity: 0, visibility: "hidden" },
-    visible: { opacity: 1, visibility: "visible"},
+    visible: { opacity: 1, visibility: "visible" },
   };
 
 const Overlay = (p) => {

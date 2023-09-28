@@ -128,14 +128,14 @@ const SidebarLink = styled(Link)`
     justify-content: flex-start;
 
     .icon-wrapper {
-        height: 15px;
+        height: 17px;
         width: 29px;
         position: relative;
         .icon {
             position: absolute;
             left: 0;
             width: 100%;
-            font-size: 15px;
+            font-size: 18px;
         }
     }
 `;

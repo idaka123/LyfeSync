@@ -17,10 +17,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
 
         @media screen and (min-width: 769px) {
-            font-size: 1.3rem;          
+            font-size: 1.5rem;          
         }
         @media screen and (max-width: 768px) {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
     }
     html {
@@ -33,6 +33,13 @@ const GlobalStyles = createGlobalStyle`
     a {
         color: var(--text-color);
         text-decoration: none;
+    }
+
+    .select-none {
+        -webkit-user-select: none!important;
+        -moz-user-select: none!important;
+        -ms-user-select: none!important;
+        user-select: none!important;
     }
 `
 
