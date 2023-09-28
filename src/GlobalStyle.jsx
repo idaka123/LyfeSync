@@ -4,7 +4,8 @@ const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
     :root {
         --sidebar-wt: 60px;
-        --header-ht: 94px;
+        --header-ht: 60px;
+        --main-gradient: linear-gradient(118deg,rgba(30, 30, 30 ,1),rgba(30, 30, 30 ,.7));
     }
     
     *, *:before, *:after {
@@ -40,6 +41,11 @@ const GlobalStyles = createGlobalStyle`
         -moz-user-select: none!important;
         -ms-user-select: none!important;
         user-select: none!important;
+    }
+
+    .col3 {
+        width: 33.333333%;
+        height: 100%;
     }
 `
 

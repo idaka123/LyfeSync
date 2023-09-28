@@ -115,7 +115,7 @@ const SidebarMenuItem = styled(motion.li)`
     
     a {
       color: #ffffff!important;
-      background: linear-gradient(118deg,rgba(30, 30, 30 ,1),rgba(30, 30, 30 ,.7));
+      background: var(--main-gradient);
     }
   }
 

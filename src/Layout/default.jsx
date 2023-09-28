@@ -15,13 +15,13 @@ const DefaultLayout = ( p ) => {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
     const toggleSideBar = (boolen) => {
-        console.log("toggle side bar")
         return () => setIsOpenMenu(boolen)
     }
 
-    return ( 
+    if(device === "mobile") {
+        return (
         <DftLaySty device={device} > 
-           {device === "mobile" && <Header toggleSideBar={toggleSideBar}/>}
+           <Header toggleSideBar={toggleSideBar}/>
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
                 <Overlay isOpenMenu={isOpenMenu} toggleSideBar={toggleSideBar}/>
@@ -30,7 +30,21 @@ const DefaultLayout = ( p ) => {
                 </div>
             </div>
         </DftLaySty>
-     );
+        )
+    }
+    else if(device === "desktop") {
+        return (
+            <DftLaySty device={device} > 
+                <div className="body">
+                    <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
+                    <Overlay isOpenMenu={isOpenMenu} toggleSideBar={toggleSideBar}/>
+                    <div className="page-content">
+                        {children}
+                    </div>
+                </div>
+            </DftLaySty>
+         );
+    }
 }
  
 export default DefaultLayout;
