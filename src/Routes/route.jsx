@@ -1,25 +1,27 @@
 import DefaultLayout from "../Layout/default"
 import Home from "../Page/Home"
-import Setting from "../Page/Setting"
+import Planner from "../Page/Planner"
 import NoPage from "../Page/NoPage"
+import paths from "./path"
+
 
 export const routes = [
     {
         name: "home",
         page: <DefaultLayout><Home/></DefaultLayout>,
-        path: '/',
+        path: paths.home,
         exact: true,
     },
     {
-        name: "setting",
-        page: <DefaultLayout><Setting/></DefaultLayout>,
-        path: '/setting',
+        name: "planner",
+        page: <DefaultLayout><Planner/></DefaultLayout>,
+        path: paths.planner,
         exact: true,
     },
     {
         name: "noPage",
         page: <NoPage/>,
-        path: '*',
+        path: paths.noPage,
         exact: true,
     }
 ]
