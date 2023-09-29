@@ -15,11 +15,6 @@ const Overlay = (p) => {
     useEffect(() => {
       setOverlay(trigger)
     }, [trigger]);
-    
-    const hdleClickOverlay = () => {
-
-      onClick()
-    }
 
     return <Container
                 initial="hidden"
@@ -27,7 +22,7 @@ const Overlay = (p) => {
                 variants={overlayVariant}
                 transition={{ duration: .2 }}
                 data-name="global-overlay"
-                onClick={() => hdleClickOverlay()}></Container>
+                onClick={onClick()}></Container>
 }
 
 export default Overlay;

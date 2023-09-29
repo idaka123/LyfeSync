@@ -24,7 +24,6 @@ const Planner = () => {
         return ( 
             <Container>
                 <PlannerMobile>
-                    
                 </PlannerMobile> 
     
             </Container>

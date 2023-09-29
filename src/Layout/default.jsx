@@ -33,6 +33,11 @@ const DefaultLayout = ( p ) => {
                 : overlayFeture.close()
         }
     }
+    const hdleClickOverLay = () => {
+        
+        if (isOpenMenu) return toggleSideBar(false)
+        
+    }
 
     useEffect(() => {
         
@@ -44,7 +49,7 @@ const DefaultLayout = ( p ) => {
            <Header toggleSideBar={toggleSideBar}/>
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                <Overlay trigger={isOverlay} onClick={toggleSideBar(false)}/>
+                <Overlay trigger={isOverlay} onClick={hdleClickOverLay}/>
                 <div className="page-content">
                     {children}
                 </div>
@@ -57,7 +62,7 @@ const DefaultLayout = ( p ) => {
             <DftLaySty device={device} > 
                 <div className="body">
                     <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                    <Overlay trigger={isOverlay} onClick={toggleSideBar(false)}/>
+                    <Overlay trigger={isOverlay} onClick={hdleClickOverLay}/>
                     <div className="page-content">
                         {children}
                     </div>

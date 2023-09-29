@@ -4,8 +4,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import TaskSection from "./TaskSection";
 import { plannerData } from "./Planner.data";
+import Button from "../../Component/Button";
 
-const PlannerMobile = () => {
+const PlannerMobile = (p) => {
+
+    const { children } = p
+
+    const section = Object.keys(plannerData)
 
     const [tab, setTab] = useState("task")
 
@@ -62,9 +67,25 @@ const PlannerMobile = () => {
                                 exit="disappear"
                                 transition={{ duration: 0.2 }} 
                                 >
-                        <TaskSection
-                            data={plannerData[tab]}
-                            /> 
+                        
+                    <TaskSection key={tab} className="col3" data={plannerData[tab]}>
+                        <ImgMotivation>
+                            <img src={plannerData[tab].empty?.img} alt="" />
+                        </ImgMotivation> 
+
+                        <TextMotivation>
+                            <p>{plannerData[tab].empty?.text1}</p>
+                            <p>{plannerData[tab].empty?.text2}</p>
+                            <p>{plannerData[tab].empty?.text3}</p>
+                        </TextMotivation>
+                        
+                        
+                        <Button title={`Tạo ${tab}`}  
+                                className="text-center"
+                                style={{marginTop: "16px"}}/>
+
+                    </TaskSection>     
+                            
                     </motion.div>
                 </AnimatePresence>
         </Container>
@@ -103,6 +124,38 @@ const TabList = styled.ul`
             user-select: none;
 
         }
+    }
+`
+
+
+const ImgMotivation = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    img {
+        max-width: 250px;
+        width: 100%;
+    }
+`
+
+const TextMotivation = styled.div`
+
+    p:nth-child(1) {
+        text-align: center;
+        font-weight: 600;
+    }
+    p:nth-child(2) {
+        text-align: center;
+        margin-top: .5rem;
+        font-size: 1.15rem;
+
+    }
+    p:nth-child(3) {
+        text-align: center;
+        margin-top: .5rem;
+        font-style: italic;
+        font-size: 1rem;
     }
 `
 const Underline = styled(motion.div) `
