@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import Sidebar from "./Component/Sidebar";
 import Overlay from "./Component/Overlay";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
 
@@ -14,9 +14,29 @@ const DefaultLayout = ( p ) => {
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
-    const toggleSideBar = (boolen) => {
-        return () => setIsOpenMenu(boolen)
+    const [isOverlay, setOverlay] = useState(false)
+
+    const overlayFeture = {
+        open() {
+            setOverlay(true)
+        },
+        close() {
+            setOverlay(false)
+        }
     }
+
+    const toggleSideBar = (boolen) => {
+        return () => {
+            setIsOpenMenu(boolen)
+            boolen 
+                ? overlayFeture.open()
+                : overlayFeture.close()
+        }
+    }
+
+    useEffect(() => {
+        
+    }, []);
 
     if(device === "mobile") {
         return (
@@ -24,7 +44,7 @@ const DefaultLayout = ( p ) => {
            <Header toggleSideBar={toggleSideBar}/>
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                <Overlay isOpenMenu={isOpenMenu} toggleSideBar={toggleSideBar}/>
+                <Overlay trigger={isOverlay} onClick={toggleSideBar(false)}/>
                 <div className="page-content">
                     {children}
                 </div>
@@ -37,7 +57,7 @@ const DefaultLayout = ( p ) => {
             <DftLaySty device={device} > 
                 <div className="body">
                     <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                    <Overlay isOpenMenu={isOpenMenu} toggleSideBar={toggleSideBar}/>
+                    <Overlay trigger={isOverlay} onClick={toggleSideBar(false)}/>
                     <div className="page-content">
                         {children}
                     </div>

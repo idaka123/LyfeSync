@@ -19,7 +19,7 @@ const Sidebar = (p) => {
 
     const SideStyle = {
         open: () => ({
-            width: device === "desktop" ? "335px" : "290px",
+            width: device === "desktop" ? "300px" : "250px",
             transition: {
                 type: 'spring',
             }
@@ -112,7 +112,7 @@ const SidebarMenuItem = styled(motion.li)`
   &.active{
     border-radius: 10px!important;
     z-index: 99;
-    
+    box-shadow: 0 0 10px 1px rgba(30,30,30,.7);
     a {
       color: #ffffff!important;
       background: var(--main-gradient);

@@ -15,7 +15,6 @@ const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         padding: 0;
         margin: 0;
-        font-family: 'Roboto', sans-serif;
 
         @media screen and (min-width: 769px) {
             font-size: 1.5rem;          
@@ -26,10 +25,17 @@ const GlobalStyles = createGlobalStyle`
     }
     html {
         font-size: 62.5%;
+        font-size: 10px;
+        width: 100%;
+        line-height: 1.5;
+        letter-spacing: .01rem;
     }
     body {
-        font-size: 1.6rem;
+        color: #626262;
         text-rendering: optimizeSpeed;
+        background-color: #FCFCFC;
+        font-family: Montserrat,Helvetica,Arial,sans-serif;
+        font-weight: 400;
     }
     a {
         color: var(--text-color);
@@ -41,6 +47,10 @@ const GlobalStyles = createGlobalStyle`
         -moz-user-select: none!important;
         -ms-user-select: none!important;
         user-select: none!important;
+    }
+
+    .text-center {
+        text-align: center!important;
     }
 
     .col3 {

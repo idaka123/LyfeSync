@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const overlayVariant = {
@@ -7,13 +8,26 @@ const overlayVariant = {
   };
 
 const Overlay = (p) => {
-    const { isOpenMenu, toggleSideBar } = p
+    const { trigger, onClick } = p
+
+    const [overlay, setOverlay] = useState(false)
+
+    useEffect(() => {
+      setOverlay(trigger)
+    }, [trigger]);
+    
+    const hdleClickOverlay = () => {
+
+      onClick()
+    }
+
     return <Container
                 initial="hidden"
-                animate={ isOpenMenu ? "visible" : "hidden"}
+                animate={ overlay ? "visible" : "hidden"}
                 variants={overlayVariant}
                 transition={{ duration: .2 }}
-                onClick={toggleSideBar(false)}></Container>
+                data-name="global-overlay"
+                onClick={() => hdleClickOverlay()}></Container>
 }
 
 export default Overlay;

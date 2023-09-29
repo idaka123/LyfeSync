@@ -18,7 +18,7 @@ const Header = (p) => {
 export default Header;
 
 const Container = styled.div`
-    background-color: #FCFCFC;
+
     height: var(--header-ht);
     width: 100vw;
     .header {

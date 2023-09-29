@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const TaskSection = (p) => {
 
-    const { data } = p
+    const { data, children } = p
     const { name, dateZone } = data 
     const hleSelctDateZ = (e) => {
         setState(e.target.getAttribute("name"))
@@ -25,6 +25,7 @@ const TaskSection = (p) => {
                 )
             })}
         </DateZone> 
+        {children}
     </Task>
     )
 }
@@ -36,6 +37,7 @@ const Task = styled.section`
     width: 100%;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    margin-top: 16px;
 `
 
 
