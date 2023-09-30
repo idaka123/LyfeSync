@@ -1,19 +1,34 @@
+import { motion } from "framer-motion"
 import { useState } from "react"
 import styled from "styled-components"
 
+import { plannerData } from "./Planner.data";
+
 const TaskSection = (p) => {
 
-    const { data, children } = p
-    const { name, dateZone } = data 
+    const { data, children, openModalData } = p
+    const dateZone = data.DateZone
+ 
     const hleSelctDateZ = (e) => {
         setState(e.target.getAttribute("name"))
     }
 
-    const [state, setState] = useState(dateZone[0].name)
+    const [state, setState] = useState(data.dateZone[0].name)
+
+    const handleClickAdd = (e) => {
+        const name = e.target.getAttribute("name")
+        openModalData(name)
+        // localStorage.setItem("tab", name)
+    }
 
     return (
-    <Task>
-        <h2 className="select-none title">{name}<span className="icon-wrap"> &nbsp;+ </span></h2>
+    <Task 
+        drag
+        dragDirectionLock
+        dragConstraints={{ top: 0, right: 0, bottom: 0, left: 0 }}
+        dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+        dragElastic={0.5}    >
+        <h2 className="select-none title">{data.name}<span className="icon-wrap" onClick={handleClickAdd} name={data.name}> &nbsp;+ </span></h2>
         <DateZone>
             {dateZone && dateZone.map(date => {
                 return (
@@ -33,7 +48,7 @@ const TaskSection = (p) => {
 export default TaskSection;
 
 
-const Task = styled.section`
+const Task = styled(motion.section)`
     width: 100%;
     padding-left: 1.5rem;
     padding-right: 1.5rem;

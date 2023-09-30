@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
+import OverlayContext from "../../Context/overlay.context";
 
 const overlayVariant = {
     hidden: { opacity: 0, visibility: "hidden" },
@@ -8,26 +9,28 @@ const overlayVariant = {
   };
 
 const Overlay = (p) => {
-    const { trigger, onClick } = p
+    const { onClick } = p
 
-    const [overlay, setOverlay] = useState(false)
+    const { isOverlay, closeOverlay } = useContext(OverlayContext)
 
-    useEffect(() => {
-      setOverlay(trigger)
-    }, [trigger]);
+    const hdleClick = () => {
+      closeOverlay()
+      onClick()
+    }
 
     return <Container
                 initial="hidden"
-                animate={ overlay ? "visible" : "hidden"}
+                animate={ isOverlay ? "visible" : "hidden"}
                 variants={overlayVariant}
                 transition={{ duration: .2 }}
                 data-name="global-overlay"
-                onClick={onClick()}></Container>
+                onClick={hdleClick}></Container>
 }
 
 export default Overlay;
 
 const Container = styled(motion.div) `
+    cursor: pointer;
     position: fixed;
     background-color: #44ffff;
     top: 0;

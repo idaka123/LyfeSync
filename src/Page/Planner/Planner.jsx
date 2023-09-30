@@ -1,68 +1,98 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { plannerData } from "./Planner.data";
+import { AnimatePresence, motion } from "framer-motion";
+import { CirclePicker } from "react-color";
+
 import DeviceContext from "../../Context/Device.context";
 import PlannerMobile from "./Planner.mobile";
-import TaskSection from "./TaskSection";
-import { AnimatePresence, motion } from "framer-motion";
-import Button from "/src/Component/Button.jsx";
+import PlannerDesktop from "./Planner.desktop";
+import Input from "../../Component/Input";
+import OverlayContext from "../../Context/overlay.context";
+import ModalContext from "../../Context/Modal.conetxt";
+import Overlay from "../../Layout/Component/Overlay";
+import Modal from "../../Component/Modal";
+import { Img } from "../../Assets/svg";
+
+
 // import { Icon } from "../Assets/icon";
 
 
 const Planner = () => {
 
+    const [modalData, setModalData] = useState("")
+
     const { device } = useContext(DeviceContext)
-
-    const section = Object.keys(plannerData)
-
-    const hldClickCreateTask = () => {
-        console.log("Create Task")
-    }
+    const { openOverlay } = useContext(OverlayContext)
+    const { openModal, closeModal }  = useContext(ModalContext)
 
     
-    if(device === "mobile") {
-        return ( 
-            <Container>
-                <PlannerMobile>
-                </PlannerMobile> 
-    
-            </Container>
-         );
+    const openModalData = (name) => {
+        setModalData(name)
+        openModal(name)
+        openOverlay()
     }
-    else if(device === "desktop") {
-        
+ 
+
+    // useEffect(() => {
+    //     onClickOverlay(closeModal)
+    // }, []);
+    
+    const Mobile = () => {
         return (
-        <AnimatePresence mode="wait">
-            <Container style={{paddingTop: "40px"}}
-            initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
-            animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}
-            > 
-            {section && section.map((sec, idx) => {
-                return (
-                <TaskSection key={idx} className="col3" data={plannerData[sec]}>
-                    <ImgMotivation>
-                        <img src={plannerData[sec].empty?.img} alt="" />
-                    </ImgMotivation> 
-
-                    <TextMotivation>
-                        <p>{plannerData[sec].empty?.text1}</p>
-                        <p>{plannerData[sec].empty?.text2}</p>
-                        <p>{plannerData[sec].empty?.text3}</p>
-                    </TextMotivation>
-                    
-                    
-                    <Button title={`Tạo ${sec}`} onClick={hldClickCreateTask} 
-                            className="text-center"
-                            style={{marginTop: "16px"}}/>
-
-                </TaskSection>     
-                )
-            })}
-                
+            <Container>
+                <PlannerMobile openModalData={openModalData}/>
             </Container>
-        </AnimatePresence>
+    )}
+
+    const Desktop = () => {
+        return (
+            <Container style={{paddingTop: "40px"}}> 
+                <PlannerDesktop openModalData={openModalData}/>
+            </Container>
          );
     }
+
+    return (
+        <AnimatePresence mode="wait">
+            <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
+                        animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
+                <Overlay onClick={closeModal}/>
+                <Modal >
+                    <Content>
+                        <div className="title">
+                            <Label className="text-dark">
+                                <Img.pen />
+                                <span>Tiêu đề</span> 
+                            </Label>
+                            
+                            <div className="title-input">
+                                <Input width="80%"/>
+                            </div>
+                        </div>
+
+                        <div className="tag">
+                            <Label className="text-dark">
+                                <Img.tag />
+                                <span>Màu tag</span> 
+                            </Label>
+
+                            <div className="color-input">
+                                <CirclePicker 
+                                    colors={["#f44336", "#e91e63", "#673ab7", "#03a9f4", "#4caf50", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", "#FFFFFF"]}
+                                    width="62%"
+                                    circleSize={20}
+                                    circleSpacing={10}
+                                    onSwatchHover={(color, event) => console.log(color, event)}
+                                    />
+                            </div>
+                        </div>
+
+                    </Content> 
+                </Modal>
+                {device === "desktop" ? <Desktop /> : <Mobile /> }
+            </motion.div> 
+        </AnimatePresence>
+    )
 }
  
 
@@ -74,7 +104,6 @@ const Container = styled(motion.div)`
     padding-right: 25px;
     padding-bottom: 0px;
     padding-left: 25px;
-    overflow-y: scroll;
     display: flex;
 
     section h2.title {
@@ -98,33 +127,45 @@ const Container = styled(motion.div)`
     }
 `
 
-const ImgMotivation = styled.div`
+const Content = styled.div`
+
+    height: calc(100vh - var(--modal-header));
+
+    .title {
+        margin-top: 18px;
+
+        .title-input {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .tag {
+        margin-top: 2rem;
+
+        .color-input {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+`
+const Label = styled.div`
+
     display: flex;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    align-items: center;
 
-    img {
-        max-width: 250px;
-        width: 100%;
+    svg {
+        width: 15px;
     }
-`
 
-const TextMotivation = styled.div`
-
-    p:nth-child(1) {
-        text-align: center;
-        font-weight: 600;
-    }
-    p:nth-child(2) {
-        text-align: center;
-        margin-top: .5rem;
-        font-size: 1.15rem;
-
-    }
-    p:nth-child(3) {
-        text-align: center;
-        margin-top: .5rem;
-        font-style: italic;
-        font-size: 1rem;
+    span {
+        margin-left: 6px;
+        font-weight: 700;
     }
 `

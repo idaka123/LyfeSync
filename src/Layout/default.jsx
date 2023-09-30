@@ -2,74 +2,61 @@
 import styled from "styled-components";
 import Sidebar from "./Component/Sidebar";
 import Overlay from "./Component/Overlay";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
+import OverlayContext, { OverlayProvider } from "../Context/overlay.context";
+import { ModalProvider } from "../Context/Modal.conetxt";
 
 
 const DefaultLayout = ( p ) => {
+    const { children } = p
+
+    return (
+    <ModalProvider>
+        <OverlayProvider>
+            <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
+        </OverlayProvider>
+    </ModalProvider>
+    )
+}
+
+const DefaultLayoutComponent = (p) => {
     const { children } = p
 
     const { device } = useContext(DeviceContext)
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
-    const [isOverlay, setOverlay] = useState(false)
+    const { openOverlay, closeOverlay } = useContext(OverlayContext)
 
-    const overlayFeture = {
-        open() {
-            setOverlay(true)
-        },
-        close() {
-            setOverlay(false)
-        }
+    // const 
+
+    const hdleClickOverLay = () => {
+        if (isOpenMenu) return toggleSideBar(false)
     }
 
     const toggleSideBar = (boolen) => {
         return () => {
             setIsOpenMenu(boolen)
             boolen 
-                ? overlayFeture.open()
-                : overlayFeture.close()
+                ? openOverlay()
+                : closeOverlay()
         }
     }
-    const hdleClickOverLay = () => {
-        
-        if (isOpenMenu) return toggleSideBar(false)
-        
-    }
 
-    useEffect(() => {
-        
-    }, []);
-
-    if(device === "mobile") {
-        return (
+    return (
         <DftLaySty device={device} > 
-           <Header toggleSideBar={toggleSideBar}/>
+            {device === "mobile" && <Header toggleSideBar={toggleSideBar}/>}
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                <Overlay trigger={isOverlay} onClick={hdleClickOverLay}/>
+                <Overlay onClick={hdleClickOverLay}/>
                 <div className="page-content">
                     {children}
                 </div>
             </div>
         </DftLaySty>
-        )
-    }
-    else if(device === "desktop") {
-        return (
-            <DftLaySty device={device} > 
-                <div className="body">
-                    <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                    <Overlay trigger={isOverlay} onClick={hdleClickOverLay}/>
-                    <div className="page-content">
-                        {children}
-                    </div>
-                </div>
-            </DftLaySty>
-         );
-    }
+    )
 }
  
 export default DefaultLayout;

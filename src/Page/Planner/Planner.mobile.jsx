@@ -1,25 +1,52 @@
 import styled from "styled-components";
-import { useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
+
 import TaskSection from "./TaskSection";
 import { plannerData } from "./Planner.data";
 import Button from "../../Component/Button";
 
+
 const PlannerMobile = (p) => {
-
-    const { children } = p
-
-    const section = Object.keys(plannerData)
-
+    const { openModalData } = p
     const [tab, setTab] = useState("task")
 
     const selectTab = (e) => {
         const name = e.target.getAttribute("name")
-
         setTab(name)
     }
 
+
+    // useEffect(() => {
+    //     const name = localStorage.getItem("tab")
+    //     if(name) setTab(name)
+    // }, []);
+
+    return ( 
+        <Container>
+            <Header>
+                <TabList>
+                {plannerData && Object.keys(plannerData).map((plan) => {
+                    return (
+                        <motion.li
+                            key={plan}
+                            name={plan}
+                            className={`col3 ${tab === plan ? "active" : ""}`}
+                            onClick={selectTab}>
+                        {plan}
+                        {tab === plan ? (<Underline layoutId="underline" />) : null}
+                        </motion.li>
+                    )
+                })}
+                </TabList> 
+            </Header>
+               <TaskSectionMobile openModalData={openModalData} tab={tab}></TaskSectionMobile>
+        </Container>
+     );
+}
+
+const TaskSectionMobile = (p) => {
+    const { openModalData, tab } = p
     const tabStyle = {
         initial: () => {
             return {
@@ -41,57 +68,50 @@ const PlannerMobile = (p) => {
         }
     }
 
-    return ( 
-        <Container>
-            <Header>
-                <TabList>
-                {plannerData && Object.keys(plannerData).map((plan) => {
-                    return (
-                        <motion.li
-                            key={plan}
-                            name={plan}
-                            className={`col3 ${tab === plan ? "active" : ""}`}
-                            onClick={selectTab}>
-                        {plan}
-                        {tab === plan ? (<Underline layoutId="underline" />) : null}
-                        </motion.li>
-                    )
-                })}
-                </TabList> 
-            </Header>
-                <AnimatePresence mode="wait">
-                    <motion.div key={tab ? tab : "task" } 
-                                variants={tabStyle}
-                                animate="appear"
-                                initial="initial"
-                                exit="disappear"
-                                transition={{ duration: 0.2 }} 
-                                >
-                        
-                    <TaskSection key={tab} className="col3" data={plannerData[tab]}>
-                        <ImgMotivation>
-                            <img src={plannerData[tab].empty?.img} alt="" />
-                        </ImgMotivation> 
+    // const hdleClickBtn = useCallback(() => {
+    //     openModalData(tab)
+    // }, [tab])
 
-                        <TextMotivation>
-                            <p>{plannerData[tab].empty?.text1}</p>
-                            <p>{plannerData[tab].empty?.text2}</p>
-                            <p>{plannerData[tab].empty?.text3}</p>
-                        </TextMotivation>
-                        
-                        
-                        <Button title={`Tạo ${tab}`}  
-                                className="text-center"
-                                style={{marginTop: "16px"}}/>
+    const hdleClickBtn = (e) => {
+        const name = e.target.getAttribute("name")
+        openModalData(name)
+    }
 
-                    </TaskSection>     
-                            
-                    </motion.div>
-                </AnimatePresence>
-        </Container>
-     );
+    return (
+    <AnimatePresence mode="wait">
+        <motion.div key={tab ? tab : "task" } 
+                    variants={tabStyle}
+                    animate="appear"
+                    initial="initial"
+                    exit="disappear"
+                    transition={{ duration: 0.2 }} 
+                    >
+            
+        <TaskSection key={tab} className="col3" data={plannerData[tab]} openModalData={openModalData}>
+            <ImgMotivation>
+                <img src={plannerData[tab]?.empty?.img} alt="" />
+            </ImgMotivation> 
+
+            <TextMotivation>
+                <p>{plannerData[tab]?.empty?.text1}</p>
+                <p>{plannerData[tab]?.empty?.text2}</p>
+                <p>{plannerData[tab]?.empty?.text3}</p>
+            </TextMotivation>
+            
+            
+            <Button title={`Tạo ${tab}`}  
+                    className="text-center"
+                    style={{marginTop: "16px"}}
+                    name={tab}
+                    onClick={hdleClickBtn}/>
+
+        </TaskSection>     
+                
+        </motion.div>
+    </AnimatePresence>
+    )
 }
- 
+
 export default PlannerMobile;
 
 const Container = styled.div`

@@ -51,9 +51,7 @@ const Sidebar = (p) => {
         animate={isopen ? 'open' : 'closed'}
         variants={SideStyle}
         onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
-            <div className="logo">
-
-            </div>
+            <div className="logo"></div>
             <SidebarMenu>
                 {menuItems.map((menuItem, idx) => (
                     <SidebarMenuItem key={idx} 
@@ -69,8 +67,9 @@ const Sidebar = (p) => {
                             {<div className="icon-wrapper">
                                 <menuItem.icon className="icon"/>
                             </div>}
+                            {/*  this may cause broken UI in item in sidebar when font-size change */}
                             <motion.span initial={{ opacity: 0, width: 0, height: 0 }}
-                                         animate={isopen ? { opacity: 1, marginLeft: "23px", width: "100%", height: "17px" } : { opacity: 0, width: 0, height: 0 }}
+                                         animate={isopen ? { opacity: 1, marginLeft: "23px", width: "100%", height: "25px" } : { opacity: 0, width: 0, height: 0 }}
                                          transition={{ duration: .2 }}
                                         >{menuItem.label}</motion.span>
                         </SidebarLink>
