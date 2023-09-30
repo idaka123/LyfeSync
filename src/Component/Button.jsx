@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 const Button = (p) => {
 
-    const { title, onClick, className, style } = p
+    const { title, onClick, className, style, name } = p
 
-    const hleClick = () => {
-        
-        onClick()
+    const hleClick = (e) => {
+        onClick(e)
     }
     
     return (
         <Container className={className} style={style}>
             <motion.button
+                name={name}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={hleClick}
