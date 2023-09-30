@@ -9,7 +9,7 @@ const overlayVariant = {
   };
 
 const Overlay = (p) => {
-    const { onClick } = p
+    const { onClick, zIndex } = p
 
     const { isOverlay, closeOverlay } = useContext(OverlayContext)
 
@@ -19,6 +19,7 @@ const Overlay = (p) => {
     }
 
     return <Container
+                zIndex={zIndex}
                 initial="hidden"
                 animate={ isOverlay ? "visible" : "hidden"}
                 variants={overlayVariant}
@@ -37,7 +38,7 @@ const Container = styled(motion.div) `
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,.2);
-    z-index: 1000;
+    z-index: ${({zIndex}) => zIndex ? zIndex : "1000"};
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
     opacity: 1;

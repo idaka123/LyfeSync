@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
 import OverlayContext, { OverlayProvider } from "../Context/overlay.context";
-import { ModalProvider } from "../Context/Modal.conetxt";
+import ModalContext, { ModalProvider } from "../Context/Modal.conetxt";
 
 
 const DefaultLayout = ( p ) => {
@@ -25,15 +25,17 @@ const DefaultLayoutComponent = (p) => {
     const { children } = p
 
     const { device } = useContext(DeviceContext)
+    const { openOverlay, closeOverlay } = useContext(OverlayContext)
+    const { modal, closeModal }  = useContext(ModalContext)
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
-    const { openOverlay, closeOverlay } = useContext(OverlayContext)
 
     // const 
 
     const hdleClickOverLay = () => {
         if (isOpenMenu) return toggleSideBar(false)
+        if (modal.isOpen) return closeModal()
     }
 
     const toggleSideBar = (boolen) => {
@@ -50,7 +52,7 @@ const DefaultLayoutComponent = (p) => {
             {device === "mobile" && <Header toggleSideBar={toggleSideBar}/>}
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                <Overlay onClick={hdleClickOverLay}/>
+                <Overlay onClick={hdleClickOverLay} zIndex={modal.isOpen && "1001"}/>
                 <div className="page-content">
                     {children}
                 </div>

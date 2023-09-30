@@ -23,7 +23,7 @@ const Planner = () => {
 
     const { device } = useContext(DeviceContext)
     const { openOverlay } = useContext(OverlayContext)
-    const { openModal, closeModal }  = useContext(ModalContext)
+    const { openModal }  = useContext(ModalContext)
 
     
     const openModalData = (name) => {
@@ -56,7 +56,6 @@ const Planner = () => {
         <AnimatePresence mode="wait">
             <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
                         animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
-                <Overlay onClick={closeModal}/>
                 <Modal >
                     <Content>
                         <div className="title">
