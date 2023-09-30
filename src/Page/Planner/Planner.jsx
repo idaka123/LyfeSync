@@ -114,7 +114,7 @@ const Container = styled(motion.div)`
         align-items: center;
         .icon-wrap {
             display: block;
-            line-height: 45px;
+            line-height: 30px;
             font-size: 43px;
             position: relative;
             cursor: pointer;

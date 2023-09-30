@@ -17,7 +17,7 @@ const PlannerDesktop = (p) => {
         <>
          {section && section.map((sec, idx) => {
                 return (
-                <TaskSection key={idx} className="col3" data={plannerData[sec]} openModalData={openModalData}>
+                <TaskSection key={idx} className="col3" data={sec} openModalData={openModalData}>
                     <ImgMotivation>
                         <img src={plannerData[sec]?.empty?.img} alt="" />
                     </ImgMotivation> 

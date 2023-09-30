@@ -2,7 +2,7 @@ import { Img } from "../../Assets/svg";
 
 export const plannerData = {
     task: {
-        name: "tasks",
+        name: "task",
         dateZone: [
             {
                 name: "today",
@@ -25,7 +25,7 @@ export const plannerData = {
         }
     },
     routine: {
-        name: "routines",
+        name: "routine",
         dateZone: [
             {
                 name: "today",
@@ -44,7 +44,7 @@ export const plannerData = {
         }
     },
     goal: {
-        name: "goals",
+        name: "goal",
         dateZone: [
             {
                 name: "today",

@@ -87,7 +87,7 @@ const TaskSectionMobile = (p) => {
                     transition={{ duration: 0.2 }} 
                     >
             
-        <TaskSection key={tab} className="col3" data={plannerData[tab]} openModalData={openModalData}>
+        <TaskSection key={tab} className="col3" data={tab} openModalData={openModalData}>
             <ImgMotivation>
                 <img src={plannerData[tab]?.empty?.img} alt="" />
             </ImgMotivation> 
