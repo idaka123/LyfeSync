@@ -13,11 +13,11 @@ const DefaultLayout = ( p ) => {
     const { children } = p
 
     return (
-    <ModalProvider>
-        <OverlayProvider>
+    <OverlayProvider>
+        <ModalProvider>
             <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
-        </OverlayProvider>
-    </ModalProvider>
+        </ModalProvider>
+    </OverlayProvider>
     )
 }
 
@@ -34,8 +34,18 @@ const DefaultLayoutComponent = (p) => {
     // const 
 
     const hdleClickOverLay = () => {
-        if (isOpenMenu) return toggleSideBar(false)
-        if (modal.isOpen) return closeModal()
+        if (isOpenMenu) return closeSideBar()
+        else if (modal.isOpen) return closeModal()
+    }
+
+    const openSideBar = () => {
+        setIsOpenMenu(true)
+        openOverlay()
+    }
+
+    const closeSideBar = () => {
+        setIsOpenMenu(false)
+
     }
 
     const toggleSideBar = (boolen) => {
@@ -49,7 +59,7 @@ const DefaultLayoutComponent = (p) => {
 
     return (
         <DftLaySty device={device} > 
-            {device === "mobile" && <Header toggleSideBar={toggleSideBar}/>}
+            {device === "mobile" && <Header toggleSideBar={openSideBar}/>}
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
                 <Overlay onClick={hdleClickOverLay} zIndex={modal.isOpen && "1001"}/>

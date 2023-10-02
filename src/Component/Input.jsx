@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const Input = (p) => {
-    const { width } = p
+    const { width, name, onInput } = p
 
     return ( 
         <Container style={{width : width}}>
-            <input type="text" />
+            <input type="text" name={name} spellCheck="false" onInput={onInput} />
         </Container>
      );
 }

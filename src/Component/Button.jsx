@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
+/* 
+Example:
+    <Button
+        title="Add"
+        onClick={handleAdd}
+        className="add"
+        style={{background: "red"}}
+    />
+*/
+
 const Button = (p) => {
 
     const { title, onClick, className, style, name } = p

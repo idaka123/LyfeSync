@@ -7,7 +7,7 @@ const Header = (p) => {
     return ( 
         <Container>
             <div className="header">
-                <div className="icon-wrapper" onClick={toggleSideBar(true)}>
+                <div className="icon-wrapper" onClick={toggleSideBar}>
                     <Icon.menu />
                 </div>
             </div>

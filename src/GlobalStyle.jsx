@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
         --sidebar-wt: 60px;
         --header-ht: 60px;
         --main-gradient: linear-gradient(118deg,rgba(30, 30, 30 ,1),rgba(30, 30, 30 ,.7));
+        --second-color: #FDBD3E;
         --modal-header: 65px;
     }
     
@@ -18,7 +19,7 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
 
         @media screen and (min-width: 769px) {
-            font-size: 1.5rem;          
+            font-size: 1.3rem;          
         }
         @media screen and (max-width: 768px) {
             font-size: 1.8rem;

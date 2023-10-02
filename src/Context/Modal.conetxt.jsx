@@ -1,9 +1,12 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
+import OverlayContext from "./overlay.context";
 
 const ModalContext = createContext()
 
 export const ModalProvider = (p) => {
     const { children } = p
+
+    const { closeOverlay, openOverlay } = useContext(OverlayContext)
 
     const [modal, setModal] = React.useState({
         isOpen: false,
@@ -12,6 +15,7 @@ export const ModalProvider = (p) => {
     
       
       const openModal = content => {
+        openOverlay()
         setModal({
           isOpen: true,
           content
@@ -19,6 +23,7 @@ export const ModalProvider = (p) => {
       };
     
       const closeModal = () => {
+        closeOverlay()
         setModal({
           isOpen: false,
           content: null
