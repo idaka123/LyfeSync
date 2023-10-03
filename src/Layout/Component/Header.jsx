@@ -7,7 +7,7 @@ const Header = (p) => {
     return ( 
         <Container>
             <div className="header">
-                <div className="icon-wrapper" onClick={toggleSideBar(true)}>
+                <div className="icon-wrapper" onClick={toggleSideBar}>
                     <Icon.menu />
                 </div>
             </div>
@@ -18,7 +18,7 @@ const Header = (p) => {
 export default Header;
 
 const Container = styled.div`
-    background-color: #FCFCFC;
+
     height: var(--header-ht);
     width: 100vw;
     .header {
@@ -37,3 +37,4 @@ const Container = styled.div`
         }
     }
 `
+

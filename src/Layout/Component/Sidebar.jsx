@@ -1,24 +1,25 @@
 import { Icon } from "../../Assets/icon";
 
 import { motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DeviceContext from "../../Context/Device.context";
+import paths from "../../Routes/path";
 
 const Sidebar = (p) => {
     const { isopen, toggle } = p
 
     const menuItems = [
-        { label: 'Home', icon: Icon.home, link: "/"},
-        { label: 'Setting', icon: Icon.setting, link: "/setting"},
+        { label: 'Trang chủ', icon: Icon.home, link: paths.home},
+        { label: 'Tác vụ', icon: Icon.setting, link: paths.planner},
     ];
 
     const { device } = useContext(DeviceContext)
 
     const SideStyle = {
         open: () => ({
-            width: device === "desktop" ? "335px" : "290px",
+            width: device === "desktop" ? "300px" : "250px",
             transition: {
                 type: 'spring',
             }
@@ -34,11 +35,15 @@ const Sidebar = (p) => {
         }
     };
 
-    const [select, setSelect] = useState("Home")
+    const [select, setSelect] = useState()
 
     const handleSelect = (link) => {
         setSelect(link)
     }
+
+    useEffect(() => {
+        setSelect(window.location.pathname)
+    }, []);
 
     return (
         <SideCon 
@@ -46,14 +51,12 @@ const Sidebar = (p) => {
         animate={isopen ? 'open' : 'closed'}
         variants={SideStyle}
         onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
-            <div className="logo">
-
-            </div>
+            <div className="logo"></div>
             <SidebarMenu>
                 {menuItems.map((menuItem, idx) => (
                     <SidebarMenuItem key={idx} 
-                                     onClick={() => handleSelect(menuItem.label)} 
-                                     className={select === menuItem.label && 'active'}
+                                     onClick={() => handleSelect(menuItem.link)} 
+                                     className={select === menuItem.link && 'active'}
                                      whileHover={{  x: "5px", 
                                                     transition: { 
                                                         duration: 1, 
@@ -64,8 +67,9 @@ const Sidebar = (p) => {
                             {<div className="icon-wrapper">
                                 <menuItem.icon className="icon"/>
                             </div>}
-                            <motion.span initial={{ opacity: 0, width: 0 }}
-                                         animate={isopen ? { opacity: 1, marginLeft: "23px" } : { opacity: 0, width: 0 }}
+                            {/*  this may cause broken UI in item in sidebar when font-size change */}
+                            <motion.span initial={{ opacity: 0, width: 0, height: 0 }}
+                                         animate={isopen ? { opacity: 1, marginLeft: "23px", width: "100%", height: "25px" } : { opacity: 0, width: 0, height: 0 }}
                                          transition={{ duration: .2 }}
                                         >{menuItem.label}</motion.span>
                         </SidebarLink>
@@ -107,10 +111,10 @@ const SidebarMenuItem = styled(motion.li)`
   &.active{
     border-radius: 10px!important;
     z-index: 99;
-    
+    box-shadow: 0 0 10px 1px rgba(30,30,30,.7);
     a {
       color: #ffffff!important;
-      background: linear-gradient(118deg,rgba(30, 30, 30 ,1),rgba(30, 30, 30 ,.7));
+      background: var(--main-gradient);
     }
   }
 
@@ -128,14 +132,14 @@ const SidebarLink = styled(Link)`
     justify-content: flex-start;
 
     .icon-wrapper {
-        height: 15px;
+        height: 17px;
         width: 29px;
         position: relative;
         .icon {
             position: absolute;
             left: 0;
             width: 100%;
-            font-size: 15px;
+            font-size: 18px;
         }
     }
 `;

@@ -5,32 +5,70 @@ import Overlay from "./Component/Overlay";
 import { useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
+import OverlayContext, { OverlayProvider } from "../Context/overlay.context";
+import ModalContext, { ModalProvider } from "../Context/Modal.conetxt";
 
 
 const DefaultLayout = ( p ) => {
     const { children } = p
 
+    return (
+    <OverlayProvider>
+        <ModalProvider>
+            <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
+        </ModalProvider>
+    </OverlayProvider>
+    )
+}
+
+const DefaultLayoutComponent = (p) => {
+    const { children } = p
+
     const { device } = useContext(DeviceContext)
+    const { openOverlay, closeOverlay } = useContext(OverlayContext)
+    const { modal, closeModal }  = useContext(ModalContext)
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
-    const toggleSideBar = (boolen) => {
-        console.log("toggle side bar")
-        return () => setIsOpenMenu(boolen)
+
+    // const 
+
+    const hdleClickOverLay = () => {
+        if (isOpenMenu) return closeSideBar()
+        else if (modal.isOpen) return closeModal()
     }
 
-    return ( 
+    const openSideBar = () => {
+        setIsOpenMenu(true)
+        openOverlay()
+    }
+
+    const closeSideBar = () => {
+        setIsOpenMenu(false)
+
+    }
+
+    const toggleSideBar = (boolen) => {
+        return () => {
+            setIsOpenMenu(boolen)
+            boolen 
+                ? openOverlay()
+                : closeOverlay()
+        }
+    }
+
+    return (
         <DftLaySty device={device} > 
-           {device === "mobile" && <Header toggleSideBar={toggleSideBar}/>}
+            {device === "mobile" && <Header toggleSideBar={openSideBar}/>}
             <div className="body">
                 <Sidebar isopen={isOpenMenu} toggle={toggleSideBar}/>
-                <Overlay isOpenMenu={isOpenMenu} toggleSideBar={toggleSideBar}/>
+                <Overlay onClick={hdleClickOverLay} zIndex={modal.isOpen && "1001"}/>
                 <div className="page-content">
                     {children}
                 </div>
             </div>
         </DftLaySty>
-     );
+    )
 }
  
 export default DefaultLayout;
@@ -49,7 +87,14 @@ const DftLaySty = styled.div`
         .page-content {
             margin-left: ${({device}) => device === "desktop" ? "var(--sidebar-wt)" : "0px" };
             width: 100%;
-            height: calc(100vh - var(--header-ht));
+
+            @media (max-width: 768px) {
+                height: calc(100vh - var(--header-ht));
+            }
+
+            @media (min-width: 769px) {
+                height: 100vh;
+            }
         }
     }
 
