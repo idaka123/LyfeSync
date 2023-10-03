@@ -8,6 +8,9 @@ import Flatpickr from "react-flatpickr";
 import ReactQuill from 'react-quill';
 import Button from "../../../Component/Button";
 import ModalContext from "../../../Context/Modal.conetxt";
+import 'react-quill/dist/quill.snow.css';
+import "flatpickr/dist/themes/light.css";
+import "flatpickr/dist/flatpickr.css";
 
 const relatedArea = [
     {

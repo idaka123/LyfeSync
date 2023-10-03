@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
             font-size: 1.3rem;          
         }
         @media screen and (max-width: 768px) {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
     }
     html {
@@ -62,6 +62,10 @@ const GlobalStyles = createGlobalStyle`
     .col3 {
         width: 33.333333%;
         height: 100%;
+    }
+
+    .mb-10 {
+        margin-bottom: 10px!important;
     }
 `
 

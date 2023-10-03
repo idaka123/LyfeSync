@@ -1,19 +1,12 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-// import Circle from '@uiw/react-color-circle';
-import { CirclePicker } from 'react-color';
 
 import DeviceContext from "../../Context/Device.context";
 import PlannerMobile from "./Planner.mobile";
 import PlannerDesktop from "./Planner.desktop";
-import Input from "../../Component/Input";
-import OverlayContext from "../../Context/overlay.context";
 import ModalContext from "../../Context/Modal.conetxt";
 
-import 'react-quill/dist/quill.snow.css';
-import "flatpickr/dist/themes/light.css";
-import "flatpickr/dist/flatpickr.css";
 import TaskModal from "./modal/task";
 
 
@@ -25,6 +18,7 @@ import TaskModal from "./modal/task";
 const Planner = () => {
 
     const [modalData, setModalData] = useState("")
+    const [tab, setTab] = useState("task")
 
     const { device } = useContext(DeviceContext)
     const { openModal }  = useContext(ModalContext)
@@ -33,15 +27,20 @@ const Planner = () => {
         setModalData(name)
         openModal(name)
     }
+
+    const selectTab = (e) => {
+        const name = e.target.getAttribute("name")
+        setTab(name)
+    }
  
     // modal
-    
+    console.log("rerender", tab)
     
     
     const Mobile = () => {
         return (
             <Container>
-                <PlannerMobile openModalData={openModalData}/>
+                <PlannerMobile selectTab={selectTab} tab={tab} openModalData={openModalData} />
             </Container>
     )}
 

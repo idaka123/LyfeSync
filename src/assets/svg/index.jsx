@@ -15,7 +15,11 @@ import {
     growth,
     relationship,
     deadline,
-    note } from './svg.jsx'
+    note,
+    checkbox,
+    subTask,
+    option,
+    arrowRight } from './svg.jsx'
 
 
 const Img = {
@@ -34,7 +38,11 @@ const Img = {
     growth,
     relationship,
     deadline,
-    note
+    note,
+    checkbox,
+    subTask,
+    option,
+    arrowRight
 }
 
 export { Img }

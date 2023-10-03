@@ -4,14 +4,12 @@ import { Icon } from "/src/Assets/icon.js";
 import React from "react";
 import DeviceContext from "../Context/Device.context";
 import ModalContext from "../Context/Modal.conetxt";
-import OverlayContext from "../Context/overlay.context";
 
 
 const Modal = (p) => {
     const { children, data } = p
 
     const { device } = React.useContext(DeviceContext)
-    const { closeOverlay } = React.useContext(OverlayContext)
     const { modal, closeModal }  = React.useContext(ModalContext)
 
     const modalStyle = {
@@ -38,7 +36,6 @@ const Modal = (p) => {
 
     const hdleToggle = () => {
         closeModal()
-        closeOverlay()
     }
 
     return (   
