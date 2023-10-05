@@ -1,4 +1,4 @@
-import { Img } from "../../Assets/svg";
+import { Img } from "../../assets/svg/index";
 
 export const plannerData = {
     task: {

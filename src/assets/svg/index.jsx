@@ -1,6 +1,7 @@
 import task from './task.svg'
 import goal from './goal.svg'
 import routine from './routine.svg'
+import habit from './habit.svg'
 
 import { 
     pen,
@@ -26,6 +27,7 @@ const Img = {
     task,
     goal,
     routine,
+    habit,
     pen,
     tag,
     area,
