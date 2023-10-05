@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Modal from "../../../Component/Modal";
 import Input from "../../../Component/Input";
-import { Img } from "../../../Assets/svg";
+import { Img } from "../../../assets/svg/index";
 import { CirclePicker } from "react-color";
 import { useContext, useState } from "react";
 import Flatpickr from "react-flatpickr";
