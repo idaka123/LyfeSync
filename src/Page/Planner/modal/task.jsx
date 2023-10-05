@@ -133,7 +133,7 @@ const TaskModal = () => {
             <ModalSectionContent
                 title="Tiêu đề"
                 Icon={Img.pen} >
-                <Input name="title" width="80%" value={dataInput.title} onInput={handleInput}/>
+                <Input name="title" inputStyle={{width: "80%"}} value={dataInput.title} onInput={handleInput}/>
             </ModalSectionContent>
 
             {/* COLOR */}

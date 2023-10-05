@@ -8,6 +8,8 @@ const GlobalStyles = createGlobalStyle`
         --main-gradient: linear-gradient(118deg,rgba(30, 30, 30 ,1),rgba(30, 30, 30 ,.7));
         --second-color: #FDBD3E;
         --modal-header: 65px;
+        --white-text: #ffff;
+        --black-text: #1e1e1e
     }
     
     *, *:before, *:after {
@@ -57,6 +59,19 @@ const GlobalStyles = createGlobalStyle`
     
     .text-dark {
         color: rgba(30,30,30,1)!important;
+    }
+
+    .text-white {
+        color: var(--white-text)!important;
+        color: rgba(255,255,255,1)!important;
+    }
+
+    .line-through {
+        text-decoration: line-through!important;
+    }
+
+    .blur{
+        opacity: .6!important;
     }
 
     .col3 {

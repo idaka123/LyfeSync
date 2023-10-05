@@ -49,7 +49,7 @@ const Planner = () => {
             <Container style={{paddingTop: "40px"}}> 
                 <PlannerDesktop openModalData={openModalData}/>
             </Container>
-         );
+        );
     }
 
     return (
