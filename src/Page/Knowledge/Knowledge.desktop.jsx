@@ -1,12 +1,13 @@
 import styled from "styled-components";
 export const KnowLedgeBlock = styled.div`
   width: 100%; 
-  height: 100%; 
+  height: 120vh; 
   display: grid; 
   grid-template: 5% 95% / 3% 57% 35% ; 
 `;
 
 export const QuoteBlock = styled.div`
+  height: 80%;
   grid-area: 2/3/3/4; 
   display: flex; 
   flex-direction: column;
@@ -18,6 +19,7 @@ font-size: 5em;
 color: black; 
 `
 export const CommunityBlockContent = styled.div`
+height: 2em; 
 blockquote{
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
   background-color: white; 
@@ -25,7 +27,6 @@ blockquote{
   border-radius: 25px;
   font-size: 1.5rem;
   &:hover{
-    cursor: pointer;
     user-select: none; 
   }
   animation-duration: 2s;
@@ -38,9 +39,17 @@ export const TipTitle = styled.div`
   }
 `
 
-export const TipBlock = styled.div`
+export const TipBlock = styled.div` 
+height: 45%;
   display: grid;
   grid-template: 100% / 50% 50%; 
+  border: 1.5px solid #000;
+  border-radius: 25px;  
+  background-color: white; 
+  &:hover{
+    user-select: none; 
+    cursor: pointer; 
+  }
 `
 
 
@@ -55,10 +64,7 @@ export const TipParagraph = styled.div`
   p{
     font-size: 1.5rem;
   }
-  border-top: 1.5px solid #000; 
-  border-left: 1.5px solid #000; 
-  border-bottom: 1.5px solid #000; 
-  border-top-left-radius: 25px;
+   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
 `
 export const TipImage = styled.div`
@@ -72,10 +78,7 @@ export const TipImage = styled.div`
   justify-content: center; 
   align-items: center;
   grid-area: 1/2/2/3;
-  border-top: 1.5px solid #000; 
-  border-right: 1.5px solid #000; 
-  border-bottom: 1.5px solid #000; 
-  border-top-right-radius: 25px;
+    border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 `
 export const WisdomBlockTitle = styled.b`
