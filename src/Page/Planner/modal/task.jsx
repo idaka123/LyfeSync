@@ -3,7 +3,7 @@ import Modal from "../../../Component/Modal";
 import Input from "../../../Component/Input";
 import { Img } from "../../../Assets/svg";
 import { CirclePicker } from "react-color";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import ReactQuill from 'react-quill';
 import Button from "../../../Component/Button";
@@ -11,6 +11,7 @@ import ModalContext from "../../../Context/Modal.conetxt";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
+import { dateConvert } from "../../../Util/util";
 
 const relatedArea = [
     {
@@ -57,10 +58,103 @@ const relatedArea = [
 ]
 
 const TaskModal = () => {
+    const { modal }  = useContext(ModalContext)
+    const [editMode, setEditMode] = useState(!!modal.content)
+    const [dataInput, setDataInput] = useState({})
+    
+
+    // const [area, setArea] = useState({
+    //     health: false,
+    //     play: false,
+    //     spirituality: false,
+    //     environment: false,
+    //     work: false,
+    //     wealth: false,
+    //     growth: false,
+    //     relationship: false,
+    // })
+
+    useEffect(() => {
+        if(modal.content !== null) 
+            setEditMode(true)
+        else 
+            setEditMode(false)
+    },[modal.content])
+    
+    useEffect(() => {
+        if(modal.content !== null) {
+            setDataInput({
+                title: modal.content.title,
+                color: modal.content.color,
+                note: modal.content.note,
+                deadline: modal.content.deadline,
+            })
+
+        } else {
+            setDataInput({})
+        }
+
+        return () => setDataInput({})
+    }, [editMode, modal.content]);
+
+    // useEffect(() => {
+    //     if(modal.content) {
+            
+    //         const data = {
+    //             health: false,
+    //             play: false,
+    //             spirituality: false,
+    //             environment: false,
+    //             work: false,
+    //             wealth: false,
+    //             growth: false,
+    //             relationship: false,
+    //         }
+
+    //         const relate = modal.content.area.forEach(area => { data[area] = true })
+    //         setArea(relate)
+    //         console.log("relate", relate)
+    //     }
+    // }, [editMode]);
+
+    return <TaskContent 
+                mode={ editMode ? "edit" : "add"}
+                dataInput={ dataInput }
+                setDataInput = {setDataInput}
+                // areaData={area} 
+                />
+}
+
+const TaskContent = (p) => {
+    const { dataInput, setDataInput, mode } = p
 
     const { closeModal }  = useContext(ModalContext)
 
-    const [dataInput, setDataInput] = useState({})
+    // const [dataInput, setDataInput] = useState(data)
+    const radioData = [
+        {
+            id: "today",
+            value: "Nay"
+        },
+        {
+            id: "tomorrow",
+            value: "Mai"
+        },
+        {
+            id: "soon",
+            value: "Sắp"
+        },
+        {
+            id: "someday",
+            value: "Ngày nào đó"
+        },
+        {
+            id: "specific-day",
+            value: "Chọn ngày"
+        },
+    ]
+
+    
     const [area, setArea] = useState({
         health: false,
         play: false,
@@ -71,12 +165,15 @@ const TaskModal = () => {
         growth: false,
         relationship: false,
     })
-    const [hex, setHex] = useState('#F44E3B');
+    
+    const [hex, setHex] = useState(dataInput.color);
     const [secOpen, setSecOpen] = useState({
         color: true,
         area: true,
-        note: true
+        note: true,
+        deadline: true
     });
+    const fp = useRef(null);
 
     const openSec = (e) => {
         const name = e.currentTarget.getAttribute("name")
@@ -108,7 +205,9 @@ const TaskModal = () => {
         setDataInput({...dataInput, area: newData })
     }
 
-    const handleChooseDateType = (e) => {
+    const handleChooseDateType = (e, mode) => {
+
+        
         console.log(e.target.id)
         const id = e.target.id
         if(id === "") return 
@@ -117,6 +216,7 @@ const TaskModal = () => {
             document.querySelector(".flat-picker-wrapper").style.display = "flex"
         } else {
             document.querySelector(".flat-picker-wrapper").style.display = "none"
+            if(mode === "edit") setSecOpen({...secOpen, deadline: !secOpen.deadline })
         }
         setDataInput({...dataInput, deadline: id })
     }
@@ -124,6 +224,12 @@ const TaskModal = () => {
     const handleSave = () => {
         console.log(dataInput)
         closeModal()
+    }
+
+    const handleChooseDateDl = (date) => {
+        setDataInput(prevData => ({ ...prevData, deadline: date[0] }));
+
+        fp.current.flatpickr.close();
     }
 
     return ( 
@@ -141,9 +247,28 @@ const TaskModal = () => {
                 title="Màu tag"
                 name="color"
                 Icon={Img.tag}
-                plus={secOpen.color}
+                plus={mode === "edit" ? false : secOpen.color}
                 openSec={openSec}>
-                {!secOpen.color && <CirclePicker
+            {mode === "edit" ?
+                (<EditSection name="color" onClick={openSec} isedit={secOpen.color}>
+                    <CirclePicker
+                        colors={
+                            !secOpen.color 
+                                ? ["#f44336", "#e91e63", "#673ab7", "#03a9f4", "#4caf50", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722"]
+                                : [dataInput.color]
+                            }
+                        onChange={(color) => {
+                            setHex(color.hex);
+                            setDataInput({...dataInput, color: color.hex })
+                        }}
+                        color={hex}
+                        circleSize={18}
+                        circleSpacing={0}
+                        // onSwatchHover={(color, event) => setHex(color.hex)}
+                        />
+                    </EditSection>
+                ) : (
+                    !secOpen.color && <CirclePicker
                     colors={["#f44336", "#e91e63", "#673ab7", "#03a9f4", "#4caf50", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722"]}
                     onChange={(color) => {
                         setHex(color.hex);
@@ -153,7 +278,7 @@ const TaskModal = () => {
                     circleSize={15}
                     circleSpacing={0}
                     // onSwatchHover={(color, event) => setHex(color.hex)}
-                    />}
+                    />)}
             </ModalSectionContent>
             
             {/* AREA */}
@@ -176,43 +301,33 @@ const TaskModal = () => {
             {/* DEADLINE */}
             <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
                 <Deadline>
-                    <Ratio>
-                    <label htmlFor="today" onClick={handleChooseDateType}>
-                        <input type="radio" id="today" name="radio"/>
-                        <span>Nay</span>
-                    </label>
-                    <label htmlFor="tomorrow" onClick={handleChooseDateType}>
-                        <input type="radio" id="tomorrow" name="radio"/>
-                        <span>Mai</span>
-                    </label>
-                    <label htmlFor="soon" onClick={handleChooseDateType}>
-                        <input type="radio" id="soon" name="radio"/>
-                        <span>Sắp</span>
-                    </label>
-                    <label htmlFor="someday" onClick={handleChooseDateType}>
-                        <input type="radio" id="someday" name="radio"/>
-                        <span>Ngày nào đó</span>
-                    </label>
-                    <label htmlFor="specific-day" 
-                    onClick={(e) => {
-                        handleChooseDateType(e)
-                    }}>
-                        <input type="radio" id="specific-day" name="radio"/>
-                        <span>Chọn ngày</span>
-                    </label>
-                    </Ratio>
-                    <div className="flat-picker-wrapper">
-                        <Flatpickr 
+                {mode === "edit" && secOpen.deadline 
+                    ? (
+                        <EditSection name="deadline" onClick={openSec} isedit={secOpen.deadline}>
+                        {dateConvert(dataInput.deadline)}
+                        </EditSection>
+                    ) : (
+                        <Fragment>
+                        <Ratio>
+                            {radioData && radioData.map(radio => (
+                            <label key={radio.id} htmlFor={radio.id} onClick={(e) =>handleChooseDateType(e, mode)}>
+                                <input type="radio" id={radio.id} name="radio"/>
+                                <span>{radio.value}</span>
+                            </label>
+                            ))}
+                        </Ratio>
+                        <div className="flat-picker-wrapper">
+                            <Flatpickr 
+                            ref={fp}
                             options={{
                                 inline: true,
                                 minDate: "today",
                             }}
-                            onChange={(date) => {
-                                setDataInput({...dataInput, deadline: date[0] })
-                            }}
-                        />
-
-                    </div>
+                            onChange={(date) => handleChooseDateDl(date)}
+                            />
+                        </div>
+                        </Fragment>
+                    )}
                 </Deadline>
             </ModalSectionContent>
 
@@ -265,6 +380,43 @@ const ModalSectionContent = (p) => {
     )
 }
 
+const EditSection = (p) => {
+    const { children, onClick, isedit, name } = p
+
+    return (
+        <EditSectionContainer isedit={isedit.toString()}>
+            {children}
+        
+        <span name={name} onClick={onClick}><Img.edit /></span>
+        </EditSectionContainer>
+    )
+}
+
+
+
+const EditSectionContainer = styled.div `
+    display: flex;
+    align-items: center;
+
+    span {
+        line-height: 1;
+        svg {
+            margin-left: 10px;
+            width: 14px;
+            cursor: pointer;
+        }
+
+        &:hover {
+            svg {
+                color: var(--second-color);
+            }
+        }
+    }
+
+    .circle-picker {
+        width: ${({isedit}) => isedit === "true" && "10px!important" };
+    }
+`
 
 const Content = styled.div`
 

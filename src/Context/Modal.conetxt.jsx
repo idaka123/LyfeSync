@@ -10,23 +10,27 @@ export const ModalProvider = (p) => {
 
     const [modal, setModal] = React.useState({
         isOpen: false,
+        title: null,
         content: null
       });
     
       
-      const openModal = content => {
+      const openModal = (title = null, content = null) => {
         openOverlay()
         setModal({
           isOpen: true,
+          title,
           content
         });
       };
     
       const closeModal = () => {
+        console.log("close modal")
         closeOverlay()
         setModal({
           isOpen: false,
-          content: null
+          content: null,
+          title: null
         });
       };
 

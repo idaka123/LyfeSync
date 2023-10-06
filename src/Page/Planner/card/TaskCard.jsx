@@ -11,7 +11,7 @@ const mockData = [
         "title": "Đánh răng",
         "color": "#4caf50",
         "area": [],
-        "deadline": "2023-10-05T17:00:00.000Z",
+        "deadline": "tomorrow",
         "note": "<p>Đánh kĩ</p>",
         "sub": [
             {   
@@ -99,12 +99,10 @@ const Card = (p) => {
                 else 
                     return total },0 )
             if(isMounted) { 
-                console.log(count)
                 setSubDone(count)
             }
         }
         countCurrSub(sub)
-        console.log("update number")
     
         return () => {
             isMounted = false; 
@@ -120,9 +118,7 @@ const Card = (p) => {
 
     const deleteSubTask = (id) => {
         let newSub = [...sub]; //prevent mutating
-        console.log("before",newSub)
         newSub = newSub.filter(data => data.id !== id)
-        console.log("after",newSub)
         setSub(newSub); 
     }
 
@@ -148,6 +144,7 @@ const Card = (p) => {
             note,
         }
         console.log(data)
+        openModal(title, data)
     }
     
     const Area = (p) => {

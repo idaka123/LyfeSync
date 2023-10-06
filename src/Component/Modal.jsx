@@ -45,7 +45,7 @@ const Modal = (p) => {
         variants={modalStyle}
         >
         <Title>
-            <h1>{modal.content} mới</h1>
+            <h1>{modal.title}</h1>
             <Icon.x onClick={hdleToggle}/>
         </Title> 
        {children}
