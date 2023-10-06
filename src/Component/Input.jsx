@@ -54,7 +54,7 @@ const Container = styled.div`
         }
         &::placeholder {
             color: ${({plhdercolor}) => plhdercolor };
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             opacity: 1; /* Firefox */
         }
 

@@ -1,22 +1,26 @@
 import styled from "styled-components";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
-import { useState } from "react";
+import { useState, useEffect, Fragment, useContext } from "react";
 import { dateConvert } from "../../../Util/util"
+import { nanoid } from 'nanoid'
+import ModalContext from "../../../Context/Modal.conetxt";
 
 const mockData = [
-    {
+    {   
         "title": "Đánh răng",
         "color": "#4caf50",
         "area": [],
         "deadline": "2023-10-05T17:00:00.000Z",
         "note": "<p>Đánh kĩ</p>",
         "sub": [
-            {
+            {   
+                "id": nanoid(),
                 "title": "rửa mặt",
                 "done": false
             },
             {
+                "id": nanoid(),
                 "title": "tắm",
                 "done": true
             },
@@ -47,7 +51,9 @@ const TaskCard = () => {
                         color={data?.color}
                         deadline={data?.deadline}
                         area={data.area}
-                        subTask={data.sub}/>
+                        note={data.note}
+                        subTask={data.sub}
+                        />
                 )
             })}
             </TaskCardList>
@@ -75,10 +81,50 @@ const Card = (p) => {
         color = null,
         deadline = "",
         area = [],
+        note = "",
         subTask = [] } = p
+    const { modal, openModal }  = useContext(ModalContext)
 
     const [checked, setChecked] = useState(false)
     const [subOpen, setSubOpen] = useState(false)
+    const [sub, setSub] = useState(subTask)
+    const [subDone, setSubDone] = useState(0)
+
+    useEffect(() => {
+        let isMounted = true;
+        const countCurrSub = (dataSub) => {
+            const count = dataSub.reduce((total, curr) => {
+                if(curr.done === true) 
+                    return total + 1
+                else 
+                    return total },0 )
+            if(isMounted) { 
+                console.log(count)
+                setSubDone(count)
+            }
+        }
+        countCurrSub(sub)
+        console.log("update number")
+    
+        return () => {
+            isMounted = false; 
+        }
+    }, [sub]);
+
+    const updateSubCheck = (id, check) => {
+        const newSub = [...sub]; //prevent mutating
+        const index = newSub.map(e => e.id).indexOf(id);
+        newSub[index].done = check;
+        setSub(newSub); 
+    }
+
+    const deleteSubTask = (id) => {
+        let newSub = [...sub]; //prevent mutating
+        console.log("before",newSub)
+        newSub = newSub.filter(data => data.id !== id)
+        console.log("after",newSub)
+        setSub(newSub); 
+    }
 
     const handleCheck = () => {
         setChecked(!checked)
@@ -87,6 +133,22 @@ const Card = (p) => {
     const openSubTask = () => {
         setSubOpen(!subOpen)
     }
+
+    const AddSub = (data) => {
+        const newData = [...sub, data]
+        setSub(newData)
+    }
+
+    const handleOpenDetail = () => {
+        const data = {
+            title,
+            color,
+            deadline,
+            area,
+            note,
+        }
+        console.log(data)
+    }
     
     const Area = (p) => {
         const {data} = p
@@ -94,14 +156,7 @@ const Card = (p) => {
         return <Image/>
     }
     
-    const countCurrSub = (dataSub) => {
-        return dataSub.reduce((total, curr) => {
-            if(curr.done === "true") 
-                return total + 1
-            else 
-                return total },0 )
-    }
-
+  
     return (
         <TaskCardContainer style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="text-dark">
             <MainTask>
@@ -122,37 +177,41 @@ const Card = (p) => {
                 </div>
 
                 <div className={`card-sub ${color ?"text-white" : ""}`} onClick={openSubTask}>
-                    {subTask.length > 0 && <span>({countCurrSub(subTask)}/{subTask.length})</span>}
+                    {sub.length > 0 && <span>({subDone}/{sub.length})</span>}
                     <span><Img.subTask/></span>
                 </div>
                 
                 <div className={`card-option ${color ?"text-white" : ""}`}>
                     <Img.option/>
-                    <Img.arrowRight/>
+                    <span onClick={handleOpenDetail}><Img.arrowRight/></span>
                 </div>
             </MainTask>
 
-            {!subOpen && 
-            <SubTaskList>
-            {subTask && subTask.map((sub, idx) => {
-                return <SubTask key={idx} color={color} title={sub.title} done={sub.done}/> 
-            })}
-            </SubTaskList>}
-            
-            <AddSubTask color={color}>
+            {subOpen && 
+            <Fragment>
+                <SubTaskList>
+                {sub && sub.map((sub, idx) => {
+                    return <SubTask key={idx} id={sub.id} color={color} title={sub.title} done={sub.done} updateSubCheck={updateSubCheck} deleteSubTask={deleteSubTask}/> 
+                })}
+                </SubTaskList>
 
-            </AddSubTask>
+                <AddSubTask color={color} AddSub={AddSub} placeholder={sub.length > 0 ? "": "Thêm subtask"}/>    
+            </Fragment>}
+
         </TaskCardContainer>
     )
 }
 
 const SubTask = (p) => {
-    const { color, title, done } = p
+    const { color, title, done, updateSubCheck, id, deleteSubTask } = p
 
     const [checked, setChecked] = useState(done)
     const [edit, setEdit] = useState(false)
     const [value, setValue] = useState(title)
 
+    useEffect(() => {
+        setValue(title)
+    }, [title])
 
     const inputStyle = {
         width:"100%",
@@ -162,8 +221,11 @@ const SubTask = (p) => {
         fontSize: "1.2rem"
     }
 
-    const handleCheck = () => {
+    const handleCheck = (e) => {
         setChecked(!checked)
+
+        const id = e.currentTarget.id
+        updateSubCheck(id, !checked)
     }
 
     const openEdit = () => {
@@ -184,12 +246,17 @@ const SubTask = (p) => {
         if (event.key === 'Enter') {
             closeEdit()
         }
-      }
+    }
+
+    const handleDel = (e) => {
+        const id = e.currentTarget.getAttribute("name")
+        deleteSubTask(id)
+    }
     
     return (
     <SubTaskContainer className={`item ${color ?"text-white" : ""}`}>
         <div className="title-wrapper">
-        <span onClick={handleCheck} className={`${checked ? "blur" : ""}`}>{checked ? <Img.checkboxChecked /> : <Img.checkbox/>}</span>
+        <span id={id} onClick={handleCheck} className={`${checked ? "blur" : ""}`}>{checked ? <Img.checkboxChecked /> : <Img.checkbox/>}</span>
             <div className={`title ${checked ? "line-through" : ""}`}>
                 {edit
                 ? <Input 
@@ -210,14 +277,14 @@ const SubTask = (p) => {
 
         <div className="option">
             <span onClick={openEdit}><Img.edit/></span>
-            <Img.deleteIcon/>
+            <span name={id} onClick={handleDel}><Img.deleteIcon/></span>
         </div>
     </SubTaskContainer>
     )
 }
 
 const AddSubTask = (p) => {
-    const { color } = p
+    const { color, AddSub, placeholder } = p
 
     const [value, setValue] = useState("")
 
@@ -233,7 +300,17 @@ const AddSubTask = (p) => {
         setValue(value)
     }
 
-
+    const handleAddSubTask = (event) => {
+        if (event.key === 'Enter') {
+            const newData = {
+                "id": nanoid(),
+                "title": value,
+                "done": false
+            }
+            AddSub(newData)
+            setValue("")
+        }
+    }
 
     return (
         <AddSubTaskContainer className={`${color ? "text-white" : ""}`}>
@@ -244,10 +321,11 @@ const AddSubTask = (p) => {
             <Input 
                 value={value}
                 onInput={handleInput}
+                onKeyDown={handleAddSubTask}
                 name="title"
                 className={`${color ? "text-white" : ""}`}
                 inputStyle={inputStyle}
-                placeholder="Thêm subtask"
+                placeholder={placeholder}
                 plhdercolor={`${color ? "var(--white-text)": "var(--black-text)"}`}
                 focusborder="false"
                />
@@ -331,7 +409,7 @@ const MainTask =styled.div `
         span {
             font-size: 1.2rem;
             cursor: pointer;
-            &:nth-child(2) {
+            &:nth-child(2), &:nth-child(1) {
                 svg {
                     width: 17.8px;
 
@@ -350,6 +428,7 @@ const MainTask =styled.div `
         line-height: 1;
         svg {
             width: 17.8px;
+            cursor: pointer;
         }
     }
 `
@@ -437,6 +516,6 @@ const AddSubTaskContainer = styled.div `
     gap: 8px;
 
     svg {
-        width: 13px;
+        width: 18px;
     }
 `
