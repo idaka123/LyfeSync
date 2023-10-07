@@ -31,11 +31,12 @@ const Community = () => {
     }, QUOTE_ANIMATION_DURATION);
     return () => {
       clearTimeout(timeoutQuoteID.current);
+      clearInterval(intervalTempQuote.current);
     }
   }, [quote]);
   return (
     <>
-      <CommunityBlockTitle> community </CommunityBlockTitle>
+      <CommunityBlockTitle><b>community</b></CommunityBlockTitle>
       <CommunityBlockContent className={`
             ${isFlipOutAnimated ? `${FLIP_OUT} animate__slow ` : ""} 
             ${isFlipInAnimated ? `${FLIP_IN} animate__slow` : ""}

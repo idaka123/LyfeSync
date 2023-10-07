@@ -20,7 +20,7 @@ const Knowledge = () => {
         
         </QuoteBlock>
         <VideoBlock>
-          <VideoBlockTitle>growth academy</VideoBlockTitle>
+          <VideoBlockTitle><b>growth academy</b></VideoBlockTitle>
         </VideoBlock>
       </KnowLedgeBlock >
     </>

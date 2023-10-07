@@ -25,7 +25,7 @@ const Wisdom = () => {
   }), [])
   return (
     <>
-      <WisdomBlockTitle> wisdom </WisdomBlockTitle>
+      <WisdomBlockTitle><b>wisdom</b></WisdomBlockTitle>
       <WisdomBlockContent>
         <blockquote>
           „Anyone who has never made a mistake has never tried anything new.“

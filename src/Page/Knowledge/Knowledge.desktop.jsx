@@ -1,25 +1,28 @@
 import styled from "styled-components";
 export const KnowLedgeBlock = styled.div`
   width: 100%; 
-  height: 120vh; 
+  height: 100%; 
   display: grid; 
-  grid-template: 5% 95% / 3% 57% 35% ; 
+  grid-template: 3% 94% / 3% 57% 35% ; 
 `;
 
 export const QuoteBlock = styled.div`
-  height: 80%;
+  height: 94%;
   grid-area: 2/3/3/4; 
   display: flex; 
   flex-direction: column;
-  justify-content: space-between;
 `;
 
-export const CommunityBlockTitle = styled.b`
-font-size: calc((4.5vw + 4.5vh)/2); 
-color: black; 
+export const CommunityBlockTitle = styled.div`
+user-select: none; 
+height: 12%;
+b{
+  font-size: calc((4.5vw + 4.5vh)/2); 
+  color: black; 
+}
 `
 export const CommunityBlockContent = styled.div`
-height: 4em; 
+height: 14%;
 blockquote{
   color: #404040; 
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
@@ -38,6 +41,8 @@ cite{
 }
 `
 export const TipTitle = styled.div`
+user-select: none; 
+height: 11%;
   b{
     color: black; 
     font-size: calc((4.5vw + 4.5vh)/2); 
@@ -45,23 +50,23 @@ export const TipTitle = styled.div`
 `
 
 export const TipBlock = styled.div` 
-position: relative; 
+height: 38%;
 overflow: hidden; 
-height: 45%;
 display: grid;
 grid-template: 100% / 50% 50%; 
 border: 1.5px solid #000;
 border-radius: 25px;  
 background-color: white; 
-transition: transform 0.3s, box-shadow 0.3s;  // Thêm transition để hiệu ứng diễn ra mượt mà
-box-shadow: 0 5px 10px rgba(0,0,0,0.2);  // Bóng đổ mặc định
+transition: transform 0.3s, box-shadow 0.3s;  
+box-shadow: 0 5px 10px rgba(0,0,0,0.2);  
 
 &:hover{
   user-select: none; 
   cursor: pointer; 
-  transform: translateY(-5px);  // Dịch chuyển lên 5px khi di chuột qua
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);  // Bóng đổ mạnh hơn khi di chuột qua
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
 }
+  margin-bottom: 3%;
 `
 
 
@@ -97,11 +102,16 @@ export const TipImage = styled.div`
     border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 `
-export const WisdomBlockTitle = styled.b`
-color: black; 
-font-size: calc((4.5vw + 4.5vh)/2); 
+export const WisdomBlockTitle = styled.div`
+height: 9.5%;
+b{
+  color: black; 
+  font-size: calc((4.5vw + 4.5vh)/2); 
+}
+user-select: none; 
 `
 export const WisdomBlockContent = styled.div`
+height: 10%;
 blockquote{
   font-weight: bold;
   padding-top: 10px; 
@@ -116,12 +126,17 @@ cite{
   font-size: calc((1.25vw + 1vh)/2);
   color: #9b9a9a; 
 }
+margin: 1.5%;
+user-select: none; 
 `
 
 export const VideoBlock = styled.div`
   grid-area: 2/2/3/3;
 `
-export const VideoBlockTitle = styled.b`
-color: black; 
-font-size: calc((4.5vw + 4.5vh)/2); 
+export const VideoBlockTitle = styled.div`
+b{
+  color: black; 
+  font-size: calc((4.5vw + 4.5vh)/2); 
+  user-select: none; 
+}
 `
