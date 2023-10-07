@@ -50,7 +50,7 @@ height: 11%;
 `
 
 export const TipBlock = styled.div` 
-height: 38%;
+height: 35%;
 overflow: hidden; 
 display: grid;
 grid-template: 100% / 50% 50%; 
@@ -66,7 +66,7 @@ box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   transform: translateY(-5px); 
   box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
 }
-  margin-bottom: 3%;
+  margin-bottom: 5%;
 `
 
 
@@ -126,7 +126,7 @@ cite{
   font-size: calc((1.25vw + 1vh)/2);
   color: #9b9a9a; 
 }
-margin: 1.5%;
+margin: 2.5%;
 user-select: none; 
 `
 
