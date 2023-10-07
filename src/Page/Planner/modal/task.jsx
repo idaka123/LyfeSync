@@ -11,7 +11,7 @@ import ModalContext from "../../../Context/Modal.conetxt";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
-import { dateConvert } from "../../../Util/util";
+import { dateConvert, isDateString } from "../../../Util/util";
 
 const relatedArea = [
     {
@@ -58,7 +58,7 @@ const relatedArea = [
 ]
 
 const TaskModal = () => {
-    const { modal }  = useContext(ModalContext)
+    const { modal, isDataLoaded, setIsDataLoaded  }  = useContext(ModalContext)
     const [editMode, setEditMode] = useState(!!modal.content)
     const [dataInput, setDataInput] = useState({})
     
@@ -97,6 +97,8 @@ const TaskModal = () => {
         return () => setDataInput({})
     }, [editMode, modal.content]);
 
+
+
     // useEffect(() => {
     //     if(modal.content) {
             
@@ -116,6 +118,7 @@ const TaskModal = () => {
     //         console.log("relate", relate)
     //     }
     // }, [editMode]);
+
 
     return <TaskContent 
                 mode={ editMode ? "edit" : "add"}
@@ -154,7 +157,6 @@ const TaskContent = (p) => {
         },
     ]
 
-    
     const [area, setArea] = useState({
         health: false,
         play: false,
@@ -175,10 +177,24 @@ const TaskContent = (p) => {
     });
     const fp = useRef(null);
 
-    const openSec = (e) => {
+    
+    useEffect(() => {
+        console.log("listen event close modal")
+        window.addEventListener('modalClosing', closeModalProcess);
+        
+        return () => {
+          window.removeEventListener('modalClosing', closeModalProcess);
+        };
+      }, []);
+
+    const openSec = async (e) => {
         const name = e.currentTarget.getAttribute("name")
         console.log(name)
-        setSecOpen({...secOpen, [name]: !secOpen[name] })
+
+        await setSecOpen({...secOpen, [name]: !secOpen[name] })
+        if(name === "deadline" && isDateString(dataInput.deadline))  {
+            await deadlineHdle.openFP()
+        }
     }
 
     const handleInput = (e, from = null) => {
@@ -205,31 +221,60 @@ const TaskContent = (p) => {
         setDataInput({...dataInput, area: newData })
     }
 
-    const handleChooseDateType = (e, mode) => {
-
-        
-        console.log(e.target.id)
-        const id = e.target.id
-        if(id === "") return 
-
-        if(id === "specific-day") {
+    const deadlineHdle = {
+        openFP: () => { // open flatpicker
             document.querySelector(".flat-picker-wrapper").style.display = "flex"
-        } else {
+        },
+        closeFP: () => { // close flatpicker
             document.querySelector(".flat-picker-wrapper").style.display = "none"
-            if(mode === "edit") setSecOpen({...secOpen, deadline: !secOpen.deadline })
+        },
+        choseType: (e, mode) => { //handle Choose type of deadline
+
+            console.log(e.target.id)
+            const id = e.target.id
+            let dateStr = id
+            if(id === "") return 
+            if(id === "today") {
+                const today = new Date()
+                today.setHours(23,59,59,0)
+                dateStr = today
+            }else if(id === "tomorrow") {
+                const today = new Date()
+                const tomorrow = new Date(today.setHours(0,0,0,0))
+                tomorrow.setDate(tomorrow.getDate() + 1)
+    
+                console.log("tomorrow", )
+                dateStr = tomorrow
+            }
+            else if(id === "specific-day") {
+                deadlineHdle.openFP()
+            } else {
+                deadlineHdle.closeFP()
+                if(mode === "edit") setSecOpen({...secOpen, deadline: !secOpen.deadline })
+            }
+    
+            console.log(dateStr)
+            setDataInput({...dataInput, deadline: dateStr })
+        },
+        choseDateFP: (date) => { // handle choose date from flatpicker
+            setDataInput(prevData => ({ ...prevData, deadline: date[0] }));
+            fp.current.flatpickr.close();
         }
-        setDataInput({...dataInput, deadline: id })
     }
 
+    const closeModalProcess = () => {
+        // setDataInput({})
+        setSecOpen({
+            color: true,
+            area: true,
+            note: true,
+            deadline: true
+        })
+    }
+    // submit
     const handleSave = () => {
         console.log(dataInput)
         closeModal()
-    }
-
-    const handleChooseDateDl = (date) => {
-        setDataInput(prevData => ({ ...prevData, deadline: date[0] }));
-
-        fp.current.flatpickr.close();
     }
 
     return ( 
@@ -304,17 +349,25 @@ const TaskContent = (p) => {
                 {mode === "edit" && secOpen.deadline 
                     ? (
                         <EditSection name="deadline" onClick={openSec} isedit={secOpen.deadline}>
-                        {dateConvert(dataInput.deadline)}
+                        {isDateString(dataInput.deadline) 
+                            ? dateConvert(dataInput.deadline)
+                            : radioData.find(radio => radio.id === dataInput.deadline)?.value ?? "Chọn thời hạn"}
                         </EditSection>
                     ) : (
                         <Fragment>
                         <Ratio>
-                            {radioData && radioData.map(radio => (
-                            <label key={radio.id} htmlFor={radio.id} onClick={(e) =>handleChooseDateType(e, mode)}>
-                                <input type="radio" id={radio.id} name="radio"/>
+                            {radioData && radioData.map(radio =>{
+                                let isChecked = false
+                                if(mode === "edit") {
+                                    if(dataInput.deadline === radio.id) isChecked = true
+                                    if(isDateString(dataInput.deadline) && radio.id === "specific-day") isChecked = true
+                                }
+                            return (
+                            <label key={radio.id} htmlFor={radio.id}onClick={(e) => deadlineHdle.choseType(e, mode)}>
+                                <input type="radio" id={radio.id} name="radio" defaultChecked={mode === "edit" ? isChecked : radio.id === "today" && "checked"} />
                                 <span>{radio.value}</span>
                             </label>
-                            ))}
+                            )})}
                         </Ratio>
                         <div className="flat-picker-wrapper">
                             <Flatpickr 
@@ -323,7 +376,8 @@ const TaskContent = (p) => {
                                 inline: true,
                                 minDate: "today",
                             }}
-                            onChange={(date) => handleChooseDateDl(date)}
+                            value={isDateString(dataInput.deadline) ? new Date(dataInput.deadline) : null}
+                            onChange={(date) => deadlineHdle.choseDateFP(date)}
                             />
                         </div>
                         </Fragment>
@@ -336,16 +390,32 @@ const TaskContent = (p) => {
                 title="Ghi chú"
                 name="note"
                 Icon={Img.note}
-                plus={secOpen.note}
+                plus={mode === "edit" ? false : secOpen.note}
                 openSec={openSec}>
-                {!secOpen.note &&<ReactQuill 
+            {mode === "edit" && secOpen.note
+            ? (
+                <EditSection name="note" onClick={openSec} isedit={secOpen.note}>
+                    <div onClick={() => { 
+                        setSecOpen({...secOpen, note: false })
+                    }}>
+                        <ReactQuill
+                            value={dataInput.note}
+                            readOnly={true}
+                            theme={"bubble"}
+                            />
+                    </div>
+                </EditSection> 
+            ) : (
+                !secOpen.note && <ReactQuill 
                     theme="snow"
                     placeholder="Ghi chú của bạn..."
+                    value={dataInput.note}
                     onChange={(value) => {
                         setDataInput({...dataInput, note: value })
-                    }}
-                    />}
+                    }}/>
+            )}                    
             </ModalSectionContent>
+ 
             
             <Button
                 title="Lưu"
@@ -384,10 +454,10 @@ const EditSection = (p) => {
     const { children, onClick, isedit, name } = p
 
     return (
-        <EditSectionContainer isedit={isedit.toString()}>
+        <EditSectionContainer isedit={isedit?.toString()}>
             {children}
         
-        <span name={name} onClick={onClick}><Img.edit /></span>
+        {name !== "note" && <span name={name} onClick={onClick}><Img.edit /></span>}
         </EditSectionContainer>
     )
 }
@@ -411,6 +481,10 @@ const EditSectionContainer = styled.div `
                 color: var(--second-color);
             }
         }
+    }
+
+    .ql-editor {
+        max-width: 370px!important;
     }
 
     .circle-picker {
@@ -604,9 +678,12 @@ const ModalSectionContentStyle = styled.div `
             }
         }
         
-        .quill .ql-container {
+        .quill {
+            max-width: 370px!important;
+
+            .ql-container {
             height: auto!important;
-        }
+        }}
         
     `
  

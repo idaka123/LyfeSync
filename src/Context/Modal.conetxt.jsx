@@ -13,7 +13,7 @@ export const ModalProvider = (p) => {
         title: null,
         content: null
       });
-    
+      const [isDataLoaded, setIsDataLoaded] = React.useState(false);
       
       const openModal = (title = null, content = null) => {
         openOverlay()
@@ -22,6 +22,7 @@ export const ModalProvider = (p) => {
           title,
           content
         });
+        window.dispatchEvent(new CustomEvent('modalOpening'));
       };
     
       const closeModal = () => {
@@ -32,10 +33,12 @@ export const ModalProvider = (p) => {
           content: null,
           title: null
         });
+        setIsDataLoaded(false);
+        window.dispatchEvent(new CustomEvent('modalClosing'));
       };
 
       const valueContext = {
-        modal, openModal, closeModal
+        modal, openModal, closeModal,isDataLoaded, setIsDataLoaded
       }
 
     return (

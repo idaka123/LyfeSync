@@ -10,7 +10,7 @@ export const dateConvert = (dateMilli) => {
 }
 
 
-function isDateString(dateString) {
+export function isDateString(dateString) {
     // Create a regex pattern to match the date format
     const pattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
   
