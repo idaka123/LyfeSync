@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
+import 'animate.css';
 import { tipsData } from "../Knowledge.data";
 import { TipBlock, TipImage, TipParagraph, TipTitle } from "../Knowledge.desktop";
+import { ANIMATIONS } from "../utils/animationConstants";
 import random from "../utils/random";
 import updateContent from "../utils/updateContent";
-import { ANIMATIONS } from "../utils/animationConstants";
-import 'animate.css';
 
 const Tip = () => {
   const { BOUNCE_IN, BOUNCE_OUT } = ANIMATIONS;
