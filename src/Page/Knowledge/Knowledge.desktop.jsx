@@ -15,7 +15,7 @@ export const QuoteBlock = styled.div`
 
 export const CommunityBlockTitle = styled.div`
 user-select: none; 
-height: 12%;
+height: 11.2%;
 b{
   font-size: calc((4.5vw + 4.5vh)/2); 
   color: black; 
@@ -50,7 +50,7 @@ height: 11%;
 `
 
 export const TipBlock = styled.div` 
-height: 35%;
+height: 38%;
 overflow: hidden; 
 display: grid;
 grid-template: 100% / 50% 50%; 
@@ -66,7 +66,7 @@ box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   transform: translateY(-5px); 
   box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
 }
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 `
 
 
@@ -126,8 +126,8 @@ cite{
   font-size: calc((1.25vw + 1vh)/2);
   color: #9b9a9a; 
 }
-margin: 2.5%;
 user-select: none; 
+margin-bottom: 3.5%;
 `
 
 export const VideoBlock = styled.div`
