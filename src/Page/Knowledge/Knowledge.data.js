@@ -248,3 +248,107 @@ export const tipsData = [
     img: img7
   }
 ]
+
+export const wisdomsData = [
+  {
+    id: 1, 
+    content: "„Anyone who has never made a mistake has never tried anything new.“", 
+    author: "Albert Einstein"
+  },
+  {
+    id: 2,
+    content: "„The only way to do great work is to love what you do.“",
+    author: "Steve Jobs"
+  },
+  {
+    id: 3,
+    content: "„In three words I can sum up everything I've learned about life: it goes on.“",
+    author: "Robert Frost"
+  },
+  {
+    id: 4,
+    content: "„You miss 100% of the shots you don't take.“",
+    author: "Wayne Gretzky"
+  },
+  {
+    id: 5,
+    content: "„It does not matter how slowly you go as long as you do not stop.“",
+    author: "Confucius"
+  },
+  {
+    id: 6,
+    content: "„The only thing we have to fear is fear itself.“",
+    author: "Franklin D. Roosevelt"
+  },
+  {
+    id: 7,
+    content: "„To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.“",
+    author: "Ralph Waldo Emerson"
+  },
+  {
+    id: 8,
+    content: "„The best way to predict the future is to invent it.“",
+    author: "Alan Kay"
+  },
+  {
+    id: 9,
+    content: "„The only true wisdom is in knowing you know nothing.“",
+    author: "Socrates"
+  },
+  {
+    id: 10,
+    content: "„It's not what happens to you, but how you react to it that matters.“",
+    author: "Epictetus"
+  },
+  {
+    id: 11,
+    content: "„In the middle of every difficulty lies opportunity.“",
+    author: "Albert Einstein"
+  },
+  {
+    id: 12,
+    content: "„The greatest glory in living lies not in never falling, but in rising every time we fall.“",
+    author: "Nelson Mandela"
+  },
+  {
+    id: 13,
+    content: "„Life is what happens when you're busy making other plans.“",
+    author: "John Lennon"
+  },
+  {
+    id: 14,
+    content: "„Believe you can and you're halfway there.“",
+    author: "Theodore Roosevelt"
+  },
+  {
+    id: 15,
+    content: "„In the end, we will remember not the words of our enemies, but the silence of our friends.“",
+    author: "Martin Luther King Jr."
+  },
+  {
+    id: 16,
+    content: "„The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it.“",
+    author: "Jordan Belfort"
+  },
+  {
+    id: 17,
+    content: "„The best revenge is massive success.“",
+    author: "Frank Sinatra"
+  },
+  {
+    id: 18,
+    content: "„The purpose of our lives is to be happy.“",
+    author: "Dalai Lama"
+  },
+  {
+    id: 19,
+    content: "„Get busy living or get busy dying.“",
+    author: "Stephen King"
+  },
+  {
+    id: 20,
+    content: "„You have within you right now, everything you need to deal with whatever the world can throw at you.“",
+    author: "Brian Tracy"
+  }
+];
+
