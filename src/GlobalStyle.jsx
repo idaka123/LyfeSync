@@ -45,6 +45,9 @@ const GlobalStyles = createGlobalStyle`
         color: var(--text-color);
         text-decoration: none;
     }
+    pre {
+        white-space:pre-wrap;
+    }
 
     .select-none {
         -webkit-user-select: none!important;
@@ -74,6 +77,16 @@ const GlobalStyles = createGlobalStyle`
         opacity: .6!important;
     }
 
+    .wrap-text {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    @-moz-document url-prefix() {
+        .wrap-text {
+            white-space: -moz-pre-wrap;
+        }
+    }
     .col3 {
         width: 33.333333%;
         height: 100%;

@@ -12,6 +12,7 @@ import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import { dateConvert, isDateString } from "../../../Util/util";
+import DOMPurify from 'dompurify';
 
 const relatedArea = [
     {
@@ -25,7 +26,7 @@ const relatedArea = [
         icon: Img.play
     },
     {
-        name: "spirituality",
+        name: "spirit",
         value: "Tâm linh",
         icon: Img.spirit
     },
@@ -58,21 +59,21 @@ const relatedArea = [
 ]
 
 const TaskModal = () => {
-    const { modal, isDataLoaded, setIsDataLoaded  }  = useContext(ModalContext)
+    const { modal  }  = useContext(ModalContext)
     const [editMode, setEditMode] = useState(!!modal.content)
     const [dataInput, setDataInput] = useState({})
-    
 
-    // const [area, setArea] = useState({
-    //     health: false,
-    //     play: false,
-    //     spirituality: false,
-    //     environment: false,
-    //     work: false,
-    //     wealth: false,
-    //     growth: false,
-    //     relationship: false,
-    // })
+
+    const [areaData, setArea] = useState({
+        health: false,
+        play: false,
+        spirit: false,
+        environment: false,
+        work: false,
+        wealth: false,
+        growth: false,
+        relationship: false,
+    })
 
     useEffect(() => {
         if(modal.content !== null) 
@@ -82,6 +83,17 @@ const TaskModal = () => {
     },[modal.content])
     
     useEffect(() => {
+        const area = {
+            health: false,
+            play: false,
+            spirit: false,
+            environment: false,
+            work: false,
+            wealth: false,
+            growth: false,
+            relationship: false,
+        }
+
         if(modal.content !== null) {
             setDataInput({
                 title: modal.content.title,
@@ -90,8 +102,13 @@ const TaskModal = () => {
                 deadline: modal.content.deadline,
             })
 
+            const relate = modal.content.area.reduce((prev, next) => {
+                return {...prev, [next]: true}
+            }, area)
+            setArea(relate)
         } else {
             setDataInput({})
+            setArea(area)
         }
 
         return () => setDataInput({})
@@ -101,18 +118,6 @@ const TaskModal = () => {
 
     // useEffect(() => {
     //     if(modal.content) {
-            
-    //         const data = {
-    //             health: false,
-    //             play: false,
-    //             spirituality: false,
-    //             environment: false,
-    //             work: false,
-    //             wealth: false,
-    //             growth: false,
-    //             relationship: false,
-    //         }
-
     //         const relate = modal.content.area.forEach(area => { data[area] = true })
     //         setArea(relate)
     //         console.log("relate", relate)
@@ -123,16 +128,18 @@ const TaskModal = () => {
     return <TaskContent 
                 mode={ editMode ? "edit" : "add"}
                 dataInput={ dataInput }
+                areaData={ areaData }
                 setDataInput = {setDataInput}
                 // areaData={area} 
                 />
 }
 
 const TaskContent = (p) => {
-    const { dataInput, setDataInput, mode } = p
+    const { dataInput, setDataInput, mode, areaData } = p
 
     const { closeModal }  = useContext(ModalContext)
 
+    const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
     // const [dataInput, setDataInput] = useState(data)
     const radioData = [
         {
@@ -157,16 +164,7 @@ const TaskContent = (p) => {
         },
     ]
 
-    const [area, setArea] = useState({
-        health: false,
-        play: false,
-        spirituality: false,
-        environment: false,
-        work: false,
-        wealth: false,
-        growth: false,
-        relationship: false,
-    })
+    const [area, setArea] = useState(areaData)
     
     const [hex, setHex] = useState(dataInput.color);
     const [secOpen, setSecOpen] = useState({
@@ -181,11 +179,21 @@ const TaskContent = (p) => {
     useEffect(() => {
         console.log("listen event close modal")
         window.addEventListener('modalClosing', closeModalProcess);
-        
+
         return () => {
-          window.removeEventListener('modalClosing', closeModalProcess);
+            window.removeEventListener('modalClosing', closeModalProcess);
         };
-      }, []);
+    }, []);
+
+    useEffect(() => {
+        areaData && setArea(areaData)
+    }, [areaData]);
+
+    useEffect(() => {
+        if(dataInput) {
+            dataInput.color && setHex(dataInput.color);
+        }
+    }, [dataInput]);
 
     const openSec = async (e) => {
         const name = e.currentTarget.getAttribute("name")
@@ -277,6 +285,12 @@ const TaskContent = (p) => {
         closeModal()
     }
 
+    const Area = (p) => {
+        const { data } = p
+        const Image = Img[data]
+        return <Image/>
+    }
+
     return ( 
     <Modal >
         <Content>           
@@ -331,16 +345,31 @@ const TaskContent = (p) => {
                 title="Liên quan"
                 name="area"
                 Icon={Img.area}
-                plus={secOpen.area}
+                plus={mode === "edit" ? false : secOpen.area}
                 openSec={openSec} >
-            {(!secOpen.area && relatedArea) && relatedArea.map(data => {
-                return (
-                    <RelateAres className={area[data.name] ? "text-dark" : ""} key={data.name} onClick={() => handleChooseArea(data.name)}>
-                        <data.icon />
-                        <p>{data.value}</p>
-                    </RelateAres>
-                )
-            })}
+            {mode === "edit" && secOpen.area 
+            ? (
+                <EditSection name="area" onClick={openSec} isedit={secOpen.area}>
+                    <div className="area-wrapper">
+                    {area && Object.keys(area).map((data, idx) => {
+                        if(area[data])
+                        return (
+                            <Area key={idx} data={data}/>
+                        )})
+                    }
+                    </div>
+                </EditSection>
+            ) : (
+                (!secOpen.area && relatedArea) && relatedArea.map(data => {
+                    return (
+                        <RelateAres className={area[data.name] ? "text-dark" : ""} key={data.name} onClick={() => handleChooseArea(data.name)}>
+                            <data.icon />
+                            <p>{data.value}</p>
+                        </RelateAres>
+                    )
+                })
+            )}
+            
             </ModalSectionContent>
 
             {/* DEADLINE */}
@@ -395,14 +424,15 @@ const TaskContent = (p) => {
             {mode === "edit" && secOpen.note
             ? (
                 <EditSection name="note" onClick={openSec} isedit={secOpen.note}>
-                    <div onClick={() => { 
+                    <div className="note-wrapper" onClick={() => { 
                         setSecOpen({...secOpen, note: false })
                     }}>
-                        <ReactQuill
+                        <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} className="wrap-text"/>
+                        {/* <ReactQuill
                             value={dataInput.note}
                             readOnly={true}
                             theme={"bubble"}
-                            />
+                            /> */}
                     </div>
                 </EditSection> 
             ) : (
@@ -454,7 +484,7 @@ const EditSection = (p) => {
     const { children, onClick, isedit, name } = p
 
     return (
-        <EditSectionContainer isedit={isedit?.toString()}>
+        <EditSectionContainer name={name} isedit={isedit?.toString()}>
             {children}
         
         {name !== "note" && <span name={name} onClick={onClick}><Img.edit /></span>}
@@ -467,6 +497,22 @@ const EditSection = (p) => {
 const EditSectionContainer = styled.div `
     display: flex;
     align-items: center;
+    width: ${({name}) => name ==="note" && "100%" };
+
+    .note-wrapper {
+        width: 100%;
+        background-color: #f8f8f8;
+        padding: 20px 30px;
+        border-radius: 12px;
+    }
+    .area-wrapper {
+        display: flex;
+        gap: 9px;
+
+        svg {
+            width: 14px;
+        }
+    }
 
     span {
         line-height: 1;
@@ -679,7 +725,7 @@ const ModalSectionContentStyle = styled.div `
         }
         
         .quill {
-            max-width: 370px!important;
+            width:100%;
 
             .ql-container {
             height: auto!important;

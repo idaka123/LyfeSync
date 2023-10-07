@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
-import { useState, useEffect, Fragment, useContext } from "react";
+import { useState, useEffect, Fragment, useContext, useMemo } from "react";
 import { dateConvert } from "../../../Util/util"
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.conetxt";
@@ -90,25 +90,30 @@ const Card = (p) => {
     const [sub, setSub] = useState(subTask)
     const [subDone, setSubDone] = useState(0)
 
+    const countCurrSub = (dataSub) => {
+        return dataSub.reduce((total, curr) => {
+            if (curr.done === true) {
+                return total + 1;
+            } else {
+                return total;
+            }
+        }, 0);
+    };
+      
+    const memoizedCount = useMemo(() => countCurrSub(sub), [sub]);
+      
     useEffect(() => {
         let isMounted = true;
-        const countCurrSub = (dataSub) => {
-            const count = dataSub.reduce((total, curr) => {
-                if(curr.done === true) 
-                    return total + 1
-                else 
-                    return total },0 )
-            if(isMounted) { 
-                setSubDone(count)
-            }
+        
+        if (isMounted) {
+            setSubDone(memoizedCount);
         }
-        countCurrSub(sub)
-    
+        
         return () => {
-            isMounted = false; 
-        }
-    }, [sub]);
-
+            isMounted = false;
+        };
+    }, [memoizedCount]);
+      
     const updateSubCheck = (id, check) => {
         const newSub = [...sub]; //prevent mutating
         const index = newSub.map(e => e.id).indexOf(id);
@@ -143,7 +148,6 @@ const Card = (p) => {
             area,
             note,
         }
-        console.log(data)
         openModal(title, data)
     }
     
