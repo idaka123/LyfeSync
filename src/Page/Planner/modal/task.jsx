@@ -273,7 +273,7 @@ const TaskContent = (p) => {
     }
 
     const closeModalProcess = () => {
-        // setDataInput({})
+        setDataInput({})
         setSecOpen({
             color: true,
             area: true,
