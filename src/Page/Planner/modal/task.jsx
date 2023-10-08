@@ -13,6 +13,8 @@ import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import { dateConvert, isDateString } from "../../../Util/util";
 import DOMPurify from 'dompurify';
+import TaskContext from "../../../Context/Task.context";
+import { nanoid } from "nanoid";
 
 const relatedArea = [
     {
@@ -137,8 +139,8 @@ const TaskModal = () => {
 const TaskContent = (p) => {
     const { dataInput, setDataInput, mode, areaData } = p
 
-    const { closeModal }  = useContext(ModalContext)
-
+    const { modal, closeModal }  = useContext(ModalContext)
+    const { task, setTask, loading }  = useContext(TaskContext)
     const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
     // const [dataInput, setDataInput] = useState(data)
     const radioData = [
@@ -281,7 +283,21 @@ const TaskContent = (p) => {
     }
     // submit
     const handleSave = () => {
-        console.log(dataInput)
+        console.log("dataInput", dataInput)
+        setTask(prevData => {
+            if(mode === "edit") {
+                const newData = prevData.map(data => {
+                    if(data.id === modal.content.id) {
+                        return {...dataInput, id: data.id, sub: data.sub }
+                    } else {
+                        return data
+                    }
+                })
+                return newData
+            } else {
+                return [...prevData, {...dataInput, id: nanoid(), sub: [] }]
+            }
+        })
         closeModal()
     }
 

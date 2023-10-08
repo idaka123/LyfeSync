@@ -8,6 +8,7 @@ import PlannerDesktop from "./Planner.desktop";
 import ModalContext from "../../Context/Modal.conetxt";
 
 import TaskModal from "./modal/task";
+import { TaskProvider } from "../../Context/Task.context";
 
 
 
@@ -54,11 +55,13 @@ const Planner = () => {
 
     return (
         <AnimatePresence mode="wait">
-            <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
-                        animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
-                <TaskModal />
-                {device === "desktop" ? <Desktop /> : <Mobile /> }
-            </motion.div> 
+            <TaskProvider>
+                <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
+                            animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
+                    <TaskModal />
+                    {device === "desktop" ? <Desktop /> : <Mobile /> }
+                </motion.div>
+            </TaskProvider> 
         </AnimatePresence>
     )
 }

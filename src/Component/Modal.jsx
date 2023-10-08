@@ -4,7 +4,7 @@ import { Icon } from "/src/Assets/icon.js";
 import React, { useEffect } from "react";
 import DeviceContext from "../Context/Device.context";
 import ModalContext from "../Context/Modal.conetxt";
-
+import Loading from "./Loadding"
 
 const Modal = (p) => {
     const { children, data } = p
@@ -63,7 +63,7 @@ const Modal = (p) => {
             <h1>{modal.title}</h1>
             <Icon.x onClick={hdleToggle}/>
         </Title> 
-       {isDataLoaded ? children: <>loading</>}
+       {isDataLoaded ? children: <Loading />}
     </Container> );
 }
  

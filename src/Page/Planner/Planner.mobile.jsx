@@ -1,16 +1,18 @@
 import styled from "styled-components";
-import {  useContext } from "react";
+import {  Fragment, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import TaskSection from "./TaskSection";
 import { plannerData } from "./Planner.data";
 import Button from "../../Component/Button";
 import { Img } from "../../Assets/svg";
 import TaskCard from "./card/TaskCard";
+import TaskContext from "../../Context/Task.context";
+import Loading from "../../Component/Loadding";
 
 
 const PlannerMobile = (p) => {
     const { selectTab, tab, openModalData } = p
-    
+    const { task, loading }  = useContext(TaskContext)
     // const selectTab = (e) => {
     //     const name = e.target.getAttribute("name")
     //     setTab(name)
@@ -39,14 +41,16 @@ const PlannerMobile = (p) => {
                 })}
                 </TabList> 
             </Header>
-               <TaskSectionMobile tab={tab} openModalData={openModalData}></TaskSectionMobile>
+            {loading 
+                ? <Loading /> 
+                : <TaskSectionMobile tab={tab} task={task} openModalData={openModalData}></TaskSectionMobile>
+            }
         </Container>
      );
 }
 
 const TaskSectionMobile = (p) => {
-    const { openModalData, tab } = p
-    // const { openModal }  = useContext(ModalContext)
+    const { openModalData, tab, task } = p
     const tabStyle = {
         initial: () => {
             return {
@@ -85,24 +89,28 @@ const TaskSectionMobile = (p) => {
                     >
             
         <TaskSection key={tab} className="col3" data={tab} openModalData={openModalData}>
+        {task && task.length > 0
+            ?<TaskCard /> 
+            :<Fragment>
+                <ImgMotivation>
+                    <img src={plannerData[tab]?.empty?.img} alt="" />
+                </ImgMotivation> 
 
-           <TaskCard /> 
-
-            {/* <ImgMotivation>
-                <img src={plannerData[tab]?.empty?.img} alt="" />
-            </ImgMotivation> 
-
-            <TextMotivation>
-                <p>{plannerData[tab]?.empty?.text1}</p>
-                <p>{plannerData[tab]?.empty?.text2}</p>
-                <p>{plannerData[tab]?.empty?.text3}</p>
-            </TextMotivation>
+                <TextMotivation>
+                    <p>{plannerData[tab]?.empty?.text1}</p>
+                    <p>{plannerData[tab]?.empty?.text2}</p>
+                    <p>{plannerData[tab]?.empty?.text3}</p>
+                </TextMotivation>
+                
+                <Button title={`Tạo ${tab}`}  
+                        className="text-center"
+                        style={{marginTop: "16px"}}
+                        name={tab}
+                        onClick={hdleClickBtn}/>
+            </Fragment>
+        }
+           
             
-            <Button title={`Tạo ${tab}`}  
-                    className="text-center"
-                    style={{marginTop: "16px"}}
-                    name={tab}
-                    onClick={hdleClickBtn}/> */}
 
         </TaskSection>     
                 
