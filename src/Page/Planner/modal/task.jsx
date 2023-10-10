@@ -99,11 +99,11 @@ const TaskModal = () => {
         if(modal.content !== null) {
             
             setDataInput({
-                title: modal.content.title,
-                color: modal.content.color,
-                area: modal.content.area,
-                deadline: modal.content.deadline,
-                note: modal.content.note,
+                title: modal?.content?.title || "",
+                color: modal?.content?.color || "",
+                area: modal?.content?.area || [],
+                deadline: modal?.content?.deadline,
+                note: modal?.content?.note || "",
             })
 
 

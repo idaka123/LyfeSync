@@ -23,3 +23,19 @@ export function isDateString(dateString) {
       return false;
     }
   }
+
+export function compareDates(date1, date2) {
+  // Set time to zero for both dates
+  date1.setHours(0, 0, 0, 0);
+  date2.setHours(0, 0, 0, 0);
+  console.log(date1)
+  console.log(date2)
+
+  if (date1 < date2) {
+    return -1;
+  } else if (date1 > date2) {
+    return 1;
+  } else {
+    return 0;
+  }
+}

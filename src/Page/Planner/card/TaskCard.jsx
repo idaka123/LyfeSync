@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
-import { dateConvert } from "../../../Util/util"
+import { compareDates, dateConvert } from "../../../Util/util"
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.conetxt";
 import TaskContext from "../../../Context/Task.context";
@@ -73,10 +73,10 @@ const TaskCard = () => {
 
     return ( 
         <Container>
-           {dateType.overdue.length > 0 && 
-
-           <Fragment>
-               <DateZoneLabel className="mb-10 overdue" title="Quá hạn" num="2" />
+        {dateType.overdue.length > 0 && 
+            <Fragment>
+                {/* OVERDUE */}
+                <DateZoneLabel name="overdue" className="mb-10 overdue" title="Quá hạn" num={dateType.overdue.length} />
                 <TaskCardList className="mb-30">
                 {dateType.overdue.map((data, idx) => {
                     return (
@@ -93,11 +93,10 @@ const TaskCard = () => {
                     )
                 })}
                 </TaskCardList>
-                
-           </Fragment>
-            }
-
-            <DateZoneLabel className="mb-10" title="Hôm nay" num="2" />
+            </Fragment>
+        }
+            {/* TODAY */}
+            <DateZoneLabel name="today" className="mb-10" title="Hôm nay" num={dateType.today.length} />
             <TaskCardList className="mb-30">
             {dateType.today && dateType.today.map((data, idx) => {
                 return (
@@ -114,7 +113,9 @@ const TaskCard = () => {
                 )
             })}
             </TaskCardList>
-            <DateZoneLabel className="mb-10 mt-40" title=" Ngày mai" num="2" />
+
+            {/* TOMORROW */}
+            <DateZoneLabel name="tomorrow" className="mb-10 mt-40" title="Ngày mai" num={dateType.tomorrow.length} />
             {dateType.tomorrow && dateType.tomorrow.map((data, idx) => {
                 return (
                     <Card 
@@ -129,7 +130,9 @@ const TaskCard = () => {
                         />
                 )
             })}
-            <DateZoneLabel className="mb-10 mt-40" title={dAfterTObject?.value?.vn} num="2" />
+
+            {/* DATE AFTER TOMORROW */}
+            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTObject?.value?.vn} num={dateType.dateAfterTomorrow.length} />
             {dateType.dateAfterTomorrow && dateType.dateAfterTomorrow.map((data, idx) => {
                 return (
                     <Card 
@@ -144,7 +147,9 @@ const TaskCard = () => {
                         />
                 )
             })}
-             <DateZoneLabel className="mb-10 mt-40" title="Ngày nào đó" num="2" />
+
+            {/* SOME DAY */}
+            <DateZoneLabel name="someday" className="mb-10 mt-40" title="Ngày nào đó" num={dateType.someDay.length} />
             {dateType.someDay && dateType.someDay.map((data, idx) => {
                 return (
                     <Card 
@@ -165,14 +170,13 @@ const TaskCard = () => {
 }
 
 const DateZoneLabel = (p) => {
-    const {title, num, className} = p
+    const { title, num, className } = p
 
     return (
     <DateZoneLabelContainer className={className}>
         <div className="label text-dark">
             <span>{title}</span>
             <span> ({num})</span>
-            <span>&nbsp;+</span>
         </div>
     </DateZoneLabelContainer>
     )
@@ -310,7 +314,11 @@ const Card = (p) => {
                     <Tippy
                         interactive
                         render={attrs => (
-                            <Option {...attrs} taskId={id} openDetail={taskHandle.open} deleteTask={taskHandle.option.delete}/>
+                            <Option {...attrs} 
+                                taskId={id} 
+                                openDetail={taskHandle.open} 
+                                deleteTask={taskHandle.option.delete}
+                                deadline={deadline}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
@@ -392,7 +400,17 @@ const AddSubTask = (p) => {
 
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId } = p
+    const { openDetail, deleteTask, taskId, deadline } = p
+    const [current, setCurrent] = useState()
+
+    useEffect(() => {
+        const compare = compareDates(new Date(), new Date(deadline))
+
+        if(compare === 0 ) {
+            setCurrent("today")
+        }
+
+    }, [taskId, deadline]);
 
     const listOption = [
         {
@@ -400,7 +418,7 @@ const Option = (p) => {
             value: "Hôm nay",
             icon: "deadline",
             handleClick: () => {
-                console.log("123")
+                
             }
         },
         {
@@ -447,7 +465,7 @@ const Option = (p) => {
         <OptionContainer>
          {listOption && listOption.map((item, idx) => { 
             return(
-            <li key={idx} onClick={item.handleClick} >
+            <li key={idx} onClick={item.handleClick} className={current === item.name && "disable"}>
                 <Icon icon={item.icon}/>
                 <span className="ml-7">{item.value}</span>
             </li>
@@ -479,6 +497,7 @@ const DateZoneLabelContainer = styled.div `
 
     .label {
         font-weight: 700;
+        /* cursor: pointer; */
 
         span {
             font-size: 1.5rem;
@@ -642,6 +661,12 @@ const OptionContainer = styled.ul `
         font-weight: 600;
         font-size: 1.26rem;
 
+        &.disable {
+            cursor: not-allowed;
+            user-select: none;
+            opacity: 0.5;
+        }
+
         span {
             font-size: 1.25rem;
         }
@@ -650,7 +675,7 @@ const OptionContainer = styled.ul `
             margin-right: 5px;
         }
 
-        &:hover {
+        &:not(.disable):hover {
             background-color: #f5f5f5;
         }
     }
