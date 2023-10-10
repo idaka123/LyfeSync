@@ -52,6 +52,10 @@ const Task = styled(motion.section)`
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     margin-top: 16px;
+
+    h2.title {
+        letter-spacing: 4px;
+    }
 `
 
 

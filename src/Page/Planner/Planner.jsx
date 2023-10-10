@@ -7,7 +7,7 @@ import PlannerMobile from "./Planner.mobile";
 import PlannerDesktop from "./Planner.desktop";
 import ModalContext from "../../Context/Modal.conetxt";
 
-import TaskModal from "./modal/task";
+import TaskModal from "./modal/Task";
 import { TaskProvider } from "../../Context/Task.context";
 
 

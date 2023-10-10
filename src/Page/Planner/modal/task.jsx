@@ -16,6 +16,7 @@ import DOMPurify from 'dompurify';
 import TaskContext from "../../../Context/Task.context";
 import { nanoid } from "nanoid";
 
+
 const relatedArea = [
     {
         name: "health",
@@ -64,8 +65,7 @@ const TaskModal = () => {
     const { modal  }  = useContext(ModalContext)
     const [editMode, setEditMode] = useState(!!modal.content)
     const [dataInput, setDataInput] = useState({})
-
-
+    
     const [areaData, setArea] = useState({
         health: false,
         play: false,
@@ -97,19 +97,29 @@ const TaskModal = () => {
         }
 
         if(modal.content !== null) {
+            
             setDataInput({
                 title: modal.content.title,
                 color: modal.content.color,
-                note: modal.content.note,
+                area: modal.content.area,
                 deadline: modal.content.deadline,
+                note: modal.content.note,
             })
+
 
             const relate = modal.content.area.reduce((prev, next) => {
                 return {...prev, [next]: true}
             }, area)
             setArea(relate)
         } else {
-            setDataInput({})
+            setDataInput({
+                title: "",
+                color: "",
+                note: "",
+                // deadline: "",
+                area: [],
+                sub: []
+            })
             setArea(area)
         }
 
@@ -141,6 +151,8 @@ const TaskContent = (p) => {
 
     const { modal, closeModal }  = useContext(ModalContext)
     const { task, setTask, loading }  = useContext(TaskContext)
+    const [valid, setValid] = useState(true)
+
     const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
     // const [dataInput, setDataInput] = useState(data)
     const radioData = [
@@ -151,10 +163,6 @@ const TaskContent = (p) => {
         {
             id: "tomorrow",
             value: "Mai"
-        },
-        {
-            id: "soon",
-            value: "Sắp"
         },
         {
             id: "someday",
@@ -218,16 +226,18 @@ const TaskContent = (p) => {
 
     const handleChooseArea = (name) => {
         console.log(name)
-        setArea({...area, [name]: !area[name] })
-
-        const newData = Object.keys(area).reduce((prev, next) => {
-            if(area[next]) {
+        let newArea = {...area, [name]: !area[name] };
+        setArea(newArea)
+    
+        const newData = Object.keys(newArea).reduce((prev, next) => {
+            if(newArea[next]) {
                 return [...prev, next]
             } else {
                 return prev
             }
         }, [])
-
+        console.log("newData", newData)
+    
         setDataInput({...dataInput, area: newData })
     }
 
@@ -253,7 +263,6 @@ const TaskContent = (p) => {
                 const tomorrow = new Date(today.setHours(0,0,0,0))
                 tomorrow.setDate(tomorrow.getDate() + 1)
     
-                console.log("tomorrow", )
                 dateStr = tomorrow
             }
             else if(id === "specific-day") {
@@ -264,10 +273,11 @@ const TaskContent = (p) => {
             }
     
             console.log(dateStr)
-            setDataInput({...dataInput, deadline: dateStr })
+            setDataInput({...dataInput, deadline: dateStr.toString() })
         },
         choseDateFP: (date) => { // handle choose date from flatpicker
-            setDataInput(prevData => ({ ...prevData, deadline: date[0] }));
+            setDataInput(prevData => ({ ...prevData, deadline: date[0].toString() }));
+            console.log(date[0].toString())
             fp.current.flatpickr.close();
         }
     }
@@ -281,24 +291,46 @@ const TaskContent = (p) => {
             deadline: true
         })
     }
+
+    const checkValid = () => {
+        if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
+            setValid(false)
+            return false
+        }
+        return true
+    }
     // submit
-    const handleSave = () => {
+    const handleSave = async () => {
         console.log("dataInput", dataInput)
-        setTask(prevData => {
-            if(mode === "edit") {
-                const newData = prevData.map(data => {
-                    if(data.id === modal.content.id) {
-                        return {...dataInput, id: data.id, sub: data.sub }
-                    } else {
-                        return data
+        const valid = checkValid()
+
+        console.log(valid)
+
+        if(valid){
+            setValid(true)
+            await setTask(prevData => {
+                if(mode === "edit") {
+                    const newData = prevData.map(data => {
+                        if(data.id === modal.content.id) {
+                            return {...dataInput, id: data.id, sub: data.sub }
+                        } else {
+                            return data
+                        }
+                    })
+                    return newData
+                } else {
+                    const newData = {...dataInput}
+                    if(typeof(newData.deadline) === "undefined") {
+                        const today = new Date()
+                        today.setHours(23,59,59,0)
+
+                        newData.deadline = today.toString()
                     }
-                })
-                return newData
-            } else {
-                return [...prevData, {...dataInput, id: nanoid(), sub: [] }]
-            }
-        })
-        closeModal()
+                    return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                }
+            })
+            closeModal()
+        }
     }
 
     const Area = (p) => {
@@ -316,7 +348,7 @@ const TaskContent = (p) => {
                 Icon={Img.pen} >
                 <Input name="title" inputStyle={{width: "80%"}} value={dataInput.title} onInput={handleInput}/>
             </ModalSectionContent>
-
+            {!valid && <Validate>Bắt buộc phải có tiêu đề</Validate>}
             {/* COLOR */}
             <ModalSectionContent 
                 title="Màu tag"
@@ -498,12 +530,11 @@ const ModalSectionContent = (p) => {
 
 const EditSection = (p) => {
     const { children, onClick, isedit, name } = p
-
     return (
         <EditSectionContainer name={name} isedit={isedit?.toString()}>
             {children}
         
-        {name !== "note" && <span name={name} onClick={onClick}><Img.edit /></span>}
+        {name !== "note" && <span name={name} onClick={onClick} className={name === "color" && "pl-10"}><Img.edit /></span>}
         </EditSectionContainer>
     )
 }
@@ -551,6 +582,11 @@ const EditSectionContainer = styled.div `
 
     .circle-picker {
         width: ${({isedit}) => isedit === "true" && "10px!important" };
+        display: grid!important;
+        grid-template-columns: ${({isedit}) => isedit === "true" ? "0px!important" : "20px 20px 20px 20px 20px!important" };
+        grid-template-rows: ${({isedit}) => isedit === "true" ? "20px!important" : "10px!important" };
+        column-gap: 10px;
+        row-gap: 15px;
     }
 `
 
@@ -582,8 +618,13 @@ const Content = styled.div`
     }
 
     .circle-picker {
-      gap: 7px;
-      justify-content: center;  
+        gap: 7px;
+        justify-content: center;  
+        display: grid!important;
+        grid-template-columns: 20px 20px 20px 20px 20px;
+        grid-template-rows: 10px;
+        column-gap: 10px;
+        row-gap: 15px;
     }
 
 `
@@ -748,5 +789,11 @@ const ModalSectionContentStyle = styled.div `
         }}
         
     `
+
+const Validate = styled.p`
+    text-align: center;
+    color: red;
+
+`
  
 export default TaskModal;
