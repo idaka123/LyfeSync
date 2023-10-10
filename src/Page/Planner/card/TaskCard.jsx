@@ -187,6 +187,7 @@ const Card = (p) => {
         note = "",
         subTask = [],
         id } = p
+    const { task, setTask }  = useContext(TaskContext)
     const { openModal }  = useContext(ModalContext)
 
     const [checked, setChecked] = useState(false)
@@ -243,6 +244,12 @@ const Card = (p) => {
             },
             toggle: () => {
                 setOption(!option)
+            },
+            delete: (id) => {
+                let newTask = [...task]; //prevent mutating
+                newTask = newTask.filter(data => data.id !== id)
+                setTask(newTask);
+                taskHandle.option.close()
             }
         }
     }
@@ -303,7 +310,7 @@ const Card = (p) => {
                     <Tippy
                         interactive
                         render={attrs => (
-                            <Option {...attrs}/>
+                            <Option {...attrs} taskId={id} openDetail={taskHandle.open} deleteTask={taskHandle.option.delete}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
@@ -384,7 +391,8 @@ const AddSubTask = (p) => {
 }
 
 
-const Option = () => {
+const Option = (p) => {
+    const { openDetail, deleteTask, taskId } = p
 
     const listOption = [
         {
@@ -416,7 +424,7 @@ const Option = () => {
             value: "Sửa",
             icon: "edit",
             handleClick: () => {
-                console.log("123")
+                openDetail()
             }
         },
         {
@@ -424,7 +432,7 @@ const Option = () => {
             value: "Xóa",
             icon: "deleteIcon",
             handleClick: () => {
-                console.log("123")
+                deleteTask(taskId)
             }
         },
     ]
