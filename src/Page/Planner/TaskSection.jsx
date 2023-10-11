@@ -65,6 +65,7 @@ const Task = styled(motion.section)`
 const DateZone = styled.div`
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 
     span {
         margin-right: 1.5rem;

@@ -20,7 +20,7 @@ const TaskCard = (p) => {
         someDay: [],
         dateAfterTomorrow: [],
     })
-    const [dAfterTObject, setDAfterTObject] = useState()
+    const [dAfterTArr, setDAfterTArr] = useState()
 
     useEffect(() => {
         const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric', timeZoneName: 'short' };
@@ -44,13 +44,24 @@ const TaskCard = (p) => {
                 return deadline.toLocaleString('en-US', options) === tomorrow.toLocaleString('en-US', options);    
             })
             
+            const newDateArr = []
+            const dATTasksArr = []
             let dateAfterTomorrow = new Date();
-            dateAfterTomorrow.setDate(dateAfterTomorrow.getDate() + 2)
-            setDAfterTObject(language.date.find(item => item.name === dateAfterTomorrow.toLocaleString('en-US', options).split(",")[0]))
-            const dATTasks = dataSection.filter((task) => {
-                const deadline = new Date(task.deadline);
-                return deadline.toLocaleString('en-US', options) === dateAfterTomorrow.toLocaleString('en-US', options);
-            })
+            dateAfterTomorrow.setDate(dateAfterTomorrow.getDate() + 2 )
+
+            for(let i = 0; i < 7; i++) {
+                
+                let dateAfter = new Date();
+                dateAfter.setDate(dateAfter.getDate() + 2 + i)
+                newDateArr.push(language.date.find(item => item.name === dateAfter.toLocaleString('en-US', options).split(",")[0]))
+                setDAfterTArr(newDateArr)
+                const dATTasks = dataSection.filter((task) => {
+                    const deadline = new Date(task.deadline);
+                    return deadline.toLocaleString('en-US', options) === dateAfter.toLocaleString('en-US', options);
+                })
+
+                dATTasksArr.push(dATTasks)
+            }
 
             const someDayTasks = dataSection.filter((task) => {
                 const deadline = new Date(task.deadline);
@@ -62,7 +73,12 @@ const TaskCard = (p) => {
                 overdue: overDueTasks,
                 today: todayTasks,
                 tomorrow: tomorrowTasks,
-                dateAfterTomorrow: dATTasks,
+                dateAfterTomorrow: dATTasksArr[0],
+                dateAfterTomorrow1: dATTasksArr[1],
+                dateAfterTomorrow2: dATTasksArr[2],
+                dateAfterTomorrow3: dATTasksArr[3],
+                dateAfterTomorrow4: dATTasksArr[4],
+                dateAfterTomorrow5: dATTasksArr[5],
                 someDay: someDayTasks,
             })
         }
@@ -179,7 +195,7 @@ const TaskCard = (p) => {
                             })}
 
                             {/* DATE AFTER TOMORROW */}
-                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTObject?.value?.vn} num={dateType.dateAfterTomorrow.length} />
+                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTArr[0]?.value?.vn} num={dateType.dateAfterTomorrow.length} />
                             {dateType.dateAfterTomorrow && dateType.dateAfterTomorrow.map((data, idx) => {
                                 return (
                                     <Card 
@@ -195,9 +211,60 @@ const TaskCard = (p) => {
                                 )
                             })}
 
-                            {/* SOME DAY */}
-                            <DateZoneLabel name="someday" className="mb-10 mt-40" title="Ngày nào đó" num={dateType.someDay.length} />
-                            {dateType.someDay && dateType.someDay.map((data, idx) => {
+                            {/* DATE + 1 AFTER TOMORROW*/}
+                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTArr[1]?.value?.vn} num={dateType.dateAfterTomorrow.length} />
+                            {dateType.dateAfterTomorrow1 && dateType.dateAfterTomorrow1.map((data, idx) => {
+                                return (
+                                    <Card 
+                                        key={idx} 
+                                        id={data.id}
+                                        title={data?.title}
+                                        color={data?.color}
+                                        deadline={data?.deadline}
+                                        area={data.area}
+                                        note={data.note}
+                                        subTask={data.sub}
+                                        />
+                                )
+                            })}
+
+                            {/* DATE + 2 AFTER TOMORROW*/}
+                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTArr[2]?.value?.vn} num={dateType.dateAfterTomorrow.length} />
+                            {dateType.dateAfterTomorrow2 && dateType.dateAfterTomorrow2.map((data, idx) => {
+                                return (
+                                    <Card 
+                                        key={idx} 
+                                        id={data.id}
+                                        title={data?.title}
+                                        color={data?.color}
+                                        deadline={data?.deadline}
+                                        area={data.area}
+                                        note={data.note}
+                                        subTask={data.sub}
+                                        />
+                                )
+                            })}
+
+                            {/* DATE + 3 AFTER TOMORROW*/}
+                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTArr[3]?.value?.vn} num={dateType.dateAfterTomorrow.length} />
+                            {dateType.dateAfterTomorrow3 && dateType.dateAfterTomorrow3.map((data, idx) => {
+                                return (
+                                    <Card 
+                                        key={idx} 
+                                        id={data.id}
+                                        title={data?.title}
+                                        color={data?.color}
+                                        deadline={data?.deadline}
+                                        area={data.area}
+                                        note={data.note}
+                                        subTask={data.sub}
+                                        />
+                                )
+                            })}
+
+                            {/* DATE + 4 AFTER TOMORROW*/}
+                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTArr[4]?.value?.vn} num={dateType.dateAfterTomorrow.length} />
+                            {dateType.dateAfterTomorrow4 && dateType.dateAfterTomorrow4.map((data, idx) => {
                                 return (
                                     <Card 
                                         key={idx} 
@@ -212,7 +279,7 @@ const TaskCard = (p) => {
                                 )
                             })}
                         </Fragment>
-                        
+
     const AllDZ = () =>  <Fragment>
                             {dateType.overdue.length > 0 && 
                                 <Fragment>
@@ -256,6 +323,7 @@ const TaskCard = (p) => {
                                 )
                             })}
                             </TaskCardList>
+
                             {/* TOMORROW */}
                             <DateZoneLabel name="tomorrow" className="mb-10 mt-40" title="Ngày mai" num={dateType.tomorrow.length} />
                             {dateType.tomorrow && dateType.tomorrow.map((data, idx) => {
@@ -274,7 +342,7 @@ const TaskCard = (p) => {
                             })}
 
                             {/* DATE AFTER TOMORROW */}
-                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTObject?.value?.vn} num={dateType.dateAfterTomorrow.length} />
+                            <DateZoneLabel name="dateAfterTomorrow" className="mb-10 mt-40" title={dAfterTArr[0]?.value?.vn} num={dateType.dateAfterTomorrow.length} />
                             {dateType.dateAfterTomorrow && dateType.dateAfterTomorrow.map((data, idx) => {
                                 return (
                                     <Card 
