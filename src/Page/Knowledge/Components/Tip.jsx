@@ -14,6 +14,7 @@ const Tip = () => {
   const TIP_ANIMATE_DURATION = 1000;
   const timeoutTipID = useRef(null);
   const timeoutUpdateTipID = useRef(null);
+  const tipParagraphRef = useRef(null)
 
   const [tip, setTip] = useState(tipsData[random(maxTips, minTips)]);
   const [tipClick, setTipClick] = useState(false);
@@ -43,6 +44,11 @@ const Tip = () => {
     };
   }, [tipClick]);
 
+  const handleWheel = (e) =>{
+    tipParagraphRef.current.scrollTop += e.deltaY + e.deltaX;
+    console.log(e.deltaY, e.deltaX)
+  }
+
   return (
     <>
       <TipTitle>
@@ -56,7 +62,10 @@ const Tip = () => {
         `}
         onClick={handleTipBlockClick}
       >
-        <TipParagraph>
+        <TipParagraph
+          ref={tipParagraphRef}
+          onWheel={handleWheel}
+        >
           <b>{tip.title}</b>
           <p>{tip.content}</p>
         </TipParagraph>

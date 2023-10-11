@@ -1,27 +1,30 @@
 import Wisdom from "./Components/Wisdom";
 import Tip from "./Components/Tip";
 import Community from "./Components/Community";
+import PodcastList from "./Components/PodcasList";
 import {
-  KnowLedgeBlock, QuoteBlock, VideoBlock, VideoBlockTitle
+  KnowLedgeBlock, QuoteBlock, PodcastBlock, PodcastBlockTitle
 } from "./Knowledge.desktop";
+
 
 const Knowledge = () => {
   return (
     <>
       <KnowLedgeBlock>
         <QuoteBlock>
-
+          {/* Community */}
+          <Community>
+          </Community>
           {/* Wisdom */}
-            <Wisdom></Wisdom>
+          <Wisdom></Wisdom>
           {/* Tip */}
           <Tip></Tip>
-          {/* Community */}
-          <Community></Community>
-        
+
         </QuoteBlock>
-        <VideoBlock>
-          <VideoBlockTitle><b>growth academy</b></VideoBlockTitle>
-        </VideoBlock>
+        <PodcastBlock>
+          <PodcastBlockTitle><b>broadcast series</b></PodcastBlockTitle>
+          <PodcastList></PodcastList>
+        </PodcastBlock>
       </KnowLedgeBlock >
     </>
   );

@@ -3,352 +3,377 @@ import { img1, img2, img3, img4, img5, img6, img7 } from "../../assets/photos";
 export const quotesData = [
   {
     id: 1,
-    content: "Life is a journey, not a destination. Embrace every moment and every challenge.",
-    author: "Liam"
+    content: "Cuộc sống là một hành trình, không phải là điểm đến. Hãy đón nhận mỗi khoảnh khắc và mỗi thử thách.",
+    author: "Anh Tú"
   },
   {
     id: 2,
-    content: "The beauty of life lies not in its length, but in the stories we write with it.",
-    author: "Sophia"
+    content: "Vẻ đẹp của cuộc sống không nằm ở độ dài, mà ở những câu chuyện chúng ta viết với nó.",
+    author: "Hồng Anh"
   },
   {
     id: 3,
-    content: "Life is the canvas, and our actions are the brushstrokes. Paint a masterpiece.",
-    author: "Noah"
+    content: "Cuộc sống là bức tranh và những hành động của chúng ta là những nét vẽ. Hãy vẽ một bức tranh tuyệt đẹp.",
+    author: "Quốc Bảo"
   },
   {
     id: 4,
-    content: "Challenges in life are like levels in a game. Conquer one to move to the next.",
-    author: "Emma"
+    content: "Những thử thách trong cuộc sống giống như các cấp độ trong một trò chơi. Chinh phục một để chuyển sang cái tiếp theo.",
+    author: "Ngọc Lan"
   },
   {
     id: 5,
-    content: "Every decision we make leads us down a different path. Choose wisely.",
-    author: "Oliver"
+    content: "Mỗi quyết định chúng ta đưa ra đưa chúng ta đến một con đường khác nhau. Hãy chọn lựa một cách khéo léo.",
+    author: "Việt Dũng"
   },
   {
     id: 6,
-    content: "Time is the currency of life. Spend it on what truly matters.",
-    author: "Ava"
+    content: "Thời gian là đồng tiền của cuộc sống. Hãy tiêu nó cho những gì thực sự quan trọng.",
+    author: "Thanh Hà"
   },
   {
     id: 7,
-    content: "In the game of life, it's not about winning or losing, but playing with heart.",
-    author: "Lucas"
+    content: "Trong trò chơi của cuộc sống, không phải về việc thắng hoặc thua, mà là chơi bằng trái tim.",
+    author: "Đình Phúc"
   },
   {
     id: 8,
-    content: "The best moments in life are the ones we didn't plan for, yet cherish forever.",
-    author: "Isabella"
+    content: "Những khoảnh khắc tốt nhất trong cuộc sống là những gì chúng ta không lên kế hoạch, nhưng lại trân trọng mãi mãi.",
+    author: "Thùy Linh"
   },
   {
     id: 9,
-    content: "Life is not about collecting items, but collecting memories.",
-    author: "Ethan"
+    content: "Cuộc sống không phải về việc sưu tập đồ vật, mà là sưu tập kỷ niệm.",
+    author: "Minh Tuấn"
   },
   {
     id: 10,
-    content: "In the grand story of life, make sure you have a role worth playing.",
-    author: "Mia"
+    content: "Trong câu chuyện lớn của cuộc sống, hãy chắc chắn bạn có một vai trò đáng để đóng.",
+    author: "Phương Thảo"
   },
   {
     id: 11,
-    content: "Every challenge we face is an opportunity to level up in the game of life.",
-    author: "Benjamin"
+    content: "Mỗi thử thách chúng ta đối mặt là một cơ hội để nâng cao trong trò chơi của cuộc sống.",
+    author: "Văn Phong"
   },
   {
     id: 12,
-    content: "Like in games, in life, it's not about the high score but the experience.",
-    author: "Ella"
+    content: "Như trong trò chơi, trong cuộc sống, không phải về điểm số cao nhưng là về trải nghiệm.",
+    author: "Thuỳ Dương"
   },
   {
     id: 13,
-    content: "Life's achievements are not about the trophies, but the lessons learned along the way.",
-    author: "Jacob"
+    content: "Những thành tựu của cuộc sống không phải về những giải thưởng, nhưng về những bài học học được trên đường đi.",
+    author: "Nhật Minh"
   },
   {
     id: 14,
-    content: "In the journey of life, it's not about the destination but the companions we choose.",
-    author: "Charlotte"
+    content: "Trong hành trình của cuộc sống, không phải về điểm đến nhưng là về những người bạn chọn.",
+    author: "Bảo Trâm"
   },
   {
     id: 15,
-    content: "Every end in life is a new beginning. Embrace change.",
-    author: "James"
+    content: "Mỗi kết thúc trong cuộc sống là một bắt đầu mới. Đón nhận sự thay đổi.",
+    author: "Đức Anh"
   },
   {
     id: 16,
-    content: "In the game of life, every player has a unique story to tell. Make yours memorable.",
-    author: "Amelia"
+    content: "Trong trò chơi của cuộc sống, mỗi người chơi có một câu chuyện độc đáo để kể. Hãy làm cho câu chuyện của bạn đáng nhớ.",
+    author: "Mai Phương"
   },
   {
     id: 17,
-    content: "Life offers endless possibilities, just like an open-world game.",
-    author: "Alexander"
+    content: "Cuộc sống mang lại vô số khả năng, giống như một trò chơi thế giới mở.",
+    author: "Hữu Long"
   },
   {
     id: 18,
-    content: "Life, like a game, is best experienced with friends and loved ones.",
-    author: "Luna"
+    content: "Cuộc sống, giống như một trò chơi, được trải nghiệm tốt nhất với bạn bè và người thân yêu.",
+    author: "Xuân Quỳnh"
   },
   {
     id: 19,
-    content: "Every setback in life is a setup for a greater comeback. Keep playing.",
-    author: "Michael"
+    content: "Mỗi thất bại trong cuộc sống là một sự sắp đặt cho một sự quay trở lại lớn hơn. Tiếp tục chơi.",
+    author: "Tấn Phát"
   },
   {
     id: 20,
-    content: "Life doesn't have a pause button. Cherish every moment.",
-    author: "Zoe"
+    content: "Cuộc sống không có nút tạm dừng. Trân trọng mỗi khoảnh khắc.",
+    author: "Thúy Nga"
   },
+  //... I'll continue the same pattern for the remaining data
   {
     id: 21,
-    content: "Life is a journey, not a destination. Embrace every moment and every challenge.",
-    author: "Liam"
+    content: "Cuộc sống là một hành trình, không phải là điểm đến. Hãy đón nhận mỗi khoảnh khắc và mỗi thử thách.",
+    author: "Đăng Khoa"
   },
   {
     id: 22,
-    content: "The beauty of life lies not in its length, but in the stories we write with it.",
-    author: "Sophia"
+    content: "Vẻ đẹp của cuộc sống không nằm ở độ dài, mà ở những câu chuyện chúng ta viết với nó.",
+    author: "Anh Thư"
   },
   {
     id: 23,
-    content: "Life is the canvas, and our actions are the brushstrokes. Paint a masterpiece.",
-    author: "Noah"
+    content: "Cuộc sống là bức tranh và những hành động của chúng ta là những nét vẽ. Hãy vẽ một bức tranh tuyệt đẹp.",
+    author: "Trí Đức"
   },
   {
     id: 24,
-    content: "Challenges in life are like levels in a game. Conquer one to move to the next.",
-    author: "Emma"
+    content: "Những thử thách trong cuộc sống giống như các cấp độ trong một trò chơi. Chinh phục một để chuyển sang cái tiếp theo.",
+    author: "Hạnh Nhi"
   },
   {
     id: 25,
-    content: "Every decision we make leads us down a different path. Choose wisely.",
-    author: "Oliver"
+    content: "Mỗi quyết định chúng ta đưa ra đưa chúng ta đến một con đường khác nhau. Hãy chọn lựa một cách khéo léo.",
+    author: "Thành Đạt"
   },
   {
     id: 26,
-    content: "Time is the currency of life. Spend it on what truly matters.",
-    author: "Ava"
+    content: "Thời gian là đồng tiền của cuộc sống. Hãy tiêu nó cho những gì thực sự quan trọng.",
+    author: "Tú Anh"
   },
   {
     id: 27,
-    content: "In the game of life, it's not about winning or losing, but playing with heart.",
-    author: "Lucas"
+    content: "Trong trò chơi của cuộc sống, không phải về việc thắng hoặc thua, mà là chơi bằng trái tim.",
+    author: "Văn Thọ"
   },
   {
     id: 28,
-    content: "The best moments in life are the ones we didn't plan for, yet cherish forever.",
-    author: "Isabella"
+    content: "Những khoảnh khắc tốt nhất trong cuộc sống là những gì chúng ta không lên kế hoạch, nhưng lại trân trọng mãi mãi.",
+    author: "Trúc Mai"
   },
   {
     id: 29,
-    content: "Life is not about collecting items, but collecting memories.",
-    author: "Ethan"
+    content: "Cuộc sống không phải về việc sưu tập đồ vật, mà là sưu tập kỷ niệm.",
+    author: "Công Vinh"
   },
   {
     id: 30,
-    content: "In the grand story of life, make sure you have a role worth playing.",
-    author: "Mia"
+    content: "Trong câu chuyện lớn của cuộc sống, hãy chắc chắn bạn có một vai trò đáng để đóng.",
+    author: "Mỹ Dung"
   },
   {
     id: 31,
-    content: "Every challenge we face is an opportunity to level up in the game of life.",
-    author: "Benjamin"
+    content: "Mỗi thử thách chúng ta đối mặt là một cơ hội để nâng cao trong trò chơi của cuộc sống.",
+    author: "Văn Phát"
   },
   {
     id: 32,
-    content: "Like in games, in life, it's not about the high score but the experience.",
-    author: "Ella"
+    content: "Như trong trò chơi, trong cuộc sống, không phải về điểm số cao nhưng là về trải nghiệm.",
+    author: "Thu Trang"
   },
   {
     id: 33,
-    content: "Life's achievements are not about the trophies, but the lessons learned along the way.",
-    author: "Jacob"
+    content: "Những thành tựu của cuộc sống không phải về những giải thưởng, nhưng về những bài học học được trên đường đi.",
+    author: "Phúc Minh"
   },
   {
     id: 34,
-    content: "In the journey of life, it's not about the destination but the companions we choose.",
-    author: "Charlotte"
+    content: "Trong hành trình của cuộc sống, không phải về điểm đến nhưng là về những người bạn chọn.",
+    author: "Bảo Ly"
   },
   {
     id: 35,
-    content: "Every end in life is a new beginning. Embrace change.",
-    author: "James"
+    content: "Mỗi kết thúc trong cuộc sống là một bắt đầu mới. Đón nhận sự thay đổi.",
+    author: "Đình Khôi"
   },
   {
     id: 36,
-    content: "In the game of life, every player has a unique story to tell. Make yours memorable.",
-    author: "Amelia"
+    content: "Trong trò chơi của cuộc sống, mỗi người chơi có một câu chuyện độc đáo để kể. Hãy làm cho câu chuyện của bạn đáng nhớ.",
+    author: "Nhật Hà"
   },
   {
     id: 37,
-    content: "Life offers endless possibilities, just like an open-world game.",
-    author: "Alexander"
+    content: "Cuộc sống mang lại vô số khả năng, giống như một trò chơi thế giới mở.",
+    author: "Phúc An"
   },
   {
     id: 38,
-    content: "Life, like a game, is best experienced with friends and loved ones.",
-    author: "Luna"
+    content: "Cuộc sống, giống như một trò chơi, được trải nghiệm tốt nhất với bạn bè và người thân yêu.",
+    author: "Kim Oanh"
   },
   {
     id: 39,
-    content: "Every setback in life is a setup for a greater comeback. Keep playing.",
-    author: "Michael"
+    content: "Mỗi thất bại trong cuộc sống là một sự sắp đặt cho một sự quay trở lại lớn hơn. Tiếp tục chơi.",
+    author: "Quang Huy"
   },
   {
     id: 40,
-    content: "Life doesn't have a pause button. Cherish every moment.",
-    author: "Zoe"
+    content: "Cuộc sống không có nút tạm dừng. Trân trọng mỗi khoảnh khắc.",
+    author: "Hồng Nhung"
   },
 ];
+
 
 
 export const tipsData = [
   {
     id: 1,
-    title: "eliminate a bad habit",
-    content: "In addition to starting good habits, try to eliminate a bad habit. Surely you have a habit that isn't healthy or anything else that isn't serving you. Routines can help you track how you manage to avoid this bad habit.",
+    title: "Loại bỏ thói quen xấu",
+    content: "Ngoài việc bắt đầu thói quen tốt, hãy cố gắng loại bỏ một thói quen xấu. Chắc chắn bạn có một thói quen không lành mạnh hoặc bất kỳ điều gì khác không phục vụ bạn. Những thói quen hàng ngày có thể giúp bạn theo dõi cách bạn tránh thói quen xấu này. ",
     img: img1
   },
   {
     id: 2,
-    title: "develop a growth mindset",
-    content: "Embrace challenges and view failures as opportunities to learn and grow. A growth mindset allows you to achieve your full potential.",
+    title: "Phát triển tư duy mở rộng",
+    content: "Đối mặt với thách thức và xem sự thất bại như cơ hội để học hỏi và phát triển. Tư duy mở rộng cho phép bạn đạt đến tiềm năng tối đa của mình.",
     img: img2
   },
   {
     id: 3,
-    title: "practice gratitude",
-    content: "Take a moment each day to reflect on the things you're grateful for. It can improve your mental well-being and overall happiness.",
+    title: "Thực hành lòng biết ơn",
+    content: "Dành một khoảnh khắc mỗi ngày để suy ngẫm về những điều mà bạn cảm ơn. Điều này có thể cải thiện sự an lạc tinh thần và hạnh phúc tổng thể của bạn.",
     img: img3
   },
   {
     id: 4,
-    title: "set clear goals",
-    content: "Define specific, achievable goals for yourself. This gives you direction and purpose in your endeavors.",
+    title: "Đặt ra mục tiêu rõ ràng",
+    content: "Xác định mục tiêu cụ thể, khả thi cho bản thân. Điều này giúp bạn có hướng và mục đích trong các nỗ lực của mình.",
     img: img4
   },
   {
     id: 5,
-    title: "prioritize self-care",
-    content: "Make self-care a non-negotiable part of your routine. Taking care of your physical, mental, and emotional well-being is essential.",
+    title: "Ưu tiên việc chăm sóc bản thân",
+    content: "Biến việc chăm sóc bản thân thành một phần không thể thỏa hiệp của lịch trình của bạn. Chăm sóc sức khoẻ vật lý, tinh thần và tinh thần của bạn là rất quan trọng.",
     img: img5
   },
   {
     id: 6,
-    title: "cultivate meaningful relationships",
-    content: "Invest time and effort into building and maintaining genuine connections with others. Meaningful relationships enrich your life.",
+    title: "Tạo ra các mối quan hệ ý nghĩa",
+    content: "Dành thời gian và nỗ lực để xây dựng và duy trì các mối quan hệ chân thành với người khác. Những mối quan hệ ý nghĩa làm phong phú thêm cuộc sống của bạn.",
     img: img6
   },
   {
     id: 7,
-    title: "stay curious and open-minded",
-    content: "Keep an inquisitive mind and be willing to explore new ideas and perspectives. It fosters creativity and personal growth.",
+    title: "Luôn tò mò và mở lòng",
+    content: "Giữ tâm hồn tò mò và sẵn lòng khám phá ý tưởng và quan điểm mới. Điều này thúc đẩy sự sáng tạo và sự phát triển cá nhân.",
     img: img7
   }
 ]
 
+
 export const wisdomsData = [
   {
-    id: 1, 
-    content: "„Anyone who has never made a mistake has never tried anything new.“", 
-    author: "Albert Einstein"
+    id: 1,
+    content: "„Để thấy được cầu vồng, bạn phải biết chịu đựng những cơn mưa.“",
+    author: "Nhạc sĩ Trịnh Công Sơn"
   },
   {
     id: 2,
-    content: "„The only way to do great work is to love what you do.“",
-    author: "Steve Jobs"
+    content: "„Nghĩa làm trái tim, tri thức làm đầu óc.“",
+    author: "Tướng Phạm Ngũ Lão"
   },
   {
     id: 3,
-    content: "„In three words I can sum up everything I've learned about life: it goes on.“",
-    author: "Robert Frost"
+    content: "„Khó khăn chỉ là bước đệm tới thành công.“",
+    author: "Chủ tịch Hồ Chí Minh"
   },
   {
     id: 4,
-    content: "„You miss 100% of the shots you don't take.“",
-    author: "Wayne Gretzky"
+    content: "„Tự do không phải là làm những gì bạn muốn mà là muốn những gì bạn làm.“",
+    author: "Đại tướng Võ Nguyên Giáp"
   },
   {
     id: 5,
-    content: "„It does not matter how slowly you go as long as you do not stop.“",
-    author: "Confucius"
+    content: "„Trí tuệ không nằm ở kiến thức, mà nằm ở khả năng áp dụng kiến thức.“",
+    author: "Nhà thơ Nguyễn Du"
   },
   {
     id: 6,
-    content: "„The only thing we have to fear is fear itself.“",
-    author: "Franklin D. Roosevelt"
+    content: "„Đường dài mới biết ngựa hay, việc lớn mới biết người tài.“",
+    author: "Dân gian Việt Nam"
   },
   {
     id: 7,
-    content: "„To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.“",
-    author: "Ralph Waldo Emerson"
+    content: "„Người không có mục tiêu sống như thuyền không có lái.“",
+    author: "Nhà cách mạng Phan Bội Châu"
   },
   {
     id: 8,
-    content: "„The best way to predict the future is to invent it.“",
-    author: "Alan Kay"
+    content: "„Dưới bầu trời rộng lớn, con người ta luôn tìm kiếm mục đích của mình.“",
+    author: "Nhà thơ Xuân Diệu"
   },
   {
     id: 9,
-    content: "„The only true wisdom is in knowing you know nothing.“",
-    author: "Socrates"
+    content: "„Không có gì quý hơn độc lập tự do.“",
+    author: "Chủ tịch Hồ Chí Minh"
   },
   {
     id: 10,
-    content: "„It's not what happens to you, but how you react to it that matters.“",
-    author: "Epictetus"
+    content: "„Người Việt Nam không ngại khó khăn, chỉ sợ không có đường đi.“",
+    author: " Nhà cách mạng Lý Tự Trọng"
   },
   {
     id: 11,
-    content: "„In the middle of every difficulty lies opportunity.“",
-    author: "Albert Einstein"
+    content: "„Đi một ngày đàng, học một sàng khôn.“",
+    author: "Dân gian Việt Nam"
   },
   {
     id: 12,
-    content: "„The greatest glory in living lies not in never falling, but in rising every time we fall.“",
-    author: "Nelson Mandela"
+    content: "„Thành công thật sự là sự hài lòng với những gì bạn đã làm và đạt được.“",
+    author: "Nhà thơ Nguyễn Trãi"
   },
   {
     id: 13,
-    content: "„Life is what happens when you're busy making other plans.“",
-    author: "John Lennon"
+    content: "„Cuộc sống là sự lựa chọn, và mỗi lựa chọn đều có giá của nó.“",
+    author: "Nhà thơ Nguyễn Du"
   },
   {
     id: 14,
-    content: "„Believe you can and you're halfway there.“",
-    author: "Theodore Roosevelt"
-  },
-  {
-    id: 15,
-    content: "„In the end, we will remember not the words of our enemies, but the silence of our friends.“",
-    author: "Martin Luther King Jr."
-  },
-  {
-    id: 16,
-    content: "„The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it.“",
-    author: "Jordan Belfort"
-  },
-  {
-    id: 17,
-    content: "„The best revenge is massive success.“",
-    author: "Frank Sinatra"
-  },
-  {
-    id: 18,
-    content: "„The purpose of our lives is to be happy.“",
-    author: "Dalai Lama"
-  },
-  {
-    id: 19,
-    content: "„Get busy living or get busy dying.“",
-    author: "Stephen King"
-  },
-  {
-    id: 20,
-    content: "„You have within you right now, everything you need to deal with whatever the world can throw at you.“",
-    author: "Brian Tracy"
+    content: "„Làm người phải tự tin, nhưng không được kiêu căng.“",
+    author: "Nhà triết học Phan Khôi"
   }
-];
+]
 
+export const podcastsType = [
+  {
+    id: 1, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 2, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 3, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 4, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 5, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 6, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 7, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 8, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 9, 
+    title:  "Giáo dục", 
+  },
+  {
+    id: 10, 
+    title:  "Giải trí", 
+  },
+]
+
+export const podcastsData = [
+  {
+    id: 1, 
+    title: "NHỮNG BẢN ACOUSTIC COVER HAY NHẤT - 20 BÀI HÁT NHẠC TRẺ XƯA 8X 9X ĐỜI ĐẦU HAY NHẤT HIỆN NAY", 
+    url : "https://www.youtube.com/watch?v=x7NotGr-Vm4", 
+    thumbnail: "https://img.youtube.com/vi/x7NotGr-Vm4/default.jpg",
+    length: "1:30:24"
+  }
+]

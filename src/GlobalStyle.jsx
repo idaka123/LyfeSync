@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
             font-size: 1.6rem;
         }
     }
+
     html {
         font-size: 62.5%;
         font-size: 10px;

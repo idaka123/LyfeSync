@@ -1,35 +1,42 @@
 import styled from "styled-components";
 export const KnowLedgeBlock = styled.div`
+  &::-webkit-scrollbar {
+    width: 0px;  
+    height: 0px; 
+  }
   width: 100%; 
   height: 100%; 
   display: grid; 
-  grid-template: 3% 94% / 3% 57% 35% ; 
+  grid-template: 3% 94% / 3% 59% 35%; 
 `;
 
+
 export const QuoteBlock = styled.div`
-  height: 94%;
+  height: 89%;
   grid-area: 2/3/3/4; 
   display: flex; 
   flex-direction: column;
 `;
 
 export const CommunityBlockTitle = styled.div`
+letter-spacing: calc((.1vw+.1vh)/2);
 user-select: none; 
 height: 11.2%;
 b{
-  font-size: calc((4.5vw + 4.5vh)/2); 
+  font-size: calc((4vw + 4vh)/2); 
   color: black; 
 }
 `
 export const CommunityBlockContent = styled.div`
+overflow: hidden;
 height: 14%;
+color: #404040; 
+box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+background-color: white; 
+border-radius: 25px;
 blockquote{
-  color: #404040; 
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-  background-color: white; 
-  padding: 25px; 
-  border-radius: 25px;
-    font-size: calc((1.16vw + 1.5vh)/2);
+  padding: calc((1.3vw + 1.5vh)/2); 
+  font-size: calc((1.16vw + 1.5vh)/2);
   &:hover{
     user-select: none; 
   }
@@ -39,13 +46,15 @@ cite{
   font-size: calc((1.16vw + 1.5vh)/2);
   color: #9b9a9a; 
 }
+margin-bottom: 4%;
 `
 export const TipTitle = styled.div`
 user-select: none; 
 height: 11%;
+letter-spacing: calc((.1vw+.1vh)/2);
   b{
     color: black; 
-    font-size: calc((4.5vw + 4.5vh)/2); 
+    font-size: calc((4vw + 4vh)/2); 
   }
 `
 
@@ -66,14 +75,14 @@ box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   transform: translateY(-5px); 
   box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
 }
-  margin-bottom: 3%;
+
 `
 
 
 export const TipParagraph = styled.div`
   background-color: white; 
   grid-area: 1/1/2/2;
-  padding: 25px;
+  padding: calc((1.3vw + 1.5vh)/2); 
   b{
     font-size: calc((1.16vw + 1.5vh)/2);
     color: black;
@@ -86,6 +95,8 @@ export const TipParagraph = styled.div`
   }
    border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
+  overflow: hidden;
+  height: 90%;
 `
 export const TipImage = styled.div`
   background-color: white; 
@@ -104,9 +115,10 @@ export const TipImage = styled.div`
 `
 export const WisdomBlockTitle = styled.div`
 height: 9.5%;
+letter-spacing: calc((.1vw+.1vh)/2);
 b{
   color: black; 
-  font-size: calc((4.5vw + 4.5vh)/2); 
+  font-size: calc((4vw + 4vh)/2); 
 }
 user-select: none; 
 `
@@ -127,16 +139,82 @@ cite{
   color: #9b9a9a; 
 }
 user-select: none; 
-margin-bottom: 3.5%;
+margin-bottom: 2%;
 `
 
-export const VideoBlock = styled.div`
+export const PodcastBlock = styled.div`
   grid-area: 2/2/3/3;
+  height: 84%;
 `
-export const VideoBlockTitle = styled.div`
+export const PodcastBlockTitle = styled.div`
+height: 11%;
+letter-spacing: calc((.1vw+.1vh)/2);
 b{
   color: black; 
-  font-size: calc((4.5vw + 4.5vh)/2); 
+  font-size: calc((4vw + 4vh)/2); 
   user-select: none; 
 }
+`
+export const StyledPodcastCard = styled.div`
+  grid-area: 3/1/4/2;
+  display: grid; 
+  grid-template: 50% 50% / auto 80%; 
+  background-color: white; 
+  width: 100%; 
+`
+
+export const PodcastThumbnails = styled.div`
+  grid-area: 1/1/3/2
+`
+export const PodcastTitle = styled.p`
+  grid-area: 1/2/2/3;
+  color: black;
+  grid-area: 
+`
+export const PodcastLength = styled.p`
+  grid-area: 2/2/3/3;
+`
+export const StyledPodcastList = styled.div`
+  height: 94%;
+  width: 93%;
+  display: grid; 
+  grid-template: 12% 5% auto / 100%; 
+  
+`
+export const PodcastListType = styled.div`
+  grid-area: 1/1/2/2;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  height: 100%; 
+  &:hover{
+    cursor: pointer;
+  }
+`
+export const PodcastArrange = styled.div`
+ grid-area: 2/1/3/2;
+`
+export const PodcastArrangeList = styled.div`
+  grid-area: 2/1/3/2;
+`
+
+export const PodcastListTypeElement = styled.div`
+  height: 60%;
+  width: auto;
+  min-width: 10%; 
+  max-width: 15%;
+  border-radius: 20px;
+  font-size: calc((1.16vw + 1.5vh)/2);
+  font-weight: 500;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  margin-left: 1.1%;
+  margin-right: 1.1%;
+  user-select: none; 
+  color: white;
+  background-color: black;
+  &:hover{
+    cursor: pointer; 
+  }
 `
