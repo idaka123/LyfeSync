@@ -196,14 +196,20 @@ export const PodcastArrange = styled.div`
   grid-area: 2/1/3/2;
   display: flex; 
   justify-content: flex-end; 
-  font-size: calc((1.1vw + 1.5vh)/2);
+  align-items: center;
+`
+export const SortBy = styled.div`
+  padding-left:  calc((1vw + 1vh)/2);
+  font-size: calc((1.18vw + 1.5vh)/2);
   font-weight: bold; 
   color: black; 
   user-select: none; 
   &:hover{
     cursor: pointer; 
   }
+  padding-right: calc((0.5vw + 0.5vh)/2);
 `
+
 export const PodcastArrangeList = styled.ul`
   background-color: grey;
   position: absolute; 
@@ -223,7 +229,8 @@ export const PodcastArrangeListElement = styled.li`
   display: flex; 
   justify-content: center;
   align-items: center; 
-  font-size: calc((1.16vw + 1.5vh)/2); 
+  font-size: calc((1vw + 1.5vh)/2); 
+  color: black;
   &:hover{
     background-color: black;
     color: white; 

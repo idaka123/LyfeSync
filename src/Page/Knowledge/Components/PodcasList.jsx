@@ -1,6 +1,6 @@
 import {
   StyledPodcastList, PodcastListType, PodcastListTypeElement, PodcastArrange,
-  PodcastArrangeList, PodcastArrangeListElement
+  PodcastArrangeList, PodcastArrangeListElement, SortBy
 } from "../Knowledge.desktop";
 import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
@@ -66,7 +66,7 @@ const PodcastList = () => {
         }
       </PodcastListType>
       <PodcastArrange onClick={handleSortByClick}>
-        {sortbyValue}
+        <SortBy>{sortbyValue}</SortBy><i class="fas fa-caret-down" style={{color: "black"}}></i>
         {isdisplayArrangeList &&
           <PodcastArrangeList>
             {
