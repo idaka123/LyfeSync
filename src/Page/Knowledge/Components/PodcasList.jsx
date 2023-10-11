@@ -32,12 +32,20 @@ const PodcastList = () => {
   }
 
   const handleWheel = (e) => {
-    podCastListTypeRef.current.scrollLeft += (e.deltaY - 130) + (e.deltaX - 130);
+    podCastListTypeRef.current.scrollLeft += (e.deltaY - 130);
   }
 
+  const [isdisplayArrangeList, setIsDisplayArrangeList] = useState(false);
   const [sortbyValue, setSortbyValue] = useState('Sort By')
-  const handleSortbyClick = (e) => {
+
+  const handleSortByClick = () => {
+    setIsDisplayArrangeList(!isdisplayArrangeList);
+    console.log(setIsDisplayArrangeList);
+  }
+
+  const handleArrangeElementClick = (e) => {
     setSortbyValue(e.target.innerText);
+    setIsDisplayArrangeList(false);
   }
   return (
     <StyledPodcastList>
@@ -57,19 +65,21 @@ const PodcastList = () => {
           ))
         }
       </PodcastListType>
-      <PodcastArrange>
+      <PodcastArrange onClick={handleSortByClick}>
         {sortbyValue}
-        <PodcastArrangeList>
-          {
-            podcastsArrangeData.map(index => {
-              return <PodcastArrangeListElement
-                key={index.id}
-                onClick={handleSortbyClick}
-              >
-                {index.title}</PodcastArrangeListElement>
-            })
-          }
-        </PodcastArrangeList>
+        {isdisplayArrangeList &&
+          <PodcastArrangeList>
+            {
+              podcastsArrangeData.map(index => {
+                return <PodcastArrangeListElement
+                  key={index.id}
+                  onClick={handleArrangeElementClick}
+                >
+                  {index.title}</PodcastArrangeListElement>
+              })
+            }
+          </PodcastArrangeList>
+        }
       </PodcastArrange>
       <PodcastCard
         thumbnail={podcastsData[0].thumbnail}

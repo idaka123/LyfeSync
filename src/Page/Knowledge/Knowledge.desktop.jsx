@@ -196,8 +196,13 @@ export const PodcastArrange = styled.div`
   grid-area: 2/1/3/2;
   display: flex; 
   justify-content: flex-end; 
-  font-size: calc((1.16vw + 1.5vh)/2);
+  font-size: calc((1.1vw + 1.5vh)/2);
+  font-weight: bold; 
   color: black; 
+  user-select: none; 
+  &:hover{
+    cursor: pointer; 
+  }
 `
 export const PodcastArrangeList = styled.ul`
   background-color: grey;
@@ -211,7 +216,6 @@ export const PodcastArrangeList = styled.ul`
   flex-direction: column; 
   height: auto; 
   width: auto;
-  //border-radius: calc((1.5vw + 1.5vh)/2);
   background-color: white; 
 `
 export const PodcastArrangeListElement = styled.li`
