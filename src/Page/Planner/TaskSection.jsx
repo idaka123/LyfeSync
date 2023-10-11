@@ -6,13 +6,15 @@ import { plannerData } from "./Planner.data";
 
 const TaskSection = (p) => {
 
-    const { data, children, openModalData } = p
- 
-    const hleSelctDateZ = (e) => {
-        setState(e.target.getAttribute("name"))
-    }
-
+    const { data, children, openModalData, setDateZone } = p
+    
     const [state, setState] = useState(plannerData[data].dateZone[0].name)
+    
+    const hleSelctDateZ = (e) => {
+        const name = e.target.getAttribute("name")
+        setDateZone(name)
+        setState(name)
+    }
 
     const handleClickAdd = (e) => {
         const name = e.target.getAttribute("name")

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {  Fragment, useContext } from "react";
+import {  Fragment, useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import TaskSection from "./TaskSection";
 import { plannerData } from "./Planner.data";
@@ -18,10 +18,9 @@ const PlannerMobile = (p) => {
     //     setTab(name)
     // }
 
-    // useEffect(() => {
-    //     const name = localStorage.getItem("tab")
-    //     if(name) setTab(name)
-    // }, []);
+    useEffect(() => {
+        console.log(tab)
+    }, [tab]);
 
     return ( 
         <Container>
@@ -43,14 +42,24 @@ const PlannerMobile = (p) => {
             </Header>
             {loading 
                 ? <Loading /> 
-                : <TaskSectionMobile tab={tab} task={task} openModalData={openModalData}></TaskSectionMobile>
+                : <TaskSectionMobile 
+                    tab={tab} 
+                    data={tab === "task" ? task : []} // separate between each tab with it own data
+                    openModalData={openModalData} />
             }
         </Container>
      );
 }
 
+
 const TaskSectionMobile = (p) => {
-    const { openModalData, tab, task } = p
+    const { openModalData, tab, data } = p
+
+    const { setTask }  = useContext(TaskContext)
+
+    const [dataSection, setDateSection] = useState(data)
+    const [dateZone, setDateZone] = useState("today")
+
     const tabStyle = {
         initial: () => {
             return {
@@ -72,6 +81,11 @@ const TaskSectionMobile = (p) => {
         }
     }
 
+    useEffect(() => {
+        // update data context follow new data from child component
+        // setTask(dataSection)
+    }, [dataSection]);
+
     const hdleClickBtn = (e) => {
         const name = e.target.getAttribute("name")
         openModalData(name)
@@ -88,32 +102,34 @@ const TaskSectionMobile = (p) => {
                     transition={{ duration: 0.2 }} 
                     >
             
-        <TaskSection key={tab} className="col3" data={tab} openModalData={openModalData}>
-        {task && task.length > 0
-            ?<TaskCard /> 
-            :<Fragment>
-                <ImgMotivation>
-                    <img src={plannerData[tab]?.empty?.img} alt="" />
-                </ImgMotivation> 
+            <TaskSection 
+                key={tab} 
+                className="col3" 
+                data={tab} // task, routine, goal
+                openModalData={openModalData} //func open modal
+                setDateZone={setDateZone}
+                >
+            {dataSection && dataSection.length > 0
+                ?<TaskCard dataSection={dataSection} setDateSection={setDateSection} dateZone={dateZone}/> 
+                :<Fragment>
+                    <ImgMotivation>
+                        <img src={plannerData[tab]?.empty?.img} alt="" />
+                    </ImgMotivation> 
 
-                <TextMotivation>
-                    <p>{plannerData[tab]?.empty?.text1}</p>
-                    <p>{plannerData[tab]?.empty?.text2}</p>
-                    <p>{plannerData[tab]?.empty?.text3}</p>
-                </TextMotivation>
-                
-                <Button title={`Tạo ${tab}`}  
-                        className="text-center"
-                        style={{marginTop: "16px"}}
-                        name={tab}
-                        onClick={hdleClickBtn}/>
-            </Fragment>
-        }
-           
-            
-
-        </TaskSection>     
-                
+                    <TextMotivation>
+                        <p>{plannerData[tab]?.empty?.text1}</p>
+                        <p>{plannerData[tab]?.empty?.text2}</p>
+                        <p>{plannerData[tab]?.empty?.text3}</p>
+                    </TextMotivation>
+                    
+                    <Button title={`Tạo ${tab}`}  
+                            className="text-center"
+                            style={{marginTop: "16px"}}
+                            name={tab}
+                            onClick={hdleClickBtn}/>
+                </Fragment>
+            }
+            </TaskSection>     
         </motion.div>
     </AnimatePresence>
     )

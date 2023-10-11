@@ -20,6 +20,7 @@ const Planner = () => {
 
     const [modalData, setModalData] = useState("")
     const [tab, setTab] = useState("task")
+    
 
     const { device } = useContext(DeviceContext)
     const { openModal }  = useContext(ModalContext)
