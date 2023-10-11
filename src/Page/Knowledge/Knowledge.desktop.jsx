@@ -33,7 +33,7 @@ height: 14%;
 color: #404040; 
 box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
 background-color: white; 
-border-radius: 25px;
+border-radius: calc((1.5vw + 1.5vh)/2);
 blockquote{
   padding: calc((1.3vw + 1.5vh)/2); 
   font-size: calc((1.16vw + 1.5vh)/2);
@@ -64,7 +64,7 @@ overflow: hidden;
 display: grid;
 grid-template: 100% / 50% 50%; 
 border: 1.5px solid #000;
-border-radius: 25px;  
+border-radius: calc((1.5vw + 1.5vh)/2);  
 background-color: white; 
 transition: transform 0.3s, box-shadow 0.3s;  
 box-shadow: 0 5px 10px rgba(0,0,0,0.2);  
@@ -103,7 +103,7 @@ export const TipImage = styled.div`
   img{
     height: 80%; 
     width: 80%;
-    border-radius: 20px;
+    border-radius: calc((1.5vw + 1.5vh)/2);
     box-shadow: 0 5px 10px rgba(0,0,0,1);  // Bóng đổ mặc định
   }
   display: flex;
@@ -130,7 +130,7 @@ blockquote{
   padding-bottom: 10px;
   padding-left: 25px; 
   padding-right: 25px; 
-  border-radius: 25px;
+  border-radius: calc((1.5vw + 1.5vh)/2);
   font-size: calc((1.16vw + 1.5vh)/2);
   color: #625d5d; 
 }
@@ -147,7 +147,7 @@ export const PodcastBlock = styled.div`
   height: 84%;
 `
 export const PodcastBlockTitle = styled.div`
-height: 11%;
+height: 10%;
 letter-spacing: calc((.1vw+.1vh)/2);
 b{
   color: black; 
@@ -159,7 +159,7 @@ export const StyledPodcastCard = styled.div`
   grid-area: 3/1/4/2;
   display: grid; 
   grid-template: 50% 50% / auto 80%; 
-  background-color: white; 
+  background-color: black; 
   width: 100%; 
 `
 
@@ -184,7 +184,7 @@ export const StyledPodcastList = styled.div`
 export const PodcastListType = styled.div`
   grid-area: 1/1/2/2;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   overflow: hidden;
   height: 100%; 
   &:hover{
@@ -192,10 +192,44 @@ export const PodcastListType = styled.div`
   }
 `
 export const PodcastArrange = styled.div`
- grid-area: 2/1/3/2;
-`
-export const PodcastArrangeList = styled.div`
+  position: relative;
   grid-area: 2/1/3/2;
+  display: flex; 
+  justify-content: flex-end; 
+  font-size: calc((1.16vw + 1.5vh)/2);
+  color: black; 
+`
+export const PodcastArrangeList = styled.ul`
+  background-color: grey;
+  position: absolute; 
+  top: calc((2.5vw + 2.5vh)/2);
+  right: 0; 
+  width: calc((8.25vw + 8.25vh) / 2);
+  index: 1; 
+  list-style: none; 
+  display: flex; 
+  flex-direction: column; 
+  height: auto; 
+  width: auto;
+  //border-radius: calc((1.5vw + 1.5vh)/2);
+  background-color: white; 
+`
+export const PodcastArrangeListElement = styled.li`
+ margin : 0;   
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  font-size: calc((1.16vw + 1.5vh)/2); 
+  &:hover{
+    background-color: black;
+    color: white; 
+    cursor: pointer;  
+  }
+  padding-top: calc((1vw + 1vh)/2); 
+  padding-bottom: calc((1vw + 1vh)/2); 
+  padding-left: calc((2vw + 2vh)/2);
+  padding-right: calc((2vw + 2vh)/2);
+  user-select: none; 
 `
 
 export const PodcastListTypeElement = styled.div`
@@ -203,7 +237,7 @@ export const PodcastListTypeElement = styled.div`
   width: auto;
   min-width: 10%; 
   max-width: 15%;
-  border-radius: 20px;
+  border-radius: calc((1.5vw + 1.5vh)/2);
   font-size: calc((1.16vw + 1.5vh)/2);
   font-weight: 500;
   display: flex; 

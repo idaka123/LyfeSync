@@ -368,6 +368,17 @@ export const podcastsType = [
   },
 ]
 
+export const podcastsArrangeData = [
+ {
+  id: 1,
+  title: "Alphabet" 
+ },
+ {
+   id: 2,
+   title: "Length"
+ }
+]
+
 export const podcastsData = [
   {
     id: 1, 

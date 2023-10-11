@@ -33,6 +33,23 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1.5;
         letter-spacing: .01rem;
     }
+/*    ::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+     ::-webkit-scrollbar-track {
+        background: rgb(35, 35, 35);
+        border-radius: 100px;
+      }
+      
+     ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 100px;
+      }
+      
+     ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      } */
     body {
         color: #626262;
         text-rendering: optimizeSpeed;
