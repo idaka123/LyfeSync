@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+src/assets/photos/img1.jpg
+src/assets/photos/img2.jpg
+src/assets/photos/img3.jpg
+src/assets/photos/img4.jpg
+src/assets/photos/img5.jpg
+src/assets/photos/img6.jpg
+src/assets/photos/img7.jpg
+src/assets/photos/index.js
+src/assets/svg/habit.svg
