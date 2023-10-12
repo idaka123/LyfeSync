@@ -327,64 +327,72 @@ export const wisdomsData = [
 
 export const podcastsType = [
   {
-    id: 1, 
-    title:  "Giáo dục", 
+    id: 1,
+    title: "Giáo dục",
   },
   {
-    id: 2, 
-    title:  "Giáo dục", 
+    id: 2,
+    title: "Giáo dục",
   },
   {
-    id: 3, 
-    title:  "Giáo dục", 
+    id: 3,
+    title: "Giáo dục",
   },
   {
-    id: 4, 
-    title:  "Giáo dục", 
+    id: 4,
+    title: "Giáo dục",
   },
   {
-    id: 5, 
-    title:  "Giáo dục", 
+    id: 5,
+    title: "Giáo dục",
   },
   {
-    id: 6, 
-    title:  "Giáo dục", 
+    id: 6,
+    title: "Giáo dục",
   },
   {
-    id: 7, 
-    title:  "Giáo dục", 
+    id: 7,
+    title: "Giáo dục",
   },
   {
-    id: 8, 
-    title:  "Giáo dục", 
+    id: 8,
+    title: "Giáo dục",
   },
   {
-    id: 9, 
-    title:  "Giáo dục", 
+    id: 9,
+    title: "Giáo dục",
   },
   {
-    id: 10, 
-    title:  "Giải trí", 
+    id: 10,
+    title: "Giải trí",
   },
 ]
 
 export const podcastsArrangeData = [
- {
-  id: 1,
-  title: "Alphabet" 
- },
- {
-   id: 2,
-   title: "Length"
- }
+  {
+    id: 1,
+    title: "Alphabet"
+  },
+  {
+    id: 2,
+    title: "Length"
+  }
 ]
 
 export const podcastsData = [
   {
-    id: 1, 
-    title: "NHỮNG BẢN ACOUSTIC COVER HAY NHẤT - 20 BÀI HÁT NHẠC TRẺ XƯA 8X 9X ĐỜI ĐẦU HAY NHẤT HIỆN NAY", 
-    url : "https://www.youtube.com/watch?v=x7NotGr-Vm4", 
-    thumbnail: "https://img.youtube.com/vi/x7NotGr-Vm4/default.jpg",
+    id: 1,
+    title: "ĐỪNG ÁM ẢNH BỞI SỰ GIÀU SANG ĐỂ RỒI BIẾN MÌNH THÀNH “NÔ LỆ” CỦA ĐỒNG TIỀN",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "1 hour 30 min 24 sec", 
+    author: "Spiderum Books"
+  },
+  {
+    id: 2,
+    title: "10 lời nhắn nhủ đến chính mình của 10 năm trước khi còn là sinh viên (Phần 1)",
+    url: "https://www.youtube.com/watch?v=f8NHXvf4ms0&list=PLK7-xrxcFKGrOQJuqlMTZhkeKH25LiICB&index=8",
+    thumbnail: "https://img.youtube.com/vi/f8NHXvf4ms0/default.jpg",
     length: "1:30:24"
   }
 ]

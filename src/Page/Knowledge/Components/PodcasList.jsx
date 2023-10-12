@@ -1,6 +1,6 @@
 import {
   StyledPodcastList, PodcastListType, PodcastListTypeElement, PodcastArrange,
-  PodcastArrangeList, PodcastArrangeListElement, SortBy
+  PodcastArrangeList, PodcastArrangeListElement, SortBy, PodcastCardList
 } from "../Knowledge.desktop";
 import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
@@ -66,7 +66,7 @@ const PodcastList = () => {
         }
       </PodcastListType>
       <PodcastArrange onClick={handleSortByClick}>
-        <SortBy>{sortbyValue}</SortBy><i class="fas fa-caret-down" style={{color: "black"}}></i>
+        <SortBy>{sortbyValue}</SortBy><i className="fas fa-caret-down" style={{ color: "black" }}></i>
         {isdisplayArrangeList &&
           <PodcastArrangeList>
             {
@@ -81,11 +81,20 @@ const PodcastList = () => {
           </PodcastArrangeList>
         }
       </PodcastArrange>
-      <PodcastCard
-        thumbnail={podcastsData[0].thumbnail}
-        title={podcastsData[0].title}
-        length={podcastsData[0].length}
-      />
+      <PodcastCardList>
+        {
+          podcastsData.map(index => {
+            return <PodcastCard
+              author = {index.author}
+              id={index.id}
+              thumbnail={index.thumbnail}
+              title={index.title}
+              length={index.length}
+              key = {index.id}
+            />
+          })
+        }
+      </PodcastCardList>
     </StyledPodcastList>
   );
 }

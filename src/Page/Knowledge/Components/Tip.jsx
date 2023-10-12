@@ -44,7 +44,7 @@ const Tip = () => {
     };
   }, [tipClick]);
 
-  const handleWheel = (e) =>{
+  const handleWheel = (e) => {
     tipParagraphRef.current.scrollTop += e.deltaY + e.deltaX;
     console.log(e.deltaY, e.deltaX)
   }

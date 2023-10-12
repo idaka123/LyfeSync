@@ -147,7 +147,7 @@ export const PodcastBlock = styled.div`
   height: 84%;
 `
 export const PodcastBlockTitle = styled.div`
-height: 10%;
+height: 11%;
 letter-spacing: calc((.1vw+.1vh)/2);
 b{
   color: black; 
@@ -155,31 +155,69 @@ b{
   user-select: none; 
 }
 `
-export const StyledPodcastCard = styled.div`
-  grid-area: 3/1/4/2;
+export const StyledPodcastCard = styled.li`
   display: grid; 
-  grid-template: 50% 50% / auto 80%; 
-  background-color: black; 
-  width: 100%; 
+  grid-template: 50% 50% / auto 86% 3%; 
+  background-color: white; 
+  border-radius: calc((1.5vw + 1.5vh)/2);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: 16.5%; 
+  margin-bottom: calc((1vw + 1vh)/2);
+  font-weight: 700; 
+  user-select: none; 
+`
+export const PodcastCardList = styled.ul`
+   grid-area: 3/1/4/2;
+   height: 100%; 
+   width: 100%;
+   background-color: transparent;
 `
 
 export const PodcastThumbnails = styled.div`
-  grid-area: 1/1/3/2
+  grid-area: 1/1/3/2;
+  img{
+    height: calc((5vh + 5vw)/2);
+    width: calc((5vh + 5vw)/2);
+    border-radius: calc((1vw + 1vh)/2);
+  }
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  flex-wrap: no-wrap;
+  &:hover{
+    cursor: pointer; 
+  }
 `
-export const PodcastTitle = styled.p`
+export const PodcastTitle = styled.div`
   grid-area: 1/2/2/3;
   color: black;
-  grid-area: 
+  font-size: calc((1.25vw + 1.25vh)/2);
+  display: flex; 
+  justify-content: start; 
+  align-items: flex-end;
+  p{
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+  }
+  width: 100%; 
+
 `
 export const PodcastLength = styled.p`
   grid-area: 2/2/3/3;
+  font-size: calc((1.25vw + 1.25vh)/2);
+  display: flex;
+  justify-content: start; 
+  align-items: flex-start;
+  overflow: hidden;
 `
 export const StyledPodcastList = styled.div`
   height: 94%;
   width: 93%;
   display: grid; 
-  grid-template: 12% 5% auto / 100%; 
-  
+  grid-template: 10% 8% auto / 100%; 
+
 `
 export const PodcastListType = styled.div`
   grid-area: 1/1/2/2;
@@ -213,7 +251,7 @@ export const SortBy = styled.div`
 export const PodcastArrangeList = styled.ul`
   background-color: grey;
   position: absolute; 
-  top: calc((2.5vw + 2.5vh)/2);
+  top: calc((4.5vw + 4.5vh)/2);
   right: 0; 
   width: calc((8.25vw + 8.25vh) / 2);
   index: 1; 
