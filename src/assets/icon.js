@@ -14,6 +14,7 @@ import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
 import { RiCloseFill } from 'react-icons/ri'
+import { BiLibrary } from 'react-icons/bi';
 
 
 
@@ -42,5 +43,6 @@ export const Icon = {
     tree: SiGumtree,
     setting: FiSettings,
     menu: FiMenu,
-    x: RiCloseFill
+    x: RiCloseFill,
+    library: BiLibrary
 }

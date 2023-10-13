@@ -1,7 +1,7 @@
 const paths = {
     home: "/",
     planner: "/planner",
-    noPage: "*"
+    knowledge: "/knowledge"
 }
 
 export default paths;
