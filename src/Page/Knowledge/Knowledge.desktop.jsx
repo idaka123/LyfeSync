@@ -155,7 +155,7 @@ b{
   user-select: none; 
 }
 `
-export const StyledPodcastCard = styled.li`
+export const StyledPodcastCard = styled.div`
   display: grid; 
   grid-template: 50% 50% / auto 86% 3%; 
   background-color: white; 
@@ -167,7 +167,7 @@ export const StyledPodcastCard = styled.li`
   font-weight: 700; 
   user-select: none; 
 `
-export const PodcastCardList = styled.ul`
+export const PodcastCardList = styled.div`
    grid-area: 3/1/4/2;
    height: 100%; 
    width: 100%;

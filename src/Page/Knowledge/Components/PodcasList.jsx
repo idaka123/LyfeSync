@@ -47,6 +47,11 @@ const PodcastList = () => {
     setSortbyValue(e.target.innerText);
     setIsDisplayArrangeList(false);
   }
+
+  const handlePodcastCardClick = () => {
+    console.log(1);
+  }
+
   return (
     <StyledPodcastList>
       <PodcastListType
@@ -83,16 +88,17 @@ const PodcastList = () => {
       </PodcastArrange>
       <PodcastCardList>
         {
-          podcastsData.map(index => {
-            return <PodcastCard
-              author = {index.author}
+          podcastsData.map(index => (
+            <PodcastCard
+              author={index.author}
               id={index.id}
               thumbnail={index.thumbnail}
               title={index.title}
               length={index.length}
-              key = {index.id}
+              key={index.id}
+              onClick={() => { console.log("click") }}
             />
-          })
+          ))
         }
       </PodcastCardList>
     </StyledPodcastList>

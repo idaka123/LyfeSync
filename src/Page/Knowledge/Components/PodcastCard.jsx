@@ -7,8 +7,8 @@ const PodcastCard = (props) => {
   const switchPlayStop = (condition) => {
     const url1 = "https://cdn-icons-png.flaticon.com/512/4153/4153091.png?uid=R103890073&ga=GA1.1.1121238435.1696518879";
     const url2 = "https://cdn-icons-png.flaticon.com/512/54/54377.png?uid=R103890073&ga=GA1.1.1121238435.1696518879";
-    const resutl = condition ? url1 : url2;
-    return resutl;
+    const result = condition ? url1 : url2;
+    return result;
   }
   const handleMouseEnter = () => {
     if (!isFocus) {
