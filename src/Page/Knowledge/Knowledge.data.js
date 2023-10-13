@@ -394,5 +394,12 @@ export const podcastsData = [
     url: "https://www.youtube.com/watch?v=f8NHXvf4ms0&list=PLK7-xrxcFKGrOQJuqlMTZhkeKH25LiICB&index=8",
     thumbnail: "https://img.youtube.com/vi/f8NHXvf4ms0/default.jpg",
     length: "1:30:24"
+  },
+  {
+    id: 3,
+    title: "10 lời nhắn nhủ đến chính mình của 10 năm trước khi còn là sinh viên (Phần 1)",
+    url: "https://www.youtube.com/watch?v=f8NHXvf4ms0&list=PLK7-xrxcFKGrOQJuqlMTZhkeKH25LiICB&index=8",
+    thumbnail: "https://img.youtube.com/vi/f8NHXvf4ms0/default.jpg",
+    length: "1:30:24"
   }
 ]

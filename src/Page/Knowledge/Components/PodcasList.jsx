@@ -9,6 +9,12 @@ const PodcastList = () => {
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [selectID, setSelectID] = useState(-1);
+  const [playPC, setPlayPC] = useState({
+    id: -1,
+    isPlaying: false
+  }) 
+  const [hoverID, setHoverID] = useState(-1);
 
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
@@ -48,8 +54,18 @@ const PodcastList = () => {
     setIsDisplayArrangeList(false);
   }
 
-  const handlePodcastCardClick = () => {
-    console.log(1);
+
+  const handlePodcast = {
+    hoverPodCast : (id) => { // handle hover for podcast card
+      setHoverID(id)
+    },
+    playPodCast : (id) => { // handle play for podcast card
+      if(id === playPC.id) setPlayPC({id: id, isPlaying: !playPC.isPlaying})
+      else setPlayPC({id: id, isPlaying: true})
+    },
+    selectPodCast : (id) => { // handle select for podcast card
+      setSelectID(id)
+    }
   }
 
   return (
@@ -92,11 +108,18 @@ const PodcastList = () => {
             <PodcastCard
               author={index.author}
               id={index.id}
+              playPC={playPC}
+              playPodCast={handlePodcast.playPodCast}
+              hoverID={hoverID}
+              hoverPodCast={handlePodcast.hoverPodCast}
+              selectID={selectID}
+              selectPodCast={handlePodcast.selectPodCast}
               thumbnail={index.thumbnail}
               title={index.title}
               length={index.length}
               key={index.id}
-              onClick={() => { console.log("click") }}
+              
+              // onClick={() => { console.log("click") }}
             />
           ))
         }

@@ -6,9 +6,8 @@ import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
-import { BsCart2 } from 'react-icons/bs'
-import { BsHeart } from 'react-icons/bs'
-import { MdKeyboardArrowDown } from 'react-icons/md'
+import { BsCart2, BsFillPlayFill, BsHeart } from 'react-icons/bs'
+import { MdKeyboardArrowDown, MdPause } from 'react-icons/md'
 import { AiOutlineLoading3Quarters, AiFillTag } from 'react-icons/ai'
 import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
@@ -44,5 +43,7 @@ export const Icon = {
     setting: FiSettings,
     menu: FiMenu,
     x: RiCloseFill,
-    library: BiLibrary
+    library: BiLibrary,
+    play: BsFillPlayFill,
+    pause: MdPause
 }

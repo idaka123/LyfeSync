@@ -157,6 +157,7 @@ b{
 `
 export const StyledPodcastCard = styled.div`
   display: grid; 
+  cursor: pointer;
   grid-template: 50% 50% / auto 86% 3%; 
   background-color: white; 
   border-radius: calc((1.5vw + 1.5vh)/2);
@@ -174,17 +175,16 @@ export const PodcastCardList = styled.div`
    background-color: transparent;
 `
 
-export const PodcastThumbnails = styled.div`
+export const PodcastThumbnailsWrapper = styled.div`
   grid-area: 1/1/3/2;
-  img{
-    height: calc((5vh + 5vw)/2);
-    width: calc((5vh + 5vw)/2);
-    border-radius: calc((1vw + 1vh)/2);
-  }
   display: flex; 
   justify-content: center; 
   align-items: center;
   flex-wrap: no-wrap;
+
+  &.active {
+    filter: brightness(0.5);
+  }
   &:hover{
     cursor: pointer; 
   }
