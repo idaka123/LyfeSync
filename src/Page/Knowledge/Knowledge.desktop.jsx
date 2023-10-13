@@ -163,7 +163,7 @@ export const StyledPodcastCard = styled.div`
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
   height: 16.5%; 
-  margin-bottom: calc((1vw + 1vh)/2);
+  margin-bottom: calc((1.5vw + 1.5vh)/2);
   font-weight: 700; 
   user-select: none; 
 `
@@ -192,7 +192,7 @@ export const PodcastThumbnails = styled.div`
 export const PodcastTitle = styled.div`
   grid-area: 1/2/2/3;
   color: black;
-  font-size: calc((1.25vw + 1.25vh)/2);
+
   display: flex; 
   justify-content: start; 
   align-items: flex-end;
@@ -200,6 +200,7 @@ export const PodcastTitle = styled.div`
     overflow: hidden;
     white-space: nowrap; 
     text-overflow: ellipsis;
+      font-size: calc((1.25vw + 1.25vh)/2);
   }
   width: 100%; 
 
