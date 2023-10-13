@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const KnowLedgeBlock = styled.div`
+export const KnowLedgeStyled = styled.div`
   &::-webkit-scrollbar {
     width: 0px;  
     height: 0px; 

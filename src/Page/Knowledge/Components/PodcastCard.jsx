@@ -1,20 +1,50 @@
 import { useContext, useState } from "react";
+import { Icon } from "../../../assets/icon";
 import { PodcastTitle, PodcastThumbnails, PodcastLength, StyledPodcastCard } from "../Knowledge.desktop"
-import { PodcastListContext } from "./PodcasList";
 const PodcastCard = (props) => {
-  const { onMouseEnter, onMouseLeave, onClick, style, author, title, thumbnail, length } = props;
-  const { handleThumbnailsClick } = useContext(PodcastListContext);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isHover, setIsHover] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const {
+    author, title, thumbnail, length, id,
+    handlePodcastCardClick, cardId } = props;
+
+  const handleMouseEnter = () => {
+    if (cardId !== id) {
+      setIsHover(true);
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (cardId !== id) {
+      setIsHover(false);
+    }
+  }
+
+  const handleIsPlaying = () => {
+    setIsClicked(true);
+    if (cardId === id) {
+      setIsPlaying(!isPlaying);
+    }
+    console.log(isPlaying);
+  }
 
   return (
     <StyledPodcastCard
       tabIndex="0"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      style={style}
+      onClick={handlePodcastCardClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={cardId === id ? { "border": "2px solid black" } : { "border": "none" }}
     >
-      <PodcastThumbnails onClick={handleThumbnailsClick}>
-        <img src={thumbnail} />
+      <PodcastThumbnails
+        onClick={handleIsPlaying}
+      >
+        {
+          isHover ?
+            <Icon.play></Icon.play>
+            : <img src={thumbnail} />
+        }
       </PodcastThumbnails>
       <PodcastTitle>
         <p>
