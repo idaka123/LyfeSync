@@ -1,18 +1,26 @@
+import React, { useRef, useState, createContext, useEffect } from "react";
 import {
-  StyledPodcastList, PodcastListType, PodcastListTypeElement, PodcastArrange,
-  PodcastArrangeList, PodcastArrangeListElement, SortBy, PodcastCardList
+  StyledPodcastList, PodcastListType, PodcastListTypeElement,
+  PodcastArrange, PodcastArrangeList, PodcastArrangeListElement,
+  SortBy, PodcastCardList
 } from "../Knowledge.desktop";
+
 import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
-import { createContext, useEffect, useRef, useState } from "react";
+
 export const PodcastListContext = createContext();
+
 const PodcastList = (props) => {
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [cardId, setCardId] = useState(null);
+  const [isHoverId, setIsHoverId] = useState(null);
+  const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: -1 });
   const { isGlobalPlaying, setIsGlobalPlaying } = props;
-  const [isHover, setIsHover] = useState(false);
+  const [isDisplayArrangeList, setIsDisplayArrangeList] = useState(false);
+  const [sortbyValue, setSortbyValue] = useState('Sort By');
+
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
     setIsDragging(true);
@@ -23,14 +31,9 @@ const PodcastList = (props) => {
     const dx = e.clientX - startX;
     podCastListTypeRef.current.scrollLeft -= dx;
     setStartX(e.clientX);
-    console.log(e.clientX);
   }
 
   const handleMouseUp = () => {
-    setIsDragging(false);
-  }
-
-  const handeMouseLeave = () => {
     setIsDragging(false);
   }
 
@@ -38,22 +41,15 @@ const PodcastList = (props) => {
     podCastListTypeRef.current.scrollLeft += (e.deltaY - 130);
   }
 
-  const [isdisplayArrangeList, setIsDisplayArrangeList] = useState(false);
-  const [sortbyValue, setSortbyValue] = useState('Sort By')
-
   const handleSortByClick = () => {
-    setIsDisplayArrangeList(!isdisplayArrangeList);
-    console.log(setIsDisplayArrangeList);
+    setIsDisplayArrangeList(!isDisplayArrangeList);
   }
 
   const handleArrangeElementClick = (e) => {
     setSortbyValue(e.target.innerText);
     setIsDisplayArrangeList(false);
   }
-  const handlePodcastCardClick = (value) => {
-    setCardId(value);
-  }
-  
+
   return (
     <StyledPodcastList>
       <PodcastListType
@@ -61,50 +57,43 @@ const PodcastList = (props) => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handeMouseLeave}
         onWheel={handleWheel}
       >
-        {
-          podcastsType.map(index => (
-            <PodcastListTypeElement key={index.id}>
-              {index.title}
-            </PodcastListTypeElement>
-          ))
-        }
+        {podcastsType.map(index => (
+          <PodcastListTypeElement key={index.id}>
+            {index.title}
+          </PodcastListTypeElement>
+        ))}
       </PodcastListType>
       <PodcastArrange onClick={handleSortByClick}>
-        <SortBy>{sortbyValue}</SortBy><i className="fas fa-caret-down" style={{ color: "black" }}></i>
-        {isdisplayArrangeList &&
+        <SortBy>{sortbyValue}</SortBy>
+        <i className="fas fa-caret-down" style={{ color: "black" }}></i>
+        {isDisplayArrangeList && (
           <PodcastArrangeList>
-            {
-              podcastsArrangeData.map(index => {
-                return <PodcastArrangeListElement
-                  key={index.id}
-                  onClick={handleArrangeElementClick}
-                >
-                  {index.title}</PodcastArrangeListElement>
-              })
-            }
+            {podcastsArrangeData.map(index => (
+              <PodcastArrangeListElement
+                key={index.id}
+                onClick={handleArrangeElementClick}
+              >
+                {index.title}
+              </PodcastArrangeListElement>
+            ))}
           </PodcastArrangeList>
-        }
+        )}
       </PodcastArrange>
       <PodcastCardList>
-        {
-          podcastsData.map((value, index) => (
-            <PodcastCard
-              author={value.author}
-              id={value.id}
-              thumbnail={value.thumbnail}
-              title={value.title}
-              length={value.length}
-              key={value.id}
-              handlePodcastCardClick = {() => handlePodcastCardClick(value.id)}
-              cardId = {cardId}
-              isHover = {isHover}
-              setIsHover = {setIsHover}
-            />
-          ))
-        }
+        {podcastsData.map(value => (
+          <PodcastCard
+            key={value.id}
+            {...value}
+            cardId={cardId}
+            setCardId={setCardId}
+            isHoverId={isHoverId}
+            setIsHoverId={setIsHoverId}
+            isPlayingId={isPlayingId}
+            setIsPlayingId={setIsPlayingId}
+          />
+        ))}
       </PodcastCardList>
     </StyledPodcastList>
   );

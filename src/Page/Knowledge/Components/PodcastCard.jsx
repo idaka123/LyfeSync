@@ -1,52 +1,75 @@
-import { useContext, useState } from "react";
+import React from "react";
 import { Icon } from "../../../assets/icon";
-import { PodcastTitle, PodcastThumbnails, PodcastLength, StyledPodcastCard } from "../Knowledge.desktop"
+import {
+  PodcastTitle,
+  PodcastThumbnails,
+  PodcastLength,
+  StyledPodcastCard,
+  PodcastCardId
+} from "../Knowledge.desktop";
+
 const PodcastCard = (props) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const [isHover, setIsHover] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const {
     author, title, thumbnail, length, id,
-    handlePodcastCardClick, cardId } = props;
+    cardId, setCardId,
+    isHoverId, setIsHoverId,
+    isPlayingId, setIsPlayingId
+  } = props;
 
-  const handleMouseEnter = () => {
-    if (cardId !== id) {
-      setIsHover(true);
+  // Event Handlers
+  const handleMouseEnter = () => setIsHoverId(id);
+
+  const handleMouseLeave = () => setIsHoverId(-1);
+
+  const handleClick = (id) => setCardId(id);
+
+  const handlePlaying = (id) => {
+    if (isPlayingId.id === id) {
+      setIsPlayingId({ isPlaying: !isPlayingId.isPlaying, id: id });
+    } else {
+      setIsPlayingId({ isPlaying: true, id: id });
     }
   }
 
-  const handleMouseLeave = () => {
-    if (cardId !== id) {
-      setIsHover(false);
-    }
-  }
+  // Conditional Styles
+  const cardStyle = isPlayingId.id === id
+    ? { transition: "all 0.1s ease", backgroundColor: "black" }
+    : cardId === id
+      ? { border: "2px solid black" }
+      : {};
 
-  const handleIsPlaying = () => {
-    setIsClicked(true);
-    if (cardId === id) {
-      setIsPlaying(!isPlaying);
-    }
-    console.log(isPlaying);
-  }
+  const thumbnailStyle = { transition: "all 1s ease" };
+
+  const playIconStyle = isPlayingId.id === id ? { color: "#ffffffb8" } : {};
+
+  const titleStyle = isPlayingId.id === id
+    ? { color: "#ffffffb8" }
+    : {};
 
   return (
     <StyledPodcastCard
       tabIndex="0"
-      onClick={handlePodcastCardClick}
+      onClick={() => handleClick(id)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={cardId === id ? { "border": "2px solid black" } : { "border": "none" }}
+      style={cardStyle}
     >
-      <PodcastThumbnails
-        onClick={handleIsPlaying}
-      >
-        {
-          isHover ?
-            <Icon.play></Icon.play>
-            : <img src={thumbnail} />
+      <PodcastCardId>{id}</PodcastCardId>
+      <PodcastThumbnails onClick={() => handlePlaying(id)} style={thumbnailStyle}>
+        {isPlayingId.id === id
+          ? (
+            isHoverId === id
+              ? isPlayingId.isPlaying
+                ? <Icon.pause style={playIconStyle} />
+                : <Icon.play style={playIconStyle} />
+              : isPlayingId.isPlaying
+                ? <img src="https://i.gifer.com/Nt6v.gif" alt="playing" />
+                : <Icon.play style={playIconStyle} />
+          )
+          : (isHoverId === id ? <Icon.play></Icon.play> : <img src={thumbnail} alt="thumbnail" />)
         }
       </PodcastThumbnails>
-      <PodcastTitle>
+      <PodcastTitle style={titleStyle}>
         <p>
           {`${author} | ${title}`}
         </p>
@@ -54,8 +77,8 @@ const PodcastCard = (props) => {
       <PodcastLength>
         {length}
       </PodcastLength>
-    </StyledPodcastCard >
+    </StyledPodcastCard>
   );
 }
 
-export default PodcastCard
+export default PodcastCard;

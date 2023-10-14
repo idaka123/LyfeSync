@@ -1,3 +1,4 @@
+import React from "react";
 import Wisdom from "./Components/Wisdom";
 import Tip from "./Components/Tip";
 import Community from "./Components/Community";
@@ -6,24 +7,17 @@ import {
   QuoteBlock, PodcastBlock, PodcastBlockTitle, KnowLedgeStyled
 } from "./Knowledge.desktop";
 
-
 const KnowLedgeBlock = () => {
   return (
     <KnowLedgeStyled>
-
       <QuoteBlock>
-        {/* Community */}
-        <Community>
-        </Community>
-        {/* Wisdom */}
-        <Wisdom></Wisdom>
-        {/* Tip */}
-        <Tip></Tip>
-
+        <Community />
+        <Wisdom />
+        <Tip />
       </QuoteBlock>
       <PodcastBlock>
         <PodcastBlockTitle><b>broadcast series</b></PodcastBlockTitle>
-        <PodcastList></PodcastList>
+        <PodcastList />
       </PodcastBlock>
     </KnowLedgeStyled>
   );

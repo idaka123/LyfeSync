@@ -1,4 +1,3 @@
-import { useState } from "react";
 import KnowLedgeBlock from "./KnowledgeBlock";
 
 const Knowledge = () => {
