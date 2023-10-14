@@ -3,10 +3,15 @@ import styled from "styled-components";
 import { plannerData } from "./Planner.data";
 import TaskSection from "./TaskSection";
 import Button from "../../Component/Button";
+import { Fragment, useContext, useState } from "react";
+import TaskContext from "../../Context/Task.context";
+import TaskCard from "./card/TaskCard";
 
 const PlannerDesktop = (p) => {
     const { openModalData } = p
     const section = Object.keys(plannerData)
+    const { task, loading, setTask }  = useContext(TaskContext)
+    const [dateZone, setDateZone] = useState("today")
 
     const onClickCreateTaskbtn = e => {
         const name = e.target.getAttribute("name")
@@ -17,21 +22,32 @@ const PlannerDesktop = (p) => {
         <>
          {section && section.map((sec, idx) => {
                 return (
-                <TaskSection key={idx} className="col3" data={sec} openModalData={openModalData}>
-                    <ImgMotivation>
-                        <img src={plannerData[sec]?.empty?.img} alt="" />
-                    </ImgMotivation> 
+                <TaskSection 
+                    key={idx}
+                    className="col3"
+                    data={sec}
+                    openModalData={openModalData}
+                    setDateZone={setDateZone}
+                    >
+                    {
+                    sec === "task" && task && task.length > 0
+                    ?<TaskCard dataSection={task} setDateSection={setTask} dateZone={dateZone}/> 
+                    :<Fragment>
+                        <ImgMotivation>
+                            <img src={plannerData[sec]?.empty?.img} alt="" />
+                        </ImgMotivation> 
 
-                    <TextMotivation>
-                        <p>{plannerData[sec]?.empty?.text1}</p>
-                        <p>{plannerData[sec]?.empty?.text2}</p>
-                        <p>{plannerData[sec]?.empty?.text3}</p>
-                    </TextMotivation>
-                    
-                    <Button title={`Tạo ${sec}`} onClick={onClickCreateTaskbtn} 
-                            name={sec}
-                            className="text-center"
-                            style={{marginTop: "16px"}}/>
+                        <TextMotivation>
+                            <p>{plannerData[sec]?.empty?.text1}</p>
+                            <p>{plannerData[sec]?.empty?.text2}</p>
+                            <p>{plannerData[sec]?.empty?.text3}</p>
+                        </TextMotivation>
+                        
+                        <Button title={`Tạo ${sec}`} onClick={onClickCreateTaskbtn} 
+                                name={sec}
+                                className="text-center"
+                                style={{marginTop: "16px"}}/>
+                    </Fragment>}
                 </TaskSection>     
                 )
             })}

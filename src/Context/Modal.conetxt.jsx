@@ -10,28 +10,35 @@ export const ModalProvider = (p) => {
 
     const [modal, setModal] = React.useState({
         isOpen: false,
+        title: null,
         content: null
       });
-    
+      const [isDataLoaded, setIsDataLoaded] = React.useState(false);
       
-      const openModal = content => {
+      const openModal = (title = null, content = null) => {
         openOverlay()
         setModal({
           isOpen: true,
+          title,
           content
         });
+        window.dispatchEvent(new CustomEvent('modalOpening'));
       };
     
       const closeModal = () => {
+        console.log("close modal")
         closeOverlay()
         setModal({
           isOpen: false,
-          content: null
+          content: null,
+          title: null
         });
+        setIsDataLoaded(false);
+        window.dispatchEvent(new CustomEvent('modalClosing'));
       };
 
       const valueContext = {
-        modal, openModal, closeModal
+        modal, openModal, closeModal,isDataLoaded, setIsDataLoaded
       }
 
     return (

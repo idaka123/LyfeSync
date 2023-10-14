@@ -3,7 +3,7 @@ import Modal from "../../../Component/Modal";
 import Input from "../../../Component/Input";
 import { Img } from "../../../Assets/svg";
 import { CirclePicker } from "react-color";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import ReactQuill from 'react-quill';
 import Button from "../../../Component/Button";
@@ -11,6 +11,11 @@ import ModalContext from "../../../Context/Modal.conetxt";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
+import { dateConvert, isDateString } from "../../../Util/util";
+import DOMPurify from 'dompurify';
+import TaskContext from "../../../Context/Task.context";
+import { nanoid } from "nanoid";
+
 
 const relatedArea = [
     {
@@ -24,7 +29,7 @@ const relatedArea = [
         icon: Img.play
     },
     {
-        name: "spirituality",
+        name: "spirit",
         value: "Tâm linh",
         icon: Img.spirit
     },
@@ -57,31 +62,157 @@ const relatedArea = [
 ]
 
 const TaskModal = () => {
-
-    const { closeModal }  = useContext(ModalContext)
-
+    const { modal  }  = useContext(ModalContext)
+    const [editMode, setEditMode] = useState(!!modal.content)
     const [dataInput, setDataInput] = useState({})
-    const [area, setArea] = useState({
+    
+    const [areaData, setArea] = useState({
         health: false,
         play: false,
-        spirituality: false,
+        spirit: false,
         environment: false,
         work: false,
         wealth: false,
         growth: false,
         relationship: false,
     })
-    const [hex, setHex] = useState('#F44E3B');
+
+    useEffect(() => {
+        if(modal.content !== null) 
+            setEditMode(true)
+        else 
+            setEditMode(false)
+    },[modal.content])
+    
+    useEffect(() => {
+        const area = {
+            health: false,
+            play: false,
+            spirit: false,
+            environment: false,
+            work: false,
+            wealth: false,
+            growth: false,
+            relationship: false,
+        }
+
+        if(modal.content !== null) {
+            
+            setDataInput({
+                title: modal?.content?.title || "",
+                color: modal?.content?.color || "",
+                area: modal?.content?.area || [],
+                deadline: modal?.content?.deadline,
+                note: modal?.content?.note || "",
+            })
+
+
+            const relate = modal.content.area.reduce((prev, next) => {
+                return {...prev, [next]: true}
+            }, area)
+            setArea(relate)
+        } else {
+            setDataInput({
+                title: "",
+                color: "",
+                note: "",
+                // deadline: "",
+                area: [],
+                sub: []
+            })
+            setArea(area)
+        }
+
+        return () => setDataInput({})
+    }, [editMode, modal.content]);
+
+
+
+    // useEffect(() => {
+    //     if(modal.content) {
+    //         const relate = modal.content.area.forEach(area => { data[area] = true })
+    //         setArea(relate)
+    //         console.log("relate", relate)
+    //     }
+    // }, [editMode]);
+
+
+    return <TaskContent 
+                mode={ editMode ? "edit" : "add"}
+                dataInput={ dataInput }
+                areaData={ areaData }
+                setDataInput = {setDataInput}
+                // areaData={area} 
+                />
+}
+
+const TaskContent = (p) => {
+    const { dataInput, setDataInput, mode, areaData } = p
+
+    const { modal, closeModal }  = useContext(ModalContext)
+    const { task, setTask, loading }  = useContext(TaskContext)
+    const [valid, setValid] = useState(true)
+
+    const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
+    // const [dataInput, setDataInput] = useState(data)
+    const radioData = [
+        {
+            id: "today",
+            value: "Nay"
+        },
+        {
+            id: "tomorrow",
+            value: "Mai"
+        },
+        {
+            id: "someday",
+            value: "Ngày nào đó"
+        },
+        {
+            id: "specific-day",
+            value: "Chọn ngày"
+        },
+    ]
+
+    const [area, setArea] = useState(areaData)
+    
+    const [hex, setHex] = useState(dataInput.color);
     const [secOpen, setSecOpen] = useState({
         color: true,
         area: true,
-        note: true
+        note: true,
+        deadline: true
     });
+    const fp = useRef(null);
 
-    const openSec = (e) => {
+    
+    useEffect(() => {
+        console.log("listen event close modal")
+        window.addEventListener('modalClosing', closeModalProcess);
+
+        return () => {
+            window.removeEventListener('modalClosing', closeModalProcess);
+        };
+    }, []);
+
+    useEffect(() => {
+        areaData && setArea(areaData)
+    }, [areaData]);
+
+    useEffect(() => {
+        if(dataInput) {
+            dataInput.color && setHex(dataInput.color);
+        }
+    }, [dataInput]);
+
+    const openSec = async (e) => {
         const name = e.currentTarget.getAttribute("name")
         console.log(name)
-        setSecOpen({...secOpen, [name]: !secOpen[name] })
+
+        await setSecOpen({...secOpen, [name]: !secOpen[name] })
+        if(name === "deadline" && isDateString(dataInput.deadline))  {
+            await deadlineHdle.openFP()
+        }
     }
 
     const handleInput = (e, from = null) => {
@@ -95,35 +226,117 @@ const TaskModal = () => {
 
     const handleChooseArea = (name) => {
         console.log(name)
-        setArea({...area, [name]: !area[name] })
-
-        const newData = Object.keys(area).reduce((prev, next) => {
-            if(area[next]) {
+        let newArea = {...area, [name]: !area[name] };
+        setArea(newArea)
+    
+        const newData = Object.keys(newArea).reduce((prev, next) => {
+            if(newArea[next]) {
                 return [...prev, next]
             } else {
                 return prev
             }
         }, [])
-
+        console.log("newData", newData)
+    
         setDataInput({...dataInput, area: newData })
     }
 
-    const handleChooseDateType = (e) => {
-        console.log(e.target.id)
-        const id = e.target.id
-        if(id === "") return 
-
-        if(id === "specific-day") {
+    const deadlineHdle = {
+        openFP: () => { // open flatpicker
             document.querySelector(".flat-picker-wrapper").style.display = "flex"
-        } else {
+        },
+        closeFP: () => { // close flatpicker
             document.querySelector(".flat-picker-wrapper").style.display = "none"
+        },
+        choseType: (e, mode) => { //handle Choose type of deadline
+
+            console.log(e.target.id)
+            const id = e.target.id
+            let dateStr = id
+            if(id === "") return 
+            if(id === "today") {
+                const today = new Date()
+                today.setHours(23,59,59,0)
+                dateStr = today
+            }else if(id === "tomorrow") {
+                const today = new Date()
+                const tomorrow = new Date(today.setHours(0,0,0,0))
+                tomorrow.setDate(tomorrow.getDate() + 1)
+    
+                dateStr = tomorrow
+            }
+            else if(id === "specific-day") {
+                deadlineHdle.openFP()
+            } else {
+                deadlineHdle.closeFP()
+                if(mode === "edit") setSecOpen({...secOpen, deadline: !secOpen.deadline })
+            }
+    
+            console.log(dateStr)
+            setDataInput({...dataInput, deadline: dateStr.toString() })
+        },
+        choseDateFP: (date) => { // handle choose date from flatpicker
+            setDataInput(prevData => ({ ...prevData, deadline: date[0].toString() }));
+            console.log(date[0].toString())
+            fp.current.flatpickr.close();
         }
-        setDataInput({...dataInput, deadline: id })
     }
 
-    const handleSave = () => {
-        console.log(dataInput)
-        closeModal()
+    const closeModalProcess = () => {
+        setDataInput({})
+        setSecOpen({
+            color: true,
+            area: true,
+            note: true,
+            deadline: true
+        })
+    }
+
+    const checkValid = () => {
+        if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
+            setValid(false)
+            return false
+        }
+        return true
+    }
+    // submit
+    const handleSave = async () => {
+        console.log("dataInput", dataInput)
+        const valid = checkValid()
+
+        console.log(valid)
+
+        if(valid){
+            setValid(true)
+            await setTask(prevData => {
+                if(mode === "edit") {
+                    const newData = prevData.map(data => {
+                        if(data.id === modal.content.id) {
+                            return {...dataInput, id: data.id, sub: data.sub }
+                        } else {
+                            return data
+                        }
+                    })
+                    return newData
+                } else {
+                    const newData = {...dataInput}
+                    if(typeof(newData.deadline) === "undefined") {
+                        const today = new Date()
+                        today.setHours(23,59,59,0)
+
+                        newData.deadline = today.toString()
+                    }
+                    return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                }
+            })
+            closeModal()
+        }
+    }
+
+    const Area = (p) => {
+        const { data } = p
+        const Image = Img[data]
+        return <Image/>
     }
 
     return ( 
@@ -133,17 +346,36 @@ const TaskModal = () => {
             <ModalSectionContent
                 title="Tiêu đề"
                 Icon={Img.pen} >
-                <Input name="title" width="80%" value={dataInput.title} onInput={handleInput}/>
+                <Input name="title" inputStyle={{width: "80%"}} value={dataInput.title} onInput={handleInput}/>
             </ModalSectionContent>
-
+            {!valid && <Validate>Bắt buộc phải có tiêu đề</Validate>}
             {/* COLOR */}
             <ModalSectionContent 
                 title="Màu tag"
                 name="color"
                 Icon={Img.tag}
-                plus={secOpen.color}
+                plus={mode === "edit" ? false : secOpen.color}
                 openSec={openSec}>
-                {!secOpen.color && <CirclePicker
+            {mode === "edit" ?
+                (<EditSection name="color" onClick={openSec} isedit={secOpen.color}>
+                    <CirclePicker
+                        colors={
+                            !secOpen.color 
+                                ? ["#f44336", "#e91e63", "#673ab7", "#03a9f4", "#4caf50", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722"]
+                                : [dataInput.color]
+                            }
+                        onChange={(color) => {
+                            setHex(color.hex);
+                            setDataInput({...dataInput, color: color.hex })
+                        }}
+                        color={hex}
+                        circleSize={18}
+                        circleSpacing={0}
+                        // onSwatchHover={(color, event) => setHex(color.hex)}
+                        />
+                    </EditSection>
+                ) : (
+                    !secOpen.color && <CirclePicker
                     colors={["#f44336", "#e91e63", "#673ab7", "#03a9f4", "#4caf50", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722"]}
                     onChange={(color) => {
                         setHex(color.hex);
@@ -153,7 +385,7 @@ const TaskModal = () => {
                     circleSize={15}
                     circleSpacing={0}
                     // onSwatchHover={(color, event) => setHex(color.hex)}
-                    />}
+                    />)}
             </ModalSectionContent>
             
             {/* AREA */}
@@ -161,58 +393,72 @@ const TaskModal = () => {
                 title="Liên quan"
                 name="area"
                 Icon={Img.area}
-                plus={secOpen.area}
+                plus={mode === "edit" ? false : secOpen.area}
                 openSec={openSec} >
-            {(!secOpen.area && relatedArea) && relatedArea.map(data => {
-                return (
-                    <RelateAres className={area[data.name] ? "text-dark" : ""} key={data.name} onClick={() => handleChooseArea(data.name)}>
-                        <data.icon />
-                        <p>{data.value}</p>
-                    </RelateAres>
-                )
-            })}
+            {mode === "edit" && secOpen.area 
+            ? (
+                <EditSection name="area" onClick={openSec} isedit={secOpen.area}>
+                    <div className="area-wrapper">
+                    {area && Object.keys(area).map((data, idx) => {
+                        if(area[data])
+                        return (
+                            <Area key={idx} data={data}/>
+                        )})
+                    }
+                    </div>
+                </EditSection>
+            ) : (
+                (!secOpen.area && relatedArea) && relatedArea.map(data => {
+                    return (
+                        <RelateAres className={area[data.name] ? "text-dark" : ""} key={data.name} onClick={() => handleChooseArea(data.name)}>
+                            <data.icon />
+                            <p>{data.value}</p>
+                        </RelateAres>
+                    )
+                })
+            )}
+            
             </ModalSectionContent>
 
             {/* DEADLINE */}
             <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
                 <Deadline>
-                    <Ratio>
-                    <label htmlFor="today" onClick={handleChooseDateType}>
-                        <input type="radio" id="today" name="radio"/>
-                        <span>Nay</span>
-                    </label>
-                    <label htmlFor="tomorrow" onClick={handleChooseDateType}>
-                        <input type="radio" id="tomorrow" name="radio"/>
-                        <span>Mai</span>
-                    </label>
-                    <label htmlFor="soon" onClick={handleChooseDateType}>
-                        <input type="radio" id="soon" name="radio"/>
-                        <span>Sắp</span>
-                    </label>
-                    <label htmlFor="someday" onClick={handleChooseDateType}>
-                        <input type="radio" id="someday" name="radio"/>
-                        <span>Ngày nào đó</span>
-                    </label>
-                    <label htmlFor="specific-day" 
-                    onClick={(e) => {
-                        handleChooseDateType(e)
-                    }}>
-                        <input type="radio" id="specific-day" name="radio"/>
-                        <span>Chọn ngày</span>
-                    </label>
-                    </Ratio>
-                    <div className="flat-picker-wrapper">
-                        <Flatpickr 
+                {mode === "edit" && secOpen.deadline 
+                    ? (
+                        <EditSection name="deadline" onClick={openSec} isedit={secOpen.deadline}>
+                        {isDateString(dataInput.deadline) 
+                            ? dateConvert(dataInput.deadline)
+                            : radioData.find(radio => radio.id === dataInput.deadline)?.value ?? "Chọn thời hạn"}
+                        </EditSection>
+                    ) : (
+                        <Fragment>
+                        <Ratio>
+                            {radioData && radioData.map(radio =>{
+                                let isChecked = false
+                                if(mode === "edit") {
+                                    if(dataInput.deadline === radio.id) isChecked = true
+                                    if(isDateString(dataInput.deadline) && radio.id === "specific-day") isChecked = true
+                                }
+                            return (
+                            <label key={radio.id} htmlFor={radio.id}onClick={(e) => deadlineHdle.choseType(e, mode)}>
+                                <input type="radio" id={radio.id} name="radio" defaultChecked={mode === "edit" ? isChecked : radio.id === "today" && "checked"} />
+                                <span>{radio.value}</span>
+                            </label>
+                            )})}
+                        </Ratio>
+                        <div className="flat-picker-wrapper">
+                            <Flatpickr 
+                            ref={fp}
                             options={{
                                 inline: true,
                                 minDate: "today",
                             }}
-                            onChange={(date) => {
-                                setDataInput({...dataInput, deadline: date[0] })
-                            }}
-                        />
-
-                    </div>
+                            value={isDateString(dataInput.deadline) ? new Date(dataInput.deadline) : null}
+                            onChange={(date) => deadlineHdle.choseDateFP(date)}
+                            />
+                        </div>
+                        </Fragment>
+                    )}
                 </Deadline>
             </ModalSectionContent>
 
@@ -221,16 +467,33 @@ const TaskModal = () => {
                 title="Ghi chú"
                 name="note"
                 Icon={Img.note}
-                plus={secOpen.note}
+                plus={mode === "edit" ? false : secOpen.note}
                 openSec={openSec}>
-                {!secOpen.note &&<ReactQuill 
+            {mode === "edit" && secOpen.note
+            ? (
+                <EditSection name="note" onClick={openSec} isedit={secOpen.note}>
+                    <div className="note-wrapper" onClick={() => { 
+                        setSecOpen({...secOpen, note: false })
+                    }}>
+                        <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }} className="wrap-text"/>
+                        {/* <ReactQuill
+                            value={dataInput.note}
+                            readOnly={true}
+                            theme={"bubble"}
+                            /> */}
+                    </div>
+                </EditSection> 
+            ) : (
+                !secOpen.note && <ReactQuill 
                     theme="snow"
                     placeholder="Ghi chú của bạn..."
+                    value={dataInput.note}
                     onChange={(value) => {
                         setDataInput({...dataInput, note: value })
-                    }}
-                    />}
+                    }}/>
+            )}                    
             </ModalSectionContent>
+ 
             
             <Button
                 title="Lưu"
@@ -265,6 +528,67 @@ const ModalSectionContent = (p) => {
     )
 }
 
+const EditSection = (p) => {
+    const { children, onClick, isedit, name } = p
+    return (
+        <EditSectionContainer name={name} isedit={isedit?.toString()}>
+            {children}
+        
+        {name !== "note" && <span name={name} onClick={onClick} className={name === "color" && "pl-10"}><Img.edit /></span>}
+        </EditSectionContainer>
+    )
+}
+
+
+
+const EditSectionContainer = styled.div `
+    display: flex;
+    align-items: center;
+    width: ${({name}) => name ==="note" && "100%" };
+
+    .note-wrapper {
+        width: 100%;
+        background-color: #f8f8f8;
+        padding: 20px 30px;
+        border-radius: 12px;
+    }
+    .area-wrapper {
+        display: flex;
+        gap: 9px;
+
+        svg {
+            width: 14px;
+        }
+    }
+
+    span {
+        line-height: 1;
+        svg {
+            margin-left: 10px;
+            width: 14px;
+            cursor: pointer;
+        }
+
+        &:hover {
+            svg {
+                color: var(--second-color);
+            }
+        }
+    }
+
+    .ql-editor {
+        max-width: 370px!important;
+    }
+
+    .circle-picker {
+        width: ${({isedit}) => isedit === "true" && "10px!important" };
+        display: grid!important;
+        grid-template-columns: ${({isedit}) => isedit === "true" ? "0px!important" : "20px 20px 20px 20px 20px!important" };
+        grid-template-rows: ${({isedit}) => isedit === "true" ? "20px!important" : "10px!important" };
+        column-gap: 10px;
+        row-gap: 15px;
+    }
+`
 
 const Content = styled.div`
 
@@ -294,8 +618,13 @@ const Content = styled.div`
     }
 
     .circle-picker {
-      gap: 7px;
-      justify-content: center;  
+        gap: 7px;
+        justify-content: center;  
+        display: grid!important;
+        grid-template-columns: 20px 20px 20px 20px 20px;
+        grid-template-rows: 10px;
+        column-gap: 10px;
+        row-gap: 15px;
     }
 
 `
@@ -452,10 +781,19 @@ const ModalSectionContentStyle = styled.div `
             }
         }
         
-        .quill .ql-container {
+        .quill {
+            width:100%;
+
+            .ql-container {
             height: auto!important;
-        }
+        }}
         
     `
+
+const Validate = styled.p`
+    text-align: center;
+    color: red;
+
+`
  
 export default TaskModal;

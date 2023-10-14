@@ -6,13 +6,15 @@ import { plannerData } from "./Planner.data";
 
 const TaskSection = (p) => {
 
-    const { data, children, openModalData } = p
- 
-    const hleSelctDateZ = (e) => {
-        setState(e.target.getAttribute("name"))
-    }
-
+    const { data, children, openModalData, setDateZone } = p
+    
     const [state, setState] = useState(plannerData[data].dateZone[0].name)
+    
+    const hleSelctDateZ = (e) => {
+        const name = e.target.getAttribute("name")
+        setDateZone(name)
+        setState(name)
+    }
 
     const handleClickAdd = (e) => {
         const name = e.target.getAttribute("name")
@@ -52,6 +54,10 @@ const Task = styled(motion.section)`
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     margin-top: 16px;
+
+    h2.title {
+        letter-spacing: 4px;
+    }
 `
 
 
@@ -59,6 +65,7 @@ const Task = styled(motion.section)`
 const DateZone = styled.div`
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 
     span {
         margin-right: 1.5rem;

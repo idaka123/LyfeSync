@@ -10,11 +10,14 @@
     "preview": "npx vite preview"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
     "@uiw/react-color-circle": "^1.4.2",
     "axios": "^1.5.0",
     "babel-plugin-styled-components": "^2.1.4",
+    "dompurify": "^3.0.6",
     "flatpickr": "^4.6.13",
     "framer-motion": "^10.16.4",
+    "nanoid": "^5.0.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
@@ -23,6 +26,7 @@
     "react-quill": "^2.0.0",
     "react-router": "^6.16.0",
     "react-router-dom": "^6.16.0",
+    "react-uid": "^2.3.3",
     "styled-components": "^6.0.8"
   },
   "devDependencies": {

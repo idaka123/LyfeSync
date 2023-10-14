@@ -1,5 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
+const variants = [...Array(50).keys()].map(i => i + 1); // generates an array [1, 2, ..., 50]
+
+
 const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
     :root {
@@ -8,6 +11,8 @@ const GlobalStyles = createGlobalStyle`
         --main-gradient: linear-gradient(118deg,rgba(30, 30, 30 ,1),rgba(30, 30, 30 ,.7));
         --second-color: #FDBD3E;
         --modal-header: 65px;
+        --white-text: #ffff;
+        --black-text: #1e1e1e
     }
     
     *, *:before, *:after {
@@ -43,6 +48,9 @@ const GlobalStyles = createGlobalStyle`
         color: var(--text-color);
         text-decoration: none;
     }
+    pre {
+        white-space:pre-wrap;
+    }
 
     .select-none {
         -webkit-user-select: none!important;
@@ -59,14 +67,69 @@ const GlobalStyles = createGlobalStyle`
         color: rgba(30,30,30,1)!important;
     }
 
+    .text-white {
+        color: var(--white-text)!important;
+        color: rgba(255,255,255,1)!important;
+    }
+
+    .line-through {
+        text-decoration: line-through!important;
+    }
+
+    .blur{
+        opacity: .6!important;
+    }
+
+    .wrap-text {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    @-moz-document url-prefix() {
+        .wrap-text {
+            white-space: -moz-pre-wrap;
+        }
+    }
     .col3 {
         width: 33.333333%;
         height: 100%;
     }
 
-    .mb-10 {
-        margin-bottom: 10px!important;
+    ${variants.map(variant => `
+    .ml-${variant} {
+      margin-left: ${variant}px!important;
     }
+
+    .mb-${variant} {
+      margin-bottom: ${variant}px!important;
+    }
+
+    .mt-${variant} {
+      margin-top: ${variant}px!important;
+    }
+
+    .mr-${variant} {
+      margin-right: ${variant}px!important;
+    }
+    
+    .pl-${variant} {
+      padding-left: ${variant}px!important;
+    }
+
+    .pb-${variant} {
+      padding-bottom: ${variant}px!important;
+    }
+
+    .pt-${variant} {
+      padding-top: ${variant}px!important;
+    }
+
+    .pr-${variant} {
+      padding-right: ${variant}px!important;
+    }
+
+  `)}
+
 `
 
 export default GlobalStyles;

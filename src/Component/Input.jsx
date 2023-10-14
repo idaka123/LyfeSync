@@ -1,11 +1,28 @@
 import styled from "styled-components";
 
+/*
+Example:
+    <Input 
+        name="title"
+        width="80%"
+        value={dataInput.title}
+        onInput={handleInput}/>
+*/
+
 const Input = (p) => {
-    const { width, name, onInput } = p
+    const { value = "", name, onInput, onKeyDown, inputStyle, className, focusborder = "true", placeholder, plhdercolor } = p
 
     return ( 
-        <Container style={{width : width}}>
-            <input type="text" name={name} spellCheck="false" onInput={onInput} />
+        <Container style={inputStyle} focusborder ={focusborder} plhdercolor={plhdercolor}>
+            <input 
+                value={value}
+                type="text"
+                name={name}
+                spellCheck="false"
+                placeholder={placeholder}
+                onInput={onInput}
+                onKeyDown={onKeyDown}
+                className={className} />
         </Container>
      );
 }
@@ -20,6 +37,7 @@ const Container = styled.div`
     border-radius: 5px;
 
     input {
+        background-color: transparent;
         border-radius: 5px;
         border: none;
         outline: none;
@@ -31,8 +49,14 @@ const Container = styled.div`
         color: #626262;
 
         &:focus {
-            border: 1px solid rgba(0, 0, 0, 0.2)!important;
+            border: ${({focusborder}) => focusborder === "true" ? "1px solid rgba(0, 0, 0, 0.2)!important" : "" };
             box-shadow: 0 3px 10px 0 rgba(0,0,0,.15);
         }
+        &::placeholder {
+            color: ${({plhdercolor}) => plhdercolor };
+            font-size: 1.15rem;
+            opacity: 1; /* Firefox */
+        }
+
     }
 `
