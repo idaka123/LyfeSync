@@ -7,7 +7,7 @@ export const KnowLedgeStyled = styled.div`
   width: 100%; 
   height: 100%; 
   display: grid; 
-  grid-template: 3% 94% / 3% 59% 35%; 
+  grid-template: 3% 80% / 3% 59% 35%; 
 `;
 
 
