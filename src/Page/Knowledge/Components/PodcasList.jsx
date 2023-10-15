@@ -4,7 +4,7 @@ import {
   PodcastArrange, PodcastArrangeList, PodcastArrangeListElement,
   SortBy, PodcastCardList
 } from "../Knowledge.desktop";
-
+import { customNumberSort, customStringSort } from "../utils/customSort";
 import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
 
@@ -20,6 +20,8 @@ const PodcastList = (props) => {
   const { isGlobalPlaying, setIsGlobalPlaying } = props;
   const [isDisplayArrangeList, setIsDisplayArrangeList] = useState(false);
   const [sortbyValue, setSortbyValue] = useState('Sort By');
+  const [podcastType, setPostcastType] = useState(podcastsType[0].title)
+  const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
 
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
@@ -50,6 +52,30 @@ const PodcastList = (props) => {
     setIsDisplayArrangeList(false);
   }
 
+  const handleTypeClick = (index) => {
+    console.log(index);
+    setPostcastType(index);
+  }
+
+  useEffect(() => {
+    let filterdata = podcastsData.filter(index => {
+      const temp = index.type.find((i) => { return i === podcastType });
+      return temp === podcastType;
+    })
+
+    const sortFunctions = {
+      Alphabet: (a, b) => customStringSort(a.title, b.title),
+      Author: (a, b) => customStringSort(a.author, b.author),
+      Length: (a, b) => customNumberSort(a.length, b.length)
+    };
+
+    if (sortbyValue in sortFunctions) {
+      filterdata.sort(sortFunctions[sortbyValue]);
+    }
+
+    setPodcastsDataFilter(filterdata);
+  }, [podcastType, sortbyValue])
+
   return (
     <StyledPodcastList>
       <PodcastListType
@@ -60,7 +86,10 @@ const PodcastList = (props) => {
         onWheel={handleWheel}
       >
         {podcastsType.map(index => (
-          <PodcastListTypeElement key={index.id}>
+          <PodcastListTypeElement
+            key={index.id}
+            onClick={() => handleTypeClick(index.title)}
+          >
             {index.title}
           </PodcastListTypeElement>
         ))}
@@ -82,9 +111,10 @@ const PodcastList = (props) => {
         )}
       </PodcastArrange>
       <PodcastCardList>
-        {podcastsData.map(value => (
+        {podcastsDataFilter.map((value, index) => (
           <PodcastCard
             key={value.id}
+            order={index + 1}
             {...value}
             cardId={cardId}
             setCardId={setCardId}

@@ -13,7 +13,7 @@ const PodcastCard = (props) => {
     author, title, thumbnail, length, id,
     cardId, setCardId,
     isHoverId, setIsHoverId,
-    isPlayingId, setIsPlayingId
+    isPlayingId, setIsPlayingId, order
   } = props;
 
   // Event Handlers
@@ -54,7 +54,7 @@ const PodcastCard = (props) => {
       onMouseLeave={handleMouseLeave}
       style={cardStyle}
     >
-      <PodcastCardId>{id}</PodcastCardId>
+      <PodcastCardId>{order}</PodcastCardId>
       <PodcastThumbnails onClick={() => handlePlaying(id)} style={thumbnailStyle}>
         {isPlayingId.id === id
           ? (
@@ -71,11 +71,11 @@ const PodcastCard = (props) => {
       </PodcastThumbnails>
       <PodcastTitle style={titleStyle}>
         <p>
-          {`${author} | ${title}`}
+          {`${title}`}
         </p>
       </PodcastTitle>
       <PodcastLength>
-        {length}
+        {` ${author} | ${length}`}
       </PodcastLength>
     </StyledPodcastCard>
   );

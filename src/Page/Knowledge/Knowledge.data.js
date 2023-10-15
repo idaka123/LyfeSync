@@ -328,7 +328,7 @@ export const wisdomsData = [
 export const podcastsType = [
   {
     id: 1,
-    title: "Giáo dục",
+    title: "Tất cả",
   },
   {
     id: 2,
@@ -375,8 +375,12 @@ export const podcastsArrangeData = [
   },
   {
     id: 2,
+    title: "Author"
+  },
+  {
+    id: 3,
     title: "Length"
-  }
+  },
 ]
 
 export const podcastsData = [
@@ -385,22 +389,80 @@ export const podcastsData = [
     title: "ĐỪNG ÁM ẢNH BỞI SỰ GIÀU SANG ĐỂ RỒI BIẾN MÌNH THÀNH “NÔ LỆ” CỦA ĐỒNG TIỀN",
     url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
-    length: "1 hour 30 min 24 sec", 
-    author: "Spiderum Books"
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
   },
   {
     id: 2,
-    title: "ĐỪNG ÁM ẢNH BỞI SỰ GIÀU SANG ĐỂ RỒI BIẾN MÌNH THÀNH “NÔ LỆ” CỦA ĐỒNG TIỀN",
-    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
-    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
-    length: "1 hour 30 min 24 sec", 
-    author: "Spiderum Books"
-  },
-  {
-    id: 3,
     title: "10 lời nhắn nhủ đến chính mình của 10 năm trước khi còn là sinh viên (Phần 1)",
     url: "https://www.youtube.com/watch?v=f8NHXvf4ms0&list=PLK7-xrxcFKGrOQJuqlMTZhkeKH25LiICB&index=8",
     thumbnail: "https://img.youtube.com/vi/f8NHXvf4ms0/default.jpg",
-    length: "1:30:24"
-  }
+    length: "1 hour 30 min 24 sec",
+    author: "The Hanoi Chamomil",
+    type: ["Tất cả", "Giải trí"]
+  },
+  {
+    id: 3,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
+  {
+    id: 4,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
+  {
+    id: 5,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
+  {
+    id: 6,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
+  {
+    id: 7,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
+  {
+    id: 8,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
+  {
+    id: 9,
+    title: "\"CHIẾN BINH CẦU VỒNG\": Những điều bạn đã KHÔNG NHẬN RA khi đọc cuốn sách",
+    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
+    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    length: "12 min 23 sec",
+    author: "Spiderum Books",
+    type: ["Tất cả", "Giáo dục"]
+  },
 ]

@@ -188,6 +188,24 @@ export const PodcastCardList = styled.div`
   height: 100%; 
   width: 100%;
   background-color: transparent;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+  width: 0px;
+}
+
+  &::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 100px;
+}
+
+  &::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 100px;
+}
+
+  &::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 `;
 
 export const PodcastThumbnails = styled.div`
@@ -238,7 +256,7 @@ export const StyledPodcastList = styled.div`
   height: 94%;
   width: 93%;
   display: grid; 
-  grid-template: 10% 8% auto / 100%; 
+  grid-template: 10% 10% auto / 100%; 
 `;
 
 export const PodcastListType = styled.div`
@@ -273,18 +291,18 @@ export const SortBy = styled.div`
 `;
 
 export const PodcastArrangeList = styled.ul`
-  background-color: grey;
+  background-color: black; 
   position: absolute; 
-  top: calc((4.5vw + 4.5vh)/2);
+  top: calc((4vw + 4vh)/2);
   right: 0; 
   width: calc((8.25vw + 8.25vh) / 2);
   index: 1; 
   list-style: none; 
+  border-radius: calc((1.5vw + 1.5vh)/2);
   display: flex; 
   flex-direction: column; 
   height: auto; 
   width: auto;
-  background-color: white; 
 `;
 
 export const PodcastArrangeListElement = styled.li`
@@ -293,7 +311,8 @@ export const PodcastArrangeListElement = styled.li`
   justify-content: center;
   align-items: center; 
   font-size: calc((1vw + 1.5vh)/2); 
-  color: black;
+  color: white;
+  border-radius: calc((1.5vw + 1.5vh)/2);
   &:hover {
     background-color: black;
     color: white; 
@@ -307,9 +326,9 @@ export const PodcastArrangeListElement = styled.li`
 `;
 
 export const PodcastListTypeElement = styled.div`
-  height: 60%;
+  height: 70%;
   width: auto;
-  min-width: 10%; 
+  min-width: 12%; 
   max-width: 15%;
   border-radius: calc((1.5vw + 1.5vh)/2);
   font-size: calc((1.16vw + 1.5vh)/2);
