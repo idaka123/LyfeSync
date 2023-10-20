@@ -1,14 +1,13 @@
-import React, { useRef, useState, createContext, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   StyledPodcastList, PodcastListType, PodcastListTypeElement,
   PodcastArrange, PodcastArrangeList, PodcastArrangeListElement,
-  SortBy, PodcastCardList
+  SortBy, PodcastCardList, SortByIcon, PodcastArrangeTitle, PodcastArrangeTitleIcon
 } from "../Knowledge.desktop";
 import { customNumberSort, customStringSort } from "../utils/customSort";
 import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
-
-export const PodcastListContext = createContext();
+import { Icon } from "../../../assets/icon";
 
 const PodcastList = (props) => {
   const podCastListTypeRef = useRef(null);
@@ -16,13 +15,15 @@ const PodcastList = (props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [cardId, setCardId] = useState(null);
   const [isHoverId, setIsHoverId] = useState(null);
-  const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: -1 });
-  const { isGlobalPlaying, setIsGlobalPlaying } = props;
+  const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: null });
   const [isDisplayArrangeList, setIsDisplayArrangeList] = useState(false);
   const [sortbyValue, setSortbyValue] = useState('Sort By');
   const [podcastType, setPostcastType] = useState(podcastsType[0].title)
   const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
-
+  const [isFavourite, setIsFavourite] = useState({ id: -1, isFavourite: false })
+  const {
+    isAdded
+  } = props;
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
     setIsDragging(true);
@@ -53,15 +54,11 @@ const PodcastList = (props) => {
   }
 
   const handleTypeClick = (index) => {
-    console.log(index);
     setPostcastType(index);
   }
 
   useEffect(() => {
-    let filterdata = podcastsData.filter(index => {
-      const temp = index.type.find((i) => { return i === podcastType });
-      return temp === podcastType;
-    })
+    const filterdata = podcastsData.filter(index => index.type.includes(podcastType));
 
     const sortFunctions = {
       Alphabet: (a, b) => customStringSort(a.title, b.title),
@@ -74,7 +71,7 @@ const PodcastList = (props) => {
     }
 
     setPodcastsDataFilter(filterdata);
-  }, [podcastType, sortbyValue])
+  }, [podcastType, sortbyValue, isFavourite])
 
   return (
     <StyledPodcastList>
@@ -89,14 +86,33 @@ const PodcastList = (props) => {
           <PodcastListTypeElement
             key={index.id}
             onClick={() => handleTypeClick(index.title)}
+            style={
+              index.title === podcastType
+                ? {
+                  backgroundColor: "white",
+                  color: "black",
+                  fontWeight: 700,
+                  transition: "all 0.3s ease",
+                  fontSize: "calc((1.4vw + 1.4vh)/2)",
+                }
+                : {}
+            }
           >
             {index.title}
           </PodcastListTypeElement>
         ))}
       </PodcastListType>
-      <PodcastArrange onClick={handleSortByClick}>
-        <SortBy>{sortbyValue}</SortBy>
-        <i className="fas fa-caret-down" style={{ color: "black" }}></i>
+      <PodcastArrange>
+        <PodcastArrangeTitleIcon>
+          <Icon.list className="iconList"></Icon.list>
+        </PodcastArrangeTitleIcon>
+        <PodcastArrangeTitle>
+          Thư viện Podcast
+        </PodcastArrangeTitle>
+        <SortBy onClick={handleSortByClick}>{sortbyValue}</SortBy>
+        <SortByIcon>
+          <i onClick={handleSortByClick} className="fas fa-caret-down iconArrowDown" style={{ color: "black" }}></i>
+        </SortByIcon>
         {isDisplayArrangeList && (
           <PodcastArrangeList>
             {podcastsArrangeData.map(index => (
@@ -116,16 +132,20 @@ const PodcastList = (props) => {
             key={value.id}
             order={index + 1}
             {...value}
+            podcastsDataFilter={podcastsDataFilter}
+            setPodcastsDataFilter={setPodcastsDataFilter}
             cardId={cardId}
             setCardId={setCardId}
             isHoverId={isHoverId}
             setIsHoverId={setIsHoverId}
             isPlayingId={isPlayingId}
             setIsPlayingId={setIsPlayingId}
+            isFavourite={isFavourite}
+            setIsFavourite={setIsFavourite}
           />
         ))}
       </PodcastCardList>
-    </StyledPodcastList>
+    </StyledPodcastList >
   );
 }
 

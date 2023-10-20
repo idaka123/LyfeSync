@@ -16,7 +16,7 @@ const KnowLedgeBlock = () => {
         <Tip />
       </QuoteBlock>
       <PodcastBlock>
-        <PodcastBlockTitle><b>broadcast series</b></PodcastBlockTitle>
+        <PodcastBlockTitle><b>podcast series</b></PodcastBlockTitle>
         <PodcastList />
       </PodcastBlock>
     </KnowLedgeStyled>

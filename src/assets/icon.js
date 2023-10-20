@@ -6,7 +6,7 @@ import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
-import { BsCart2, BsFillPlayFill } from 'react-icons/bs'
+import { BsCart2, BsFillPlayFill, BsShareFill } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown,  MdPause } from 'react-icons/md'
 import { AiOutlineLoading3Quarters, AiFillTag } from 'react-icons/ai'
@@ -15,8 +15,10 @@ import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
 import { RiCloseFill } from 'react-icons/ri'
 import { BiLibrary } from 'react-icons/bi';
-
-
+import { FaShare } from 'react-icons/fa';
+import { MdAddCircle } from 'react-icons/md';
+import { BiCheckCircle } from 'react-icons/bi';
+import { ImLibrary } from 'react-icons/im';
 export const Icon = {
     passHide: AiFillEyeInvisible,
     passUnHide: AiFillEye,
@@ -43,7 +45,11 @@ export const Icon = {
     setting: FiSettings,
     menu: FiMenu,
     x: RiCloseFill,
-    library: BiLibrary,
+    list: BiLibrary,
     play: BsFillPlayFill,
-    pause: MdPause
+    pause: MdPause, 
+    share : FaShare,
+    add: MdAddCircle,
+    check: BiCheckCircle,
+    library: ImLibrary,
 }

@@ -332,7 +332,7 @@ export const podcastsType = [
   },
   {
     id: 2,
-    title: "Giáo dục",
+    title: "Yêu thích",
   },
   {
     id: 3,
@@ -340,30 +340,6 @@ export const podcastsType = [
   },
   {
     id: 4,
-    title: "Giáo dục",
-  },
-  {
-    id: 5,
-    title: "Giáo dục",
-  },
-  {
-    id: 6,
-    title: "Giáo dục",
-  },
-  {
-    id: 7,
-    title: "Giáo dục",
-  },
-  {
-    id: 8,
-    title: "Giáo dục",
-  },
-  {
-    id: 9,
-    title: "Giáo dục",
-  },
-  {
-    id: 10,
     title: "Giải trí",
   },
 ]
@@ -391,7 +367,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 2,
@@ -400,7 +377,8 @@ export const podcastsData = [
     thumbnail: "https://img.youtube.com/vi/f8NHXvf4ms0/default.jpg",
     length: "1 hour 30 min 24 sec",
     author: "The Hanoi Chamomil",
-    type: ["Tất cả", "Giải trí"]
+    type: ["Tất cả", "Giải trí"],
+    favourite: 0,
   },
   {
     id: 3,
@@ -409,7 +387,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 4,
@@ -418,7 +397,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 5,
@@ -427,7 +407,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 6,
@@ -436,7 +417,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 7,
@@ -445,7 +427,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 8,
@@ -454,7 +437,8 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
   {
     id: 9,
@@ -463,6 +447,7 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
     length: "12 min 23 sec",
     author: "Spiderum Books",
-    type: ["Tất cả", "Giáo dục"]
+    type: ["Tất cả", "Giáo dục"],
+    favourite: 0,
   },
 ]

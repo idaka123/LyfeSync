@@ -3,8 +3,7 @@ import KnowLedgeBlock from "./KnowledgeBlock";
 const Knowledge = () => {
 
   return (
-    <KnowLedgeBlock
-    >
+    <KnowLedgeBlock>
     </KnowLedgeBlock>
   );
 }
