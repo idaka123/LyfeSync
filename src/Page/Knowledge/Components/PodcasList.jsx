@@ -21,9 +21,7 @@ const PodcastList = (props) => {
   const [podcastType, setPostcastType] = useState(podcastsType[0].title)
   const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
   const [isFavourite, setIsFavourite] = useState({ id: -1, isFavourite: false })
-  const {
-    isAdded
-  } = props;
+  const [podcastStatus, setPodcastStatus] = useState({});
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
     setIsDragging(true);
@@ -71,7 +69,7 @@ const PodcastList = (props) => {
     }
 
     setPodcastsDataFilter(filterdata);
-  }, [podcastType, sortbyValue, isFavourite])
+  }, [podcastType, sortbyValue, podcastStatus])
 
   return (
     <StyledPodcastList>
@@ -142,6 +140,8 @@ const PodcastList = (props) => {
             setIsPlayingId={setIsPlayingId}
             isFavourite={isFavourite}
             setIsFavourite={setIsFavourite}
+            podcastStatus={podcastStatus}
+            setPodcastStatus={setPodcastStatus}
           />
         ))}
       </PodcastCardList>

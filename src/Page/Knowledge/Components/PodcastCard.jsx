@@ -11,17 +11,14 @@ import {
 } from "../Knowledge.desktop";
 import { Icon } from "../../../assets/icon";
 
-const PodcastCard = (props) => {
-  const {
-    author, title, thumbnail, length, id,
-    cardId, setCardId,
-    isHoverId, setIsHoverId,
-    isPlayingId, setIsPlayingId, order,
-    podcastsDataFilter, setPodcastsDataFilter,
-    isFavourite, setIsFavourite
-  } = props;
-
-  const [isAdded, setIsAdded] = useState(true);
+const PodcastCard = ({
+  author, title, thumbnail, length, id,
+  cardId, setCardId,
+  isHoverId, setIsHoverId,
+  isPlayingId, setIsPlayingId, order,
+  podcastsDataFilter, setPodcastsDataFilter,
+  setIsFavourite, podcastStatus, setPodcastStatus
+}) => {
 
   // Event Handlers
   const handleMouseEnter = () => setIsHoverId(id);
@@ -32,26 +29,27 @@ const PodcastCard = (props) => {
     id
   }));
   const handleAddClick = (id) => {
-    setIsFavourite({ id: id, isFavourite: true })
-    console.log(isFavourite);
-    setIsAdded(false);
+    setPodcastStatus({
+      ...podcastStatus,
+      [id]: { isFavourite: false, isAdded: false }
+    });
+    setIsFavourite({ id: id, isFavourite: false })
     const updatedData = podcastsDataFilter;
-    console.log(updatedData);
     updatedData[id - 1].type.push("Yêu thích");
-    console.log(updatedData[id - 1]);
     setPodcastsDataFilter(updatedData);
   };
   const handleRemoveClick = (id) => {
-    setIsFavourite({ id: id, isFavourite: false })
-    console.log(isFavourite);
-    setIsAdded(true);
+    setPodcastStatus({
+      ...podcastStatus,
+      [id]: { isFavourite: true, isAdded: true }
+    });
     const updatedData = podcastsDataFilter;
-    console.log(updatedData)
     updatedData.map(index => {
       if (index.id === id) index.type.pop();
     })
     setPodcastsDataFilter(updatedData);
   };
+  const currentStatus = podcastStatus[id] || { isFavourite: true, isAdded: true };
 
 
   // Styles
@@ -86,7 +84,7 @@ const PodcastCard = (props) => {
       <PodcastLength>{`${author} | ${length}`}</PodcastLength>
       <PodcastOption>
         <PodcastAdd>
-          {isAdded
+          {currentStatus.isAdded
             ? <Icon.add style={iconStyle} className="iconAdd" onClick={() => handleAddClick(id)} />
             : <Icon.check style={iconStyle} className="iconCheck" onClick={() => handleRemoveClick(id)} />
           }
