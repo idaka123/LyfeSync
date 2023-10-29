@@ -9,7 +9,10 @@ import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
 import { Icon } from "../../../assets/icon";
 
-const PodcastList = (props) => {
+const PodcastList = ({
+  setIsPodcastShareDisplay, setShareTitle,
+  setShareAuthor, setShareLength, setShareImage, setShareUrl
+}) => {
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -69,6 +72,7 @@ const PodcastList = (props) => {
     }
 
     setPodcastsDataFilter(filterdata);
+    return () => { }
   }, [podcastType, sortbyValue, podcastStatus])
 
   return (
@@ -142,6 +146,12 @@ const PodcastList = (props) => {
             setIsFavourite={setIsFavourite}
             podcastStatus={podcastStatus}
             setPodcastStatus={setPodcastStatus}
+            setIsPodcastShareDisplay={setIsPodcastShareDisplay}
+            setShareTitle={setShareTitle}
+            setShareAuthor={setShareAuthor}
+            setShareLength={setShareLength}
+            setShareImage={setShareImage}
+            setShareUrl={setShareUrl}
           />
         ))}
       </PodcastCardList>

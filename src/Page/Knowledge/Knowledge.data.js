@@ -342,6 +342,10 @@ export const podcastsType = [
     id: 4,
     title: "Giải trí",
   },
+  {
+    id: 5,
+    title: "Thể thao"
+  }
 ]
 
 export const podcastsArrangeData = [
@@ -362,11 +366,11 @@ export const podcastsArrangeData = [
 export const podcastsData = [
   {
     id: 1,
-    title: "ĐỪNG ÁM ẢNH BỞI SỰ GIÀU SANG ĐỂ RỒI BIẾN MÌNH THÀNH “NÔ LỆ” CỦA ĐỒNG TIỀN",
-    url: "https://www.youtube.com/watch?v=hSfvJ0amEqQ",
-    thumbnail: "https://i.scdn.co/image/ab6765630000f68dfc4a0e306c8a04ec6e990a4b",
+    title: "THẺ TÍN DỤNG đã ra đời như thế nào? | Thành Long | Tiền tài",
+    url: "https://www.youtube.com/watch?v=Jq-v7Cv_cXc",
+    thumbnail: "https://i.scdn.co/image/ab6765630000ba8ade85c9dd1b09091210558e7f",
     length: "12 min 23 sec",
-    author: "Spiderum Books",
+    author: "Spiderum Podcasts",
     type: ["Tất cả", "Giáo dục"],
     favourite: 0,
   },
@@ -374,7 +378,7 @@ export const podcastsData = [
     id: 2,
     title: "10 lời nhắn nhủ đến chính mình của 10 năm trước khi còn là sinh viên (Phần 1)",
     url: "https://www.youtube.com/watch?v=f8NHXvf4ms0&list=PLK7-xrxcFKGrOQJuqlMTZhkeKH25LiICB&index=8",
-    thumbnail: "https://img.youtube.com/vi/f8NHXvf4ms0/default.jpg",
+    thumbnail: "https://i.ytimg.com/vi/f8NHXvf4ms0/maxresdefault.jpg",
     length: "1 hour 30 min 24 sec",
     author: "The Hanoi Chamomil",
     type: ["Tất cả", "Giải trí"],

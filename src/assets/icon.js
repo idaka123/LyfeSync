@@ -8,7 +8,7 @@ import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
 import { BsCart2, BsFillPlayFill, BsShareFill } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
-import { MdKeyboardArrowDown,  MdPause } from 'react-icons/md'
+import { MdKeyboardArrowDown, MdPause } from 'react-icons/md'
 import { AiOutlineLoading3Quarters, AiFillTag } from 'react-icons/ai'
 import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
@@ -19,6 +19,11 @@ import { FaShare } from 'react-icons/fa';
 import { MdAddCircle } from 'react-icons/md';
 import { BiCheckCircle } from 'react-icons/bi';
 import { ImLibrary } from 'react-icons/im';
+import { FaFacebookMessenger } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
+import { BiLogoGmail } from 'react-icons/bi';
+import { MdMoreHoriz } from 'react-icons/md'
 export const Icon = {
     passHide: AiFillEyeInvisible,
     passUnHide: AiFillEye,
@@ -47,9 +52,14 @@ export const Icon = {
     x: RiCloseFill,
     list: BiLibrary,
     play: BsFillPlayFill,
-    pause: MdPause, 
-    share : FaShare,
+    pause: MdPause,
+    share: FaShare,
     add: MdAddCircle,
     check: BiCheckCircle,
     library: ImLibrary,
+    facebook: FaFacebook,
+    messenger: FaFacebookMessenger,
+    instagram: FaInstagram,
+    gmail: BiLogoGmail,
+    more: MdMoreHoriz
 }

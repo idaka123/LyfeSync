@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   PodcastTitle,
   PodcastThumbnails,
@@ -12,12 +12,14 @@ import {
 import { Icon } from "../../../assets/icon";
 
 const PodcastCard = ({
-  author, title, thumbnail, length, id,
+  author, title, thumbnail, length, id, url,
   cardId, setCardId,
   isHoverId, setIsHoverId,
   isPlayingId, setIsPlayingId, order,
   podcastsDataFilter, setPodcastsDataFilter,
-  setIsFavourite, podcastStatus, setPodcastStatus
+  setIsFavourite, podcastStatus, setPodcastStatus,
+  setIsPodcastShareDisplay, setShareTitle,
+  setShareAuthor, setShareLength, setShareImage, setShareUrl
 }) => {
 
   // Event Handlers
@@ -29,28 +31,47 @@ const PodcastCard = ({
     id
   }));
   const handleAddClick = (id) => {
+    const updatedData = [...podcastsDataFilter];
+    const podcastToUpdate = updatedData.find(podcast => podcast.id === id);
+    if (podcastToUpdate) {
+      podcastToUpdate.type = [...podcastToUpdate.type, "Yêu thích"];
+    }
+
+    setPodcastsDataFilter(updatedData);
+
     setPodcastStatus({
       ...podcastStatus,
       [id]: { isFavourite: false, isAdded: false }
     });
-    setIsFavourite({ id: id, isFavourite: false })
-    const updatedData = podcastsDataFilter;
-    updatedData[id - 1].type.push("Yêu thích");
-    setPodcastsDataFilter(updatedData);
+
+    setIsFavourite({ id: id, isFavourite: false });
   };
+
   const handleRemoveClick = (id) => {
+    const updatedData = [...podcastsDataFilter];
+    const podcastToUpdate = updatedData.find(podcast => podcast.id === id);
+    if (podcastToUpdate) {
+      podcastToUpdate.type = podcastToUpdate.type.filter(type => type !== "Yêu thích");
+    }
+
+    setPodcastsDataFilter(updatedData);
+
     setPodcastStatus({
       ...podcastStatus,
       [id]: { isFavourite: true, isAdded: true }
     });
-    const updatedData = podcastsDataFilter;
-    updatedData.map(index => {
-      if (index.id === id) index.type.pop();
-    })
-    setPodcastsDataFilter(updatedData);
   };
+
   const currentStatus = podcastStatus[id] || { isFavourite: true, isAdded: true };
 
+  const handleShareClick = (title, author, length, thumbnail) => {
+    setIsPodcastShareDisplay(true);
+    setShareTitle(title);
+    setShareAuthor(author);
+    setShareLength(length);
+    setShareImage(thumbnail);
+    setShareUrl(url);
+  }
 
   // Styles
   const cardStyle = isPlayingId.id === id
@@ -90,7 +111,10 @@ const PodcastCard = ({
           }
         </PodcastAdd>
         <PodcastShare>
-          <Icon.share style={iconStyle} />
+          <Icon.share
+            style={iconStyle}
+            onClick={() => { handleShareClick(title, author, length, thumbnail) }}
+          />
         </PodcastShare>
       </PodcastOption>
     </StyledPodcastCard>
