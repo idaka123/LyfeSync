@@ -9,7 +9,14 @@ import {
 
 const KnowLedgeBlock = ({
   setIsPodcastShareDisplay, setShareTitle,
-  setShareAuthor, setShareLength, setShareImage, setShareUrl
+  setShareAuthor, setShareLength, setShareImage, setShareUrl,
+  setInfoTitle,
+  setInfoAuthor,
+  setInfoLength,
+  setInfoDescription,
+  setInfoThumbnail, 
+  setIsPodcastInfoDisplay, 
+  setInfoDate
 }) => {
   return (
     <KnowLedgeBlockStyled>
@@ -27,6 +34,13 @@ const KnowLedgeBlock = ({
           setShareLength={setShareLength}
           setShareImage={setShareImage}
           setShareUrl={setShareUrl}
+          setInfoTitle={setInfoTitle}
+          setInfoAuthor={setInfoAuthor}
+          setInfoLength={setInfoLength}
+          setInfoDescription={setInfoDescription}
+          setInfoThumbnail = {setInfoThumbnail}
+          setIsPodcastInfoDisplay = {setIsPodcastInfoDisplay}
+          setInfoDate = {setInfoDate}
         />
       </PodcastBlock>
     </KnowLedgeBlockStyled>

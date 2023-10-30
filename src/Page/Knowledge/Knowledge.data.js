@@ -371,8 +371,17 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000ba8ade85c9dd1b09091210558e7f",
     length: "12 min 23 sec",
     author: "Spiderum Podcasts",
+    date: "Oct 26 2023", 
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: `Đầu xuân năm 1870, hai vợ chồng Luigi Giovanni và Maria Virginia De Martini đặt chân tới San Jose,
+     California sau quãng đường dài gần 10.000 cây số từ ngôi làng nhỏ Acreeto, nước Ý. Chỉ vài tháng sau đó, cậu bé 
+     Amadeo Pietro Giannini cất tiếng khóc chào đời vào ngày 6 tháng 5. Cô lẽ Luigi và Maria cùng không ngờ rằng đứa 
+     bé đang nằm trong nôi kia, thiên thần nhỏ bé của ông bà, sau này sẽ khai sinh ra ngân hàng lớn nhất nước Mỹ và giúp
+      mảnh đất California trở thành một trong những nền kinh tế lớn nhất thế giới. Ngân hàng mà Giannini kiến tạo nên 
+      chính là Bank of America (Ngân hàng Hoa Kỳ), và ông đã nắm giữ cương vị Chủ tịch Hội đồng quản trị trong suốt 30 năm 
+      cho tới khi nghỉ hưu. Bank of America chính là ngân hàng cho ra mắt thẻ tín dụng đầu tiên trên thế giới với tên gọi 
+      BankAmericard, tiền thân của thẻ VISA ngày nay. Thông qua bài viết của tác giả "Thành Long" 
+      đã được đăng tải trên Website Spiderum, chúng ta cùng tìm hiểu toàn bộ quá trình hình thành của Visa nhé.`,
   },
   {
     id: 2,
@@ -382,7 +391,7 @@ export const podcastsData = [
     length: "1 hour 30 min 24 sec",
     author: "The Hanoi Chamomil",
     type: ["Tất cả", "Giải trí"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 3,
@@ -392,7 +401,7 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 4,
@@ -402,7 +411,7 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 5,
@@ -412,7 +421,7 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 6,
@@ -422,7 +431,7 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 7,
@@ -432,7 +441,7 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 8,
@@ -442,7 +451,7 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
   {
     id: 9,
@@ -452,6 +461,6 @@ export const podcastsData = [
     length: "12 min 23 sec",
     author: "Spiderum Books",
     type: ["Tất cả", "Giáo dục"],
-    favourite: 0,
+    description: 0,
   },
 ]

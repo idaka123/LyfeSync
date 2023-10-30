@@ -245,6 +245,7 @@ export const PodcastTitle = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: calc((1.3vw + 1.3vh)/2);
+    cursor: pointer;
   }
   width: 100%;
 `;
@@ -256,6 +257,9 @@ export const PodcastLength = styled.p`
   justify-content: start;
   align-items: flex-start;
   overflow: hidden;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export const PodcastOption = styled.div`
@@ -454,7 +458,7 @@ export const PodcastShareBlock = styled.div`
     8% auto 5% 11% 11% /
     100%;
   gap: calc((0.5vw + 0.5vh)/2);
-  background-color: rgb(24,24,24);
+  background: linear-gradient(to bottom, rgb(61,61,58), rgb(18,18,18));
   padding: 1% 1.5%;
   border-radius: calc((1.5vw + 1.5vh)/2);
   box-shadow: 10px 10px 20px rgb(61 59 59 / 71%);
@@ -497,7 +501,7 @@ export const PodcastShareBlockTitle = styled.div`
 
 export const PodcastShareBlockContent = styled.div`
   grid-area: 2/1/2/2;
-  background-image: radial-gradient(circle, white, rgb(110 110 110));
+  background: linear-gradient(to bottom, rgb(160,160,152), rgb(82,82,77));
   border-radius: calc((1.5vw + 1.5vh)/2);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 1);
   display: grid; 
@@ -679,3 +683,232 @@ export const PodcastShareCopyButton = styled.div`
     margin-right: 1%;
   }
 `;
+
+export const PodcastInfoStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #00000080;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const PodcastInfoBlock = styled.div`
+  height: 75%; 
+  width: 55%; 
+  display: grid; 
+  grid-template: 35% 65% / 100%;  
+  border-radius: calc((1vw + 1vh)/2);
+  position: relative;
+  .closeButton{
+    background-color: white; 
+    width: calc((2vw + 2vh)/2);
+    height: calc((2vw + 2vh)/2);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    position: absolute; 
+    top: calc((1vw + 1vh)/2);
+    right: calc((1vw + 1vh)/2);
+    border-radius: 50%;
+    transform-origin: center;
+    .close{
+      font-size: calc((1vw + 1vh)/2);
+      color: black;
+    }
+    &:hover{
+      transform: scale(1.1);
+      cursor: pointer; 
+      transition: all 0.3s ease;
+      .close{
+        color: red;
+      }
+    }
+  }
+`
+export const PodcastInfoBlockTitle = styled.div`
+  grid-area: 1/1/2/2;
+  display: grid; 
+  grid-template: 100%/ 25% 75%;
+  padding-bottom: 2%;
+  padding-right: 2%;
+  background: linear-gradient(to bottom, rgb(160,160,152), rgb(82,82,77));
+  border-top-left-radius: calc((1vw + 1vh)/2);
+  border-top-right-radius: calc((1vw + 1vh)/2);
+  user-select: none; 
+  .infoThumbnail{
+    grid-area: 1/1/2/2;
+    display: flex; 
+    justify-content: center; 
+    align-items: end; 
+    img{
+      width: calc((12.75vw + 12.75vh)/2);
+      height: calc((12.75vw + 12.75vh)/2); 
+      border-radius: calc((1vw + 1vh)/2);
+    }
+  }
+  .infoTitle{
+    grid-area: 1/2/2/3;
+    display: flex; 
+    flex-direction: column;
+    justify-content: end; 
+    .title{
+    font-size: calc((2vw + 2vh)/2);
+    font-weight: bold; 
+    color: white;
+    }
+    .author{
+    font-size: calc((1.5vw + 1.5vh)/2);
+    color: white;
+    font-weight: bold; 
+    }
+  }
+ `
+export const PodcastInfoBlockDescription = styled.div`
+ grid-area: 2/1/3/2;
+ background: linear-gradient(to bottom, rgb(61,61,58), rgb(18,18,18));
+ padding: 2.5%;
+ display: grid; 
+ grid-template: 8% 12% 8% 72% / 100%;
+ border-bottom-left-radius: calc((1vw + 1vh)/2);
+ border-bottom-right-radius: calc((1vw + 1vh)/2);
+ 
+ .dateAndTime {
+   grid-area: 1/1/2/2;
+   display: flex; 
+   
+   .date {
+     font-size: calc((1vw + 1vh)/2);
+     color: rgb(193,193,193);
+   }
+   
+   .dot {
+     color: transparent;
+   }
+   
+   .time {
+     font-size: calc((1vw + 1vh)/2);
+     color: rgb(193,193,193);
+   }
+   
+   user-select: none; 
+ }
+ 
+ .descriptionButton {
+   grid-area: 2/1/3/2;
+   display: flex; 
+   align-items: center;
+   
+   .playButton {
+     width: calc((4vw + 4vh)/2);
+     height: calc((4vw + 4vh)/2); 
+     background-color: white; 
+     display: flex; 
+     justify-content: center; 
+     align-items: center; 
+     border-radius: 50%;
+     transform-origin: center;
+     margin-right: calc((1.5vw + 1.5vh)/2);
+     
+     .play {
+       font-size: calc((3vw + 3vh)/2);
+       color: black;
+     }
+     
+     &:hover {
+       cursor: pointer;
+       transform: scale(1.1);
+       transition: all 0.3s ease; 
+     }
+   }
+   
+   .downloadButton {
+     width: calc((2vw + 2vh)/2);
+     height: calc((2vw + 2vh)/2);
+     border: 2.75px solid rgb(167,167,167);
+     border-radius: 50%;
+     display: flex; 
+     justify-content: center; 
+     align-items: center;
+     margin-right: calc((1.5vw + 1.5vh)/2);
+     
+     .download {
+       font-size: calc((1vw + 1vh)/2);
+       color: rgb(167,167,167);
+     }
+     
+     &:hover {
+       cursor: pointer;
+       transform: scale(1.1);
+       transition: all 0.3s ease; 
+     }
+   }
+
+   .addButton{
+    width: calc((2vw + 2vh)/2);
+    height: calc((2vw + 2vh)/2);
+    border: 2.75px solid rgb(167,167,167);
+    border-radius: 50%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    
+    .add{
+      font-size: calc((1.25vw + 1.25vh)/2);
+      color: rgb(167,167,167);
+    }
+
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.1);
+      transition: all 0.3s ease; 
+    }
+   }
+ }
+ .descriptionTitle{
+  grid-area: 3/1/4/2;
+  display: flex; 
+  align-items: end; 
+  p{
+    color: white; 
+    font-size: calc((1vw + 1vh)/2);
+    font-weight: bold;
+    border-bottom: 3px solid rgb(30,215,96);
+  }
+ }
+ .descriptionContent{
+  grid-area: 4/1/5/2;
+  padding-top: 1.75%;
+  padding-bottom: 1.5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  p{
+    color: rgb(174,174,174);
+    font-size: calc((1.2vw + 1.2vh)/2);
+    user-select: none;
+    line-height: calc((1.9vw + 1.9vh)/2);
+  }
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgb(35, 35, 35);
+    border-radius: 100px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 100px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+ }
+`

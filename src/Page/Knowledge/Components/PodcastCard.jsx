@@ -12,14 +12,16 @@ import {
 import { Icon } from "../../../assets/icon";
 
 const PodcastCard = ({
-  author, title, thumbnail, length, id, url,
+  author, title, thumbnail, length, id, url, description, date, 
   cardId, setCardId,
   isHoverId, setIsHoverId,
   isPlayingId, setIsPlayingId, order,
   podcastsDataFilter, setPodcastsDataFilter,
   setIsFavourite, podcastStatus, setPodcastStatus,
   setIsPodcastShareDisplay, setShareTitle,
-  setShareAuthor, setShareLength, setShareImage, setShareUrl
+  setShareAuthor, setShareLength, setShareImage, setShareUrl,
+  setIsPodcastInfoDisplay, setInfoTitle, setInfoAuthor, setInfoLength,
+  setInfoDescription, setInfoThumbnail, setInfoDate
 }) => {
 
   // Event Handlers
@@ -73,6 +75,16 @@ const PodcastCard = ({
     setShareUrl(url);
   }
 
+  const handleInfoClick = (title, author, length, thumbnail, description, date) => {
+    setIsPodcastInfoDisplay(true);
+    setInfoTitle(title);
+    setInfoAuthor(author);
+    setInfoLength(length);
+    setInfoThumbnail(thumbnail);
+    setInfoDescription(description);
+    setInfoDate(date)
+  }
+
   // Styles
   const cardStyle = isPlayingId.id === id
     ? { backgroundColor: "black" }
@@ -99,10 +111,17 @@ const PodcastCard = ({
           : (isHoverId === id ? <Icon.play /> : <img src={thumbnail} alt="thumbnail" />)
         }
       </PodcastThumbnails>
-      <PodcastTitle style={titleStyle}>
+      <PodcastTitle
+        style={titleStyle}
+        onClick={() => handleInfoClick(title, author, length, thumbnail, description, date)}
+      >
         <p>{title}</p>
       </PodcastTitle>
-      <PodcastLength>{`${author} | ${length}`}</PodcastLength>
+      <PodcastLength
+        onClick={() => handleInfoClick(title, author, length, thumbnail, description, date)}
+      >
+        {`${author} | ${length}`}
+      </PodcastLength>
       <PodcastOption>
         <PodcastAdd>
           {currentStatus.isAdded

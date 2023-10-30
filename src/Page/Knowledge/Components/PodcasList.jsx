@@ -11,7 +11,14 @@ import { Icon } from "../../../assets/icon";
 
 const PodcastList = ({
   setIsPodcastShareDisplay, setShareTitle,
-  setShareAuthor, setShareLength, setShareImage, setShareUrl
+  setShareAuthor, setShareLength, setShareImage, setShareUrl,
+  setInfoTitle,
+  setInfoAuthor,
+  setInfoLength,
+  setInfoDescription,
+  setInfoThumbnail,
+  setIsPodcastInfoDisplay, 
+  setInfoDate
 }) => {
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
@@ -152,6 +159,13 @@ const PodcastList = ({
             setShareLength={setShareLength}
             setShareImage={setShareImage}
             setShareUrl={setShareUrl}
+            setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
+            setInfoTitle={setInfoTitle}
+            setInfoAuthor={setInfoAuthor}
+            setInfoLength={setInfoLength}
+            setInfoDescription={setInfoDescription}
+            setInfoThumbnail={setInfoThumbnail}
+            setInfoDate = {setInfoDate}
           />
         ))}
       </PodcastCardList>

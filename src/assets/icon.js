@@ -24,6 +24,8 @@ import { FaFacebook } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { BiLogoGmail } from 'react-icons/bi';
 import { MdMoreHoriz } from 'react-icons/md'
+import { BiSolidDownload } from 'react-icons/bi';
+import { MdAdd } from 'react-icons/md';
 export const Icon = {
     passHide: AiFillEyeInvisible,
     passUnHide: AiFillEye,
@@ -55,11 +57,13 @@ export const Icon = {
     pause: MdPause,
     share: FaShare,
     add: MdAddCircle,
+    addOutline: MdAdd,
     check: BiCheckCircle,
     library: ImLibrary,
     facebook: FaFacebook,
     messenger: FaFacebookMessenger,
     instagram: FaInstagram,
     gmail: BiLogoGmail,
-    more: MdMoreHoriz
+    more: MdMoreHoriz, 
+    download: BiSolidDownload,
 }
