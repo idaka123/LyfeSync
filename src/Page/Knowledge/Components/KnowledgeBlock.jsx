@@ -4,19 +4,18 @@ import Tip from "./Tip";
 import Community from "./Community";
 import PodcastList from "./PodcasList";
 import {
-  QuoteBlock, PodcastBlock, PodcastBlockTitle, KnowLedgeBlockStyled, PodcastShare, PodcastShareStyled
+  QuoteBlock, PodcastBlock, PodcastBlockTitle, KnowLedgeBlockStyled
 } from "../Knowledge.desktop";
 
 const KnowLedgeBlock = ({
-  setIsPodcastShareDisplay, setShareTitle,
-  setShareAuthor, setShareLength, setShareImage, setShareUrl,
-  setInfoTitle,
-  setInfoAuthor,
-  setInfoLength,
-  setInfoDescription,
-  setInfoThumbnail, 
-  setIsPodcastInfoDisplay, 
-  setInfoDate
+  setPodcastShare,
+  setIsPodcastShareDisplay,
+  setPodcastInfo,
+  setIsPodcastInfoDisplay,
+  isPlayingId,
+  setIsPlayingId,
+  isFavourite,
+  setIsFavourite,
 }) => {
   return (
     <KnowLedgeBlockStyled>
@@ -28,19 +27,14 @@ const KnowLedgeBlock = ({
       <PodcastBlock>
         <PodcastBlockTitle><b>podcast series</b></PodcastBlockTitle>
         <PodcastList
+          isPlayingId={isPlayingId}
+          setIsPlayingId={setIsPlayingId}
+          isFavourite = {isFavourite} 
+          setIsFavourite = {setIsFavourite}
           setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-          setShareTitle={setShareTitle}
-          setShareAuthor={setShareAuthor}
-          setShareLength={setShareLength}
-          setShareImage={setShareImage}
-          setShareUrl={setShareUrl}
-          setInfoTitle={setInfoTitle}
-          setInfoAuthor={setInfoAuthor}
-          setInfoLength={setInfoLength}
-          setInfoDescription={setInfoDescription}
-          setInfoThumbnail = {setInfoThumbnail}
-          setIsPodcastInfoDisplay = {setIsPodcastInfoDisplay}
-          setInfoDate = {setInfoDate}
+          setPodcastShare={setPodcastShare}
+          setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
+          setPodcastInfo={setPodcastInfo}
         />
       </PodcastBlock>
     </KnowLedgeBlockStyled>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   PodcastShareStyled, PodcastShareBlock,
   PodcastShareBlockTitle, PodcastShareBlockContent,
@@ -5,7 +6,7 @@ import {
 } from "../Knowledge.desktop";
 import { Img } from "../../../assets/svg/index";
 import { Icon } from "../../../assets/icon";
-import { useEffect, useState } from "react";
+
 const socialMediaPlatforms = [
   'facebook',
   'twitter',
@@ -18,21 +19,25 @@ const socialMediaPlatforms = [
   'discord',
   'more'
 ];
+
 const PodcastShare = ({
   setIsPodcastShareDisplay,
-  shareTitle,
-  shareAuthor,
-  shareLength,
-  shareImage,
-  shareUrl
+  podcastShare
 }) => {
+  const {
+    title,
+    author,
+    length,
+    image,
+    url,
+  } = podcastShare;
   const [isCopy, setIsCopy] = useState("COPY");
   const platformUrls = {
-    facebook: `https://www.facebook.com/dialog/share?app_id=87741124305&href=${shareUrl}`,
-    twitter: `https://twitter.com/intent/tweet?url=${shareUrl}&text=${encodeURIComponent(shareTitle)}&via=YouTube&related=YouTube,YouTubeTrends,YTCreators`,
-    gmail: `https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&su=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareUrl)}`,
-    reddit: `https://www.reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareTitle)}`,
-    pinterest: `https://www.pinterest.com/pin-builder/?description=${shareTitle}&is_video=true&media=${shareImage}&method=button&url=${encodeURIComponent(shareUrl)}`,
+    facebook: `https://www.facebook.com/dialog/share?app_id=87741124305&href=${url}`,
+    twitter: `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(title)}&via=YouTube&related=YouTube,YouTubeTrends,YTCreators`,
+    gmail: `https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&su=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`,
+    reddit: `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`,
+    pinterest: `https://www.pinterest.com/pin-builder/?description=${title}&is_video=true&media=${image}&method=button&url=${encodeURIComponent(url)}`,
     messenger: "https://www.messenger.com",
     zalo: "https://chat.zalo.me",
     telegram: "https://web.telegram.org/a/",
@@ -40,31 +45,27 @@ const PodcastShare = ({
   };
 
   const handlePlatformClick = (platform) => {
+    if (platform === "more") {
+      navigator.share({ title, url });
+      return;
+    }
     const tempUrl = platformUrls[platform];
-
-    if (!tempUrl) return;
     if (["messenger", "zalo", "telegram", "discord"].includes(platform)) {
       const copyToClipboard = () => {
-        navigator.clipboard.writeText(shareUrl).catch(() => console.log("Error"));
+        navigator.clipboard.writeText(url).catch(() => console.log("Error"));
       };
       copyToClipboard();
-    } else if (platform === "more") {
-      navigator.share({
-        title: shareTitle,
-        url: shareUrl
-      });
-      return;
     }
     window.open(tempUrl, '_blank');
   };
 
   const handleInfoButtonClick = () => {
-    window.open(shareUrl, '_blank');
+    window.open(url, '_blank');
   }
 
   const handleCopyButtonClick = () => {
     setIsCopy("COPIED!");
-    navigator.clipboard.writeText(shareUrl)
+    navigator.clipboard.writeText(url)
       .then()
       .catch(() => console.log("Error"));
   }
@@ -96,15 +97,15 @@ const PodcastShare = ({
         </PodcastShareBlockTitle>
         <PodcastShareBlockContent>
           <div className="blockContentImage">
-            <img src={shareImage}></img>
+            <img src={image}></img>
           </div>
           <div className="blockContentInfoContainer">
             <div className="blockContentInfo">
               <div className="contentInfoTitle">
-                <p className="running-text">{shareTitle}</p>
+                <p className="running-text">{title}</p>
               </div>
-              <p className="contentInfoAuthor">{shareAuthor}</p>
-              <p className="contentInfoLength">{shareLength}</p>
+              <p className="contentInfoAuthor">{author}</p>
+              <p className="contentInfoLength">{length}</p>
               <div
                 className="contentInfoButton"
                 onClick={handleInfoButtonClick}
@@ -138,7 +139,7 @@ const PodcastShare = ({
         </PodcastShareBlockSocial>
 
         <PodcastShareCopyButton>
-          <p>{shareUrl}</p>
+          <p>{url}</p>
           <button onClick={handleCopyButtonClick}>{isCopy}</button>
         </PodcastShareCopyButton>
       </PodcastShareBlock>

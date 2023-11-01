@@ -10,27 +10,24 @@ import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.da
 import { Icon } from "../../../assets/icon";
 
 const PodcastList = ({
-  setIsPodcastShareDisplay, setShareTitle,
-  setShareAuthor, setShareLength, setShareImage, setShareUrl,
-  setInfoTitle,
-  setInfoAuthor,
-  setInfoLength,
-  setInfoDescription,
-  setInfoThumbnail,
-  setIsPodcastInfoDisplay, 
-  setInfoDate
+  setIsPodcastShareDisplay,
+  setPodcastShare,
+  setIsPodcastInfoDisplay,
+  setPodcastInfo,
+  isPlayingId,
+  setIsPlayingId,
+  isFavourite,
+  setIsFavourite,
 }) => {
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [cardId, setCardId] = useState(null);
   const [isHoverId, setIsHoverId] = useState(null);
-  const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: null });
   const [isDisplayArrangeList, setIsDisplayArrangeList] = useState(false);
   const [sortbyValue, setSortbyValue] = useState('Sort By');
   const [podcastType, setPostcastType] = useState(podcastsType[0].title)
   const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
-  const [isFavourite, setIsFavourite] = useState({ id: -1, isFavourite: false })
   const [podcastStatus, setPodcastStatus] = useState({});
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
@@ -97,14 +94,7 @@ const PodcastList = ({
             onClick={() => handleTypeClick(index.title)}
             style={
               index.title === podcastType
-                ? {
-                  backgroundColor: "white",
-                  color: "black",
-                  fontWeight: 700,
-                  transition: "all 0.3s ease",
-                  fontSize: "calc((1.4vw + 1.4vh)/2)",
-                }
-                : {}
+                ? { color: "rgb(4 228 84)", transform: "scale(1.1)" } : {}
             }
           >
             {index.title}
@@ -153,19 +143,10 @@ const PodcastList = ({
             setIsFavourite={setIsFavourite}
             podcastStatus={podcastStatus}
             setPodcastStatus={setPodcastStatus}
-            setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-            setShareTitle={setShareTitle}
-            setShareAuthor={setShareAuthor}
-            setShareLength={setShareLength}
-            setShareImage={setShareImage}
-            setShareUrl={setShareUrl}
             setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
-            setInfoTitle={setInfoTitle}
-            setInfoAuthor={setInfoAuthor}
-            setInfoLength={setInfoLength}
-            setInfoDescription={setInfoDescription}
-            setInfoThumbnail={setInfoThumbnail}
-            setInfoDate = {setInfoDate}
+            setIsPodcastShareDisplay={setIsPodcastShareDisplay}
+            setPodcastShare={setPodcastShare}
+            setPodcastInfo={setPodcastInfo}
           />
         ))}
       </PodcastCardList>

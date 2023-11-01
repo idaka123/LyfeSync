@@ -1,27 +1,25 @@
 import React from "react";
+import { Icon } from "../../../assets/icon";
 import {
-  PodcastTitle,
-  PodcastThumbnails,
-  PodcastLength,
-  StyledPodcastCard,
+  PodcastAdd,
   PodcastCardId,
+  PodcastLength,
   PodcastOption,
   PodcastShare,
-  PodcastAdd
+  PodcastThumbnails,
+  PodcastTitle,
+  StyledPodcastCard,
 } from "../Knowledge.desktop";
-import { Icon } from "../../../assets/icon";
 
 const PodcastCard = ({
-  author, title, thumbnail, length, id, url, description, date, 
+  id, order, title, author, thumbnail, length, url, description, date,
   cardId, setCardId,
   isHoverId, setIsHoverId,
-  isPlayingId, setIsPlayingId, order,
+  isPlayingId, setIsPlayingId,
   podcastsDataFilter, setPodcastsDataFilter,
   setIsFavourite, podcastStatus, setPodcastStatus,
-  setIsPodcastShareDisplay, setShareTitle,
-  setShareAuthor, setShareLength, setShareImage, setShareUrl,
-  setIsPodcastInfoDisplay, setInfoTitle, setInfoAuthor, setInfoLength,
-  setInfoDescription, setInfoThumbnail, setInfoDate
+  setIsPodcastShareDisplay, setPodcastShare,
+  setIsPodcastInfoDisplay, setPodcastInfo,
 }) => {
 
   // Event Handlers
@@ -66,73 +64,92 @@ const PodcastCard = ({
 
   const currentStatus = podcastStatus[id] || { isFavourite: true, isAdded: true };
 
-  const handleShareClick = (title, author, length, thumbnail) => {
+  const handleShareClick = (title, author, length, thumbnail, url) => {
     setIsPodcastShareDisplay(true);
-    setShareTitle(title);
-    setShareAuthor(author);
-    setShareLength(length);
-    setShareImage(thumbnail);
-    setShareUrl(url);
+    const newShare = {
+      title: title,
+      author: author,
+      length: length,
+      image: thumbnail,
+      url: url,
+    }
+    setPodcastShare(newShare);
   }
 
-  const handleInfoClick = (title, author, length, thumbnail, description, date) => {
+  const handleInfoClick = (id, title, author, length, thumbnail, description, date) => {
     setIsPodcastInfoDisplay(true);
-    setInfoTitle(title);
-    setInfoAuthor(author);
-    setInfoLength(length);
-    setInfoThumbnail(thumbnail);
-    setInfoDescription(description);
-    setInfoDate(date)
+    const newInfo = {
+      id: id,
+      title: title,
+      author: author,
+      length: length,
+      thumbnail: thumbnail,
+      description: description,
+      date: date,
+    }
+    setPodcastInfo(newInfo);
   }
 
   // Styles
-  const cardStyle = isPlayingId.id === id
+  const cardStyled = isPlayingId.id === id
     ? { backgroundColor: "black" }
     : (cardId === id) ? { border: "2px solid black" } : {};
 
-  const iconStyle = isPlayingId.id === id ? { color: "#ffffffb8" } : {};
-  const titleStyle = isPlayingId.id === id ? { color: "#ffffffb8" } : {};
-
+  const optionIconStyled = isPlayingId.id === id ? { color: "white" } : isHoverId === id
+    ? { color: "#d8d7d7" }
+    : {};
+  const podcastTitleStyled = isPlayingId.id === id
+    ? { color: "rgb(30,215,96)" }
+    : isHoverId === id
+      ? { color: "#d8d7d7" }
+      : {};
+  const podcastAuthorStyled = isPlayingId.id === id ? { color: "white" } : {};
+  const podcastIdStyled = isPlayingId.id === id
+    ? { color: "rgb(30,215,96)" }
+    : isHoverId === id
+      ? { color: "#d8d7d7" }
+      : {};
   return (
     <StyledPodcastCard
       tabIndex="0"
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={cardStyle}
+      style={cardStyled}
     >
-      <PodcastCardId>{order}</PodcastCardId>
+      <PodcastCardId style={podcastIdStyled}>{order}</PodcastCardId>
       <PodcastThumbnails onClick={handlePlaying}>
         {isPlayingId.id === id
           ? (isHoverId === id
-            ? (isPlayingId.isPlaying ? <Icon.pause style={iconStyle} /> : <Icon.play style={iconStyle} />)
-            : (isPlayingId.isPlaying ? <img src="https://i.gifer.com/Nt6v.gif" alt="playing" /> : <Icon.play style={iconStyle} />)
+            ? (isPlayingId.isPlaying ? <Icon.pause /> : <Icon.play />)
+            : (isPlayingId.isPlaying ? <img src="https://i.gifer.com/Nt6v.gif" alt="playing" /> : <Icon.play />)
           )
           : (isHoverId === id ? <Icon.play /> : <img src={thumbnail} alt="thumbnail" />)
         }
       </PodcastThumbnails>
       <PodcastTitle
-        style={titleStyle}
-        onClick={() => handleInfoClick(title, author, length, thumbnail, description, date)}
+        style={podcastTitleStyled}
+        onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date)}
       >
         <p>{title}</p>
       </PodcastTitle>
       <PodcastLength
-        onClick={() => handleInfoClick(title, author, length, thumbnail, description, date)}
+        onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date)}
+        style={podcastAuthorStyled}
       >
         {`${author} | ${length}`}
       </PodcastLength>
       <PodcastOption>
         <PodcastAdd>
           {currentStatus.isAdded
-            ? <Icon.add style={iconStyle} className="iconAdd" onClick={() => handleAddClick(id)} />
-            : <Icon.check style={iconStyle} className="iconCheck" onClick={() => handleRemoveClick(id)} />
+            ? <Icon.add style={optionIconStyled} className="iconAdd" onClick={() => handleAddClick(id)} />
+            : <Icon.check style={optionIconStyled} className="iconCheck" onClick={() => handleRemoveClick(id)} />
           }
         </PodcastAdd>
         <PodcastShare>
           <Icon.share
-            style={iconStyle}
-            onClick={() => { handleShareClick(title, author, length, thumbnail) }}
+            style={optionIconStyled}
+            onClick={() => { handleShareClick(title, author, length, thumbnail, url) }}
           />
         </PodcastShare>
       </PodcastOption>

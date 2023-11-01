@@ -371,7 +371,7 @@ export const podcastsData = [
     thumbnail: "https://i.scdn.co/image/ab6765630000ba8ade85c9dd1b09091210558e7f",
     length: "12 min 23 sec",
     author: "Spiderum Podcasts",
-    date: "Oct 26 2023", 
+    date: "Oct 26 2023",
     type: ["Tất cả", "Giáo dục"],
     description: `Đầu xuân năm 1870, hai vợ chồng Luigi Giovanni và Maria Virginia De Martini đặt chân tới San Jose,
      California sau quãng đường dài gần 10.000 cây số từ ngôi làng nhỏ Acreeto, nước Ý. Chỉ vài tháng sau đó, cậu bé 
@@ -381,7 +381,8 @@ export const podcastsData = [
       chính là Bank of America (Ngân hàng Hoa Kỳ), và ông đã nắm giữ cương vị Chủ tịch Hội đồng quản trị trong suốt 30 năm 
       cho tới khi nghỉ hưu. Bank of America chính là ngân hàng cho ra mắt thẻ tín dụng đầu tiên trên thế giới với tên gọi 
       BankAmericard, tiền thân của thẻ VISA ngày nay. Thông qua bài viết của tác giả "Thành Long" 
-      đã được đăng tải trên Website Spiderum, chúng ta cùng tìm hiểu toàn bộ quá trình hình thành của Visa nhé.`,
+      đã được đăng tải trên Website Spiderum, chúng ta cùng tìm hiểu toàn bộ quá trình hình thành của Visa nhé.
+      `,
   },
   {
     id: 2,

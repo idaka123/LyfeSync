@@ -4,56 +4,53 @@ import PodcastShare from "./Components/PodcastShare";
 import PodcastInfo from "./Components/PodcastInfo";
 import { KnowLedgeStyled } from "./Knowledge.desktop";
 const Knowledge = () => {
+  const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: null });
+  const [isFavourite, setIsFavourite] = useState({ id: -1, isFavourite: false })
   const [isPodcastShareDisplay, setIsPodcastShareDisplay] = useState(false);
-  const [shareTitle, setShareTitle] = useState(null);
-  const [shareAuthor, setShareAuthor] = useState(null);
-  const [shareLength, setShareLength] = useState(null);
-  const [shareImage, setShareImage] = useState(null);
-  const [shareUrl, setShareUrl] = useState(null);
+  const [podcastShare, setPodcastShare] = useState({
+    title: null,
+    author: null,
+    length: null,
+    image: null,
+    url: null,
+  })
   const [isPodcastInfoDisplay, setIsPodcastInfoDisplay] = useState(false);
-  const [infoTitle, setInfoTitle] = useState(null);
-  const [infoAuthor, setInfoAuthor] = useState(null);
-  const [infoLength, setInfoLength] = useState(null);
-  const [infoDescription, setInfoDescription] = useState(null);
-  const [infoThumbnail, setInfoThumbnail] = useState(null);
-  const [infoDate, setInfoDate] = useState(null);
+  const [podcastInfo, setPodcastInfo] = useState({
+    id: null,
+    title: null,
+    author: null,
+    length: null,
+    description: null,
+    thumbnail: null,
+    date: null,
+  })
   return (
     <KnowLedgeStyled>
       {isPodcastShareDisplay &&
         < PodcastShare
           setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-          shareTitle={shareTitle}
-          shareAuthor={shareAuthor}
-          shareLength={shareLength}
-          shareImage={shareImage}
-          shareUrl={shareUrl}
+          podcastShare={podcastShare}
         />
       }
       {isPodcastInfoDisplay &&
         <PodcastInfo
+          isPlayingId={isPlayingId}
+          setIsPlayingId={setIsPlayingId}
+          isFavourite={isFavourite}
+          setIsFavourite={setIsFavourite}
           setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
-          infoTitle={infoTitle}
-          infoAuthor={infoAuthor}
-          infoLength={infoLength}
-          infoDescription={infoDescription}
-          infoThumbnail={infoThumbnail}
-          infoDate={infoDate}
+          podcastInfo={podcastInfo}
         />
       }
       <KnowLedgeBlock
+        isPlayingId={isPlayingId}
+        setIsPlayingId={setIsPlayingId}
+        isFavourite={isFavourite}
+        setIsFavourite={setIsFavourite}
         setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-        setShareTitle={setShareTitle}
-        setShareAuthor={setShareAuthor}
-        setShareLength={setShareLength}
-        setShareImage={setShareImage}
-        setShareUrl={setShareUrl}
+        setPodcastShare={setPodcastShare}
         setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
-        setInfoTitle={setInfoTitle}
-        setInfoAuthor={setInfoAuthor}
-        setInfoLength={setInfoLength}
-        setInfoDescription={setInfoDescription}
-        setInfoThumbnail={setInfoThumbnail}
-        setInfoDate={setInfoDate}
+        setPodcastInfo={setPodcastInfo}
       />
     </KnowLedgeStyled>
   );
