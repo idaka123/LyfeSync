@@ -1,24 +1,42 @@
-import React, { useRef, useState, useEffect } from "react";
+// React related imports
+import React, { useRef, useState, useEffect, useContext } from 'react';
+
+// Component imports
 import {
-  StyledPodcastList, PodcastListType, PodcastListTypeElement,
-  PodcastArrange, PodcastArrangeList, PodcastArrangeListElement,
-  SortBy, PodcastCardList, SortByIcon, PodcastArrangeTitle, PodcastArrangeTitleIcon
+  StyledPodcastList,
+  PodcastListType,
+  PodcastListTypeElement,
+  PodcastArrange,
+  PodcastArrangeList,
+  PodcastArrangeListElement,
+  SortBy,
+  PodcastCardList,
+  PodcastEmptyList,
+  SortByIcon,
+  PodcastArrangeTitle,
+  PodcastArrangeTitleIcon
 } from "../Knowledge.desktop";
-import { customNumberSort, customStringSort } from "../utils/customSort";
 import PodcastCard from "./PodcastCard";
 import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
+import { KnowledgeContext } from "../Knowledge";
+
+// Utility and helper function imports
+import { customNumberSort, customStringSort } from "../utils/customSort";
+
+// Asset imports
 import { Icon } from "../../../assets/icon";
 
+
 const PodcastList = ({
-  setIsPodcastShareDisplay,
-  setPodcastShare,
-  setIsPodcastInfoDisplay,
-  setPodcastInfo,
-  isPlayingId,
-  setIsPlayingId,
-  isFavourite,
-  setIsFavourite,
 }) => {
+  const {
+    isPlayingId, setIsPlayingId, isFavourite, setIsFavourite,
+    podcastsDataFilter, setPodcastsDataFilter,
+    podcastStatus, setPodcastStatus, podcastShare, setPodcastShare,
+    setIsPodcastShareDisplay, podcastInfo, setPodcastInfo,
+    setIsPodcastInfoDisplay,
+  } = useContext(KnowledgeContext);
+
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -26,9 +44,8 @@ const PodcastList = ({
   const [isHoverId, setIsHoverId] = useState(null);
   const [isDisplayArrangeList, setIsDisplayArrangeList] = useState(false);
   const [sortbyValue, setSortbyValue] = useState('Sort By');
-  const [podcastType, setPostcastType] = useState(podcastsType[0].title)
-  const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
-  const [podcastStatus, setPodcastStatus] = useState({});
+  const [podcastType, setPostcastType] = useState(podcastsType[0].title);
+
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
     setIsDragging(true);
@@ -76,8 +93,9 @@ const PodcastList = ({
     }
 
     setPodcastsDataFilter(filterdata);
+
     return () => { }
-  }, [podcastType, sortbyValue, podcastStatus])
+  }, [podcastType, sortbyValue, podcastStatus]);
 
   return (
     <StyledPodcastList>
@@ -125,32 +143,37 @@ const PodcastList = ({
           </PodcastArrangeList>
         )}
       </PodcastArrange>
-      <PodcastCardList>
-        {podcastsDataFilter.map((value, index) => (
-          <PodcastCard
-            key={value.id}
-            order={index + 1}
-            {...value}
-            podcastsDataFilter={podcastsDataFilter}
-            setPodcastsDataFilter={setPodcastsDataFilter}
-            cardId={cardId}
-            setCardId={setCardId}
-            isHoverId={isHoverId}
-            setIsHoverId={setIsHoverId}
-            isPlayingId={isPlayingId}
-            setIsPlayingId={setIsPlayingId}
-            isFavourite={isFavourite}
-            setIsFavourite={setIsFavourite}
-            podcastStatus={podcastStatus}
-            setPodcastStatus={setPodcastStatus}
-            setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
-            setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-            setPodcastShare={setPodcastShare}
-            setPodcastInfo={setPodcastInfo}
-          />
-        ))}
-      </PodcastCardList>
-    </StyledPodcastList >
+      {podcastsDataFilter.length !== 0 ?
+        <PodcastCardList>
+          {podcastsDataFilter.map((value, index) => (
+            <PodcastCard
+              key={value.id}
+              order={index + 1}
+              {...value}
+              cardId={cardId}
+              setCardId={setCardId}
+              isHoverId={isHoverId}
+              setIsHoverId={setIsHoverId}
+              isPlayingId={isPlayingId}
+              setIsPlayingId={setIsPlayingId}
+              isFavourite={isFavourite}
+              setIsFavourite={setIsFavourite}
+              podcastsDataFilter={podcastsDataFilter}
+              setPodcastsDataFilter={setPodcastsDataFilter}
+              podcastStatus={podcastStatus}
+              setPodcastStatus={setPodcastStatus}
+              podcastShare={podcastShare}
+              setPodcastShare={setPodcastShare}
+              setIsPodcastShareDisplay={setIsPodcastShareDisplay}
+              podcastInfo={podcastInfo}
+              setPodcastInfo={setPodcastInfo}
+              setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
+            />
+          ))}
+        </PodcastCardList>
+        : <PodcastEmptyList>Chưa có podcast nào trong mục này !</PodcastEmptyList>
+      }
+    </StyledPodcastList>
   );
 }
 

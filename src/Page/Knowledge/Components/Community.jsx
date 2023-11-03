@@ -1,10 +1,20 @@
+// React related imports
 import React, { useEffect, useRef, useState } from "react";
+
+// Library imports
 import 'animate.css';
+
+// Component imports
 import { CommunityBlockContent, CommunityBlockTitle } from "../Knowledge.desktop";
+
+// Data imports
 import { quotesData } from "../Knowledge.data";
+
+// Utility or helper function imports
 import { ANIMATIONS } from "../utils/animationConstants";
 import updateContent from "../utils/updateContent";
 import random from "../utils/random";
+
 
 const Community = () => {
   const { FLIP_IN, FLIP_OUT } = ANIMATIONS;

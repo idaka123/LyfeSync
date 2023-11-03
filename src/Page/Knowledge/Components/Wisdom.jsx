@@ -1,12 +1,21 @@
-import React from "react";
+// React related imports
+import React, { useEffect, useState } from "react";
+
+// Component imports
 import { WisdomBlockTitle, WisdomBlockContent } from "../Knowledge.desktop";
+
+// Data and utility imports
 import { wisdomsData } from "../Knowledge.data";
 import random from "../utils/random";
+
 
 const Wisdom = () => {
   const maxWisdom = 13;
   const minWisdom = 0;
-  const wisdom = wisdomsData[random(maxWisdom, minWisdom)];
+  const [wisdom, setWisdom] = useState(wisdomsData[random(maxWisdom, minWisdom)])
+  useEffect(() => {
+    setWisdom(wisdomsData[random(maxWisdom, minWisdom)]);
+  }, [  ]);
 
   return (
     <>

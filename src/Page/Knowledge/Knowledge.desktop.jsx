@@ -216,6 +216,22 @@ export const PodcastCardList = styled.div`
   }
 `;
 
+export const PodcastEmptyList = styled.p`
+  position: relative;
+  grid-area: 3/1/4/2;
+  height: 100%;
+  width: 100%;
+  border-radius: calc((2vw + 2vh)/2);
+  font-size: calc((1.75vw + 1.75vh)/2);
+  border: 2px solid #cbcbcb;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  font-style: italic;
+  font-weight: bold;
+  user-select: none;
+`
+
 export const PodcastThumbnails = styled.div`
   grid-area: 1/2/3/3;
   img {
@@ -297,7 +313,7 @@ export const PodcastAdd = styled.div`
       cursor: pointer;
     }
   }
-  .iconAdd {
+  .iconLove {
     color: black;
     &:hover{
       color: rgb(30,215,96);
@@ -542,6 +558,7 @@ export const PodcastShareBlockContent = styled.div`
     align-items: center;
     color: black;
     margin-right: 5%;
+    color: white; 
 
     .blockContentInfo {
       width: 100%;
@@ -579,7 +596,7 @@ export const PodcastShareBlockContent = styled.div`
       .contentInfoAuthor {
         height: 14.5%;
         font-size: calc((1.5vw + 1.5vh)/2);
-        color: #000000bf;
+/*         color: #000000bf; */
         font-weight: bold;
         user-select: none;
       }
@@ -587,7 +604,7 @@ export const PodcastShareBlockContent = styled.div`
       .contentInfoLength {
         height: 14.5%;
         font-size: calc((1.25vw + 1.25vh)/2);
-        color: #000000bf;
+/*         color: #000000bf; */
         font-weight: bold;
         user-select: none;
       }
@@ -596,11 +613,12 @@ export const PodcastShareBlockContent = styled.div`
         height: 30%;
         display: flex; 
         justify-content: end;
-        align-items: center; 
+        align-items: end; 
         
         p {
-          background-color: rgb(155,155,147);
-          color: #ffffffeb;
+          background-color: white; 
+          color:  #000000bf;;
+          font-weight: bold;
           height: calc((3vw + 3vh)/2);
           width: calc((8.75vw + 8.75vh)/2);
           border-radius: calc((1.1vw + 1.1vh)/2);
@@ -614,9 +632,8 @@ export const PodcastShareBlockContent = styled.div`
           &:hover {
             transition: all 0.3s ease;
             transform: scale(1.05);
-            color: white;
+            color: black;
             cursor: pointer;
-            color: white;
           }
         }
       }
@@ -850,11 +867,12 @@ export const PodcastInfoBlockDescription = styled.div`
    .downloadButton {
      width: calc((2vw + 2vh)/2);
      height: calc((2vw + 2vh)/2);
-     border: 3px solid rgb(167,167,167);
+     border: 2.5px solid rgb(167,167,167);
      border-radius: 50%;
      display: flex; 
      justify-content: center; 
      align-items: center;
+     transform-origin: center;
      margin-right: calc((1.25vw + 1.25vh)/2);
      
      .download {
@@ -863,30 +881,47 @@ export const PodcastInfoBlockDescription = styled.div`
      }
      
      &:hover {
+       transition: all 0.3s ease;     
        cursor: pointer;
        transform: scale(1.1);
-       transition: all 0.3s ease; 
+       border-color: white;
+       .download{
+        color: white;
+       }
      }
    }
 
-   .addButton{
+   .loveButton{
     width: calc((2vw + 2vh)/2);
     height: calc((2vw + 2vh)/2);
-    border: 3px solid rgb(167,167,167);
+    border: 2.5px solid rgb(167,167,167);
     border-radius: 50%;
     display: flex; 
     justify-content: center; 
     align-items: center;
-    
-    .add{
+    transform-origin: center;
+  
+    .love{
       font-size: calc((1.25vw + 1.25vh)/2);
       color: rgb(167,167,167);
     }
 
+    .unLove{
+      font-size: calc((1.25vw + 1.25vh)/2);
+      color: rgb(30,215,96);
+    }
+
     &:hover{
+      transition: all 0.3s ease;     
       cursor: pointer;
       transform: scale(1.1);
-      transition: all 0.3s ease; 
+      border-color: white;
+      .love{
+        color: white;
+      }
+      .unLove{
+        color: rgb(30,215,96);
+      }
     }
    }
  }

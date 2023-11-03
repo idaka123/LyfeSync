@@ -1,19 +1,33 @@
+// React related imports
+import React, { useContext } from "react";
+
+// Component imports
 import {
   PodcastInfoStyled,
   PodcastInfoBlock,
   PodcastInfoBlockTitle,
   PodcastInfoBlockDescription
 } from "../Knowledge.desktop";
+import { KnowledgeContext } from "../Knowledge";
+
+// Asset imports
 import { Icon } from "../../../assets/icon";
 
+
 const PodcastInfo = ({
-  setIsPodcastInfoDisplay,
-  podcastInfo,
-  isPlayingId,
-  setIsPlayingId,
-  isFavourite,
-  setIsFavourite,
 }) => {
+  const {
+    isPlayingId,
+    setIsPlayingId,
+    podcastsDataFilter,
+    setPodcastsDataFilter,
+    podcastStatus,
+    setPodcastStatus,
+    setIsFavourite,
+    setIsPodcastInfoDisplay,
+    podcastInfo,
+  } = useContext(KnowledgeContext);
+
   const {
     id,
     title,
@@ -22,23 +36,65 @@ const PodcastInfo = ({
     description,
     thumbnail,
     date,
+    downloadUrl
   } = podcastInfo;
 
   const handleCloseInfo = () => {
     setIsPodcastInfoDisplay(false);
-  }
+  };
 
   const handlePlaying = () => setIsPlayingId(prev => ({
     isPlaying: prev.id !== id || !prev.isPlaying,
     id
   }));
 
+  const handleDownload = () => {
+    window.open(downloadUrl);
+  };
+
+  const handleAddClick = (id) => {
+    const updatedData = [...podcastsDataFilter];
+    const podcastToUpdate = updatedData.find(podcast => podcast.id === id);
+
+    if (podcastToUpdate) {
+      podcastToUpdate.type = [...podcastToUpdate.type, "Yêu thích"];
+    }
+
+    setPodcastsDataFilter(updatedData);
+
+    setPodcastStatus({
+      ...podcastStatus,
+      [id]: { isFavourite: false, isAdded: false }
+    });
+
+    setIsFavourite({ id: id, isFavourite: false });
+  };
+
+  const handleRemoveClick = (id) => {
+    const updatedData = [...podcastsDataFilter];
+    const podcastToUpdate = updatedData.find(podcast => podcast.id === id);
+
+    if (podcastToUpdate) {
+      podcastToUpdate.type = podcastToUpdate.type.filter(type => type !== "Yêu thích");
+    }
+
+    setPodcastsDataFilter(updatedData);
+
+    setPodcastStatus({
+      ...podcastStatus,
+      [id]: { isFavourite: true, isAdded: true }
+    });
+  };
+
+  const currentStatus = podcastStatus[id] || { isFavourite: true, isAdded: true };
+
   return (
     <PodcastInfoStyled>
       <PodcastInfoBlock>
         <div
           onClick={handleCloseInfo}
-          className="closeButton">
+          className="closeButton"
+        >
           <Icon.x className="close"></Icon.x>
         </div>
         <PodcastInfoBlockTitle>
@@ -63,11 +119,14 @@ const PodcastInfo = ({
                 : < Icon.play className="play"></Icon.play>
               }
             </div>
-            <div className="downloadButton">
+            <div className="downloadButton" onClick={handleDownload}>
               <Icon.download className="download"></Icon.download>
             </div>
-            <div className="addButton">
-              <Icon.addOutline className="add"></Icon.addOutline>
+            <div className="loveButton">
+              {currentStatus.isAdded
+                ? <Icon.addOutline className="love" onClick={() => handleAddClick(id)} />
+                : <Icon.check className="unLove" onClick={() => handleRemoveClick(id)} />
+              }
             </div>
           </div>
           <div className="descriptionTitle">

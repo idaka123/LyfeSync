@@ -8,14 +8,6 @@ import {
 } from "../Knowledge.desktop";
 
 const KnowLedgeBlock = ({
-  setPodcastShare,
-  setIsPodcastShareDisplay,
-  setPodcastInfo,
-  setIsPodcastInfoDisplay,
-  isPlayingId,
-  setIsPlayingId,
-  isFavourite,
-  setIsFavourite,
 }) => {
   return (
     <KnowLedgeBlockStyled>
@@ -26,16 +18,7 @@ const KnowLedgeBlock = ({
       </QuoteBlock>
       <PodcastBlock>
         <PodcastBlockTitle><b>podcast series</b></PodcastBlockTitle>
-        <PodcastList
-          isPlayingId={isPlayingId}
-          setIsPlayingId={setIsPlayingId}
-          isFavourite = {isFavourite} 
-          setIsFavourite = {setIsFavourite}
-          setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-          setPodcastShare={setPodcastShare}
-          setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
-          setPodcastInfo={setPodcastInfo}
-        />
+        <PodcastList />
       </PodcastBlock>
     </KnowLedgeBlockStyled>
   );

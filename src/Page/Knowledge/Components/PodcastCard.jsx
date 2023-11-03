@@ -1,64 +1,82 @@
+// React related imports
 import React from "react";
-import { Icon } from "../../../assets/icon";
+
+// Component imports
 import {
-  PodcastAdd,
+  StyledPodcastCard,
   PodcastCardId,
-  PodcastLength,
-  PodcastOption,
-  PodcastShare,
   PodcastThumbnails,
   PodcastTitle,
-  StyledPodcastCard,
+  PodcastLength,
+  PodcastOption,
+  PodcastAdd,
+  PodcastShare,
 } from "../Knowledge.desktop";
 
-const PodcastCard = ({
-  id, order, title, author, thumbnail, length, url, description, date,
-  cardId, setCardId,
-  isHoverId, setIsHoverId,
-  isPlayingId, setIsPlayingId,
-  podcastsDataFilter, setPodcastsDataFilter,
-  setIsFavourite, podcastStatus, setPodcastStatus,
-  setIsPodcastShareDisplay, setPodcastShare,
-  setIsPodcastInfoDisplay, setPodcastInfo,
-}) => {
+// Asset imports
+import { Icon } from "../../../assets/icon";
 
+
+const PodcastCard = ({
+  id,
+  order,
+  title,
+  author,
+  thumbnail,
+  length,
+  url,
+  description,
+  date,
+  downloadUrl,
+  cardId,
+  setCardId,
+  isHoverId,
+  setIsHoverId,
+  isPlayingId,
+  setIsPlayingId,
+  podcastsDataFilter,
+  setPodcastsDataFilter,
+  setIsFavourite,
+  podcastStatus,
+  setPodcastStatus,
+  setIsPodcastShareDisplay,
+  setPodcastShare,
+  setIsPodcastInfoDisplay,
+  setPodcastInfo,
+}) => {
   // Event Handlers
   const handleMouseEnter = () => setIsHoverId(id);
   const handleMouseLeave = () => setIsHoverId(-1);
   const handleClick = () => setCardId(id);
   const handlePlaying = () => setIsPlayingId(prev => ({
     isPlaying: prev.id !== id || !prev.isPlaying,
-    id
+    id,
   }));
-  const handleAddClick = (id) => {
+
+  const handleAddClick = id => {
     const updatedData = [...podcastsDataFilter];
     const podcastToUpdate = updatedData.find(podcast => podcast.id === id);
     if (podcastToUpdate) {
       podcastToUpdate.type = [...podcastToUpdate.type, "Yêu thích"];
     }
-
     setPodcastsDataFilter(updatedData);
-
     setPodcastStatus({
       ...podcastStatus,
-      [id]: { isFavourite: false, isAdded: false }
+      [id]: { isFavourite: false, isAdded: false },
     });
-
     setIsFavourite({ id: id, isFavourite: false });
   };
 
-  const handleRemoveClick = (id) => {
+  const handleRemoveClick = id => {
     const updatedData = [...podcastsDataFilter];
     const podcastToUpdate = updatedData.find(podcast => podcast.id === id);
     if (podcastToUpdate) {
       podcastToUpdate.type = podcastToUpdate.type.filter(type => type !== "Yêu thích");
     }
-
     setPodcastsDataFilter(updatedData);
-
     setPodcastStatus({
       ...podcastStatus,
-      [id]: { isFavourite: true, isAdded: true }
+      [id]: { isFavourite: true, isAdded: true },
     });
   };
 
@@ -66,49 +84,29 @@ const PodcastCard = ({
 
   const handleShareClick = (title, author, length, thumbnail, url) => {
     setIsPodcastShareDisplay(true);
-    const newShare = {
-      title: title,
-      author: author,
-      length: length,
-      image: thumbnail,
-      url: url,
-    }
-    setPodcastShare(newShare);
-  }
+    setPodcastShare({ title, author, length, image: thumbnail, url });
+  };
 
-  const handleInfoClick = (id, title, author, length, thumbnail, description, date) => {
+  const handleInfoClick = (id, title, author, length, thumbnail, description, date, downloadUrl) => {
     setIsPodcastInfoDisplay(true);
-    const newInfo = {
-      id: id,
-      title: title,
-      author: author,
-      length: length,
-      thumbnail: thumbnail,
-      description: description,
-      date: date,
-    }
-    setPodcastInfo(newInfo);
-  }
+    setPodcastInfo({ id, title, author, length, thumbnail, description, date, downloadUrl });
+  };
 
   // Styles
-  const cardStyled = isPlayingId.id === id
-    ? { backgroundColor: "black" }
-    : (cardId === id) ? { border: "2px solid black" } : {};
+  const cardStyled = isPlayingId.id === id ? { backgroundColor: "black" } :
+    cardId === id ? { border: "2px solid black" } : {};
 
-  const optionIconStyled = isPlayingId.id === id ? { color: "white" } : isHoverId === id
-    ? { color: "#d8d7d7" }
-    : {};
-  const podcastTitleStyled = isPlayingId.id === id
-    ? { color: "rgb(30,215,96)" }
-    : isHoverId === id
-      ? { color: "#d8d7d7" }
-      : {};
+  const optionIconStyled = isPlayingId.id === id ? { color: "white" } :
+    isHoverId === id ? { color: "#d8d7d7" } : {};
+
+  const podcastTitleStyled = isPlayingId.id === id ? { color: "rgb(30,215,96)" } :
+    isHoverId === id ? { color: "#d8d7d7" } : {};
+
   const podcastAuthorStyled = isPlayingId.id === id ? { color: "white" } : {};
-  const podcastIdStyled = isPlayingId.id === id
-    ? { color: "rgb(30,215,96)" }
-    : isHoverId === id
-      ? { color: "#d8d7d7" }
-      : {};
+
+  const podcastIdStyled = isPlayingId.id === id ? { color: "rgb(30,215,96)" } :
+    isHoverId === id ? { color: "#d8d7d7" } : {};
+
   return (
     <StyledPodcastCard
       tabIndex="0"
@@ -119,38 +117,36 @@ const PodcastCard = ({
     >
       <PodcastCardId style={podcastIdStyled}>{order}</PodcastCardId>
       <PodcastThumbnails onClick={handlePlaying}>
-        {isPlayingId.id === id
-          ? (isHoverId === id
-            ? (isPlayingId.isPlaying ? <Icon.pause /> : <Icon.play />)
-            : (isPlayingId.isPlaying ? <img src="https://i.gifer.com/Nt6v.gif" alt="playing" /> : <Icon.play />)
+        {isPlayingId.id === id ? (
+          isHoverId === id ? (
+            isPlayingId.isPlaying ? <Icon.pause /> : <Icon.play />
+          ) : isPlayingId.isPlaying ? (
+            <img src="https://i.gifer.com/Nt6v.gif" alt="playing" />
+          ) : (
+            <Icon.play />
           )
-          : (isHoverId === id ? <Icon.play /> : <img src={thumbnail} alt="thumbnail" />)
-        }
+        ) : isHoverId === id ? (
+          <Icon.play />
+        ) : (
+          <img src={thumbnail} alt="thumbnail" />
+        )}
       </PodcastThumbnails>
-      <PodcastTitle
-        style={podcastTitleStyled}
-        onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date)}
-      >
+      <PodcastTitle style={podcastTitleStyled} onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date, downloadUrl)}>
         <p>{title}</p>
       </PodcastTitle>
-      <PodcastLength
-        onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date)}
-        style={podcastAuthorStyled}
-      >
+      <PodcastLength style={podcastAuthorStyled} onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date, downloadUrl)}>
         {`${author} | ${length}`}
       </PodcastLength>
       <PodcastOption>
         <PodcastAdd>
-          {currentStatus.isAdded
-            ? <Icon.add style={optionIconStyled} className="iconAdd" onClick={() => handleAddClick(id)} />
-            : <Icon.check style={optionIconStyled} className="iconCheck" onClick={() => handleRemoveClick(id)} />
-          }
+          {currentStatus.isAdded ? (
+            <Icon.love style={optionIconStyled} className="iconLove" onClick={() => handleAddClick(id)} />
+          ) : (
+            <Icon.checkCircle style={optionIconStyled} className="iconCheck" onClick={() => handleRemoveClick(id)} />
+          )}
         </PodcastAdd>
         <PodcastShare>
-          <Icon.share
-            style={optionIconStyled}
-            onClick={() => { handleShareClick(title, author, length, thumbnail, url) }}
-          />
+          <Icon.share style={optionIconStyled} onClick={() => handleShareClick(title, author, length, thumbnail, url)} />
         </PodcastShare>
       </PodcastOption>
     </StyledPodcastCard>

@@ -1,10 +1,20 @@
+// React related imports
 import React, { useRef, useState, useEffect } from "react";
+
+// Library imports
 import 'animate.css';
+
+// Data imports
 import { tipsData } from "../Knowledge.data";
+
+// Utility or helper function imports
 import { ANIMATIONS } from "../utils/animationConstants";
 import random from "../utils/random";
 import updateContent from "../utils/updateContent";
+
+// Component imports
 import { TipBlock, TipImage, TipParagraph, TipTitle } from "../Knowledge.desktop";
+
 
 const Tip = () => {
   const { BOUNCE_IN, BOUNCE_OUT } = ANIMATIONS;

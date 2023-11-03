@@ -383,6 +383,7 @@ export const podcastsData = [
       BankAmericard, tiền thân của thẻ VISA ngày nay. Thông qua bài viết của tác giả "Thành Long" 
       đã được đăng tải trên Website Spiderum, chúng ta cùng tìm hiểu toàn bộ quá trình hình thành của Visa nhé.
       `,
+    downloadUrl: `https://dl233.dlmate21.online/?file=M3R4SUNiN3JsOHJ6WWQ2a3NQS1Y5ZGlxVlZIOCtyZ1FzSkFmbGxVQklPNXVoOFlia3NmelpwRnJBT3dyaUsvelZQeDJzQitNWC9mQWRTemQ4OEYzQjFEU3N2ZHU4aTNPdU1zRERZd29CMVBkeXFPQnRIUXZyUTYrY05DSU51NFRUeWN3dDBnbTluZlc3dENSbXpPenZUaU85QWlpUEN0QitROERlTmFEdEw0WTIyR0FRL2pxMU50T21TL2F4OHNNK05MWTdGRDRpS1o3bTQ4d2Z4UjlQWjFOaXR6ejF2ekptbGNZbEpGQm54K0NzTzJ6RW9zM0dlRE1YenBnYldkYno3YXFEajAwM21nSXIwK295YXdkN1M0RVlmTXo3WHFrOE9Ec2NqYVZlNStuR2NqY2M3bms5NUtxcE9wb3BVU2MvN0tYeXM0WXhVNjBYcFg3UklZPQ%3D%3D`
   },
   {
     id: 2,

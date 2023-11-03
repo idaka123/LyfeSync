@@ -16,7 +16,7 @@ import { SiGumtree } from 'react-icons/si'
 import { RiCloseFill } from 'react-icons/ri'
 import { BiLibrary } from 'react-icons/bi';
 import { FaShare } from 'react-icons/fa';
-import { MdAddCircle } from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md';
 import { BiCheckCircle } from 'react-icons/bi';
 import { ImLibrary } from 'react-icons/im';
 import { FaFacebookMessenger } from 'react-icons/fa';
@@ -26,6 +26,7 @@ import { BiLogoGmail } from 'react-icons/bi';
 import { MdMoreHoriz } from 'react-icons/md'
 import { BiSolidDownload } from 'react-icons/bi';
 import { MdAdd } from 'react-icons/md';
+import { BiCheck } from 'react-icons/bi';
 export const Icon = {
     passHide: AiFillEyeInvisible,
     passUnHide: AiFillEye,
@@ -56,14 +57,15 @@ export const Icon = {
     play: BsFillPlayFill,
     pause: MdPause,
     share: FaShare,
-    add: MdAddCircle,
+    love: MdFavorite,
     addOutline: MdAdd,
-    check: BiCheckCircle,
+    checkCircle: BiCheckCircle,
+    check: BiCheck,
     library: ImLibrary,
     facebook: FaFacebook,
     messenger: FaFacebookMessenger,
     instagram: FaInstagram,
     gmail: BiLogoGmail,
-    more: MdMoreHoriz, 
+    more: MdMoreHoriz,
     download: BiSolidDownload,
 }
