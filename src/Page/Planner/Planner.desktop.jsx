@@ -6,16 +6,18 @@ import Button from "../../Component/Button";
 import { Fragment, useContext, useState } from "react";
 import TaskContext from "../../Context/Task.context";
 import TaskCard from "./card/TaskCard";
+import ModalContext from "../../Context/Modal.conetxt";
 
 const PlannerDesktop = (p) => {
-    const { openModalData } = p
+    const {  } = p
     const section = Object.keys(plannerData)
     const { task, loading, setTask }  = useContext(TaskContext)
     const [dateZone, setDateZone] = useState("today")
+    const { openModal }  = useContext(ModalContext)
 
     const onClickCreateTaskbtn = e => {
         const name = e.target.getAttribute("name")
-        openModalData(name)
+        openModal(name)
     }
 
     return ( 
@@ -26,7 +28,6 @@ const PlannerDesktop = (p) => {
                     key={idx}
                     className="col3"
                     data={sec}
-                    openModalData={openModalData}
                     setDateZone={setDateZone}
                     >
                     {

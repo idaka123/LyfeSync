@@ -1,34 +1,21 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-
 import DeviceContext from "../../Context/Device.context";
 import PlannerMobile from "./Planner.mobile";
 import PlannerDesktop from "./Planner.desktop";
-import ModalContext from "../../Context/Modal.conetxt";
-
+import ModalContext, { ModalProvider } from "../../Context/Modal.conetxt";
 import TaskModal from "./modal/Task";
 import { TaskProvider } from "../../Context/Task.context";
 
-
-
-// import { Icon } from "../Assets/icon";
-
-
-
 const Planner = () => {
 
-    const [modalData, setModalData] = useState("")
+    // const [modalData, setModalData] = useState("")
     const [tab, setTab] = useState("task")
     
 
     const { device } = useContext(DeviceContext)
-    const { openModal }  = useContext(ModalContext)
 
-    const openModalData = (name) => {
-        setModalData(name)
-        openModal(name)
-    }
 
     const selectTab = (e) => {
         const name = e.target.getAttribute("name")
@@ -36,20 +23,20 @@ const Planner = () => {
     }
  
     // modal
-    console.log("rerender", tab)
+    console.log("rerender dfas dsad sad", tab)
     
     
     const Mobile = () => {
         return (
             <Container>
-                <PlannerMobile selectTab={selectTab} tab={tab} openModalData={openModalData} />
+                <PlannerMobile selectTab={selectTab} tab={tab} />
             </Container>
     )}
 
     const Desktop = () => {
         return (
             <Container style={{paddingTop: "40px"}}> 
-                <PlannerDesktop openModalData={openModalData}/>
+                <PlannerDesktop/>
             </Container>
         );
     }
@@ -57,11 +44,13 @@ const Planner = () => {
     return (
         <AnimatePresence mode="wait">
             <TaskProvider>
-                <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
-                            animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
-                    <TaskModal />
-                    {device === "desktop" ? <Desktop /> : <Mobile /> }
-                </motion.div>
+                <ModalProvider>
+                    <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
+                                animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
+                        <TaskModal />
+                        {device === "desktop" ? <Desktop /> : <Mobile /> }
+                    </motion.div>
+                </ModalProvider>
             </TaskProvider> 
         </AnimatePresence>
     )

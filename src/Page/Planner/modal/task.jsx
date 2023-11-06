@@ -505,7 +505,6 @@ const TaskContent = (p) => {
     </Modal>
      );
 }
-
  
 const ModalSectionContent = (p) => {
     const { title, name, Icon, children, plus, openSec } = p
@@ -538,8 +537,6 @@ const EditSection = (p) => {
         </EditSectionContainer>
     )
 }
-
-
 
 const EditSectionContainer = styled.div `
     display: flex;

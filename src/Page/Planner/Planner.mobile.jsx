@@ -8,10 +8,11 @@ import { Img } from "../../Assets/svg";
 import TaskCard from "./card/TaskCard";
 import TaskContext from "../../Context/Task.context";
 import Loading from "../../Component/Loadding";
+import ModalContext from "../../Context/Modal.conetxt";
 
 
 const PlannerMobile = (p) => {
-    const { selectTab, tab, openModalData } = p
+    const { selectTab, tab } = p
     const { task, loading }  = useContext(TaskContext)
     // const selectTab = (e) => {
     //     const name = e.target.getAttribute("name")
@@ -45,7 +46,7 @@ const PlannerMobile = (p) => {
                 : <TaskSectionMobile 
                     tab={tab} 
                     data={tab === "task" ? task : []} // separate between each tab with it own data
-                    openModalData={openModalData} />
+                   />
             }
         </Container>
      );
@@ -53,12 +54,13 @@ const PlannerMobile = (p) => {
 
 
 const TaskSectionMobile = (p) => {
-    const { openModalData, tab, data } = p
+    const { tab, data } = p
 
     const { setTask }  = useContext(TaskContext)
 
     const [dataSection, setDateSection] = useState(data)
     const [dateZone, setDateZone] = useState("today")
+    const { openModal }  = useContext(ModalContext)
 
     const tabStyle = {
         initial: () => {
@@ -88,8 +90,7 @@ const TaskSectionMobile = (p) => {
 
     const hdleClickBtn = (e) => {
         const name = e.target.getAttribute("name")
-        openModalData(name)
-        // openModal(name)
+        openModal(name)
     }
 
     return (
@@ -106,7 +107,6 @@ const TaskSectionMobile = (p) => {
                 key={tab} 
                 className="col3" 
                 data={tab} // task, routine, goal
-                openModalData={openModalData} //func open modal
                 setDateZone={setDateZone}
                 >
             {dataSection && dataSection.length > 0
