@@ -17,7 +17,7 @@ import {
   PodcastArrangeTitleIcon
 } from "../Knowledge.desktop";
 import PodcastCard from "./PodcastCard";
-import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
+import { podcastsData, podcastsType, podcastsArrangeData, playlistsData } from "../Knowledge.data";
 import { KnowledgeContext } from "../Knowledge";
 
 // Utility and helper function imports
@@ -45,7 +45,9 @@ const PodcastList = ({
   const [isDisplayArrangeList, setIsDisplayArrangeList] = useState(false);
   const [sortbyValue, setSortbyValue] = useState('Sort By');
   const [podcastType, setPostcastType] = useState(podcastsType[0].title);
-
+  const [isPodcastMoreDisplay, setIsPodcastMoreDisplay] = useState({ isDisplay: null, id: 1 });
+  const [isDisplayAddPlaylist, setIsDisplayAddPlaylist] = useState(null);
+  const [playListDataFilter, setPlayListDataFilter] = useState(playlistsData.map(playlist => playlist.name));
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
     setIsDragging(true);
@@ -68,6 +70,9 @@ const PodcastList = ({
 
   const handleSortByClick = () => {
     setIsDisplayArrangeList(!isDisplayArrangeList);
+    setIsPodcastMoreDisplay(prev => ({
+      isDisplay: false,
+    }));
   }
 
   const handleArrangeElementClick = (e) => {
@@ -75,9 +80,7 @@ const PodcastList = ({
     setIsDisplayArrangeList(false);
   }
 
-  const handleTypeClick = (index) => {
-    setPostcastType(index);
-  }
+  const handleTypeClick = (index) => setPostcastType(index);
 
   useEffect(() => {
     const filterdata = podcastsData.filter(index => index.type.includes(podcastType));
@@ -145,32 +148,41 @@ const PodcastList = ({
       </PodcastArrange>
       {podcastsDataFilter.length !== 0 ?
         <PodcastCardList>
-          {podcastsDataFilter.map((value, index) => (
-            <PodcastCard
-              key={value.id}
-              order={index + 1}
-              {...value}
-              cardId={cardId}
-              setCardId={setCardId}
-              isHoverId={isHoverId}
-              setIsHoverId={setIsHoverId}
-              isPlayingId={isPlayingId}
-              setIsPlayingId={setIsPlayingId}
-              isFavourite={isFavourite}
-              setIsFavourite={setIsFavourite}
-              podcastsDataFilter={podcastsDataFilter}
-              setPodcastsDataFilter={setPodcastsDataFilter}
-              podcastStatus={podcastStatus}
-              setPodcastStatus={setPodcastStatus}
-              podcastShare={podcastShare}
-              setPodcastShare={setPodcastShare}
-              setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-              podcastInfo={podcastInfo}
-              setPodcastInfo={setPodcastInfo}
-              setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
-            />
+          {podcastsDataFilter.map((value) => (
+            <React.Fragment key={value.id}>
+              <PodcastCard
+                order={value.id}
+                {...value}
+                cardId={cardId}
+                setCardId={setCardId}
+                isHoverId={isHoverId}
+                setIsHoverId={setIsHoverId}
+                isPlayingId={isPlayingId}
+                setIsPlayingId={setIsPlayingId}
+                isFavourite={isFavourite}
+                setIsFavourite={setIsFavourite}
+                podcastsDataFilter={podcastsDataFilter}
+                setPodcastsDataFilter={setPodcastsDataFilter}
+                podcastStatus={podcastStatus}
+                setPodcastStatus={setPodcastStatus}
+                podcastShare={podcastShare}
+                setPodcastShare={setPodcastShare}
+                setIsPodcastShareDisplay={setIsPodcastShareDisplay}
+                podcastInfo={podcastInfo}
+                setPodcastInfo={setPodcastInfo}
+                setIsPodcastInfoDisplay={setIsPodcastInfoDisplay}
+                isPodcastMoreDisplay={isPodcastMoreDisplay}
+                setIsPodcastMoreDisplay={setIsPodcastMoreDisplay}
+                playListDataFilter={playListDataFilter}
+                setPlayListDataFilter={setPlayListDataFilter}
+                isDisplayAddPlaylist={isDisplayAddPlaylist}
+                setIsDisplayAddPlaylist={setIsDisplayAddPlaylist}
+              >
+              </PodcastCard>
+            </React.Fragment>
           ))}
         </PodcastCardList>
+
         : <PodcastEmptyList>Chưa có podcast nào trong mục này !</PodcastEmptyList>
       }
     </StyledPodcastList>

@@ -10,7 +10,7 @@ import { BsCart2, BsFillPlayFill, BsShareFill } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown, MdPause } from 'react-icons/md'
 import { AiOutlineLoading3Quarters, AiFillTag } from 'react-icons/ai'
-import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
+import { BiMessageAltDetail, BiHomeAlt2, BiSolidRightArrowAlt, BiCaretLeft, BiCaretLeftCircle, BiSolidCaretLeftCircle, BiCaretRightCircle } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
 import { RiCloseFill } from 'react-icons/ri'
@@ -27,6 +27,8 @@ import { MdMoreHoriz } from 'react-icons/md'
 import { BiSolidDownload } from 'react-icons/bi';
 import { MdAdd } from 'react-icons/md';
 import { BiCheck } from 'react-icons/bi';
+import { BiCaretRight } from 'react-icons/bi';
+import { BiRightArrowCircle } from 'react-icons/bi';
 export const Icon = {
     passHide: AiFillEyeInvisible,
     passUnHide: AiFillEye,
@@ -61,6 +63,8 @@ export const Icon = {
     addOutline: MdAdd,
     checkCircle: BiCheckCircle,
     check: BiCheck,
+    rightArrow: BiCaretRight,
+    leftArrow: BiSolidCaretLeftCircle,
     library: ImLibrary,
     facebook: FaFacebook,
     messenger: FaFacebookMessenger,
@@ -68,4 +72,5 @@ export const Icon = {
     gmail: BiLogoGmail,
     more: MdMoreHoriz,
     download: BiSolidDownload,
+    send: BiRightArrowCircle,
 }

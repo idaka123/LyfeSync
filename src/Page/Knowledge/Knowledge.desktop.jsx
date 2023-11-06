@@ -173,21 +173,24 @@ export const PodcastBlockTitle = styled.div`
 `;
 
 export const StyledPodcastCard = styled.div`
+  position: relative;
   display: grid;
-  grid-template: 50% 50% / 4% 9% 76% auto;
+  grid-template: 50% 50% / 4% 9% 72% auto;
   background-color: white;
   border-radius: calc((1.5vw + 1.5vh)/2);
+  padding-right: calc((0.7vw + 0.7vh)/2);
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
   width: 100%;
   height: 16%;
   margin-bottom: calc((0.7vw + 0.7vh)/2);
   font-weight: 700;
   user-select: none;
-  transform-origin: center; 
-  transition: all 0.3s ease;
+  transition: background-color 0.5s ease; 
+  z-index: 0;
   &:hover{
-    transform: scale(1.015);
+    z-index: 1; 
     background-color: black;
+    }
   }
 `;
 
@@ -284,11 +287,11 @@ export const PodcastLength = styled.p`
 export const PodcastOption = styled.div`
   grid-area: 1/4/3/5;
   display: grid;
-  grid-template: 100% / 50% 50%;
+  grid-template: 100% / 1fr 1fr 1fr;
 `;
 
-export const PodcastShare = styled.div`
-  grid-area: 1/2/2/3;
+export const PodcastMore = styled.div`
+  grid-area: 1/3/2/4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,11 +305,25 @@ export const PodcastShare = styled.div`
   }
 `;
 
-export const PodcastAdd = styled.div`
+export const PodcastDownload = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   grid-area: 1/1/2/2;
+  svg{
+    font-size: calc((2.25vw + 2.25vh)/2);
+    color: black;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+`
+
+export const PodcastAdd = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: 1/2/2/3;
   svg{
     font-size:  calc((2.25vw + 2.25vh)/2);
     &:hover{
@@ -315,20 +332,181 @@ export const PodcastAdd = styled.div`
   }
   .iconLove {
     color: black;
-    &:hover{
-      color: rgb(30,215,96);
-    }
-  }
-  .iconCheck{
-    color: rgb(30,215,96);
   }
 `;
+
+export const StyledPodcastCardMore = styled.div`
+  user-select: none;
+  position: absolute; 
+  right: calc((0.5vw + 0.5vh)/2);
+  width: calc((20vw + 20vh)/2);
+  height: calc((20vw + 20vh)/2);
+  background-color: rgb(40,40,40);
+  z-index: 10;
+  display: flex; 
+  padding: 0.75%;
+  flex-direction: column;
+  justify-content: space-around; 
+  border-radius: calc((0.5vw + 0.5vh)/2); 
+  p{
+    color: rgb(234,234,234);
+    font-size:  calc((1.25vw + 1.25vh)/2);
+  }
+  svg{
+    color: rgb(234,234,234);
+    font-size:  calc((1.75vw + 1.75vh)/2);
+  }
+  .moreOption{
+    height: 25%;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    border-radius: calc((0.2vw + 0.2vh)/2); 
+    padding: 5%;
+    transition: all 0.3s ease; 
+    &:hover{
+      background-color: rgb(62,62,62);
+      cursor: pointer;
+    }
+  }
+  .addToPlaylist{
+  }
+  .addToQueue{
+  }
+  .download{
+  }
+  .share{
+    border-top: 2px solid rgb(75,75,75);
+  }
+
+  .playlistList{
+    height: 100%; 
+    width: 100%;
+    padding: 0.75%;
+    margin-bottom: 2%;
+    .playlistListTitle{
+      border-bottom: 2px solid rgb(75,75,75);
+      height: 50%;
+      .backToMoreButton{
+        height: 30%;
+        display: flex; 
+        align-items: center;
+        svg{
+          color: rgb(234,234,234);
+          font-size: calc((1.5vw + 1.5vh)/2);
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+      .findPlaylistInput{
+        height: 30%;
+        display: flex; 
+        align-items: center;
+        background-color: rgb(62,62,62);
+        border-radius: calc((0.2vw + 0.2vh)/2); 
+        padding-left: 5%;
+        svg{
+          font-size:  calc((1.5vw + 1.5vh)/2);
+          margin-right: 3%;
+        }
+        input{
+          border: none;
+          outline: none;
+          color: rgb(234,234,234);
+          font-size:  calc((1.25vw + 1.25vh)/2);
+          height: 100%; 
+          width: 100%; 
+          background-color: rgb(62,62,62);
+        }
+      }
+      .playlistCreate{
+        margin-top : 1%;
+        height: 39%;
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        border-radius: calc((0.2vw + 0.2vh)/2); 
+        padding: 5%;
+        transition: all 0.3s ease; 
+        &:hover{
+          background-color: rgb(62,62,62);
+          cursor: pointer;
+        }
+      }
+    }
+    .playlistListContent{
+      height: 50%;
+      padding-right: 2%;
+      margin-top: 2%;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgb(35, 35, 35);
+        border-radius: 100px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 100px;
+      }
+      
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .createInput{
+        border-radius: calc((0.2vw + 0.2vh)/2); 
+        margin-top: 2%;
+        height: 25%; 
+        display: flex; 
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgb(62,62,62);
+        input{
+          border: none;
+          outline: none;
+          height: 100%; 
+          width: 100%;
+          color: rgb(234,234,234);
+          font-size:  calc((1.25vw + 1.25vh)/2);
+          background-color: rgb(62,62,62);
+          padding-left: 3%;
+        }
+        svg{
+          font-size:  calc((1.5vw + 1.5vh)/2);
+          margin-right: 3%;
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+      .listName{
+        border-radius: calc((0.2vw + 0.2vh)/2); 
+        margin-top: 2%;
+        padding-left: 7%;
+        height: 35%;
+        display: flex; 
+        align-items: center;
+        transition: all 0.3s ease; 
+        &:hover{
+          cursor: pointer;
+          user-select: none; 
+          background-color: rgb(62,62,62);
+        }
+      }
+    }
+  }
+`
 
 export const StyledPodcastList = styled.div`
   height: 94%;
   width: 93%;
   display: grid;
   grid-template: 9% 5.5% auto / 100%;
+  z-index: 0;
 `;
 
 export const PodcastListType = styled.div`
@@ -404,7 +582,7 @@ export const PodcastArrangeList = styled.ul`
   position: absolute;
   top: calc((2.6vw + 2.6vh)/2);
   right: 0;
-  z-index: 1;
+  z-index: 4;
   list-style: none;
   border-radius: calc((1.5vw + 1.5vh)/2);
   display: flex;
@@ -467,7 +645,7 @@ export const PodcastShareStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 5;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -719,7 +897,7 @@ export const PodcastInfoStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 5;
   display:flex;
   justify-content: center;
   align-items: center;
