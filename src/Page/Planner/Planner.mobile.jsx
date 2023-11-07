@@ -8,7 +8,7 @@ import { Img } from "../../Assets/svg";
 import TaskCard from "./card/TaskCard";
 import TaskContext from "../../Context/Task.context";
 import Loading from "../../Component/Loadding";
-import ModalContext from "../../Context/Modal.conetxt";
+import ModalContext from "../../Context/Modal.context";
 
 
 const PlannerMobile = (p) => {

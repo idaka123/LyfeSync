@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 import styled from "styled-components"
 
 import { plannerData } from "./Planner.data";
-import ModalContext from "../../Context/Modal.conetxt";
+import ModalContext from "../../Context/Modal.context";
 
 const TaskSection = (p) => {
 
@@ -61,8 +61,6 @@ const Task = styled(motion.section)`
         letter-spacing: 4px;
     }
 `
-
-
 
 const DateZone = styled.div`
     display: flex;

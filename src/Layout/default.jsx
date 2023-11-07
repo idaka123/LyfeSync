@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
 import OverlayContext, { OverlayProvider } from "../Context/overlay.context";
-import ModalContext, { ModalProvider } from "../Context/Modal.conetxt";
+import ModalContext, { ModalProvider } from "../Context/Modal.context";
 
 
 const DefaultLayout = ( p ) => {

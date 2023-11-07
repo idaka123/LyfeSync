@@ -1,0 +1,128 @@
+import Modal from "../../../Component/Modal";
+import { useContext, useEffect, useRef, useState } from "react";
+import ModalContext from "../../../Context/Modal.context";
+import Task from "./Task";
+import Routine from "./Routine";
+
+const TaskModal = () => {
+    const { modal }  = useContext(ModalContext)
+    const [editMode, setEditMode] = useState(!!modal.content)
+    const [dataInput, setDataInput] = useState({})
+    
+    const [areaData, setArea] = useState({
+        health: false,
+        play: false,
+        spirit: false,
+        environment: false,
+        work: false,
+        wealth: false,
+        growth: false,
+        relationship: false,
+    })
+
+    useEffect(() => {
+        if(modal.content !== null) 
+            setEditMode(true)
+        else 
+            setEditMode(false)
+    },[modal.content])
+    
+    useEffect(() => {
+        const area = {
+            health: false,
+            play: false,
+            spirit: false,
+            environment: false,
+            work: false,
+            wealth: false,
+            growth: false,
+            relationship: false,
+        }
+
+        if(modal.content !== null) {
+            
+            setDataInput({
+                title: modal?.content?.title || "",
+                color: modal?.content?.color || "",
+                area: modal?.content?.area || [],
+                deadline: modal?.content?.deadline,
+                note: modal?.content?.note || "",
+            })
+
+
+            const relate = modal.content.area.reduce((prev, next) => {
+                return {...prev, [next]: true}
+            }, area)
+            setArea(relate)
+        } else {
+            setDataInput({
+                title: "",
+                color: "",
+                note: "",
+                // deadline: "",
+                area: [],
+                sub: []
+            })
+            setArea(area)
+        }
+
+        return () => setDataInput({})
+    }, [editMode, modal.content]);
+
+
+
+    // useEffect(() => {
+    //     if(modal.content) {
+    //         const relate = modal.content.area.forEach(area => { data[area] = true })
+    //         setArea(relate)
+    //         console.log("relate", relate)
+    //     }
+    // }, [editMode]);
+
+
+    return <TaskContent 
+                mode={ editMode ? "edit" : "add"}
+                dataInput={ dataInput }
+                areaData={ areaData }
+                setDataInput = {setDataInput}
+                // areaData={area} 
+                />
+}
+
+const TaskContent = (p) => {
+    const { dataInput, setDataInput, mode, areaData } = p
+    const { modal }  = useContext(ModalContext)
+
+
+    return ( 
+    <Modal >
+    {
+    mode === "edit" ? (
+        <Task 
+            dataInput={dataInput} 
+            setDataInput={setDataInput}
+            mode={mode}
+            areaData={areaData}/>
+    ) : (
+    modal.title === "task" ?
+        <Task 
+            dataInput={dataInput} 
+            setDataInput={setDataInput}
+            mode={mode}
+            areaData={areaData}/> :
+
+        modal.title === "routine" ? 
+        <Routine
+            dataInput={dataInput} 
+            setDataInput={setDataInput}
+            mode={mode}
+            areaData={areaData}/>
+        : null
+    )
+
+    }
+    </Modal>
+     );
+}
+ 
+export default TaskModal;

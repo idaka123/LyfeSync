@@ -4,9 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import DeviceContext from "../../Context/Device.context";
 import PlannerMobile from "./Planner.mobile";
 import PlannerDesktop from "./Planner.desktop";
-import ModalContext, { ModalProvider } from "../../Context/Modal.conetxt";
-import TaskModal from "./modal/Task";
+import ModalContext, { ModalProvider } from "../../Context/Modal.context";
+import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
+import { RoutineProvider } from "../../Context/Routine.context";
 
 const Planner = () => {
 
@@ -44,13 +45,15 @@ const Planner = () => {
     return (
         <AnimatePresence mode="wait">
             <TaskProvider>
-                <ModalProvider>
-                    <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
-                                animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
-                        <TaskModal />
-                        {device === "desktop" ? <Desktop /> : <Mobile /> }
-                    </motion.div>
-                </ModalProvider>
+                <RoutineProvider>
+                    <ModalProvider>
+                        <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
+                                    animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
+                            <TaskModal />
+                            {device === "desktop" ? <Desktop /> : <Mobile /> }
+                        </motion.div>
+                    </ModalProvider>
+                </RoutineProvider>
             </TaskProvider> 
         </AnimatePresence>
     )

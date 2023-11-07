@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Icon } from "/src/Assets/icon.js";
 import React, { Fragment, useEffect, useState } from "react";
 import DeviceContext from "../Context/Device.context";
-import ModalContext from "../Context/Modal.conetxt";
+import ModalContext from "../Context/Modal.context";
 import Loading from "./Loadding"
 import Overlay from "../Layout/Component/Overlay";
 
@@ -16,6 +16,11 @@ const Modal = (p) => {
     useEffect(() => {
         console.log("listen event opening modal")
         window.addEventListener('modalOpening', openingModal);
+        window.addEventListener('modalClosing', () => {
+            setIsOpenOverlay(false)
+        });
+
+        
         
         return () => {
           window.removeEventListener('modalOpening', openingModal);
