@@ -8,8 +8,7 @@ import PodcastInfo from './Components/PodcastInfo';
 
 // Style and data imports
 import { KnowLedgeStyled } from './Knowledge.desktop';
-import { podcastsData } from './Knowledge.data';
-
+import { podcastsData, playlistsData } from './Knowledge.data';
 
 export const KnowledgeContext = createContext();
 
@@ -17,6 +16,7 @@ const Knowledge = () => {
   const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: null });
   const [isFavourite, setIsFavourite] = useState({ id: -1, isFavourite: false })
   const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
+  const [playListDataFilter, setPlayListDataFilter] = useState(playlistsData.map(playlist => playlist.name));
   const [podcastStatus, setPodcastStatus] = useState({});
   const [isPodcastShareDisplay, setIsPodcastShareDisplay] = useState(false);
   const [podcastShare, setPodcastShare] = useState({
@@ -52,6 +52,8 @@ const Knowledge = () => {
     podcastInfo,
     setPodcastInfo,
     setIsPodcastInfoDisplay,
+    playListDataFilter,
+    setPlayListDataFilter
   }
   return (
     <KnowledgeContext.Provider value={shareValue}>

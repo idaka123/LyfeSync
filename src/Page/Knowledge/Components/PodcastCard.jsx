@@ -48,10 +48,10 @@ const PodcastCard = ({
   setPodcastInfo,
   isPodcastMoreDisplay,
   setIsPodcastMoreDisplay,
-  playListDataFilter,
-  setPlayListDataFilter,
   isDisplayAddPlaylist,
   setIsDisplayAddPlaylist,
+  playListDataFilter,
+  setPlayListDataFilter
 }) => {
   const [cardPosition, setCardPosition] = useState(null);
   const [isDisplayCreatePlaylist, setIsDisplayCreatePlaylist] = useState(null);
@@ -115,11 +115,6 @@ const PodcastCard = ({
 
   const currentStatus = podcastStatus[id] || { isFavourite: true, isAdded: true };
 
-  const handleShareClick = (title, author, length, thumbnail, url) => {
-    setIsPodcastShareDisplay(true);
-    setPodcastShare({ title, author, length, image: thumbnail, url });
-  };
-
   const handleInfoClick = (id, title, author, length, thumbnail, description, date, downloadUrl) => {
     setIsPodcastMoreDisplay(prev => ({
       isDisplay: false,
@@ -142,7 +137,7 @@ const PodcastCard = ({
     const distanceFromBottomOfViewport = window.innerHeight - cardRect.bottom;
     const temp = distanceFromBottomOfViewport - window.innerHeight * 0.2;
 
-    setCardPosition(temp >= window.innerHeight * 0.2 ? (window.innerHeight * 0.075) : (-window.innerHeight * 0.265));
+    setCardPosition(temp >= window.innerHeight * 0.2 ? (window.innerHeight * 0.075) : (-window.innerHeight * 0.3));
 
     setIsPodcastMoreDisplay(prev => ({
       isDisplay: prev.id !== id || !prev.isDisplay,
@@ -212,21 +207,27 @@ const PodcastCard = ({
             )}
           </PodcastAdd>
           <PodcastMore onClick={event => { handleMoreClick(event) }} >
-            <Icon.more style={optionIconStyled} /* onClick={() => handleShareClick(title, author, length, thumbnail, url)} */ />
+            <Icon.more style={optionIconStyled} />
           </PodcastMore>
         </PodcastOption>
         {isPodcastMoreDisplay.isDisplay && isPodcastMoreDisplay.id === id &&
           <PodcastCardMore
+            id={id}
             title={title}
+            author={author}
+            length={length}
+            thumbnail={thumbnail}
+            url={url}
+            downloadUrl={downloadUrl}
             isPodcastMoreDisplay={isPodcastMoreDisplay}
             setIsPodcastMoreDisplay={setIsPodcastMoreDisplay}
-            playListDataFilter={playListDataFilter}
-            setPlayListDataFilter={setPlayListDataFilter}
             isDisplayCreatePlaylist={isDisplayCreatePlaylist}
             isDisplayAddPlaylist={isDisplayAddPlaylist}
             setIsDisplayAddPlaylist={setIsDisplayAddPlaylist}
             setIsDisplayCreatePlaylist={setIsDisplayCreatePlaylist}
             cardPosition={cardPosition}
+            setIsPodcastShareDisplay={setIsPodcastShareDisplay}
+            setPodcastShare={setPodcastShare}
           />
         }
       </StyledPodcastCard >

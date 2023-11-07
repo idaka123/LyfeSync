@@ -333,6 +333,9 @@ export const PodcastAdd = styled.div`
   .iconLove {
     color: black;
   }
+  .iconCheck{
+    color: rgb(30,215,96);
+  }
 `;
 
 export const StyledPodcastCardMore = styled.div`
@@ -340,7 +343,7 @@ export const StyledPodcastCardMore = styled.div`
   position: absolute; 
   right: calc((0.5vw + 0.5vh)/2);
   width: calc((20vw + 20vh)/2);
-  height: calc((20vw + 20vh)/2);
+  height: calc((22vw + 22vh)/2);
   background-color: rgb(40,40,40);
   z-index: 10;
   display: flex; 
@@ -384,11 +387,13 @@ export const StyledPodcastCardMore = styled.div`
     width: 100%;
     padding: 0.75%;
     margin-bottom: 2%;
+    display:flex; 
+    flex-direction: column;
     .playlistListTitle{
       border-bottom: 2px solid rgb(75,75,75);
-      height: 50%;
+      height: auto;
       .backToMoreButton{
-        height: 30%;
+        height: calc((3vw + 3vh)/2);
         display: flex; 
         align-items: center;
         svg{
@@ -400,7 +405,7 @@ export const StyledPodcastCardMore = styled.div`
         }
       }
       .findPlaylistInput{
-        height: 30%;
+        height: calc((2.5vw + 2.5vh)/2);
         display: flex; 
         align-items: center;
         background-color: rgb(62,62,62);
@@ -422,7 +427,7 @@ export const StyledPodcastCardMore = styled.div`
       }
       .playlistCreate{
         margin-top : 1%;
-        height: 39%;
+        height: calc((3vw + 3vh)/2);
         display: flex; 
         justify-content: space-between; 
         align-items: center;
@@ -434,33 +439,10 @@ export const StyledPodcastCardMore = styled.div`
           cursor: pointer;
         }
       }
-    }
-    .playlistListContent{
-      height: 50%;
-      padding-right: 2%;
-      margin-top: 2%;
-      overflow-y: scroll;
-      &::-webkit-scrollbar {
-        width: 5px;
-      }
-      
-      &::-webkit-scrollbar-track {
-        background: rgb(35, 35, 35);
-        border-radius: 100px;
-      }
-      
-      &::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 100px;
-      }
-      
-      &::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
       .createInput{
         border-radius: calc((0.2vw + 0.2vh)/2); 
-        margin-top: 2%;
-        height: 25%; 
+        margin-top: 1%;
+        height: calc((2.5vw + 2.5vh)/2);
         display: flex; 
         align-items: center;
         justify-content: space-between;
@@ -483,11 +465,34 @@ export const StyledPodcastCardMore = styled.div`
           }
         }
       }
+    }
+    .playlistListContent{
+      flex-grow: 1; 
+      padding-right: 2%;
+      margin-top: 2%;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgb(35, 35, 35);
+        border-radius: 100px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 100px;
+      }
+      
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
       .listName{
         border-radius: calc((0.2vw + 0.2vh)/2); 
         margin-top: 2%;
         padding-left: 7%;
-        height: 35%;
+        height: calc((2.5vw + 2.5vh)/2);
         display: flex; 
         align-items: center;
         transition: all 0.3s ease; 

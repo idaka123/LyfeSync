@@ -470,26 +470,26 @@ export const podcastsData = [
 export const playlistsData = [
   {
     id: 1,
-    name: `Playlist 1`
+    name: `Monday`
   },
   {
     id: 2,
-    name: `Playlist 2`
+    name: `Mayday`
   },
   {
     id: 3,
-    name: `Playlist 3`
+    name: `Moonday`
   },
   {
     id: 4,
-    name: `Playlist 4`
+    name: `Tuesday`
   },
   {
     id: 5,
-    name: `Playlist 5`
+    name: `Wednesday`
   },
   {
     id: 6,
-    name: `Playlist 6`
+    name: `Thursday`
   },
 ]
