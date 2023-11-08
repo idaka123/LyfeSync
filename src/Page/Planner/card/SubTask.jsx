@@ -109,6 +109,7 @@ const SubTaskContainer = styled.div `
     }
 
     .option {
+        display: flex;
         svg {
             cursor: pointer;
             width: 15px;

@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { useContext } from "react";
 import styled from "styled-components";
-import OverlayContext from "../../Context/overlay.context";
 
 const overlayVariant = {
     hidden: { opacity: 0, visibility: "hidden" },
@@ -9,19 +7,22 @@ const overlayVariant = {
   };
 
 const Overlay = (p) => {
-    const { onClick, zIndex } = p
+    const { onClick, zIndex,
+      isOpen,
+      setIsOpen
+    } = p
 
-    const { isOverlay, closeOverlay } = useContext(OverlayContext)
+    
 
     const hdleClick = () => {
-      closeOverlay()
       onClick()
+      setIsOpen(false)
     }
 
     return <Container
                 zIndex={zIndex}
                 initial="hidden"
-                animate={ isOverlay ? "visible" : "hidden"}
+                animate={ isOpen ? "visible" : "hidden"}
                 variants={overlayVariant}
                 transition={{ duration: .2 }}
                 data-name="global-overlay"
