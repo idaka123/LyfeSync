@@ -71,6 +71,7 @@ const DftLaySty = styled.div`
     .body {
         display: flex;
         flex-direction: row;
+        overflow-y: scroll;
 
         .page-content {
             overflow-y: scroll;
