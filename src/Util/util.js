@@ -37,3 +37,9 @@ export function compareDates(date1, date2) {
     return 0;
   }
 }
+
+export const convertUpperCase = (string) => {
+  const upperCase = string.toUpperCase()
+  console.log(upperCase)
+  return upperCase
+}

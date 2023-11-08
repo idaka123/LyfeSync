@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import OverlayContext from "./overlay.context";
+// import OverlayContext from "./overlay.context";
 
 const ModalContext = createContext()
 
@@ -38,7 +39,7 @@ export const ModalProvider = (p) => {
       };
 
       const valueContext = {
-        modal, openModal, closeModal,isDataLoaded, setIsDataLoaded
+        modal, openModal, closeModal, isDataLoaded, setIsDataLoaded
       }
 
     return (
