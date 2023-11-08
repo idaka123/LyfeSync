@@ -24,7 +24,7 @@ import {
 } from './svg.jsx'
 
 
-const Img = {
+export const Img = {
     task,
     goal,
     routine,
@@ -48,4 +48,3 @@ const Img = {
     arrowRight
 }
 
-export { Img }
