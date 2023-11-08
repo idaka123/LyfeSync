@@ -1,5 +1,12 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+
+import Modal from "../../../Component/Modal";
+import Input from "../../../Component/Input";
+import { Img } from "../../../assets/svg/index";
+import { CirclePicker } from "react-color";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
+
 import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
@@ -7,6 +14,7 @@ import { dateConvert, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
+
 import Flatpickr from "react-flatpickr";
 import ReactQuill from 'react-quill';
 import { CirclePicker } from "react-color";
