@@ -14,8 +14,8 @@ import {
 import { KnowledgeContext } from '../Knowledge';
 
 // Asset imports
-import { Img } from '../../../assets/svg/index';
-import { Icon } from '../../../assets/icon';
+import { Social } from '../../../assets/svg/onlineSvg'
+import { Icon } from '../../../Assets/icon';
 import { ANIMATIONS } from "../utils/animationConstants";
 
 const PodcastShare = ({
@@ -134,7 +134,7 @@ const PodcastShare = ({
             platform !== 'more' ? (
               <img
                 onClick={() => handlePlatformClick(platform)}
-                src={Img[platform]}
+                src={Social[platform]}
                 className={`blockSocial blockSocial${platform
                   .charAt(0)
                   .toUpperCase() + platform.slice(1)}`}
