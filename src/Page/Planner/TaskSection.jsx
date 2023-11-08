@@ -1,14 +1,16 @@
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import styled from "styled-components"
 
 import { plannerData } from "./Planner.data";
+import ModalContext from "../../Context/Modal.context";
 
 const TaskSection = (p) => {
 
-    const { data, children, openModalData, setDateZone } = p
+    const { data, children, setDateZone } = p
     
     const [state, setState] = useState(plannerData[data].dateZone[0].name)
+    const { openModal }  = useContext(ModalContext)
     
     const hleSelctDateZ = (e) => {
         const name = e.target.getAttribute("name")
@@ -18,7 +20,7 @@ const TaskSection = (p) => {
 
     const handleClickAdd = (e) => {
         const name = e.target.getAttribute("name")
-        openModalData(name)
+        openModal(name)
         // localStorage.setItem("tab", name)
     }
     return (
@@ -59,8 +61,6 @@ const Task = styled(motion.section)`
         letter-spacing: 4px;
     }
 `
-
-
 
 const DateZone = styled.div`
     display: flex;

@@ -6,14 +6,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DeviceContext from "../../Context/Device.context";
 import paths from "../../Routes/path";
+import Overlay from "./Overlay";
 
 const Sidebar = (p) => {
-    const { isopen, toggle } = p
+    const { isopen, toggle, isOpenOvelay, setIsOpenOverlay } = p
 
     const menuItems = [
         { label: 'Trang chủ', icon: Icon.home, link: paths.home},
         { label: 'Tác vụ', icon: Icon.setting, link: paths.planner},
     ];
+
+   
 
     const { device } = useContext(DeviceContext)
 
@@ -35,6 +38,12 @@ const Sidebar = (p) => {
         }
     };
 
+    const hdleClickOverLay = () => {
+        setIsOpenOverlay(false)
+        toggle(false)
+
+    }
+
     const [select, setSelect] = useState()
 
     const handleSelect = (link) => {
@@ -46,36 +55,45 @@ const Sidebar = (p) => {
     }, []);
 
     return (
-        <SideCon 
-        initial={"closed"}
-        animate={isopen ? 'open' : 'closed'}
-        variants={SideStyle}
-        onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
-            <div className="logo"></div>
-            <SidebarMenu>
-                {menuItems.map((menuItem, idx) => (
-                    <SidebarMenuItem key={idx} 
-                                     onClick={() => handleSelect(menuItem.link)} 
-                                     className={select === menuItem.link && 'active'}
-                                     whileHover={{  x: "5px", 
-                                                    transition: { 
-                                                        duration: 1, 
-                                                        type: "spring" 
-                                                    }
-                                                }} >
-                        <SidebarLink to={menuItem.link}>
-                            {<div className="icon-wrapper">
-                                <menuItem.icon className="icon"/>
-                            </div>}
-                            {/*  this may cause broken UI in item in sidebar when font-size change */}
-                            <motion.span initial={{ opacity: 0, width: 0, height: 0 }}
-                                         animate={isopen ? { opacity: 1, marginLeft: "23px", width: "100%", height: "25px" } : { opacity: 0, width: 0, height: 0 }}
-                                         transition={{ duration: .2 }}
-                                        >{menuItem.label}</motion.span>
-                        </SidebarLink>
-                    </SidebarMenuItem>))}
-            </SidebarMenu>
-        </SideCon> 
+        <>
+            <SideCon 
+            initial={"closed"}
+            animate={isopen ? 'open' : 'closed'}
+            variants={SideStyle}
+            onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
+                <div className="logo"></div>
+            
+                <SidebarMenu>
+                    {menuItems.map((menuItem, idx) => (
+                        <SidebarMenuItem key={idx} 
+                                        onClick={() => handleSelect(menuItem.link)} 
+                                        className={select === menuItem.link && 'active'}
+                                        whileHover={{  x: "5px", 
+                                                        transition: { 
+                                                            duration: 1, 
+                                                            type: "spring" 
+                                                        }
+                                                    }} >
+                            <SidebarLink to={menuItem.link}>
+                                {<div className="icon-wrapper">
+                                    <menuItem.icon className="icon"/>
+                                </div>}
+                                {/*  this may cause broken UI in item in sidebar when font-size change */}
+                                <motion.span initial={{ opacity: 0, width: 0, height: 0 }}
+                                            animate={isopen ? { opacity: 1, marginLeft: "23px", width: "100%", height: "25px" } : { opacity: 0, width: 0, height: 0 }}
+                                            transition={{ duration: .2 }}
+                                            >{menuItem.label}</motion.span>
+                            </SidebarLink>
+                        </SidebarMenuItem>))}
+                </SidebarMenu>
+            </SideCon> 
+            <Overlay 
+                onClick={toggle(false)}
+                isOpen={isOpenOvelay}
+                setIsOpen={setIsOpenOverlay}
+                zIndex={"1000"}
+            />
+        </>
     )
 }
 

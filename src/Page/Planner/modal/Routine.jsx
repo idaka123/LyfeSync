@@ -59,7 +59,7 @@ const relatedArea = [
 
 ]
 
-const Task = (p) => {
+const Routine = (p) => {
 
     const { dataInput, setDataInput, mode, areaData } = p
     
@@ -332,7 +332,7 @@ const Task = (p) => {
         
         </ModalSectionContent>
 
-        {/* DEADLINE */}
+{/* 
         <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
             <Deadline>
             {mode === "edit" && secOpen.deadline 
@@ -372,7 +372,7 @@ const Task = (p) => {
                     </Fragment>
                 )}
             </Deadline>
-        </ModalSectionContent>
+        </ModalSectionContent> */}
 
         {/* NOTE */}
         <ModalSectionContent 
@@ -448,7 +448,7 @@ const EditSection = (p) => {
         </EditSectionContainer>
     )
 }
-export default Task;
+export default Routine;
 
 
 
