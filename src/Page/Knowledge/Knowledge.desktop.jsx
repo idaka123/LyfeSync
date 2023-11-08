@@ -1245,13 +1245,14 @@ export const PodcastPlaylistType = styled.p`
   height: 6%; 
   display: flex; 
   flex-direction: row;
-  font-size: calc((2.5vw + 2.5vh)/2);
+  align-items: center;
+  font-size: calc((2vw + 2vh)/2);
   padding-left: 2%; 
   .listTypeIcon{
     display: flex; 
     align-items: center;
     svg{
-    font-size: calc((2.5vw + 2.5vh)/2);
+    font-size: calc((2vw + 2vh)/2);
     }
   }
 `

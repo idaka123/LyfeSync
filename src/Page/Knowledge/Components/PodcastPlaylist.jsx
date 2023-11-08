@@ -49,7 +49,7 @@ const PodcastPlayList = () => {
           <div className="titleIcon">
             <Icon.playlist></Icon.playlist>
           </div>
-          <p>Danh sách của tôi</p>
+          <p>Danh sách Playlist</p>
         </div>
         <div className="titleSearch" style={searchInputStyled}>
           <div className="titleSearchIcon">
@@ -72,7 +72,7 @@ const PodcastPlayList = () => {
         <div className="listTypeIcon">
           <Icon.dot></Icon.dot>
         </div>
-        By us
+        Tạo bởi LFM
       </PodcastPlaylistType>
       <PodcastPlayListContent>
         <PodcastPlaylistBlock>
