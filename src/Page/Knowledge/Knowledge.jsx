@@ -5,6 +5,7 @@ import { useState, createContext } from 'react';
 import KnowLedgeBlock from './Components/KnowledgeBlock';
 import PodcastShare from './Components/PodcastShare';
 import PodcastInfo from './Components/PodcastInfo';
+import PodcastPlayList from './Components/PodcastPlaylist';
 
 // Style and data imports
 import { KnowLedgeStyled } from './Knowledge.desktop';
@@ -37,6 +38,7 @@ const Knowledge = () => {
     date: null,
     downloadUrl: null,
   })
+  const [isPodcastPlaylistDisplay, setIsPodcastPlaylistDisplay] = useState(true) ;
   const shareValue = {
     isPlayingId,
     setIsPlayingId,
@@ -53,14 +55,17 @@ const Knowledge = () => {
     setPodcastInfo,
     setIsPodcastInfoDisplay,
     playListDataFilter,
-    setPlayListDataFilter
+    setPlayListDataFilter,
+    isPodcastPlaylistDisplay,
+    setIsPodcastPlaylistDisplay
   }
   return (
     <KnowledgeContext.Provider value={shareValue}>
       <KnowLedgeStyled>
         {isPodcastShareDisplay && < PodcastShare />}
         {isPodcastInfoDisplay && <PodcastInfo />}
-        <KnowLedgeBlock />
+        {isPodcastPlaylistDisplay && <PodcastPlayList />}
+        {!isPodcastPlaylistDisplay && <KnowLedgeBlock />}
       </KnowLedgeStyled>
     </KnowledgeContext.Provider>
   );

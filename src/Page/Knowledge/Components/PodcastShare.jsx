@@ -16,9 +16,12 @@ import { KnowledgeContext } from '../Knowledge';
 // Asset imports
 import { Img } from '../../../assets/svg/index';
 import { Icon } from '../../../assets/icon';
+import { ANIMATIONS } from "../utils/animationConstants";
 
 const PodcastShare = ({
 }) => {
+  const { FADE_IN } = ANIMATIONS;
+
   const { setIsPodcastShareDisplay, podcastShare, setIsPodcastInfoDisplay } = useContext(KnowledgeContext);
 
   const [isCopy, setIsCopy] = useState('COPY');
@@ -97,7 +100,7 @@ const PodcastShare = ({
   ];
 
   return (
-    <PodcastShareStyled>
+    <PodcastShareStyled className={`${FADE_IN} `}>
       <PodcastShareBlock>
         <PodcastShareBlockTitle>
           <p>Sharing episode</p>

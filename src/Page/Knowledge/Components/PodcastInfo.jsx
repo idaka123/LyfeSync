@@ -11,11 +11,13 @@ import {
 import { KnowledgeContext } from "../Knowledge";
 
 // Asset imports
+import { ANIMATIONS } from "../utils/animationConstants";
 import { Icon } from "../../../assets/icon";
 
 
 const PodcastInfo = ({
 }) => {
+  const { FADE_IN } = ANIMATIONS;
   const {
     isPlayingId,
     setIsPlayingId,
@@ -89,7 +91,7 @@ const PodcastInfo = ({
   const currentStatus = podcastStatus[id] || { isFavourite: true, isAdded: true };
 
   return (
-    <PodcastInfoStyled>
+    <PodcastInfoStyled className={`${FADE_IN} `}>
       <PodcastInfoBlock>
         <div
           onClick={handleCloseInfo}

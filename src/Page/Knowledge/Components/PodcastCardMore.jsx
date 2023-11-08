@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import search from "../utils/search";
 import { KnowledgeContext } from "../Knowledge";
 import { useContext } from "react";
+import { ANIMATIONS } from "../utils/animationConstants";
 const PodcastCardMore = ({
   isDisplayAddPlaylist,
   setIsDisplayAddPlaylist,
@@ -20,6 +21,7 @@ const PodcastCardMore = ({
   url,
   downloadUrl
 }) => {
+  const { FADE_IN } = ANIMATIONS;
   const { playListDataFilter, setPlayListDataFilter } = useContext(KnowledgeContext);
   const [searchData, setSearchData] = useState(playListDataFilter);
   const [playListSearchInput, setPlaylistSearchInput] = useState('');
@@ -70,7 +72,7 @@ const PodcastCardMore = ({
 
   return (
     <StyledPodcastCardMore
-      className="podcastCardMore"
+      className={`podcastCardMore ${FADE_IN}`}
       style={{ top: cardPosition }}
     >
       {isDisplayAddPlaylist ? (

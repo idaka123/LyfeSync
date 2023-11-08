@@ -470,7 +470,8 @@ export const podcastsData = [
 export const playlistsData = [
   {
     id: 1,
-    name: `Monday`
+    name: `Monday`,
+    image: "https://i.scdn.co/image/ab67656300005f1f906fcd6180adf7988cda3481",
   },
   {
     id: 2,

@@ -18,7 +18,7 @@ import PodcastCardMore from "./PodcastCardMore";
 
 // Asset imports
 import { Icon } from "../../../assets/icon";
-
+import { ANIMATIONS } from "../utils/animationConstants";
 
 const PodcastCard = ({
   id,
@@ -50,9 +50,9 @@ const PodcastCard = ({
   setIsPodcastMoreDisplay,
   isDisplayAddPlaylist,
   setIsDisplayAddPlaylist,
-  playListDataFilter,
-  setPlayListDataFilter
+  podcastCardAnimation,
 }) => {
+  const { FADE_IN } = ANIMATIONS;
   const [cardPosition, setCardPosition] = useState(null);
   const [isDisplayCreatePlaylist, setIsDisplayCreatePlaylist] = useState(null);
   // Event Handlers
@@ -166,11 +166,11 @@ const PodcastCard = ({
   return (
     <>
       <StyledPodcastCard
+        className={podcastCardAnimation && `${FADE_IN} `}
         tabIndex="0"
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onContextMenu={event => handleCardContextMenu(event)}
         style={cardStyled}
       >
         <PodcastCardId style={podcastIdStyled}>{order}</PodcastCardId>

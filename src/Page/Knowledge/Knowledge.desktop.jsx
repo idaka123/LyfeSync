@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const KnowLedgeStyled = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100%; 
+  user-select: none; 
 `;
 
 export const KnowLedgeBlockStyled = styled.div`
@@ -16,9 +17,6 @@ export const KnowLedgeBlockStyled = styled.div`
   background-color: white;
   display: grid;
   grid-template: 2% 90% / 3% 69% 25%;
-  &::-webkit-scrollbar {
-    width: 0px;
-  }
 `;
 
 export const QuoteBlock = styled.div`
@@ -29,7 +27,6 @@ export const QuoteBlock = styled.div`
 `;
 
 export const CommunityBlockTitle = styled.div`
-  user-select: none;
   height: 10%;
   letter-spacing: calc((.1vw+.1vh)/2);
   b {
@@ -53,7 +50,7 @@ export const CommunityBlockContent = styled.div`
     padding: calc((1.3vw + 1.5vh)/2);
     font-size: calc((1.16vw + 1.5vh)/2);
     &:hover {
-      user-select: none;
+  
     }
   }
   cite {
@@ -64,7 +61,6 @@ export const CommunityBlockContent = styled.div`
 `;
 
 export const TipTitle = styled.div`
-  user-select: none;
   height: 11%;
   letter-spacing: calc((.1vw+.1vh)/2);
   b {
@@ -84,7 +80,7 @@ export const TipBlock = styled.div`
   transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   &:hover {
-    user-select: none;
+
     cursor: pointer;
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
@@ -134,7 +130,6 @@ export const WisdomBlockTitle = styled.div`
     color: black;
     font-size: calc((4vw + 4vh)/2);
   }
-  user-select: none;
 `;
 
 export const WisdomBlockContent = styled.div`
@@ -153,7 +148,6 @@ export const WisdomBlockContent = styled.div`
     font-size: calc((1.25vw + 1vh)/2);
     color: #9b9a9a;
   }
-  user-select: none;
   margin-bottom: 2%;
 `;
 
@@ -168,7 +162,7 @@ export const PodcastBlockTitle = styled.div`
   b {
     color: black;
     font-size: calc((4vw + 4vh)/2);
-    user-select: none;
+
   }
 `;
 
@@ -184,14 +178,12 @@ export const StyledPodcastCard = styled.div`
   height: 16%;
   margin-bottom: calc((0.7vw + 0.7vh)/2);
   font-weight: 700;
-  user-select: none;
   transition: background-color 0.5s ease; 
   z-index: 0;
   &:hover{
     z-index: 1; 
     background-color: black;
     }
-  }
 `;
 
 export const PodcastCardId = styled.p`
@@ -232,7 +224,6 @@ export const PodcastEmptyList = styled.p`
   align-items: center;
   font-style: italic;
   font-weight: bold;
-  user-select: none;
 `
 
 export const PodcastThumbnails = styled.div`
@@ -339,13 +330,13 @@ export const PodcastAdd = styled.div`
 `;
 
 export const StyledPodcastCardMore = styled.div`
-  user-select: none;
+  --animate-duration: 0.2s;
   position: absolute; 
   right: calc((0.5vw + 0.5vh)/2);
   width: calc((20vw + 20vh)/2);
   height: calc((22vw + 22vh)/2);
   background-color: rgb(40,40,40);
-  z-index: 10;
+  z-index: 4;
   display: flex; 
   padding: 0.75%;
   flex-direction: column;
@@ -442,7 +433,7 @@ export const StyledPodcastCardMore = styled.div`
       .createInput{
         border-radius: calc((0.2vw + 0.2vh)/2); 
         margin-top: 1%;
-        height: calc((2.5vw + 2.5vh)/2);
+        height: calc((2.25vw + 2.25vh)/2);
         display: flex; 
         align-items: center;
         justify-content: space-between;
@@ -492,13 +483,13 @@ export const StyledPodcastCardMore = styled.div`
         border-radius: calc((0.2vw + 0.2vh)/2); 
         margin-top: 2%;
         padding-left: 7%;
-        height: calc((2.5vw + 2.5vh)/2);
+        height: calc((2.75vw + 2.75vh)/2);
         display: flex; 
         align-items: center;
         transition: all 0.3s ease; 
         &:hover{
           cursor: pointer;
-          user-select: none; 
+       
           background-color: rgb(62,62,62);
         }
       }
@@ -541,8 +532,10 @@ export const PodcastArrangeTitleIcon = styled.div`
     font-size: calc((1.5vw + 1.5vh)/2);
     color: black;
   }
-  user-select: none;
   height: 90%;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export const PodcastArrangeTitle = styled.p`
@@ -553,7 +546,9 @@ export const PodcastArrangeTitle = styled.p`
   font-size: calc((1.2vw + 1.2vh)/2);
   color: black;
   font-weight: 700;
-  user-select: none;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export const SortBy = styled.div`
@@ -561,12 +556,14 @@ export const SortBy = styled.div`
   justify-content: flex-end;
   align-items: center;
   grid-area: 1/3/2/4;
-  font-size: calc((1.25vw + 1.25vh)/2);
-  font-weight: bold;
-  color: black;
-  user-select: none;
-  &:hover {
-    cursor: pointer;
+  p{
+    font-size: calc((1.25vw + 1.25vh)/2);
+    font-weight: bold;
+    color: black;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -579,10 +576,10 @@ export const SortByIcon = styled.div`
   .iconArrowDown {
     font-size: calc((1.18vw + 1.vh)/2);
   }
-  user-select: none;
 `;
 
 export const PodcastArrangeList = styled.ul`
+  --animate-duration: 0.2s;
   background-color: black;
   position: absolute;
   top: calc((2.6vw + 2.6vh)/2);
@@ -613,7 +610,6 @@ export const PodcastArrangeListElement = styled.li`
   padding-bottom: calc((1vw + 1vh)/2);
   padding-left: calc((2vw + 2vh)/2);
   padding-right: calc((2vw + 2vh)/2);
-  user-select: none;
 `;
 
 export const PodcastListTypeElement = styled.p`
@@ -630,7 +626,6 @@ export const PodcastListTypeElement = styled.p`
   align-items: center;
   margin-left: 1.1%;
   margin-right: 1.1%;
-  user-select: none;
   transform-origin: center;
   font-size: calc((1.3vw + 1.3vh)/2);
   letter-spacing: calc((0.05vw + 0.05vh)/2);
@@ -644,6 +639,7 @@ export const PodcastListTypeElement = styled.p`
 `;
 
 export const PodcastShareStyled = styled.div`
+  --animate-duration: 0.2s;
   width: 100%;
   height: 100%;
   background-color: #00000080;
@@ -680,7 +676,7 @@ export const PodcastShareBlockTitle = styled.div`
   p {
     font-size: calc((1.5vw + 1.5vh)/2);
     font-weight: bold;
-    user-select: none;
+
   }
 
   .shareBlockIcon {
@@ -730,7 +726,7 @@ export const PodcastShareBlockContent = styled.div`
       height: calc((18vw + 18vh)/2);
       border-radius: calc((2.5vw + 2.5vh)/2);
       box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
-      user-select: none;
+  
     }
   }
 
@@ -757,7 +753,7 @@ export const PodcastShareBlockContent = styled.div`
         p {
           font-size: calc((2.25vw + 2.25vh)/2);
           white-space: nowrap;
-          user-select: none;
+      
           width: max-content; 
         }
 
@@ -781,7 +777,7 @@ export const PodcastShareBlockContent = styled.div`
         font-size: calc((1.5vw + 1.5vh)/2);
 /*         color: #000000bf; */
         font-weight: bold;
-        user-select: none;
+    
       }
 
       .contentInfoLength {
@@ -789,7 +785,7 @@ export const PodcastShareBlockContent = styled.div`
         font-size: calc((1.25vw + 1.25vh)/2);
 /*         color: #000000bf; */
         font-weight: bold;
-        user-select: none;
+    
       }
 
       .contentInfoButton {
@@ -833,7 +829,6 @@ export const PodcastShareSendto = styled.p`
   font-weight: bold;
   display: flex;
   align-items: flex-end;
-  user-select: none;
 `;
 
 export const PodcastShareBlockSocial = styled.div`
@@ -854,7 +849,7 @@ export const PodcastShareBlockSocial = styled.div`
       transition: all 0.3s ease;
       transform: scale(1.2);
     }
-    user-select: none;
+
   }
 `;
 
@@ -896,6 +891,7 @@ export const PodcastShareCopyButton = styled.div`
 `;
 
 export const PodcastInfoStyled = styled.div`
+  --animate-duration: 0.2s;
   width: 100%;
   height: 100%;
   background-color: #00000080;
@@ -950,8 +946,7 @@ export const PodcastInfoBlockTitle = styled.div`
   padding-right: 2%;
   background: linear-gradient(to bottom, rgb(160,160,152), rgb(82,82,77));
   border-top-left-radius: calc((1vw + 1vh)/2);
-  border-top-right-radius: calc((1vw + 1vh)/2);
-  user-select: none; 
+  border-top-right-radius: calc((1vw + 1vh)/2); 
   .infoThumbnail{
     grid-area: 1/1/2/2;
     display: flex; 
@@ -1010,7 +1005,7 @@ export const PodcastInfoBlockDescription = styled.div`
      color: rgb(193,193,193);
    }
    
-   user-select: none; 
+ 
  }
  
  .descriptionButton {
@@ -1118,7 +1113,7 @@ export const PodcastInfoBlockDescription = styled.div`
     font-size: calc((1.25vw + 1.25vh)/2);
     font-weight: bold;
     border-bottom: 3px solid rgb(30,215,96);
-    user-select: none;
+
   }
  }
  .descriptionContent{
@@ -1131,7 +1126,7 @@ export const PodcastInfoBlockDescription = styled.div`
     text-align: justify;
     color: rgb(174,174,174);
     font-size: calc((1.3vw + 1.3vh)/2);
-    user-select: none;
+
     line-height: calc((2.25vw + 2.25vh)/2);
     white-space: normal;
   }
@@ -1154,4 +1149,118 @@ export const PodcastInfoBlockDescription = styled.div`
     background: #555;
   }
  }
+`
+export const StyledPodcastPlaylist = styled.div`
+ position: absolute; 
+ top: 0; 
+ left: 0; 
+ width: 100%; 
+ height: 100%; 
+ padding-left: 2%;
+ padding-right: 2%;
+ padding-top: 1%; 
+ z-index: 6; 
+ background-color: white ;
+ user-select: none; 
+`
+export const PodcastPlaylistBackButton = styled.div`
+ display: flex; 
+ flex-direction: row;
+ align-items: center;
+ height: 4%; 
+ transform-origin: center;
+ transition: all 0.3s ease;
+ svg{
+  color: black;
+  font-size: calc((2vw + 2vh)/2);
+ }
+ p{
+  color: black;
+  font-size: calc((1.5vw + 1.5vh)/2);
+ }
+ &:hover{
+  transform: scale(1.005);
+  svg{
+    color: gray;
+  }
+  p{
+    color: gray;
+  }
+  cursor: pointer;
+ }
+`
+export const PodcastPlaylistTitle = styled.div`
+ height: 10%; 
+ display: flex; 
+ align-items: center;
+ justify-content: space-between; 
+ .playListTitle{
+   display: flex; 
+   justify-content: center; 
+   p{
+    font-size: calc((3vw + 3vh)/2);
+    color: black;
+    font-weight: bold; 
+   }
+   .titleIcon{
+   display: flex; 
+    align-items: center;
+    svg{
+      font-size: calc((3vw + 3vh)/2);
+      color: black;
+    }
+   }
+ }
+   .titleSearch{
+    width: 15%;  
+   height: 50%; 
+   border: 2px solid grey; 
+   border-radius: calc((3vw + 3vh)/2);
+   display: flex; 
+   align-items: center;
+   justify-content: end; 
+  .titleSearchIcon{
+    width: 15%; 
+    height: 100%;  
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    svg{ 
+      font-size: calc((1.25vw + 1.25vh)/2);
+     }
+  }
+  input{
+    height: 100%;
+    width: 85%;
+    outline: none; 
+    border: none; 
+    height: 100%;
+    border-top-right-radius: calc((3vw + 3vh)/2);
+    border-bottom-right-radius: calc((3vw + 3vh)/2);
+    font-size: calc((1.25vw + 1.25vh)/2); 
+  }
+ }
+`
+export const PodcastPlaylistType = styled.p`
+  height: 6%; 
+  display: flex; 
+  flex-direction: row;
+  font-size: calc((2.5vw + 2.5vh)/2);
+  padding-left: 2%; 
+  .listTypeIcon{
+    display: flex; 
+    align-items: center;
+    svg{
+    font-size: calc((2.5vw + 2.5vh)/2);
+    }
+  }
+`
+
+export const PodcastPlayListContent = styled.div`
+padding-left: 2%;   
+width: 100%; 
+
+`
+export const PodcastPlaylistBlock = styled.div`
+
 `

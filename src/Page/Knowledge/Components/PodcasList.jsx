@@ -17,7 +17,7 @@ import {
   PodcastArrangeTitleIcon
 } from "../Knowledge.desktop";
 import PodcastCard from "./PodcastCard";
-import { podcastsData, podcastsType, podcastsArrangeData, playlistsData } from "../Knowledge.data";
+import { podcastsData, podcastsType, podcastsArrangeData } from "../Knowledge.data";
 import { KnowledgeContext } from "../Knowledge";
 
 // Utility and helper function imports
@@ -25,19 +25,26 @@ import { customNumberSort, customStringSort } from "../utils/customSort";
 
 // Asset imports
 import { Icon } from "../../../assets/icon";
+import { ANIMATIONS } from "../utils/animationConstants";
+
 
 
 const PodcastList = ({
 }) => {
+  const { FADE_IN } = ANIMATIONS;
   const {
     isPlayingId, setIsPlayingId, isFavourite, setIsFavourite,
     podcastsDataFilter, setPodcastsDataFilter,
     podcastStatus, setPodcastStatus, podcastShare, setPodcastShare,
     setIsPodcastShareDisplay, podcastInfo, setPodcastInfo,
     setIsPodcastInfoDisplay, playListDataFilter,
-    setPlayListDataFilter
+    setPlayListDataFilter,
+    isPodcastPlaylistDisplay,
+    setIsPodcastPlaylistDisplay
   } = useContext(KnowledgeContext);
-
+  const timeoutId = useRef(null);
+  const [podcastCardAnimation, setPodcastCardAnimation] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
   const podCastListTypeRef = useRef(null);
   const [startX, setStartX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -79,9 +86,21 @@ const PodcastList = ({
   const handleArrangeElementClick = (e) => {
     setSortbyValue(e.target.innerText);
     setIsDisplayArrangeList(false);
+    clearTimeout(timeoutId.current);
+    setPodcastCardAnimation(true);
+    setAnimationKey(prev => prev + 1);
   }
 
-  const handleTypeClick = (index) => setPostcastType(index);
+  const handleTypeClick = (index) => {
+    clearTimeout(timeoutId.current);
+    setPostcastType(index);
+    setPodcastCardAnimation(true);
+    setAnimationKey(prev => prev + 1);
+  }
+
+  const handleArrangeTitleClick = () => {
+    setIsPodcastPlaylistDisplay(true);
+  }
 
   useEffect(() => {
     const filterdata = podcastsData.filter(index => index.type.includes(podcastType));
@@ -100,6 +119,19 @@ const PodcastList = ({
 
     return () => { }
   }, [podcastType, sortbyValue, podcastStatus]);
+
+  useEffect(() => {
+    if (podcastCardAnimation) {
+      clearTimeout(timeoutId.current);
+      timeoutId.current = setTimeout(() => {
+        setPodcastCardAnimation(false);
+      }, 1500);
+    }
+    return () => {
+      clearTimeout(timeoutId.current);
+    }
+  }, [podcastCardAnimation]);
+
 
   return (
     <StyledPodcastList>
@@ -124,18 +156,20 @@ const PodcastList = ({
         ))}
       </PodcastListType>
       <PodcastArrange>
-        <PodcastArrangeTitleIcon>
+        <PodcastArrangeTitleIcon onClick={handleArrangeTitleClick}>
           <Icon.list className="iconList"></Icon.list>
         </PodcastArrangeTitleIcon>
-        <PodcastArrangeTitle>
+        <PodcastArrangeTitle onClick={handleArrangeTitleClick}>
           Danh sách Playlist
         </PodcastArrangeTitle>
-        <SortBy onClick={handleSortByClick}>{sortbyValue}</SortBy>
+        <SortBy>
+          <p onClick={handleSortByClick}>{sortbyValue}</p>
+        </SortBy>
         <SortByIcon>
           <i onClick={handleSortByClick} className="fas fa-caret-down iconArrowDown" style={{ color: "black" }}></i>
         </SortByIcon>
         {isDisplayArrangeList && (
-          <PodcastArrangeList>
+          <PodcastArrangeList className={`${FADE_IN} `}>
             {podcastsArrangeData.map(index => (
               <PodcastArrangeListElement
                 key={index.id}
@@ -153,6 +187,7 @@ const PodcastList = ({
             <React.Fragment key={value.id}>
               <PodcastCard
                 order={index + 1}
+                key={animationKey}
                 {...value}
                 cardId={cardId}
                 setCardId={setCardId}
@@ -178,6 +213,9 @@ const PodcastList = ({
                 setIsDisplayAddPlaylist={setIsDisplayAddPlaylist}
                 playListDataFilter={playListDataFilter}
                 setPlayListDataFilter={setPlayListDataFilter}
+                podcastCardAnimation={podcastCardAnimation}
+                setPodcastCardAnimation={setPodcastCardAnimation}
+                podcastType={podcastType}
               >
               </PodcastCard>
             </React.Fragment>

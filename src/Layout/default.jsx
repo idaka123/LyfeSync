@@ -86,6 +86,7 @@ const DftLaySty = styled.div`
         overflow-y: scroll;
 
         .page-content {
+            overflow-y: scroll;
             margin-left: ${({device}) => device === "desktop" ? "var(--sidebar-wt)" : "0px" };
             width: 100%;
 

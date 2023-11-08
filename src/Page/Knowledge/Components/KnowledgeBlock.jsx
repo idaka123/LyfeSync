@@ -6,11 +6,13 @@ import PodcastList from "./PodcasList";
 import {
   QuoteBlock, PodcastBlock, PodcastBlockTitle, KnowLedgeBlockStyled
 } from "../Knowledge.desktop";
+import { ANIMATIONS } from "../utils/animationConstants";
 
 const KnowLedgeBlock = ({
 }) => {
+  const { FADE_IN } = ANIMATIONS;
   return (
-    <KnowLedgeBlockStyled>
+    <KnowLedgeBlockStyled className={`${FADE_IN}`}>
       <QuoteBlock>
         <Community />
         <Wisdom />
