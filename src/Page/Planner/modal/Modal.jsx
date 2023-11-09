@@ -38,6 +38,8 @@ const TaskModal = () => {
             growth: false,
             relationship: false,
         }
+        
+        console.log("modal", modal)
 
         if(modal.content !== null) {
             
@@ -47,6 +49,8 @@ const TaskModal = () => {
                 area: modal?.content?.area || [],
                 deadline: modal?.content?.deadline,
                 note: modal?.content?.note || "",
+                dateDone: modal?.content?.dateDone || [],
+                active: modal?.content?.active || false,
             })
 
 
@@ -104,14 +108,14 @@ const TaskContent = (p) => {
             mode={mode}
             areaData={areaData}/>
     ) : (
-    modal.title === "task" ?
+    modal.type === "task" ?
         <Task 
             dataInput={dataInput} 
             setDataInput={setDataInput}
             mode={mode}
             areaData={areaData}/> :
 
-        modal.title === "routine" ? 
+        modal.type === "routine" ? 
         <Routine
             dataInput={dataInput} 
             setDataInput={setDataInput}

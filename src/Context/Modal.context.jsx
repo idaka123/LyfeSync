@@ -12,16 +12,18 @@ export const ModalProvider = (p) => {
     const [modal, setModal] = React.useState({
         isOpen: false,
         title: null,
-        content: null
+        content: null,
+        type: null
       });
       const [isDataLoaded, setIsDataLoaded] = React.useState(false);
       
-      const openModal = (title = null, content = null) => {
+      const openModal = (title = null, content = null, type = null) => {
         openOverlay()
         setModal({
           isOpen: true,
           title,
-          content
+          content,
+          type
         });
         window.dispatchEvent(new CustomEvent('modalOpening'));
       };
@@ -32,7 +34,8 @@ export const ModalProvider = (p) => {
         setModal({
           isOpen: false,
           content: null,
-          title: null
+          title: null,
+          type: null
         });
         setIsDataLoaded(false);
         window.dispatchEvent(new CustomEvent('modalClosing'));

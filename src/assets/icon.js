@@ -1,5 +1,4 @@
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai';
+import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters, AiFillTag, AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai'
 import { MdSecurity, MdOutlineAdminPanelSettings, MdNotificationsNone, MdDelete } from 'react-icons/md'
 import { FiUser, FiSettings, FiMenu } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
@@ -9,11 +8,13 @@ import { VscSearch } from 'react-icons/vsc'
 import { BsCart2 } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import { AiOutlineLoading3Quarters, AiFillTag } from 'react-icons/ai'
 import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
+import { GrPlay } from 'react-icons/gr'
+import { CiPause1 } from 'react-icons/ci'
 import { RiCloseFill } from 'react-icons/ri'
+import { HiOutlinePlay } from 'react-icons/hi'
 
 
 
@@ -42,5 +43,7 @@ export const Icon = {
     tree: SiGumtree,
     setting: FiSettings,
     menu: FiMenu,
-    x: RiCloseFill
+    x: RiCloseFill,
+    Playy: HiOutlinePlay,
+    pause: CiPause1
 }

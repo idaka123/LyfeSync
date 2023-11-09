@@ -24,7 +24,10 @@ import {
   edit,
   deleteIcon,
   plus,
-  plusCircle
+  plusCircle,
+  routineDone,
+  routineMiss,
+  status
 } from './svg.jsx'
 
 const Img = {
@@ -52,7 +55,10 @@ const Img = {
   edit,
   deleteIcon,
   plus,
-  plusCircle
+  plusCircle,
+  routineDone,
+  routineMiss,
+  status
 }
 
 export { Img }

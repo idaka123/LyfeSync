@@ -43,3 +43,23 @@ export const convertUpperCase = (string) => {
   console.log(upperCase)
   return upperCase
 }
+
+export const convertDates = (dateArray) => {
+    return dateArray.map(dateStr => {
+        let date = new Date(dateStr);
+        return date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate();
+    });
+}
+
+export const  getRecentSevenDates = (array) => {
+  const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var now = new Date(); 
+  var dates = array.map(date => new Date(date))
+
+  var orderedDates = weekDays.map((day,index) => {
+    var dateInWeek = dates.find(date => date.getDay() === (now.getDay() + index + 1) % 7);
+    return dateInWeek ? dateInWeek.toString() : null;
+  });
+
+  return orderedDates;
+}

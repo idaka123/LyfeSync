@@ -255,7 +255,8 @@ const Card = (p) => {
         subTask = [],
         id,
         dataSection,
-        setDateSection } = p
+        setDateSection,
+        } = p
     // const { task, setTask }  = useContext(TaskContext)
     const { openModal }  = useContext(ModalContext)
 
@@ -299,7 +300,7 @@ const Card = (p) => {
                 note,
                 id
             }
-            openModal(title, data)
+            openModal(title, data, "task")
         },
         check: () => { // Check task
             setChecked(!checked)
@@ -523,6 +524,8 @@ const Option = (p) => {
     const Icon = (p) => {
         const {icon} = p
         const Image = Img[icon]
+
+        if(Image)
         return <Image/>
     }
 

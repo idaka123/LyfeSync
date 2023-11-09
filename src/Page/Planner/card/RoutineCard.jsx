@@ -2,12 +2,13 @@ import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
+import { Icon } from "../../../Assets/icon";
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
-import { compareDates, dateConvert } from "../../../Util/util"
+import { compareDates, dateConvert, getRecentSevenDates } from "../../../Util/util"
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.context";
 import SubTask from "./SubTask";
-import language from "../../../Util/language"
+
 
 const RoutineCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p
@@ -19,9 +20,27 @@ const RoutineCard = (p) => {
 
     useEffect(() => {
     
-        const setupDate = () => {    
+        const setupDate = () => {   
+            
+            const filterRoutineDo = (routine) => {
+                return routine.filter((data) => {
+                    return data.active === true
+                });
+            };
+
+            const filterRoutineDontNeed = (routine) => {
+                return routine.filter((data) => {
+                    return data.active === false
+                });
+            };
+
+            const mustDo = filterRoutineDo(dataSection)
+            const doNotNeed = filterRoutineDontNeed(dataSection)
+            
             setDateType({
-                mustdo: dataSection,
+                mustdo: mustDo,
+                doNotNeed: doNotNeed,
+                all: dataSection
             });
         };
     
@@ -47,6 +66,59 @@ const RoutineCard = (p) => {
                                                 subTask={data.sub}
                                                 dataSection={dataSection}
                                                 setDateSection={setDateSection}
+                                                dateDone={data?.dateDone}
+                                                active={data?.active}
+                                                />
+                                        )
+                                    })}
+                                    </TaskCardList>
+                                </Fragment>
+                            }
+                        </Fragment>
+
+    const AllDZ = () => <Fragment>
+                            {dateType.mustdo.length > 0 && 
+                                <Fragment>
+                                    {/* Must Do */}
+                                    <DateZoneLabel name="must-do" className="mb-10" title="Phải Làm" num={dateType.mustdo.length} />
+                                    <TaskCardList className="mb-30">
+                                    {dateType.mustdo.map((data, idx) => {
+                                        return (
+                                            <Card 
+                                                key={idx} 
+                                                id={data.id}
+                                                title={data?.title}
+                                                color={data?.color}
+                                                deadline={data?.deadline}
+                                                area={data.area}
+                                                note={data.note}
+                                                subTask={data.sub}
+                                                dataSection={dataSection}
+                                                setDateSection={setDateSection}
+                                                dateDone={data?.dateDone}
+                                                active={data?.active}
+                                                />
+                                        )
+                                    })}
+                                    </TaskCardList>
+                                    {/* Do Not Need */}
+                                    <DateZoneLabel name="must-do" className="mb-10" title="Không cần phải làm" num={dateType.doNotNeed.length} />
+                                    <TaskCardList className="mb-30">
+                                    {dateType.doNotNeed.map((data, idx) => {
+                                        return (
+                                            <Card 
+                                                key={idx} 
+                                                id={data.id}
+                                                title={data?.title}
+                                                color={data?.color}
+                                                deadline={data?.deadline}
+                                                area={data.area}
+                                                note={data.note}
+                                                subTask={data.sub}
+                                                dataSection={dataSection}
+                                                setDateSection={setDateSection}
+                                                dateDone={data?.dateDone}
+                                                active={data?.active}
                                                 />
                                         )
                                     })}
@@ -57,8 +129,10 @@ const RoutineCard = (p) => {
     return ( 
         <Container>
 
-        {dateZone === "today" &&
-            <TodayDZ />
+        {dateZone === "today" ?
+        <TodayDZ />
+        : 
+        <AllDZ />
         }  
         </Container>
      );
@@ -87,7 +161,9 @@ const Card = (p) => {
         subTask = [],
         id,
         dataSection,
-        setDateSection } = p
+        setDateSection,
+        dateDone,
+        active } = p
     // const { task, setTask }  = useContext(TaskContext)
     const { openModal }  = useContext(ModalContext)
 
@@ -129,9 +205,11 @@ const Card = (p) => {
                 deadline,
                 area,
                 note,
-                id
+                id,
+                dateDone,
+                active
             }
-            openModal(title, data)
+            openModal(title, data, "routine")
         },
         check: () => { // Check task
             setChecked(!checked)
@@ -188,7 +266,13 @@ const Card = (p) => {
             <MainTask>
                 <div className={`card-title ${color ?"text-white" : ""}  ${checked ? "blur" : ""}`}>
                     <Title>
-                        <span onClick={taskHandle.check}>{checked ? <Img.checkboxChecked /> : <Img.checkbox/>}</span>
+                        <RoutineChecked>
+                        {dateDone && getRecentSevenDates(dateDone).reverse().map((date, idx) => {
+                            if(date !== null)
+                                return <span key={idx}><Img.routineDone /></span>
+                            else return <span key={idx}><Img.routineMiss /></span>
+                        })}
+                        </RoutineChecked>
                         <div className={`title ${checked ? "line-through" : ""}`}>{title}</div>
                     </Title>
 
@@ -297,41 +381,16 @@ const AddSubTask = (p) => {
 
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId, deadline } = p
-    const [current, setCurrent] = useState()
+    const { openDetail, deleteTask, taskId } = p
 
-    useEffect(() => {
-        const compare = compareDates(new Date(), new Date(deadline))
-
-        if(compare === 0 ) {
-            setCurrent("today")
-        }
-
-    }, [taskId, deadline]);
 
     const listOption = [
         {
-            name: "today",
-            value: "Hôm nay",
-            icon: "deadline",
+            name: "continue",
+            value: "Tiếp tục",
+            icon: "Playy",
             handleClick: () => {
                 
-            }
-        },
-        {
-            name: "tomorrow",
-            value: "Mai",
-            icon: "deadline",
-            handleClick: () => {
-                console.log("123")
-            }
-        },
-        {
-            name: "someDay",
-            value: "Ngày nào đó",
-            icon: "deadline",
-            handleClick: () => {
-                console.log("123")
             }
         },
         {
@@ -352,18 +411,23 @@ const Option = (p) => {
         },
     ]
     
-    const Icon = (p) => {
+    const IconTemp = (p) => {
         const {icon} = p
-        const Image = Img[icon]
+        let Image = Img[icon]
+        if(Image)
         return <Image/>
+        else {
+            Image = Icon[icon]
+            return <Image/>
+        }
     }
 
     return (
         <OptionContainer>
          {listOption && listOption.map((item, idx) => { 
             return(
-            <li key={idx} onClick={item.handleClick} className={current === item.name ? "disable" : ""}>
-                <Icon icon={item.icon}/>
+            <li key={idx} onClick={item.handleClick} >
+                <IconTemp icon={item?.icon}/>
                 <span className="ml-7">{item.value}</span>
             </li>
             )})
@@ -487,7 +551,8 @@ const SubTaskList = styled.div `
 `
 const Title = styled.div `
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column-reverse;
 
     span {
         line-height: 1;
@@ -574,6 +639,19 @@ const OptionContainer = styled.ul `
 
         &:not(.disable):hover {
             background-color: #f5f5f5;
+        }
+    }
+`
+
+const RoutineChecked = styled.div `
+    gap: 4px;
+    padding: 5px;
+    display: flex;
+
+    span {
+        transition: all .3s ease-in-out;
+        svg:hover {
+            color: var(--second-color);
         }
     }
 `

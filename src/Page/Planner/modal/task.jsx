@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
-import { dateConvert, isDateString } from "../../../Util/util";
+import { convertDates, dateConvert, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
@@ -14,6 +14,8 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
+import RoutineContext from "../../../Context/Routine.context";
+import SwitchButton from "../../../Component/SwitchButton";
 
 const relatedArea = [
     {
@@ -65,6 +67,7 @@ const Task = (p) => {
     
     const { modal, closeModal }  = useContext(ModalContext)
     const { task, setTask, loading }  = useContext(TaskContext)
+    const { setRoutine }  = useContext(RoutineContext)
     const [valid, setValid] = useState(true)
     const fp = useRef(null);
 
@@ -206,53 +209,84 @@ const Task = (p) => {
         setDataInput({...dataInput, area: newData })
     }
 
-        // submit
-        const handleSave = async () => {
-            console.log("dataInput", dataInput)
-            const valid = checkValid()
-    
-            console.log(valid)
-    
-            if(valid){
-                setValid(true)
-                await setTask(prevData => {
-                    if(mode === "edit") {
-                        const newData = prevData.map(data => {
-                            if(data.id === modal.content.id) {
-                                return {...dataInput, id: data.id, sub: data.sub }
-                            } else {
-                                return data
-                            }
-                        })
-                        return newData
-                    } else {
-                        const newData = {...dataInput}
-                        if(typeof(newData.deadline) === "undefined") {
-                            const today = new Date()
-                            today.setHours(23,59,59,0)
-    
-                            newData.deadline = today.toString()
-                        }
-                        return [...prevData, {...newData, id: nanoid(), sub: [] }]
-                    }
-                })
-                closeModal()
-            }
-        }
-    
-        const Area = (p) => {
-            const { data } = p
-            const Image = Img[data]
-            return <Image/>
-        }
+    const handleChooseDateRoutine = (date) => {
+        setDataInput({...dataInput, dateDone: date.map(date => date.toString()) })
+    }
 
-        const checkValid = () => {
-            if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
-                setValid(false)
-                return false
-            }
-            return true
+    const handleCheckStatus = () => {
+        setDataInput({...dataInput, active: !dataInput.active })
+    }
+
+    // submit
+    const handleSave = async () => {
+        console.log("dataInput", dataInput)
+        const valid = checkValid()
+
+        console.log(valid)
+
+        if(valid){
+            setValid(true)
+            modal.type === "task" ?
+            await setTask(prevData => {
+                if(mode === "edit") {
+                    const newData = prevData.map(data => {
+                        if(data.id === modal.content.id) {
+                            return {...dataInput, id: data.id, sub: data.sub }
+                        } else {
+                            return data
+                        }
+                    })
+                    return newData
+                } else {
+                    const newData = {...dataInput}
+                    if(typeof(newData.deadline) === "undefined") {
+                        const today = new Date()
+                        today.setHours(23,59,59,0)
+
+                        newData.deadline = today.toString()
+                    }
+                    return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                }
+            })
+            : modal.type === "routine" && 
+            await setRoutine(prevData => {
+                if(mode === "edit") {
+                    const newData = prevData.map(data => {
+                        if(data.id === modal.content.id) {
+                            return {...dataInput, id: data.id, sub: data.sub }
+                        } else {
+                            return data
+                        }
+                    })
+                    return newData
+                } else {
+                    const newData = {...dataInput}
+                    if(typeof(newData.deadline) === "undefined") {
+                        const today = new Date()
+                        today.setHours(23,59,59,0)
+
+                        newData.deadline = today.toString()
+                    }
+                    return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                }
+            })
+            closeModal()
         }
+    }
+
+    const Area = (p) => {
+        const { data } = p
+        const Image = Img[data]
+        return <Image/>
+    }
+
+    const checkValid = () => {
+        if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
+            setValid(false)
+            return false
+        }
+        return true
+    }
 
     return ( 
     <Content>           
@@ -332,7 +366,32 @@ const Task = (p) => {
         
         </ModalSectionContent>
 
+        {/* STATUS */}
+        {modal.type === "routine" &&
+        <ModalSectionContent 
+            title="Trạng thái"
+            name="status"
+            Icon={Img.status}
+            plus={mode === "edit" ? false : secOpen.note}
+            openSec={openSec}>
+            
+            <div className="status-wrapper">
+               {dataInput.active 
+                ? <p>Dừng Hoạt Động</p>    
+                : <p>Tiếp tục Hoạt Động</p>
+                }
+                <SwitchButton
+                    handleCheckStatus={handleCheckStatus}
+                    defaultValue={dataInput.active}
+                />
+            </div>
+            
+        </ModalSectionContent>}
+
+
         {/* DEADLINE */}
+        {
+        dataInput.deadline ?
         <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
             <Deadline>
             {mode === "edit" && secOpen.deadline 
@@ -372,7 +431,31 @@ const Task = (p) => {
                     </Fragment>
                 )}
             </Deadline>
+        </ModalSectionContent>:
+        
+        // date DONE
+        dataInput.dateDone && 
+        <ModalSectionContent title="Ngày hoàn thành" Icon={Img.deadline} >
+            <DateDone>
+                <Fragment>
+                <div className="flat-picker-wrapper">
+                    <Flatpickr
+                    ref={fp}
+                    options={{
+                        mode: "multiple",
+                        inline: true,
+                        maxDate: "today",
+                    }}
+                    value={convertDates(dataInput.dateDone)}
+                    onChange={handleChooseDateRoutine}
+                    />
+                </div>
+                </Fragment>
+            </DateDone>
         </ModalSectionContent>
+        }
+
+ 
 
         {/* NOTE */}
         <ModalSectionContent 
@@ -613,6 +696,20 @@ const Deadline = styled.div`
         display: none!important;
     }
 `
+const DateDone = styled.div`
+    text-align: center;
+    
+    .flat-picker-wrapper {
+        justify-content: center;
+
+    }
+
+    input.flatpickr-input {
+        display: none!important;
+    }
+`
+
+
 
 const Ratio = styled.div`
 
@@ -699,6 +796,14 @@ const ModalSectionContentStyle = styled.div `
             height: auto!important;
         }}
         
+
+        .status-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
     `
 
 const Validate = styled.p`

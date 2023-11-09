@@ -20,7 +20,7 @@ const TaskSection = (p) => {
 
     const handleClickAdd = (e) => {
         const name = e.target.getAttribute("name")
-        openModal(name)
+        openModal(name, null, name)
         // localStorage.setItem("tab", name)
     }
     return (

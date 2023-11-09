@@ -90,7 +90,7 @@ const TaskSectionMobile = (p) => {
 
     const hdleClickBtn = (e) => {
         const name = e.target.getAttribute("name")
-        openModal(name)
+        openModal(name, null, name)
     }
 
     return (
