@@ -9,11 +9,14 @@ import TaskCard from "./card/TaskCard";
 import TaskContext from "../../Context/Task.context";
 import Loading from "../../Component/Loadding";
 import ModalContext from "../../Context/Modal.context";
+import RoutineContext from "../../Context/Routine.context";
+import RoutineCard from "./card/RoutineCard";
 
 
 const PlannerMobile = (p) => {
     const { selectTab, tab } = p
-    const { task, loading }  = useContext(TaskContext)
+    const { task, loading, setTask }  = useContext(TaskContext)
+    const { routine, loading:routineLoading, setRoutine }  = useContext(RoutineContext)
     // const selectTab = (e) => {
     //     const name = e.target.getAttribute("name")
     //     setTab(name)
@@ -45,7 +48,11 @@ const PlannerMobile = (p) => {
                 ? <Loading /> 
                 : <TaskSectionMobile 
                     tab={tab} 
-                    data={tab === "task" ? task : []} // separate between each tab with it own data
+                    data={
+                        tab === "task" ? task : 
+                        tab === "routine" && routine
+                        } // separate between each tab with it own data
+                    setDateSection={tab === "task" ? setTask : setRoutine }
                    />
             }
         </Container>
@@ -54,11 +61,7 @@ const PlannerMobile = (p) => {
 
 
 const TaskSectionMobile = (p) => {
-    const { tab, data } = p
-
-    const { setTask }  = useContext(TaskContext)
-
-    const [dataSection, setDateSection] = useState(data)
+    const { tab, data, setDateSection } = p
     const [dateZone, setDateZone] = useState("today")
     const { openModal }  = useContext(ModalContext)
 
@@ -83,10 +86,6 @@ const TaskSectionMobile = (p) => {
         }
     }
 
-    useEffect(() => {
-        // update data context follow new data from child component
-        // setTask(dataSection)
-    }, [dataSection]);
 
     const hdleClickBtn = (e) => {
         const name = e.target.getAttribute("name")
@@ -109,8 +108,9 @@ const TaskSectionMobile = (p) => {
                 data={tab} // task, routine, goal
                 setDateZone={setDateZone}
                 >
-            {dataSection && dataSection.length > 0
-                ?<TaskCard dataSection={dataSection} setDateSection={setDateSection} dateZone={dateZone}/> 
+            {data && data.length > 0 &&
+                tab === "task" ?<TaskCard dataSection={data} setDateSection={setDateSection} dateZone={dateZone}/> :
+                tab === "routine" ?<RoutineCard dataSection={data} setDateSection={setDateSection} dateZone={dateZone}/> 
                 :<Fragment>
                     <ImgMotivation>
                         <img src={plannerData[tab]?.empty?.img} alt="" />

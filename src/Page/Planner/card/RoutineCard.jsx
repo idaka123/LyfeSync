@@ -78,55 +78,52 @@ const RoutineCard = (p) => {
                         </Fragment>
 
     const AllDZ = () => <Fragment>
-                            {dateType.mustdo.length > 0 && 
-                                <Fragment>
-                                    {/* Must Do */}
-                                    <DateZoneLabel name="must-do" className="mb-10" title="Phải Làm" num={dateType.mustdo.length} />
-                                    <TaskCardList className="mb-30">
-                                    {dateType.mustdo.map((data, idx) => {
-                                        return (
-                                            <Card 
-                                                key={idx} 
-                                                id={data.id}
-                                                title={data?.title}
-                                                color={data?.color}
-                                                deadline={data?.deadline}
-                                                area={data.area}
-                                                note={data.note}
-                                                subTask={data.sub}
-                                                dataSection={dataSection}
-                                                setDateSection={setDateSection}
-                                                dateDone={data?.dateDone}
-                                                active={data?.active}
-                                                />
-                                        )
-                                    })}
-                                    </TaskCardList>
-                                    {/* Do Not Need */}
-                                    <DateZoneLabel name="must-do" className="mb-10" title="Không cần phải làm" num={dateType.doNotNeed.length} />
-                                    <TaskCardList className="mb-30">
-                                    {dateType.doNotNeed.map((data, idx) => {
-                                        return (
-                                            <Card 
-                                                key={idx} 
-                                                id={data.id}
-                                                title={data?.title}
-                                                color={data?.color}
-                                                deadline={data?.deadline}
-                                                area={data.area}
-                                                note={data.note}
-                                                subTask={data.sub}
-                                                dataSection={dataSection}
-                                                setDateSection={setDateSection}
-                                                dateDone={data?.dateDone}
-                                                active={data?.active}
-                                                />
-                                        )
-                                    })}
-                                    </TaskCardList>
-                                </Fragment>
-                            }
+                            {/* Must Do */}
+                            <DateZoneLabel name="must-do" className="mb-10" title="Phải Làm" num={dateType.mustdo.length} />
+                            <TaskCardList className="mb-30">
+                            {dateType.mustdo.map((data, idx) => {
+                                return (
+                                    <Card 
+                                        key={idx} 
+                                        id={data.id}
+                                        title={data?.title}
+                                        color={data?.color}
+                                        deadline={data?.deadline}
+                                        area={data.area}
+                                        note={data.note}
+                                        subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
+                                        dateDone={data?.dateDone}
+                                        active={data?.active}
+                                        />
+                                )
+                            })}
+                            </TaskCardList>
+                            {/* Do Not Need */}
+                            <DateZoneLabel name="must-do" className="mb-10" title="Không cần phải làm" num={dateType.doNotNeed.length} />
+                            <TaskCardList className="mb-30">
+                            {dateType.doNotNeed.map((data, idx) => {
+                                return (
+                                    <Card 
+                                        key={idx} 
+                                        id={data.id}
+                                        title={data?.title}
+                                        color={data?.color}
+                                        deadline={data?.deadline}
+                                        area={data.area}
+                                        note={data.note}
+                                        subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
+                                        dateDone={data?.dateDone}
+                                        active={data?.active}
+                                        />
+                                )
+                            })}
+                            </TaskCardList>
                         </Fragment>
+           
     return ( 
         <Container>
 
@@ -395,6 +392,7 @@ const Option = (p) => {
                 setRoutine(prev => {
                     const newRoutine = [...prev]
                     const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    console.log(" newRoutine[index]",  newRoutine[index])
                     newRoutine[index].active = !active;
                     return newRoutine
                 })
