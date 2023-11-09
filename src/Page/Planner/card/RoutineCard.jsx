@@ -8,6 +8,7 @@ import { compareDates, dateConvert, getRecentSevenDates } from "../../../Util/ut
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.context";
 import SubTask from "./SubTask";
+import RoutineContext from "../../../Context/Routine.context";
 
 
 const RoutineCard = (p) => {
@@ -299,7 +300,8 @@ const Card = (p) => {
                                 taskId={id} 
                                 openDetail={taskHandle.open} 
                                 deleteTask={taskHandle.option.delete}
-                                deadline={deadline}/>
+                                deadline={deadline}
+                                active={active}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
@@ -381,16 +383,21 @@ const AddSubTask = (p) => {
 
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId } = p
-
-
+    const { openDetail, deleteTask, taskId, active } = p
+    const { setRoutine }  = useContext(RoutineContext)
+    
     const listOption = [
         {
-            name: "continue",
-            value: "Tiếp tục",
-            icon: "Playy",
+            name: active ? "pause" : "continue",
+            value: active ? "Dừng lại" : "Tiếp tục",
+            icon: active ? "pause2" : "play2",
             handleClick: () => {
-                
+                setRoutine(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    newRoutine[index].active = !active;
+                    return newRoutine
+                })
             }
         },
         {

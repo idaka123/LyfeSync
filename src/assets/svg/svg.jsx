@@ -57,3 +57,7 @@ export const routineDone = () => <svg xmlns="http://www.w3.org/2000/svg" width="
 export const routineMiss = () => <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-minus h-5 w-5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
 
 export const status = () => <svg data-v-e32cd4c2="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-activity h-4 w-4"><polyline data-v-e32cd4c2="" points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+
+export const play2 = () => <svg data-v-eead4bfa="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-play h-6 w-6"><polygon data-v-eead4bfa="" points="5 3 19 12 5 21 5 3"></polygon></svg>
+
+export const pause2 = () => <svg data-v-eead4bfa="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-pause-circle h-6 w-6"><circle data-v-eead4bfa="" cx="12" cy="12" r="10"></circle><line data-v-eead4bfa="" x1="10" y1="15" x2="10" y2="9"></line><line data-v-eead4bfa="" x1="14" y1="15" x2="14" y2="9"></line></svg>

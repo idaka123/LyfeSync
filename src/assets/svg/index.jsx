@@ -27,7 +27,9 @@ import {
   plusCircle,
   routineDone,
   routineMiss,
-  status
+  status,
+  pause2,
+  play2
 } from './svg.jsx'
 
 const Img = {
@@ -58,7 +60,9 @@ const Img = {
   plusCircle,
   routineDone,
   routineMiss,
-  status
+  status,
+  pause2,
+  play2
 }
 
 export { Img }
