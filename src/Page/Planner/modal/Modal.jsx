@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import ModalContext from "../../../Context/Modal.context";
 import Task from "./Task";
 import Routine from "./Routine";
+import Goal from "./Goal";
 
 const TaskModal = () => {
     const { modal }  = useContext(ModalContext)
@@ -51,6 +52,7 @@ const TaskModal = () => {
                 note: modal?.content?.note || "",
                 dateDone: modal?.content?.dateDone || [],
                 active: modal?.content?.active || false,
+                target: modal?.content?.target || "0%",
             })
 
 
@@ -108,15 +110,18 @@ const TaskContent = (p) => {
             mode={mode}
             areaData={areaData}/> :
 
-        modal.type === "routine" ? 
+    modal.type === "routine" ? 
         <Routine
             dataInput={dataInput} 
             setDataInput={setDataInput}
             mode={mode}
-            areaData={areaData}/>
-        : null
-    
-
+            areaData={areaData}/> :
+    modal.type === "goal" &&
+        <Goal
+            dataInput={dataInput} 
+            setDataInput={setDataInput}
+            mode={mode}
+            areaData={areaData}/> 
     }
     </Modal>
      );

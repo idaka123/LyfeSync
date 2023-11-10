@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
-import Input from "../../../Component/Input"
 import { Icon } from "../../../Assets/icon";
-import { useState, useEffect, Fragment, useContext, useMemo } from "react";
-import { getRecentSevenDates } from "../../../Util/util"
-import { nanoid } from 'nanoid'
+import { useState, useEffect, Fragment, useContext } from "react";
+import { dateConvert } from "../../../Util/util"
 import ModalContext from "../../../Context/Modal.context";
-import SubTask from "./SubTask";
 import RoutineContext from "../../../Context/Routine.context";
+import GoalContext from "../../../Context/Goal.context";
+import _ from 'lodash';
 
 
-const RoutineCard = (p) => {
+const GoalCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p
     // const { task }  = useContext(TaskContext)
     const [dateType, setDateType] = useState({
@@ -23,24 +22,7 @@ const RoutineCard = (p) => {
     
         const setupDate = () => {   
             
-            const filterRoutineDo = (routine) => {
-                return routine.filter((data) => {
-                    return data.active === true
-                });
-            };
-
-            const filterRoutineDontNeed = (routine) => {
-                return routine.filter((data) => {
-                    return data.active === false
-                });
-            };
-
-            const mustDo = filterRoutineDo(dataSection)
-            const doNotNeed = filterRoutineDontNeed(dataSection)
-            
             setDateType({
-                mustdo: mustDo,
-                doNotNeed: doNotNeed,
                 all: dataSection
             });
         };
@@ -48,40 +30,11 @@ const RoutineCard = (p) => {
         setupDate();
     }, [dataSection]);
 
-    const TodayDZ = () => <Fragment>
-                            {dateType.mustdo.length > 0 && 
-                                <Fragment>
-                                    {/* Must Do */}
-                                    <DateZoneLabel name="must-do" className="mb-10" title="Phải Làm" num={dateType.mustdo.length} />
-                                    <TaskCardList className="mb-30">
-                                    {dateType.mustdo.map((data, idx) => {
-                                        return (
-                                            <Card 
-                                                key={idx} 
-                                                id={data.id}
-                                                title={data?.title}
-                                                color={data?.color}
-                                                deadline={data?.deadline}
-                                                area={data.area}
-                                                note={data.note}
-                                                subTask={data.sub}
-                                                dataSection={dataSection}
-                                                setDateSection={setDateSection}
-                                                dateDone={data?.dateDone}
-                                                active={data?.active}
-                                                />
-                                        )
-                                    })}
-                                    </TaskCardList>
-                                </Fragment>
-                            }
-                        </Fragment>
-
     const AllDZ = () => <Fragment>
                             {/* Must Do */}
-                            <DateZoneLabel name="must-do" className="mb-10" title="Phải Làm" num={dateType.mustdo.length} />
+                            <DateZoneLabel name="must-do" className="mb-10" title="Tất cả" num={dateType.all.length} />
                             <TaskCardList className="mb-30">
-                            {dateType.mustdo.map((data, idx) => {
+                            {dateType.all.map((data, idx) => {
                                 return (
                                     <Card 
                                         key={idx} 
@@ -91,33 +44,9 @@ const RoutineCard = (p) => {
                                         deadline={data?.deadline}
                                         area={data.area}
                                         note={data.note}
-                                        subTask={data.sub}
                                         dataSection={dataSection}
                                         setDateSection={setDateSection}
-                                        dateDone={data?.dateDone}
-                                        active={data?.active}
-                                        />
-                                )
-                            })}
-                            </TaskCardList>
-                            {/* Do Not Need */}
-                            <DateZoneLabel name="must-do" className="mb-10" title="Không cần phải làm" num={dateType.doNotNeed.length} />
-                            <TaskCardList className="mb-30">
-                            {dateType.doNotNeed.map((data, idx) => {
-                                return (
-                                    <Card 
-                                        key={idx} 
-                                        id={data.id}
-                                        title={data?.title}
-                                        color={data?.color}
-                                        deadline={data?.deadline}
-                                        area={data.area}
-                                        note={data.note}
-                                        subTask={data.sub}
-                                        dataSection={dataSection}
-                                        setDateSection={setDateSection}
-                                        dateDone={data?.dateDone}
-                                        active={data?.active}
+                                        target={data.target}
                                         />
                                 )
                             })}
@@ -126,12 +55,7 @@ const RoutineCard = (p) => {
            
     return ( 
         <Container>
-
-        {dateZone === "today" ?
-        <TodayDZ />
-        : 
-        <AllDZ />
-        }  
+            <AllDZ />
         </Container>
      );
 }
@@ -156,45 +80,32 @@ const Card = (p) => {
         deadline = "",
         area = [],
         note = "",
-        subTask = [],
         id,
         dataSection,
         setDateSection,
-        dateDone,
-        active } = p
+        target
+         } = p
     // const { task, setTask }  = useContext(TaskContext)
     const { openModal }  = useContext(ModalContext)
-
+    const { setGoal } = useContext(GoalContext)
+        
     const [checked, setChecked] = useState(false)
-    const [subOpen, setSubOpen] = useState(false)
-    const [sub, setSub] = useState(subTask)
-    const [subDone, setSubDone] = useState(0)
     const [option, setOption] = useState(false)
+    const [targetVl, setTargetVl] = useState(target)
 
-    const countCurrSub = (dataSub) => {
-        return dataSub.reduce((total, curr) => {
-            if (curr.done === true) {
-                return total + 1;
-            } else {
-                return total;
-            }
-        }, 0);
-    };
-      
-    const memoizedCount = useMemo(() => countCurrSub(sub), [sub]);
-      
-    useEffect(() => {
-        let isMounted = true;
-        
-        if (isMounted) {
-            setSubDone(memoizedCount);
-        }
-        
-        return () => {
-            isMounted = false;
-        };
-    }, [memoizedCount]);
 
+
+    const handleInputTarget = (e) => {
+        const { value } = e.target
+        setTargetVl(value)
+        setGoal(prev => {
+            const newGoal = [...prev]
+            const index = newGoal.map(e => e.id).indexOf(id);
+            newGoal[index].target = value;
+            return newGoal
+        })
+    }
+   
     const taskHandle = {
         open: () => { // Open modal detail
             const data = {
@@ -204,10 +115,9 @@ const Card = (p) => {
                 area,
                 note,
                 id,
-                dateDone,
-                active
+                target
             }
-            openModal(title, data, "routine")
+            openModal(title, data, "goal")
         },
         check: () => { // Check task
             setChecked(!checked)
@@ -230,60 +140,45 @@ const Card = (p) => {
             }
         }
     }
-
-    const subTaskHandle = {
-        delete: (id) => { // Delete subtask
-            let newSub = [...sub]; //prevent mutating
-            newSub = newSub.filter(data => data.id !== id)
-            setSub(newSub); 
-        },
-        add: (data) => { // Add new subtask
-            const newData = [...sub, data]
-            setSub(newData)
-        },
-        open: () => { // Open list subtask
-            setSubOpen(!subOpen)
-        },
-        check: (id, check) => { // check subtask
-            const newSub = [...sub]; //prevent mutating
-            const index = newSub.map(e => e.id).indexOf(id);
-            newSub[index].done = check;
-            setSub(newSub); 
-        }
-    }
     
     const Area = (p) => {
         const {data} = p
         const Image = Img[data]
         return <Image/>
     }
-    
+
+ 
   
     return (
         <TaskCardContainer style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="text-dark">
             <MainTask>
                 <div className={`card-title ${color ?"text-white" : ""}  ${checked ? "blur" : ""}`}>
                     <Title>
-                        <RoutineChecked>
+                        {/* <RoutineChecked>
                         {dateDone && getRecentSevenDates(dateDone).reverse().map((date, idx) => {
                             if(date !== null)
                                 return <span key={idx}><Img.routineDone /></span>
                             else return <span key={idx}><Img.routineMiss /></span>
                         })}
-                        </RoutineChecked>
+                        </RoutineChecked> */}
                         <div className={`title ${checked ? "line-through" : ""}`}>{title}</div>
                     </Title>
 
-                    {/* <Deadline>
+                    <Deadline>
                         <Img.deadline />
                         <span>{dateConvert(deadline)}</span>
-                    </Deadline> */}
+                    </Deadline>
                     
+                    <RangerContainer>
+                        <input type="range" onChange={handleInputTarget} name="target" value={targetVl} id="range" className="range" min="0" step="1" max="100" />
+                        <p>{targetVl}%</p>
+                    </RangerContainer>
+
                     <RelateArea>
                         {area && area.map((item, idx) => <Area key={idx} data={item}/>)}
                     </RelateArea>
                 </div>
-
+                
                 <div className={`card-option ${color ?"text-white" : ""}`}>
                     <Tippy
                         interactive
@@ -292,8 +187,7 @@ const Card = (p) => {
                                 taskId={id} 
                                 openDetail={taskHandle.open} 
                                 deleteTask={taskHandle.option.delete}
-                                deadline={deadline}
-                                active={active}/>
+                                deadline={deadline}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
@@ -312,24 +206,11 @@ const Card = (p) => {
     )
 }
 
+
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId, active } = p
-    const { setRoutine }  = useContext(RoutineContext)
+    const { openDetail, deleteTask, taskId } = p
     
     const listOption = [
-        {
-            name: active ? "pause" : "continue",
-            value: active ? "Dừng lại" : "Tiếp tục",
-            icon: active ? "pause2" : "play2",
-            handleClick: () => {
-                setRoutine(prev => {
-                    const newRoutine = [...prev]
-                    const index = newRoutine.map(e => e.id).indexOf(taskId);
-                    newRoutine[index].active = !active;
-                    return newRoutine
-                })
-            }
-        },
         {
             name: "edit",
             value: "Sửa",
@@ -373,7 +254,7 @@ const Option = (p) => {
     )
 }
 
-export default RoutineCard;
+export default GoalCard;
 
 
 const Container = styled.div `
@@ -482,10 +363,7 @@ const OptionBtnCon = styled.div `
         cursor: pointer;
     }
 `
-const SubTaskList = styled.div `
-    padding: 8px 12px;
 
-`
 const Title = styled.div `
     display: flex;
     align-items: flex-start;
@@ -518,6 +396,80 @@ const Deadline = styled.div `
         font-size: 1.2rem;
     }
 `
+
+const RangerContainer = styled.div `
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+        font-weight: 600;
+    }
+
+.range{
+    width: 100%;
+    height: 10px;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-image: var(--main-gradient);
+    background-repeat: no-repeat;
+    background-size:0% 100%;
+     /* background: transparent; */
+} 
+
+.range::-webkit-slider-runnable-track{
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
+    -webkit-appearance: none;
+}  
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}
+
+.range::-webkit-slider-thumb{
+    /* css cho cục mút của thanh range */
+    -webkit-appearance: none;
+    
+    /* margin-top: -10px; */
+    
+    border-radius: 100rem;
+   
+    z-index: 999;
+    /* cursor: ew-resize; */
+ 
+    width: 10px;
+    height: 10px;
+	-webkit-appearance: none;
+	cursor: ew-resize;
+	background-color: white;
+	/* box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 10px #1597ff; */
+     box-shadow:0 0 0 5px #000000, 0 0 0 7px #aba6a7;
+     /* background-image: linear-gradient(#9796f0 0%,  #aba6a7 100%); */
+	
+}   
+.range::-ms-track {
+    /* css cho cục mút của thanh range */
+    background-color: #333;
+    
+}
+
+`
+
 const RelateArea = styled.div `
     display: flex;
     gap: 6px;
@@ -525,15 +477,7 @@ const RelateArea = styled.div `
         width: 12px;
     }
 `
-const AddSubTaskContainer = styled.div `
-    display: flex;
-    align-items: center;
-    gap: 8px;
 
-    svg {
-        width: 18px;
-    }
-`
 const OptionContainer = styled.ul `
     position: absolute;
     top: 0;
@@ -576,19 +520,6 @@ const OptionContainer = styled.ul `
 
         &:not(.disable):hover {
             background-color: #f5f5f5;
-        }
-    }
-`
-
-const RoutineChecked = styled.div `
-    gap: 4px;
-    padding: 5px;
-    display: flex;
-
-    span {
-        transition: all .3s ease-in-out;
-        svg:hover {
-            color: var(--second-color);
         }
     }
 `

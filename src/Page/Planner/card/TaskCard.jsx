@@ -467,20 +467,7 @@ const AddSubTask = (p) => {
 
 const Option = (p) => {
     const { openDetail, deleteTask, taskId, deadline } = p
-    const [current, setCurrent] = useState()
     const { setTask }  = useContext(TaskContext)
-
-    useEffect(() => {
-
-        const today = new Date();
-        const tomorrow = today.setDate(today.getDate() + 1);
-
-        console.log(convertDates([today])[0], convertDates([deadline])[0], convertDates([today])[0]=== convertDates([deadline])[0])
-
-        // if(convertDates([tomorrow])[0] === convertDates([deadline])[0]){ setCurrent("tomorrow")}
-        if(convertDates([today])[0] === convertDates([deadline])[0]) {setCurrent("today")}
-
-    }, [taskId, deadline]);
 
     const listOption = [
         {

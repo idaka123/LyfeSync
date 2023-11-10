@@ -8,6 +8,7 @@ import ModalContext, { ModalProvider } from "../../Context/Modal.context";
 import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
 import { RoutineProvider } from "../../Context/Routine.context";
+import { GoalProvider } from "../../Context/Goal.context";
 
 const Planner = () => {
 
@@ -46,13 +47,15 @@ const Planner = () => {
         <AnimatePresence mode="wait">
             <TaskProvider>
                 <RoutineProvider>
-                    <ModalProvider>
-                        <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
-                                    animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
-                            <TaskModal />
-                            {device === "desktop" ? <Desktop /> : <Mobile /> }
-                        </motion.div>
-                    </ModalProvider>
+                    <GoalProvider>
+                        <ModalProvider>
+                            <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
+                                        animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
+                                <TaskModal />
+                                {device === "desktop" ? <Desktop /> : <Mobile /> }
+                            </motion.div>
+                        </ModalProvider>
+                    </GoalProvider>
                 </RoutineProvider>
             </TaskProvider> 
         </AnimatePresence>

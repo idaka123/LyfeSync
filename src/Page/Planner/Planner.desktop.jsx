@@ -9,6 +9,8 @@ import RoutineContext from "../../Context/Routine.context";
 import TaskCard from "./card/TaskCard";
 import RoutineCard from "./card/RoutineCard";
 import ModalContext from "../../Context/Modal.context";
+import GoalContext from "../../Context/Goal.context";
+import GoalCard from "./card/GoalCard";
 
 const PlannerDesktop = (p) => {
     const {  } = p
@@ -31,8 +33,9 @@ const PlannerDesktop = (p) => {
 const SectionContent = (p) => {
     const { sec, idx } = p
 
-    const { task, loading, setTask }  = useContext(TaskContext)
-    const { routine, setRoutine, loading:routineLoading }  = useContext(RoutineContext)
+    const { task, setTask }  = useContext(TaskContext)
+    const { routine, setRoutine }  = useContext(RoutineContext)
+    const { goal, setGoal }  = useContext(GoalContext)
 
     const [dateZone, setDateZone] = useState("today")
 
@@ -52,9 +55,11 @@ const SectionContent = (p) => {
         >
         {
         sec === "task" && task && task.length > 0
-        ?<TaskCard dataSection={task} setDateSection={setTask} dateZone={dateZone}/>:
+        ?<TaskCard dataSection={task} setDateSection={setTask} dateZone={dateZone}/> :
         sec === "routine" && routine && routine.length > 0
-        ?<RoutineCard dataSection={routine} setDateSection={setRoutine} dateZone={dateZone}/> 
+        ?<RoutineCard dataSection={routine} setDateSection={setRoutine} dateZone={dateZone}/> :
+        sec === "goal" && goal && goal.length > 0
+        ?<GoalCard dataSection={goal} setDateSection={setGoal} dateZone={dateZone}/> 
         :<Fragment>
             <ImgMotivation>
                 <img src={plannerData[sec]?.empty?.img} alt="" />

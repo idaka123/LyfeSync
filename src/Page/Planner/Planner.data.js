@@ -47,14 +47,6 @@ export const plannerData = {
         name: "goal",
         dateZone: [
             {
-                name: "today",
-                value: "Nay"
-            },
-            {
-                name: "week",
-                value: "Tuần"
-            },
-            {
                 name: "all",
                 value: "Tất cả"
             }
