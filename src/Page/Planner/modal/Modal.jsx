@@ -101,13 +101,6 @@ const TaskContent = (p) => {
     return ( 
     <Modal >
     {
-    mode === "edit" ? (
-        <Task 
-            dataInput={dataInput} 
-            setDataInput={setDataInput}
-            mode={mode}
-            areaData={areaData}/>
-    ) : (
     modal.type === "task" ?
         <Task 
             dataInput={dataInput} 
@@ -122,7 +115,7 @@ const TaskContent = (p) => {
             mode={mode}
             areaData={areaData}/>
         : null
-    )
+    
 
     }
     </Modal>

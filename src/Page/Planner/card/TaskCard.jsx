@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
-import { compareDates, dateConvert } from "../../../Util/util"
+import { compareDates, convertDates, dateConvert } from "../../../Util/util"
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
@@ -37,7 +37,7 @@ const TaskCard = (p) => {
             const today = new Date();
             const overDueTasks = dataSection.filter((task) => {
                 const deadline = new Date(task.deadline);
-                return deadline < today;
+                return convertDates([deadline])[0] < convertDates([today])[0]
             });
     
             const todayTasks = filterTasksByDeadline(dataSection, today);
@@ -61,8 +61,8 @@ const TaskCard = (p) => {
             }
     
             const someDayTasks = dataSection.filter((task) => {
-                const deadline = new Date(task.deadline);
-                return deadline > dateAfterTomorrow;
+                
+                return task.deadline === "someday";
             });
     
             setDateType({
@@ -379,6 +379,7 @@ const Card = (p) => {
                 <div className={`card-option ${color ?"text-white" : ""}`}>
                     <Tippy
                         interactive
+                        content="Tooltip"
                         render={attrs => (
                             <Option {...attrs} 
                                 taskId={id} 
@@ -388,8 +389,7 @@ const Card = (p) => {
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
-                        offset={[30, -20]}
-
+                        offset={[10, 0]}
                         >
                         <OptionBtnCon className="mr-5" style={{position: "relative"}} onClick={taskHandle.option.toggle}>
                             <Img.option/>
@@ -468,13 +468,17 @@ const AddSubTask = (p) => {
 const Option = (p) => {
     const { openDetail, deleteTask, taskId, deadline } = p
     const [current, setCurrent] = useState()
+    const { setTask }  = useContext(TaskContext)
 
     useEffect(() => {
-        const compare = compareDates(new Date(), new Date(deadline))
 
-        if(compare === 0 ) {
-            setCurrent("today")
-        }
+        const today = new Date();
+        const tomorrow = today.setDate(today.getDate() + 1);
+
+        console.log(convertDates([today])[0], convertDates([deadline])[0], convertDates([today])[0]=== convertDates([deadline])[0])
+
+        // if(convertDates([tomorrow])[0] === convertDates([deadline])[0]){ setCurrent("tomorrow")}
+        if(convertDates([today])[0] === convertDates([deadline])[0]) {setCurrent("today")}
 
     }, [taskId, deadline]);
 
@@ -484,7 +488,12 @@ const Option = (p) => {
             value: "Hôm nay",
             icon: "deadline",
             handleClick: () => {
-                
+                setTask(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    newRoutine[index].deadline = new Date();
+                    return newRoutine
+                })
             }
         },
         {
@@ -492,7 +501,15 @@ const Option = (p) => {
             value: "Mai",
             icon: "deadline",
             handleClick: () => {
-                console.log("123")
+                setTask(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    newRoutine[index].deadline = tomorrow;
+                    return newRoutine
+                })
+                
             }
         },
         {
@@ -500,7 +517,12 @@ const Option = (p) => {
             value: "Ngày nào đó",
             icon: "deadline",
             handleClick: () => {
-                console.log("123")
+                setTask(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    newRoutine[index].deadline = "someday";
+                    return newRoutine
+                })
             }
         },
         {
@@ -533,7 +555,11 @@ const Option = (p) => {
         <OptionContainer>
          {listOption && listOption.map((item, idx) => { 
             return(
-            <li key={idx} onClick={item.handleClick} className={current === item.name ? "disable" : ""}>
+            <li key={idx} onClick={item.handleClick} className={
+                (convertDates([new Date()])[0] === convertDates([deadline])[0] && item.name === "today")
+                || convertDates([new Date().setDate(new Date().getDate() + 1)])[0] === convertDates([deadline])[0] && item.name === "tomorrow"
+                || deadline === "someday" && item.name === "someDay"
+                ? "disable" : ""}>
                 <Icon icon={item.icon}/>
                 <span className="ml-7">{item.value}</span>
             </li>
@@ -731,6 +757,7 @@ const OptionContainer = styled.ul `
 
         &.disable {
             cursor: not-allowed;
+            pointer-events: none;
             user-select: none;
             opacity: 0.5;
         }

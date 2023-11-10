@@ -29,14 +29,14 @@ const Planner = () => {
     
     const Mobile = () => {
         return (
-            <Container>
+            <Container style={{ paddingBottom: "150px"}}>
                 <PlannerMobile selectTab={selectTab} tab={tab} />
             </Container>
     )}
 
     const Desktop = () => {
         return (
-            <Container style={{paddingTop: "40px"}}> 
+            <Container style={{paddingTop: "40px", paddingBottom: "150px"}}> 
                 <PlannerDesktop/>
             </Container>
         );

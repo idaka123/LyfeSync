@@ -4,7 +4,7 @@ import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
 import { Icon } from "../../../Assets/icon";
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
-import { compareDates, dateConvert, getRecentSevenDates } from "../../../Util/util"
+import { getRecentSevenDates } from "../../../Util/util"
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.context";
 import SubTask from "./SubTask";
@@ -392,7 +392,6 @@ const Option = (p) => {
                 setRoutine(prev => {
                     const newRoutine = [...prev]
                     const index = newRoutine.map(e => e.id).indexOf(taskId);
-                    console.log(" newRoutine[index]",  newRoutine[index])
                     newRoutine[index].active = !active;
                     return newRoutine
                 })

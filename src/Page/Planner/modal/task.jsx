@@ -67,7 +67,6 @@ const Task = (p) => {
     
     const { modal, closeModal }  = useContext(ModalContext)
     const { task, setTask, loading }  = useContext(TaskContext)
-    const { setRoutine }  = useContext(RoutineContext)
     const [valid, setValid] = useState(true)
     const fp = useRef(null);
 
@@ -209,10 +208,6 @@ const Task = (p) => {
         setDataInput({...dataInput, area: newData })
     }
 
-    const handleChooseDateRoutine = (date) => {
-        setDataInput({...dataInput, dateDone: date.map(date => date.toString()) })
-    }
-
     const handleCheckStatus = () => {
         setDataInput({...dataInput, active: !dataInput.active })
     }
@@ -226,7 +221,6 @@ const Task = (p) => {
 
         if(valid){
             setValid(true)
-            modal.type === "task" ?
             await setTask(prevData => {
                 if(mode === "edit") {
                     const newData = prevData.map(data => {
@@ -248,28 +242,7 @@ const Task = (p) => {
                     return [...prevData, {...newData, id: nanoid(), sub: [] }]
                 }
             })
-            : modal.type === "routine" && 
-            await setRoutine(prevData => {
-                if(mode === "edit") {
-                    const newData = prevData.map(data => {
-                        if(data.id === modal.content.id) {
-                            return {...dataInput, id: data.id, sub: data.sub }
-                        } else {
-                            return data
-                        }
-                    })
-                    return newData
-                } else {
-                    const newData = {...dataInput}
-                    if(typeof(newData.deadline) === "undefined") {
-                        const today = new Date()
-                        today.setHours(23,59,59,0)
 
-                        newData.deadline = today.toString()
-                    }
-                    return [...prevData, {...newData, id: nanoid(), sub: [] }]
-                }
-            })
             closeModal()
         }
     }
@@ -390,8 +363,7 @@ const Task = (p) => {
 
 
         {/* DEADLINE */}
-        {
-        dataInput.deadline ?
+        
         <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
             <Deadline>
             {mode === "edit" && secOpen.deadline 
@@ -431,32 +403,8 @@ const Task = (p) => {
                     </Fragment>
                 )}
             </Deadline>
-        </ModalSectionContent>:
-        
-        // date DONE
-        dataInput.dateDone && 
-        <ModalSectionContent title="Ngày hoàn thành" Icon={Img.deadline} >
-            <DateDone>
-                <Fragment>
-                <div className="flat-picker-wrapper">
-                    <Flatpickr
-                    ref={fp}
-                    options={{
-                        mode: "multiple",
-                        inline: true,
-                        maxDate: "today",
-                    }}
-                    value={convertDates(dataInput.dateDone)}
-                    onChange={handleChooseDateRoutine}
-                    />
-                </div>
-                </Fragment>
-            </DateDone>
         </ModalSectionContent>
-        }
-
- 
-
+        
         {/* NOTE */}
         <ModalSectionContent 
             title="Ghi chú"
@@ -696,20 +644,6 @@ const Deadline = styled.div`
         display: none!important;
     }
 `
-const DateDone = styled.div`
-    text-align: center;
-    
-    .flat-picker-wrapper {
-        justify-content: center;
-
-    }
-
-    input.flatpickr-input {
-        display: none!important;
-    }
-`
-
-
 
 const Ratio = styled.div`
 

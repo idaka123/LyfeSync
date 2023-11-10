@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
-import { dateConvert, isDateString } from "../../../Util/util";
+import { convertDates, dateConvert, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
@@ -14,6 +14,7 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
+import RoutineContext from "../../../Context/Routine.context";
 
 const relatedArea = [
     {
@@ -64,30 +65,12 @@ const Routine = (p) => {
     const { dataInput, setDataInput, mode, areaData } = p
     
     const { modal, closeModal }  = useContext(ModalContext)
-    const { task, setTask, loading }  = useContext(TaskContext)
+    const { setRoutine }  = useContext(RoutineContext)
     const [valid, setValid] = useState(true)
     const fp = useRef(null);
 
     const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
     // const [dataInput, setDataInput] = useState(data)
-    const radioData = [
-        {
-            id: "today",
-            value: "Nay"
-        },
-        {
-            id: "tomorrow",
-            value: "Mai"
-        },
-        {
-            id: "someday",
-            value: "Ngày nào đó"
-        },
-        {
-            id: "specific-day",
-            value: "Chọn ngày"
-        },
-    ]
 
     const [area, setArea] = useState(areaData)
     
@@ -128,6 +111,9 @@ const Routine = (p) => {
         })
     }
 
+    const handleChooseDateRoutine = (date) => {
+        setDataInput({...dataInput, dateDone: date.map(date => date.toString()) })
+    }
 
     const deadlineHdle = {
         openFP: () => { // open flatpicker
@@ -215,7 +201,7 @@ const Routine = (p) => {
     
             if(valid){
                 setValid(true)
-                await setTask(prevData => {
+                await setRoutine(prevData => {
                     if(mode === "edit") {
                         const newData = prevData.map(data => {
                             if(data.id === modal.content.id) {
@@ -332,47 +318,29 @@ const Routine = (p) => {
         
         </ModalSectionContent>
 
-{/* 
-        <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
-            <Deadline>
-            {mode === "edit" && secOpen.deadline 
-                ? (
-                    <EditSection name="deadline" onClick={openSec} isedit={secOpen.deadline}>
-                    {isDateString(dataInput.deadline) 
-                        ? dateConvert(dataInput.deadline)
-                        : radioData.find(radio => radio.id === dataInput.deadline)?.value ?? "Chọn thời hạn"}
-                    </EditSection>
-                ) : (
-                    <Fragment>
-                    <Ratio>
-                        {radioData && radioData.map(radio =>{
-                            let isChecked = false
-                            if(mode === "edit") {
-                                if(dataInput.deadline === radio.id) isChecked = true
-                                if(isDateString(dataInput.deadline) && radio.id === "specific-day") isChecked = true
-                            }
-                        return (
-                        <label key={radio.id} htmlFor={radio.id}onClick={(e) => deadlineHdle.choseType(e, mode)}>
-                            <input type="radio" id={radio.id} name="radio" defaultChecked={mode === "edit" ? isChecked : radio.id === "today" && "checked"} />
-                            <span>{radio.value}</span>
-                        </label>
-                        )})}
-                    </Ratio>
-                    <div className="flat-picker-wrapper">
-                        <Flatpickr
-                        ref={fp}
-                        options={{
-                            inline: true,
-                            minDate: "today",
-                        }}
-                        value={isDateString(dataInput.deadline) ? new Date(dataInput.deadline) : null}
-                        onChange={(date) => deadlineHdle.choseDateFP(date)}
-                        />
-                    </div>
-                    </Fragment>
-                )}
-            </Deadline>
-        </ModalSectionContent> */}
+                {/* date DONE */}
+                {
+        dataInput.dateDone && 
+        <ModalSectionContent title="Ngày hoàn thành" Icon={Img.deadline} >
+            <DateDone>
+                <Fragment>
+                <div className="flat-picker-wrapper">
+                    <Flatpickr
+                    ref={fp}
+                    options={{
+                        mode: "multiple",
+                        inline: true,
+                        maxDate: "today",
+                    }}
+                    value={convertDates(dataInput.dateDone)}
+                    onChange={handleChooseDateRoutine}
+                    />
+                </div>
+                </Fragment>
+            </DateDone>
+        </ModalSectionContent>
+        }
+
 
         {/* NOTE */}
         <ModalSectionContent 
@@ -707,3 +675,15 @@ const Validate = styled.p`
 
 `
  
+const DateDone = styled.div`
+    text-align: center;
+    
+    .flat-picker-wrapper {
+        justify-content: center;
+
+    }
+
+    input.flatpickr-input {
+        display: none!important;
+    }
+`
