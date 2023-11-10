@@ -14,19 +14,7 @@ const mockData = [
             "Thu Nov 09 2023 17:23:12 GMT+0700 (Indochina Time)",
             "Tue Nov 07 2023 17:23:12 GMT+0700 (Indochina Time)",
         ],
-        "note": "<p>Đánh kĩ</p>",
-        "sub": [
-            {   
-                "id": nanoid(),
-                "title": "rửa mặt",
-                "done": false
-            },
-            {
-                "id": nanoid(),
-                "title": "tắm",
-                "done": true
-            },
-        ]
+        "note": "<p>Đánh kĩ</p>"
     },
     {
         "id": nanoid(),

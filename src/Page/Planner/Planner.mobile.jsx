@@ -11,12 +11,15 @@ import Loading from "../../Component/Loadding";
 import ModalContext from "../../Context/Modal.context";
 import RoutineContext from "../../Context/Routine.context";
 import RoutineCard from "./card/RoutineCard";
+import GoalContext from "../../Context/Goal.context";
+import GoalCard from "./card/GoalCard";
 
 
 const PlannerMobile = (p) => {
     const { selectTab, tab } = p
     const { task, loading, setTask }  = useContext(TaskContext)
     const { routine, loading:routineLoading, setRoutine }  = useContext(RoutineContext)
+    const { goal, setGoal }  = useContext(GoalContext)
     // const selectTab = (e) => {
     //     const name = e.target.getAttribute("name")
     //     setTab(name)
@@ -50,9 +53,15 @@ const PlannerMobile = (p) => {
                     tab={tab} 
                     data={
                         tab === "task" ? task : 
-                        tab === "routine" && routine
+                        tab === "routine" ? routine :
+                        tab === "goal" && goal
                         } // separate between each tab with it own data
-                    setDateSection={tab === "task" ? setTask : setRoutine }
+                    setDateSection={
+                        tab === "task" ? setTask :
+                        tab === "routine" ? setRoutine :
+                        tab === "goal" && setGoal
+                    
+                    }
                    />
             }
         </Container>
@@ -110,7 +119,8 @@ const TaskSectionMobile = (p) => {
                 >
             {data && data.length > 0 &&
                 tab === "task" ?<TaskCard dataSection={data} setDateSection={setDateSection} dateZone={dateZone}/> :
-                tab === "routine" ?<RoutineCard dataSection={data} setDateSection={setDateSection} dateZone={dateZone}/> 
+                tab === "routine" ?<RoutineCard dataSection={data} setDateSection={setDateSection} dateZone={dateZone}/> :
+                tab === "goal" ?<GoalCard dataSection={data} setDateSection={setDateSection} dateZone={dateZone}/> 
                 :<Fragment>
                     <ImgMotivation>
                         <img src={plannerData[tab]?.empty?.img} alt="" />

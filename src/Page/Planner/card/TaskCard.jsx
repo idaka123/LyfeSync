@@ -116,6 +116,8 @@ const TaskCard = (p) => {
                                             area={data.area}
                                             note={data.note}
                                             subTask={data.sub}
+                                            dataSection={dataSection}
+                                            setDateSection={setDateSection}
                                             />
                                     )
                                 })}
@@ -179,6 +181,8 @@ const TaskCard = (p) => {
                                         area={data.area}
                                         note={data.note}
                                         subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
                                         />
                                 )
                             })}
@@ -196,6 +200,8 @@ const TaskCard = (p) => {
                                         area={data.area}
                                         note={data.note}
                                         subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
                                         />
                                 )
                             })}
@@ -213,6 +219,8 @@ const TaskCard = (p) => {
                                         area={data.area}
                                         note={data.note}
                                         subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
                                         />
                                 )
                             })}

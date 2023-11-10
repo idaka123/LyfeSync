@@ -220,7 +220,7 @@ const Goal = (p) => {
                     if(mode === "edit") {
                         const newData = prevData.map(data => {
                             if(data.id === modal.content.id) {
-                                return {...dataInput, id: data.id, sub: data.sub }
+                                return {...dataInput, id: data.id }
                             } else {
                                 return data
                             }
@@ -234,7 +234,7 @@ const Goal = (p) => {
     
                             newData.deadline = today.toString()
                         }
-                        return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                        return [...prevData, {...newData, id: nanoid(), target: "0" }]
                     }
                 })
                 closeModal()

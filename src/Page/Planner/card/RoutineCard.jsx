@@ -156,7 +156,6 @@ const Card = (p) => {
         deadline = "",
         area = [],
         note = "",
-        subTask = [],
         id,
         dataSection,
         setDateSection,
@@ -166,34 +165,7 @@ const Card = (p) => {
     const { openModal }  = useContext(ModalContext)
 
     const [checked, setChecked] = useState(false)
-    const [subOpen, setSubOpen] = useState(false)
-    const [sub, setSub] = useState(subTask)
-    const [subDone, setSubDone] = useState(0)
     const [option, setOption] = useState(false)
-
-    const countCurrSub = (dataSub) => {
-        return dataSub.reduce((total, curr) => {
-            if (curr.done === true) {
-                return total + 1;
-            } else {
-                return total;
-            }
-        }, 0);
-    };
-      
-    const memoizedCount = useMemo(() => countCurrSub(sub), [sub]);
-      
-    useEffect(() => {
-        let isMounted = true;
-        
-        if (isMounted) {
-            setSubDone(memoizedCount);
-        }
-        
-        return () => {
-            isMounted = false;
-        };
-    }, [memoizedCount]);
 
     const taskHandle = {
         open: () => { // Open modal detail
@@ -228,27 +200,6 @@ const Card = (p) => {
                 setDateSection(newTask);
                 taskHandle.option.close()
             }
-        }
-    }
-
-    const subTaskHandle = {
-        delete: (id) => { // Delete subtask
-            let newSub = [...sub]; //prevent mutating
-            newSub = newSub.filter(data => data.id !== id)
-            setSub(newSub); 
-        },
-        add: (data) => { // Add new subtask
-            const newData = [...sub, data]
-            setSub(newData)
-        },
-        open: () => { // Open list subtask
-            setSubOpen(!subOpen)
-        },
-        check: (id, check) => { // check subtask
-            const newSub = [...sub]; //prevent mutating
-            const index = newSub.map(e => e.id).indexOf(id);
-            newSub[index].done = check;
-            setSub(newSub); 
         }
     }
     

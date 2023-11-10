@@ -1,9 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ModalContext from "../../../Context/Modal.context";
-import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
-import { convertDates, dateConvert, isDateString } from "../../../Util/util";
+import { convertDates, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
@@ -205,7 +204,7 @@ const Routine = (p) => {
                     if(mode === "edit") {
                         const newData = prevData.map(data => {
                             if(data.id === modal.content.id) {
-                                return {...dataInput, id: data.id, sub: data.sub }
+                                return {...dataInput, id: data.id}
                             } else {
                                 return data
                             }
@@ -219,7 +218,7 @@ const Routine = (p) => {
     
                             newData.deadline = today.toString()
                         }
-                        return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                        return [...prevData, {...newData, id: nanoid(), active: true}]
                     }
                 })
                 closeModal()

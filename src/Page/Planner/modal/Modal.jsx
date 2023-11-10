@@ -52,7 +52,7 @@ const TaskModal = () => {
                 note: modal?.content?.note || "",
                 dateDone: modal?.content?.dateDone || [],
                 active: modal?.content?.active || false,
-                target: modal?.content?.target || "0%",
+                target: modal?.content?.target || "0",
             })
 
 
