@@ -74,10 +74,15 @@ const Container = styled(motion.div)`
     padding-left: 25px;
     display: flex;
 
+    section h2 {
+        white-space: nowrap;
+
+    }
+
     section h2.title {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 900;
-        font-family: fantasy;
+        /* font-family: fantasy; */
         display: flex;
         align-items: center;
         .icon-wrap {

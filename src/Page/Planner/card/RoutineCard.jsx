@@ -241,7 +241,8 @@ const Card = (p) => {
                                 openDetail={taskHandle.open} 
                                 deleteTask={taskHandle.option.delete}
                                 deadline={deadline}
-                                active={active}/>
+                                active={active}
+                                setOption={setOption}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
@@ -261,7 +262,7 @@ const Card = (p) => {
 }
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId, active } = p
+    const { openDetail, deleteTask, taskId, active, setOption } = p
     const { setRoutine }  = useContext(RoutineContext)
     
     const listOption = [
@@ -284,6 +285,7 @@ const Option = (p) => {
             icon: "edit",
             handleClick: () => {
                 openDetail()
+                setOption(false)
             }
         },
         {
@@ -325,7 +327,7 @@ export default RoutineCard;
 
 
 const Container = styled.div `
-
+    padding-top: 20px;
 `
 
 

@@ -15,7 +15,7 @@ const TaskSection = (p) => {
     
     const hleSelctDateZ = (e) => {
         const name = e.target.getAttribute("name")
-        setDateZone(name)
+        setDateZone(prev => ({...prev, [data]: name}))
         setState(name)
     }
 
@@ -32,13 +32,15 @@ const TaskSection = (p) => {
         // dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
         // dragElastic={0.5}
         >
-        <h2 className="select-none text-dark title">{plannerData[data].name}<span className="icon-wrap" onClick={handleClickAdd} name={plannerData[data].name}> &nbsp;+ </span></h2>
-        <DateZone 
-        style={{cursor: `url(${myCursor}), auto`}}
-        >
+        <h2 className="select-none text-dark title">{plannerData[data].value}
+            <span className="icon-wrap" onClick={handleClickAdd} name={plannerData[data].name}> &nbsp;+ 
+            </span>
+        </h2>
+        <DateZone >
             {plannerData[data].dateZone && plannerData[data].dateZone.map(date => {    
                 return (
                 <span 
+                    style={{cursor: `url(${myCursor}), auto`}}
                     key={date.name}
                     name={date.name}
                     className={`select-none ${state === date.name ? "active" : ""}`}
@@ -62,6 +64,7 @@ const Task = styled(motion.section)`
 
     h2.title {
         letter-spacing: 4px;
+        line-height: 0;
     }
 `
 
@@ -69,12 +72,14 @@ const DateZone = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding-top: 5px;
+    line-height: 2;
 
     span {
         margin-right: 1.5rem;
         color: #626262;
         font-weight: 500;
-        font-family: fantasy;
+        /* font-family: fantasy; */
         font-weight: 600;
         transition: all 0.3s ease-in-out;
 
@@ -85,7 +90,7 @@ const DateZone = styled.div`
         &.active {
             color: #000000;
             font-size: larger;
-            cursor: default;
+            font-weight: 800;
         }
     }
 `

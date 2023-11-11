@@ -186,6 +186,7 @@ const Card = (p) => {
                                 taskId={id} 
                                 openDetail={taskHandle.open} 
                                 deleteTask={taskHandle.option.delete}
+                                setOption={setOption}
                                 deadline={deadline}/>
                         )}
                         visible={option}
@@ -207,7 +208,7 @@ const Card = (p) => {
 
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId } = p
+    const { openDetail, deleteTask, taskId, setOption } = p
     
     const listOption = [
         {
@@ -216,6 +217,7 @@ const Option = (p) => {
             icon: "edit",
             handleClick: () => {
                 openDetail()
+                setOption(false)
             }
         },
         {
@@ -257,7 +259,7 @@ export default GoalCard;
 
 
 const Container = styled.div `
-
+    padding-top: 20px;
 `
 
 

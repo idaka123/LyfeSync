@@ -25,6 +25,10 @@ const mockData = [
             "health",
             "growth"
         ],
+        "dateDone": [
+            "Fri Nov 10 2023 17:23:12 GMT+0700 (Indochina Time)",
+            "Tue Nov 07 2023 17:23:12 GMT+0700 (Indochina Time)",
+        ],
         "note": "\n<p>Chơi với bạn bè</p>\n",
     },
     {
@@ -35,6 +39,9 @@ const mockData = [
         "area": [
             "health",
             "growth"
+        ],
+        "dateDone": [
+            "Tue Nov 07 2023 17:23:12 GMT+0700 (Indochina Time)",
         ],
         "note": "\n<p>Chơi với bạn bè</p>\n",
     }
@@ -52,7 +59,7 @@ export const RoutineProvider = (p) => {
         const routineData = setTimeout(() => {
             setRoutine(mockData)
             setLoading(false)
-        }, 500)
+        }, 2000)
 
         return () => clearTimeout(routineData)
         

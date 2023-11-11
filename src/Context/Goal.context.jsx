@@ -52,7 +52,7 @@ export const GoalProvider = (p) => {
         const goalData = setTimeout(() => {
             setGoal(mockData)
             setLoading(false)
-        }, 500)
+        }, 2000)
 
         return () => clearTimeout(goalData)
         

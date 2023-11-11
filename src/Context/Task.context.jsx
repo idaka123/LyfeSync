@@ -53,14 +53,14 @@ export const TaskProvider = (p) => {
 
 
     const [task, setTask] = React.useState([]);
-    const [loading, setLoading] = React.useState(false)
+    const [loading, setLoading] = React.useState(true)
 
     React.useEffect(() => {
         setLoading(true)
         const taskData = setTimeout(() => {
             setTask(mockData)
             setLoading(false)
-        }, 500)
+        }, 2000)
 
         return () => clearTimeout(taskData)
         

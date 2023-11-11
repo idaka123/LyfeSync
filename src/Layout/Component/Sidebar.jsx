@@ -14,7 +14,7 @@ const Sidebar = (p) => {
 
     const menuItems = [
         { label: 'Trang chủ', icon: Icon.home, link: paths.home},
-        { label: 'Tác vụ', icon: Icon.setting, link: paths.planner},
+        { label: 'Tác vụ', icon: Icon.task, link: paths.planner},
     ];
 
    
@@ -164,5 +164,10 @@ const SidebarLink = styled(Link)`
             width: 100%;
             font-size: 18px;
         }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
     }
 `;

@@ -394,7 +394,8 @@ const Card = (p) => {
                                 taskId={id} 
                                 openDetail={taskHandle.open} 
                                 deleteTask={taskHandle.option.delete}
-                                deadline={deadline}/>
+                                deadline={deadline}
+                                setOption={setOption}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
@@ -475,7 +476,7 @@ const AddSubTask = (p) => {
 
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId, deadline } = p
+    const { openDetail, deleteTask, taskId, deadline, setOption } = p
     const { setTask }  = useContext(TaskContext)
 
     const listOption = [
@@ -527,6 +528,7 @@ const Option = (p) => {
             icon: "edit",
             handleClick: () => {
                 openDetail()
+                setOption(false)
             }
         },
         {
@@ -569,7 +571,7 @@ export default TaskCard;
 
 
 const Container = styled.div `
-
+    padding-top: 20px;
 `
 
 
