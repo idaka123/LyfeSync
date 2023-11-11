@@ -15,7 +15,8 @@ const TaskSection = (p) => {
     
     const hleSelctDateZ = (e) => {
         const name = e.target.getAttribute("name")
-        setDateZone(prev => ({...prev, [data]: name}))
+        console.log(data, name)
+        setDateZone(name);
         setState(name)
     }
 

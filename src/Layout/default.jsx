@@ -42,7 +42,7 @@ const DefaultLayoutComponent = (p) => {
 
     return (
        <Fragment>
-            <Background background={appearance}/>
+            <Background background={appearance.url}/>
             <DftLaySty device={device} > 
                 {device === "mobile" && <Header toggleSideBar={openSideBar}/>}
                 

@@ -62,50 +62,52 @@ const Container = styled.div `
 const BoxContent = styled.div `
     
     @media screen and (min-width: 769px) {
-        margin: 40px;
+        margin: 15px;
+        border: 1px solid #cfcfcf;
+        border-radius: 10px;
     }
-    height: 87vh;
+    @media screen and (max-width: 768px) {
+    }
+    height: 95vh;
     width: 100%;
-    background-color: #ffffff;
-    border-radius: 10px;
+    background-color: #fdfdfd;
+    
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
-
+    
+    overflow: hidden;
 `
 
 const MenuList = styled.ul `
     list-style: none;
-    
     @media screen and (min-width: 769px) {
-        width: 30%;
+        width: 20%;
     }
     @media screen and (max-width: 768px) {
         width: 13%;
     }
+    
     height: 100%;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px;
 `
 
 const ContentWrapper = styled.div `
     
     @media screen and (min-width: 769px) {
-        width: 70%;
+        width: 80%;
     }
-
-
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+    border-left: 1px solid #cfcfcf;
+    background-color: #ffffff;
     height: auto;
-    margin: 10px;
-    border: 2px solid rgb(134, 134, 134);
-    border-radius: 10px;
 `
 
 const MenuItem = styled.li`
     display: flex;
     align-items: center;
     padding: 13px;
-    
     border-radius: 10px;
     
     svg {

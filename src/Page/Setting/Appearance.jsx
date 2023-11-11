@@ -4,13 +4,18 @@ import data from "../../assets/photos/background.json"
 import { useContext, useState } from "react";
 import AppearanceContext from "../../Context/Appearance.context";
 import DeviceContext from "../../Context/Device.context";
+import Button from "../../Component/Button";
 
 const Appearance = () => {
     
     const [dataAppearance] = useState(data.background)
-    const { setAppearance } = useContext(AppearanceContext)
-    const handleClickPhoto = (url) => {
-        setAppearance(url)
+    const { appearance, setAppearance } = useContext(AppearanceContext)
+    const { device } = useContext(DeviceContext)
+    const handleClickPhoto = (data) => {
+        setAppearance({
+            url: data.url,
+            name: data.name
+        })
     }
 
     return ( 
@@ -19,19 +24,42 @@ const Appearance = () => {
                 <h2>Thay đổi hình nền</h2>
             </TitleWrapper>
 
-            <Content>
+            <PreviewSection>
+                <PreviewImg>
+                {appearance && appearance.url === "" ?
+                    <WithoutBackgroundPR>
+                        <div className="title-wrapper">
+                            <Icon.bin />
+                            <span>Không cần hình nền</span>
+                        </div>
+                    </WithoutBackgroundPR> :
+                   <PrImg url={appearance.url}/>
+                }
+                </PreviewImg>
 
-                <WithoutBackground className="pointer-cursor" onClick={() => handleClickPhoto("")}>
+                <PreviewInfor>
+                    <div className="name">
+                        {appearance && appearance.url === "" ?
+                        <p>Không có hình nền</p>
+                        :<p>{appearance.name}</p>
+                        }
+                    </div>
+
+                    
+                </PreviewInfor>
+            </PreviewSection>
+
+            <Content>
+                <WithoutBackground className="pointer-cursor" onClick={() => handleClickPhoto({url: "", name: ""})}>
                     <div className="title-wrapper">
                         <Icon.bin />
-                        <span>Không cần hình nền</span>
+                        {device === "desktop" && <span>Không cần hình nền</span>}
                     </div>
                 </WithoutBackground>
 
                 {dataAppearance && dataAppearance.map((data, idx) => {
                     return (
-                        <Background onClick={() => handleClickPhoto(data.url)} key={idx} className="pointer-cursor">
-                            <img src={data.url} alt=""/>
+                        <Background onClick={() => handleClickPhoto(data)} url={data.url} key={idx} className="pointer-cursor">
                         </Background>
                     )
                 })
@@ -48,6 +76,10 @@ export default Appearance;
 const Container = styled.div `
     width: 100%;
     height: 100%;
+
+    --title-height: 5%;
+    --preview-height: 35%;
+    --content-height: 55%;
 `
 
 const TitleWrapper = styled.div `
@@ -55,15 +87,15 @@ const TitleWrapper = styled.div `
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10%;
+    height: var(--title-height);
 
 
     h2 {
         @media screen and (min-width: 769px) {
-            font-size: 25px;
+            font-size: 15px;
         }
         @media screen and (max-width: 768px) {
-            font-size: 17px;
+            font-size: 12px;
         }
         font-size: 25px;
         font-weight: 900;
@@ -71,13 +103,61 @@ const TitleWrapper = styled.div `
     }
 `
 
+const PreviewSection = styled.div `
+    height: var(--preview-height);
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #cfcfcf;
+`
+
+const PreviewImg = styled.div `
+
+    width: 40%;
+    height: 100%;
+    padding: 10px;
+
+`
+
+const PrImg = styled.div `
+    background-image: ${({url}) => `url(${url})`};
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 26px;
+    border: 2px solid #585A5C;
+`
+
+const PreviewInfor = styled.div `
+    height: 100%;
+    width: 60%;
+    padding: 54px 0px;
+    .name {
+        width: 100%;
+        border: 1px solid #585A5C;
+        padding: 10px 20px;
+        border-radius: 10px;
+        height: auto;
+
+        p {
+            color: var(--black-text);
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+    }
+`
+
 const Content = styled.div `
     width: 100%;
-    height: 90%;
+    height: auto;
     padding: 20px;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     
     &::-webkit-scrollbar { 
         display: none;  /* Safari and Chrome */
@@ -85,8 +165,8 @@ const Content = styled.div `
 `
 
 const WithoutBackground = styled.div `
-    max-width: 1000px;
-    height: 200px;
+    width: 20%;
+    height: 100px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -119,17 +199,52 @@ const WithoutBackground = styled.div `
     }
 `
 
-const Background = styled.div `
+const WithoutBackgroundPR = styled.div `
     width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed;
+    transition: all 0.3s ease-in-out;
+
+    .title-wrapper {
+        display: flex;
+        align-items: center;
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        svg {
+            font-size: 2rem;
+        }
+
+        span {
+            margin-left: 10px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+    }
+
+    &:hover {
+        border: 2px solid;
+    
+    }
+    
+`
+
+const Background = styled.div `
+    width: 20%;
     padding-top: 10px;
-    img{
-        transition: all 0.5s ease-in-out;
-        width: 100%;
-        border-radius: 10px;
-        &:hover {
-        border: 4px solid black;
-        padding: 1px;
-    }
-    }
+    background-image: ${({url}) => `url(${url})`};
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    border: 2px solid #585A5C;
+    
 
 `

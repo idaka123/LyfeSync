@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import myCursor from '../assets/HVCyan_link.cur';
+import { Icon } from "../Assets/icon";
 /* 
 Example:
     <Button
@@ -27,7 +28,7 @@ const Button = (p) => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={hleClick}
-            >
+            >   
                 {title}
             </motion.button>            
         </Container>
@@ -48,5 +49,9 @@ const Container = styled.div`
         transform: none;
         color: white;
         font-size: 1.3rem;
+    }
+
+    svg {
+        color: white
     }
 `

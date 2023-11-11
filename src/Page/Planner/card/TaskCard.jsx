@@ -572,6 +572,13 @@ export default TaskCard;
 
 const Container = styled.div `
     padding-top: 20px;
+    height: 70vh;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    
+    &::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
 `
 
 

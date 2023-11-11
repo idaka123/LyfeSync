@@ -14,11 +14,9 @@ import GoalCard from "./card/GoalCard";
 import Loading from "../../Component/Loadding";
 
 const PlannerDesktop = () => {
-    const [dateZone, setDateZone] = useState({
-        task: "today",
-        routine: "today",
-        goal: "today",
-    })
+    const [taskDateZone, setTaskDateZone] = useState("today")
+    const [routineDateZone, setRoutineDateZone] = useState("today")
+    const [goalDateZone, setGoalDateZone] = useState("today")
     const { task, setTask, loading:taskLoad }  = useContext(TaskContext)
     const { routine, setRoutine, loading:routineLoad }  = useContext(RoutineContext)
     const { goal, setGoal, loading:goalLoad }  = useContext(GoalContext)
@@ -31,20 +29,20 @@ const PlannerDesktop = () => {
         <>
             <SectionContent sec="task" loading={taskLoad} 
                             dataSection={task} setDateSection={setTask} 
-                            setDateZone={setDateZone}>
-               <TaskCard dataSection={task} setDateSection={setTask} dateZone={dateZone.task} />
+                            setDateZone={setTaskDateZone}>
+               <TaskCard dataSection={task} setDateSection={setTask} dateZone={taskDateZone} />
             </SectionContent>
 
             <SectionContent sec="routine" loading={routineLoad} 
                             dataSection={routine} setDateSection={setRoutine} 
-                            setDateZone={setDateZone} >
-               <RoutineCard dataSection={routine} setDateSection={setRoutine} dateZone={dateZone.routine}/>
+                            setDateZone={setRoutineDateZone} >
+               <RoutineCard dataSection={routine} setDateSection={setRoutine} dateZone={routineDateZone}/>
             </SectionContent>
 
             <SectionContent sec="goal" loading={goalLoad} 
                             dataSection={goal} setDateSection={setGoal} 
-                            setDateZone={setDateZone}>
-               <GoalCard dataSection={goal} setDateSection={setGoal} dateZone={dateZone.goal} setDateZone={setDateZone}/>
+                            setDateZone={setGoalDateZone}>
+               <GoalCard dataSection={goal} setDateSection={setGoal} dateZone={goalDateZone}/>
             </SectionContent>
 \
         </>

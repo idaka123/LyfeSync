@@ -31,7 +31,7 @@ const Planner = () => {
     
     const Mobile = () => {
         return (
-            <Container style={{ paddingBottom: "150px"}}>
+            <Container >
                 <PlannerMobile selectTab={selectTab} tab={tab} />
             </Container>
     )}

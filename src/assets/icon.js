@@ -13,6 +13,7 @@ import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
 import { CiPause1 } from 'react-icons/ci'
 import { RiCloseFill, RiDeleteBinLine } from 'react-icons/ri'
+import { GrUploadOption } from 'react-icons/gr'
 
 
 
@@ -46,5 +47,6 @@ export const Icon = {
     pause: CiPause1,
     task: BsListTask,
     background: BsCardImage,
-    bin: RiDeleteBinLine
+    bin: RiDeleteBinLine,
+    upload: GrUploadOption
 }

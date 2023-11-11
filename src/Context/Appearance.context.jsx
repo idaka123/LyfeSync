@@ -5,7 +5,7 @@ const AppearanceContext = createContext()
 
 export const AppearanceProvider = (p) => {
     const { children } = p
-    const [appearance, setAppearance] = useState(data.background[0].url)
+    const [appearance, setAppearance] = useState(data.background[0])
 
 
     const contextValue = {
