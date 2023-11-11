@@ -169,7 +169,7 @@ const Card = (p) => {
                     </Deadline>
                     
                     <RangerContainer>
-                        <input type="range" onChange={handleInputTarget} name="target" value={targetVl} id="range" className="range" min="0" step="1" max="100" />
+                        <input type="range" onChange={handleInputTarget} name="target" value={targetVl} id="range" className="range pointer-cursor" min="0" step="1" max="100" />
                         <p>{targetVl}%</p>
                     </RangerContainer>
 

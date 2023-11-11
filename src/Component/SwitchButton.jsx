@@ -23,7 +23,10 @@ const SwitchButton = (p) => {
 
     return ( 
     <Container >
-        <div className="switch" data-isOn={isOn} onClick={handleToogleSwitch}
+        <div 
+            className="switch" 
+            data-isOn={isOn} 
+            onClick={handleToogleSwitch}
             style={{cursor: `url(${myCursor}), auto`}}>
             <motion.div className="handle" layout transition={spring} />
         </div>
@@ -45,7 +48,8 @@ const Container = styled.div`
     .switch {
     width: 100%;
     height: 25px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.6);
+    /* rgba(255, 255, 255, 0.4) */
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -55,6 +59,8 @@ const Container = styled.div`
 
     .switch[data-isOn="true"] {
     justify-content: flex-end;
+    background: var(--main-gradient);
+
     }
 
     .handle {

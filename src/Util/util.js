@@ -63,3 +63,40 @@ export const  getRecentSevenDates = (array) => {
 
   return orderedDates;
 }
+
+
+export const updateRecentDates = (inputDates) => {
+  const recentDates = [];
+
+  // Helper function to format date to the desired string format
+  const formatDate = (date) => {
+    return date.toDateString() + ' ' + date.toTimeString().split(' ')[0] + ' GMT+0700 (Indochina Time)';
+  };
+
+  // Helper function to compare dates ignoring the time part
+  const isSameDate = (date1, date2) => {
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate();
+  };
+
+  // Create recentDates array with the last 7 days
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    recentDates.push({ value: formatDate(date), check: false });
+  }
+
+  // Convert input dates to Date objects for easier comparison
+  const inputDateObjects = inputDates.map(dateStr => new Date(dateStr));
+
+  // Check and update the 'check' key if dates match
+  recentDates.forEach(recentDateObj => {
+    let recentDate = new Date(recentDateObj.value);
+    if (inputDateObjects.some(inputDate => isSameDate(inputDate, recentDate))) {
+      recentDateObj.check = true;
+    }
+  });
+
+  return recentDates;
+}

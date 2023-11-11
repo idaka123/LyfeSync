@@ -36,6 +36,7 @@ const GlobalStyles = createGlobalStyle`
         width: 100%;
         line-height: 1.5;
         letter-spacing: .01rem;
+        cursor: ${`url(${myCursor}), auto`}!important;
     }
     body {
         color: #626262;

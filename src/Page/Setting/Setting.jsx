@@ -7,7 +7,7 @@ import DeviceContext from "../../Context/Device.context";
 const Setting = () => {
 
     
-    const [selectItem, setSelectItem] = useState("")
+    const [selectItem, setSelectItem] = useState("appearance")
     const { device } = useContext(DeviceContext)
     const dataItem = [
         {

@@ -8,8 +8,7 @@ import DeviceContext from "../../Context/Device.context";
 const Appearance = () => {
     
     const [dataAppearance] = useState(data.background)
-    const { appearance, setAppearance } = useContext(AppearanceContext)
-    const { device } = useContext(DeviceContext)
+    const { setAppearance } = useContext(AppearanceContext)
     const handleClickPhoto = (url) => {
         setAppearance(url)
     }

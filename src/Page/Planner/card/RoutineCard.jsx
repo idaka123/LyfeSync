@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
 import { Icon } from "../../../Assets/icon";
 import { useState, useEffect, Fragment, useContext } from "react";
-import { getRecentSevenDates } from "../../../Util/util"
+import { getRecentSevenDates, updateRecentDates } from "../../../Util/util"
 import ModalContext from "../../../Context/Modal.context";
 import RoutineContext from "../../../Context/Routine.context";
 import myCursor from "../../../assets/HVCyan_link.cur"
@@ -206,26 +206,53 @@ const Card = (p) => {
         return <Image/>
     }
     
-  
+    const handleClickUnCheckDate = (date) => {
+
+        const isSameDate = (date1, date2) => {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+          };
+
+        setDateSection(prev => {
+            const newRoutine = [...prev]
+            const index = newRoutine.map(e => e.id).indexOf(id);
+            // console.log(newRoutine[index].dateDone)
+            newRoutine[index].dateDone = newRoutine[index].dateDone.filter(d => {
+
+                return !isSameDate(new Date(d), new Date(date))
+            })
+            // console.log(newRoutine[index].dateDone)
+            return newRoutine
+        })
+    }
+
+    const handleClickCheckDate = (date) => {
+        console.log(date)
+        setDateSection(prev => {
+            const newRoutine = [...prev]
+            const index = newRoutine.map(e => e.id).indexOf(id);
+            console.log(date)
+            newRoutine[index].dateDone.push(date)
+            console.log(newRoutine[index])
+            return newRoutine
+        })
+    }
+
     return (
         <TaskCardContainer style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="text-dark">
             <MainTask>
                 <div className={`card-title ${color ?"text-white" : ""}  ${checked ? "blur" : ""}`}>
                     <Title>
                         <RoutineChecked>
-                        {dateDone && getRecentSevenDates(dateDone).reverse().map((date, idx) => {
-                            if(date !== null)
-                                return <span key={idx}><Img.routineDone /></span>
-                            else return <span key={idx}><Img.routineMiss /></span>
+                        {dateDone && updateRecentDates(dateDone).reverse().map((date, idx) => {
+                            if(date.check)
+                                return <span key={idx} onClick={() => handleClickUnCheckDate(date.value)}><Img.routineDone /></span>
+                            else return <span key={idx} onClick={() => handleClickCheckDate(date.value)}><Img.routineMiss /></span>
                         })}
                         </RoutineChecked>
                         <div className={`title ${checked ? "line-through" : ""}`}>{title}</div>
                     </Title>
-
-                    {/* <Deadline>
-                        <Img.deadline />
-                        <span>{dateConvert(deadline)}</span>
-                    </Deadline> */}
                     
                     <RelateArea>
                         {area && area.map((item, idx) => <Area key={idx} data={item}/>)}

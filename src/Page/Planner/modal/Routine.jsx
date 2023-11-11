@@ -334,8 +334,8 @@ const Routine = (p) => {
             
             <div className="status-wrapper">
                {dataInput.active 
-                ? <p>Dừng Hoạt Động</p>    
-                : <p>Tiếp tục Hoạt Động</p>
+                ? <p style={{color: "red"}}>Dừng Hoạt Động</p>    
+                : <p style={{color: "green"}}>Tiếp tục Hoạt Động</p>
                 }
                 <SwitchButton
                     handleCheckStatus={handleCheckStatus}
