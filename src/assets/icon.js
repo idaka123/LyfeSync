@@ -5,14 +5,14 @@ import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
-import { BsCart2, BsPlay, BsListTask } from 'react-icons/bs'
+import { BsCart2, BsPlay, BsListTask, BsCardImage } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
 import { CiPause1 } from 'react-icons/ci'
-import { RiCloseFill } from 'react-icons/ri'
+import { RiCloseFill, RiDeleteBinLine } from 'react-icons/ri'
 
 
 
@@ -44,5 +44,7 @@ export const Icon = {
     x: RiCloseFill,
     Playy: BsPlay,
     pause: CiPause1,
-    task: BsListTask
+    task: BsListTask,
+    background: BsCardImage,
+    bin: RiDeleteBinLine
 }

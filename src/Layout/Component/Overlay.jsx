@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import myCursor from "../../assets/HVCyan_link.cur";
 
 const overlayVariant = {
     hidden: { opacity: 0, visibility: "hidden" },
@@ -32,7 +33,7 @@ const Overlay = (p) => {
 export default Overlay;
 
 const Container = styled(motion.div) `
-    cursor: url('../../assets/Machete.cur'), auto;
+    cursor: url(${myCursor}), auto;
     position: fixed;
     background-color: #44ffff;
     top: 0;

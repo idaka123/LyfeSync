@@ -15,6 +15,7 @@ const Sidebar = (p) => {
     const menuItems = [
         { label: 'Trang chủ', icon: Icon.home, link: paths.home},
         { label: 'Tác vụ', icon: Icon.task, link: paths.planner},
+        { label: 'Cài đặt', icon: Icon.setting, link: paths.setting},
     ];
 
    

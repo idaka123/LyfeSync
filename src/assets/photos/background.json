@@ -3,6 +3,31 @@
         {
             "name": "fuji",
             "url": "src/assets/photos/fuji.jpg"
+        },
+        {
+            "name": "sunset",
+            "url": "src/assets/photos/sunset.jpg"
+        },
+        {
+            "name": "forest",
+            "url": "src/assets/photos/forest.jpeg"
+        },
+        {
+            "name": "moon",
+            "url": "src/assets/photos/moon.jpeg"
+        },
+        {
+            "name": "songoku",
+            "url": "src/assets/photos/songoku.jpeg"
+        },
+        {
+            "name": "tanjirou",
+            "url": "src/assets/photos/tanjirou.jpeg"
+        },
+        {
+            "name": "temple",
+            "url": "src/assets/photos/temple.jpeg"
         }
+        
     ]
 }

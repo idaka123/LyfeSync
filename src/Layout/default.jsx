@@ -1,21 +1,23 @@
 
 import styled from "styled-components";
 import Sidebar from "./Component/Sidebar";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
 import { OverlayProvider } from "../Context/overlay.context";
-import data from "../assets/photos/background.json"
+import AppearanceContext, { AppearanceProvider } from "../Context/Appearance.context";
 
 const DefaultLayout = ( p ) => {
     const { children } = p
 
     return (
-    <OverlayProvider>
-        {/* <ModalProvider> */}
-            <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
-        {/* </ModalProvider> */}
-    </OverlayProvider>
+    <AppearanceProvider>
+        <OverlayProvider>
+            {/* <ModalProvider> */}
+                <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
+            {/* </ModalProvider> */}
+        </OverlayProvider>
+    </AppearanceProvider>
     )
 }
 
@@ -23,20 +25,15 @@ const DefaultLayoutComponent = (p) => {
     const { children } = p
 
     const { device } = useContext(DeviceContext)
+    const { appearance } = useContext(AppearanceContext)
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [isOpenOvelay, setIsOpenOverlay] = useState(false)
-    const [background, setBackground] = useState(data.background[0].url)
 
     const openSideBar = () => {
         setIsOpenMenu(true)
         setIsOpenOverlay(true)
     }
-
-    useEffect(() => {
-        console.log("background", background)
-    }, [])
-
     const toggleSideBar = (boolen) => {
         return () => {
             setIsOpenMenu(boolen)
@@ -45,7 +42,7 @@ const DefaultLayoutComponent = (p) => {
 
     return (
        <Fragment>
-            <Background background={background}/>
+            <Background background={appearance}/>
             <DftLaySty device={device} > 
                 {device === "mobile" && <Header toggleSideBar={openSideBar}/>}
                 

@@ -3,6 +3,7 @@ import Home from "../Page/Home"
 import Planner from "../Page/Planner/Planner"
 import NoPage from "../Page/NoPage"
 import paths from "./path"
+import Setting from "../Page/Setting/Setting"
 
 
 export const routes = [
@@ -16,6 +17,12 @@ export const routes = [
         name: "planner",
         page: <DefaultLayout><Planner/></DefaultLayout>,
         path: paths.planner,
+        exact: true,
+    },
+    {
+        name: "setting",
+        page: <DefaultLayout><Setting/></DefaultLayout>,
+        path: paths.setting,
         exact: true,
     },
     {
