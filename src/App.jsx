@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { routes } from './Routes/route';
 import { DeviceProvider } from "./Context/Device.context"
 import { useEffect } from 'react';
-import myCursor from './assets/KrisBackground.ani';
+import myCursor from './assets/hvcy_Option_1_ds.cur';
 const App = () => {
 
 

@@ -6,6 +6,7 @@ import DeviceContext from "../Context/Device.context";
 import ModalContext from "../Context/Modal.context";
 import Loading from "./Loadding"
 import Overlay from "../Layout/Component/Overlay";
+import myCursor from '../assets/HVCyan_link.cur';
 
 const Modal = (p) => {
     const { children, data } = p
@@ -75,7 +76,7 @@ const Modal = (p) => {
             >
             <Title>
                 <h1>{modal.title}</h1>
-                <Icon.x onClick={hdleToggle}/>
+                <Icon.x onClick={hdleToggle}  style={{cursor: `url(${myCursor}), auto`}}/>
             </Title> 
            {isDataLoaded ? children: <Loading />}
         </Container> 
@@ -117,7 +118,6 @@ const Title = styled.div`
 
     svg {
         font-size: 2.4rem;
-        cursor: pointer;
     }
 `
 

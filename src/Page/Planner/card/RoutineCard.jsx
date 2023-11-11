@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
-import Input from "../../../Component/Input"
 import { Icon } from "../../../Assets/icon";
-import { useState, useEffect, Fragment, useContext, useMemo } from "react";
+import { useState, useEffect, Fragment, useContext } from "react";
 import { getRecentSevenDates } from "../../../Util/util"
-import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.context";
-import SubTask from "./SubTask";
 import RoutineContext from "../../../Context/Routine.context";
-
+import myCursor from "../../../assets/HVCyan_link.cur"
 
 const RoutineCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p
@@ -346,7 +343,6 @@ const DateZoneLabelContainer = styled.div `
 
     .label {
         font-weight: 700;
-        /* cursor: pointer; */
 
         span {
             font-size: 1.5rem;
@@ -405,7 +401,7 @@ const MainTask =styled.div `
 
         span {
             font-size: 1.2rem;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
             &:nth-child(2), &:nth-child(1) {
                 svg {
                     width: 17.8px;
@@ -430,12 +426,8 @@ const MainTask =styled.div `
 const OptionBtnCon = styled.div `
     svg {
         width: 17.8px;
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
     }
-`
-const SubTaskList = styled.div `
-    padding: 8px 12px;
-
 `
 const Title = styled.div `
     display: flex;
@@ -446,7 +438,7 @@ const Title = styled.div `
         line-height: 1;
         svg {
             width: 17px;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
         }
     }
 
@@ -503,7 +495,7 @@ const OptionContainer = styled.ul `
     li {
         user-select: none;
         display: flex;
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
         align-items: center;
         border-radius: 5px;
         padding: 5px 9px;

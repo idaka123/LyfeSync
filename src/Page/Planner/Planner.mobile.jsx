@@ -38,7 +38,7 @@ const PlannerMobile = (p) => {
                         <motion.li
                             key={plan}
                             name={plan}
-                            className={`col3 ${tab === plan ? "active" : ""}`}
+                            className={`col3 pointer-cursor ${tab === plan ? "active" : ""}`}
                             onClick={selectTab}>
                         {plan}
                         {tab === plan ? (<Underline layoutId="underline" />) : null}
@@ -170,7 +170,6 @@ const TabList = styled.ul`
     li {
         text-align: center;
         height: 100%;
-        cursor: pointer;
         font-size: 1.4rem;
         font-weight: 500;
         position: relative;

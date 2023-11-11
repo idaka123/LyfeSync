@@ -9,6 +9,7 @@ import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
 import { RoutineProvider } from "../../Context/Routine.context";
 import { GoalProvider } from "../../Context/Goal.context";
+import myCursor from "../../assets/HVCyan_link.cur";
 
 const Planner = () => {
 
@@ -84,7 +85,7 @@ const Container = styled(motion.div)`
             line-height: 30px;
             font-size: 43px;
             position: relative;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
             transition: all 0.3s ease-in-out;
 
             &:hover {

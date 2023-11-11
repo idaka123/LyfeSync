@@ -32,7 +32,7 @@ const Overlay = (p) => {
 export default Overlay;
 
 const Container = styled(motion.div) `
-    cursor: pointer;
+    cursor: url('../../assets/Machete.cur'), auto;
     position: fixed;
     background-color: #44ffff;
     top: 0;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import myCursor from '../assets/HVCyan_link.cur';
 
 const spring = {
     type: "spring",
@@ -22,7 +23,8 @@ const SwitchButton = (p) => {
 
     return ( 
     <Container >
-        <div className="switch" data-isOn={isOn} onClick={handleToogleSwitch}>
+        <div className="switch" data-isOn={isOn} onClick={handleToogleSwitch}
+            style={{cursor: `url(${myCursor}), auto`}}>
             <motion.div className="handle" layout transition={spring} />
         </div>
     </Container>
@@ -49,7 +51,6 @@ const Container = styled.div`
     align-items: center;
     border-radius: 50px;
     padding: 5px;
-    cursor: pointer;
     }
 
     .switch[data-isOn="true"] {

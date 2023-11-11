@@ -1,9 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ModalContext from "../../../Context/Modal.context";
-import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
-import { convertDates, dateConvert, isDateString } from "../../../Util/util";
+import {  dateConvert, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
@@ -15,7 +14,7 @@ import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import GoalContext from "../../../Context/Goal.context";
-
+import myCursor from "../../../assets/HVCyan_link.cur"
 const relatedArea = [
     {
         name: "health",
@@ -244,7 +243,7 @@ const Goal = (p) => {
         const Area = (p) => {
             const { data } = p
             const Image = Img[data]
-            return <Image/>
+            return <Image />
         }
 
         const checkValid = () => {
@@ -480,7 +479,6 @@ const EditSectionContainer = styled.div `
         svg {
             margin-left: 10px;
             width: 14px;
-            cursor: pointer;
         }
 
         &:hover {
@@ -566,7 +564,7 @@ const Label = styled.div`
 
     &.click-able {
         
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
         &:hover {
             svg {
                 transition: all .3s ease-in-out;
@@ -590,7 +588,7 @@ const Label = styled.div`
 const RelateAres = styled.div `
     text-align: center;
     color: #b8c2cc!important;
-    cursor: pointer;
+    cursor: url(${myCursor}), auto;
     width: 25%;
 
     svg {
@@ -626,7 +624,7 @@ const Ratio = styled.div`
     flex-direction: row;
     label {
     display: flex;
-    cursor: pointer;
+    cursor: url(${myCursor}), auto;
     font-weight: 500;
     position: relative;
     overflow: hidden;

@@ -14,6 +14,8 @@ import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import RoutineContext from "../../../Context/Routine.context";
+import SwitchButton from "../../../Component/SwitchButton";
+import myCursor from '../../../assets/HVCyan_link.cur';
 
 const relatedArea = [
     {
@@ -231,6 +233,10 @@ const Routine = (p) => {
             return <Image/>
         }
 
+        const handleCheckStatus = () => {
+            setDataInput({...dataInput, active: !dataInput.active })
+        }
+
         const checkValid = () => {
             if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
                 setValid(false)
@@ -317,8 +323,30 @@ const Routine = (p) => {
         
         </ModalSectionContent>
 
-                {/* date DONE */}
-                {
+        {/* STATUS */}
+        {modal.type === "routine" &&
+        <ModalSectionContent 
+            title="Trạng thái"
+            name="status"
+            Icon={Img.status}
+            plus={mode === "edit" ? false : secOpen.note}
+            openSec={openSec}>
+            
+            <div className="status-wrapper">
+               {dataInput.active 
+                ? <p>Dừng Hoạt Động</p>    
+                : <p>Tiếp tục Hoạt Động</p>
+                }
+                <SwitchButton
+                    handleCheckStatus={handleCheckStatus}
+                    defaultValue={dataInput.active}
+                />
+            </div>
+            
+        </ModalSectionContent>}
+
+        {/* date DONE */}
+        {
         dataInput.dateDone && 
         <ModalSectionContent title="Ngày hoàn thành" Icon={Img.deadline} >
             <DateDone>
@@ -444,7 +472,7 @@ const EditSectionContainer = styled.div `
         svg {
             margin-left: 10px;
             width: 14px;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
         }
 
         &:hover {
@@ -530,7 +558,7 @@ const Label = styled.div`
 
     &.click-able {
         
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
         &:hover {
             svg {
                 transition: all .3s ease-in-out;
@@ -554,7 +582,7 @@ const Label = styled.div`
 const RelateAres = styled.div `
     text-align: center;
     color: #b8c2cc!important;
-    cursor: pointer;
+    cursor: url(${myCursor}), auto;
     width: 25%;
 
     svg {
@@ -581,64 +609,6 @@ const Deadline = styled.div`
     }
 `
 
-const Ratio = styled.div`
-
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: row;
-    label {
-    display: flex;
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 0.375em;
-    /* Accessible outline */
-    /* Remove comment to use */ 
-    /*
-        &:focus-within {
-            outline: .125em solid #00005c;
-        }
-    */
-    input {
-        position: absolute;
-        left: -9999px;
-        &:checked + span {
-        background-color: mix(#fff, #10163A, 84%);
-        &:before {
-            box-shadow: inset 0 0 0 0.3375em #10163A;
-        }
-        }
-    }
-    span {
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        padding: 0.375em 0.75em 0.375em 0.375em;
-        border-radius: 99em; // or something higher...
-        transition: 0.25s ease;
-        &:hover {
-        background-color: mix(#fff, #10163A, 84%);
-        }
-        &:before {
-        display: flex;
-        flex-shrink: 0;
-        content: "";
-        background-color: #fff;
-        width: 1.1em;
-        height: 1.1em;
-        border-radius: 50%;
-        margin-right: 0.375em;
-        transition: 0.25s ease;
-        box-shadow: inset 0 0 0 0.125em #10163A;
-        }
-    }
-    }
-
-
-`
 const ModalSectionContentStyle = styled.div `
         margin-top: 18px;
 
@@ -665,6 +635,15 @@ const ModalSectionContentStyle = styled.div `
             .ql-container {
             height: auto!important;
         }}
+
+
+        .status-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
         
     `
 

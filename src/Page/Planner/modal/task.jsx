@@ -14,8 +14,7 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
-import RoutineContext from "../../../Context/Routine.context";
-import SwitchButton from "../../../Component/SwitchButton";
+import myCursor from "../../../assets/HVCyan_link.cur"
 
 const relatedArea = [
     {
@@ -208,10 +207,6 @@ const Task = (p) => {
         setDataInput({...dataInput, area: newData })
     }
 
-    const handleCheckStatus = () => {
-        setDataInput({...dataInput, active: !dataInput.active })
-    }
-
     // submit
     const handleSave = async () => {
         console.log("dataInput", dataInput)
@@ -338,28 +333,6 @@ const Task = (p) => {
         )}
         
         </ModalSectionContent>
-
-        {/* STATUS */}
-        {modal.type === "routine" &&
-        <ModalSectionContent 
-            title="Trạng thái"
-            name="status"
-            Icon={Img.status}
-            plus={mode === "edit" ? false : secOpen.note}
-            openSec={openSec}>
-            
-            <div className="status-wrapper">
-               {dataInput.active 
-                ? <p>Dừng Hoạt Động</p>    
-                : <p>Tiếp tục Hoạt Động</p>
-                }
-                <SwitchButton
-                    handleCheckStatus={handleCheckStatus}
-                    defaultValue={dataInput.active}
-                />
-            </div>
-            
-        </ModalSectionContent>}
 
         {/* DEADLINE */}
         
@@ -507,7 +480,7 @@ const EditSectionContainer = styled.div `
         svg {
             margin-left: 10px;
             width: 14px;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
         }
 
         &:hover {
@@ -593,7 +566,7 @@ const Label = styled.div`
 
     &.click-able {
         
-        cursor: pointer;
+            cursor: url(${myCursor}), auto;
         &:hover {
             svg {
                 transition: all .3s ease-in-out;
@@ -616,8 +589,8 @@ const Label = styled.div`
 
 const RelateAres = styled.div `
     text-align: center;
-    color: #b8c2cc!important;
-    cursor: pointer;
+    color: #b8c2cc!important
+            cursor: url(${myCursor}), auto;
     width: 25%;
 
     svg {
@@ -652,8 +625,8 @@ const Ratio = styled.div`
     justify-content: center;
     flex-direction: row;
     label {
-    display: flex;
-    cursor: pointer;
+    display: flex
+            cursor: url(${myCursor}), auto;
     font-weight: 500;
     position: relative;
     overflow: hidden;
@@ -730,13 +703,6 @@ const ModalSectionContentStyle = styled.div `
         }}
         
 
-        .status-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
     `
 
 const Validate = styled.p`

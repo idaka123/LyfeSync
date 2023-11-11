@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import { plannerData } from "./Planner.data";
 import ModalContext from "../../Context/Modal.context";
+import myCursor from '../../assets/HVCyan_link.cur';
 
 const TaskSection = (p) => {
 
@@ -32,7 +33,9 @@ const TaskSection = (p) => {
         // dragElastic={0.5}
         >
         <h2 className="select-none text-dark title">{plannerData[data].name}<span className="icon-wrap" onClick={handleClickAdd} name={plannerData[data].name}> &nbsp;+ </span></h2>
-        <DateZone>
+        <DateZone 
+        style={{cursor: `url(${myCursor}), auto`}}
+        >
             {plannerData[data].dateZone && plannerData[data].dateZone.map(date => {    
                 return (
                 <span 
@@ -69,7 +72,6 @@ const DateZone = styled.div`
 
     span {
         margin-right: 1.5rem;
-        cursor: pointer;
         color: #626262;
         font-weight: 500;
         font-family: fantasy;
