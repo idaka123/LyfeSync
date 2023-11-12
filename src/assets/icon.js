@@ -15,7 +15,7 @@ import { CiPause1 } from 'react-icons/ci'
 import { RiCloseFill, RiDeleteBinLine } from 'react-icons/ri'
 import { GrUploadOption } from 'react-icons/gr'
 
-
+   
 
 export const Icon = {
     passHide: AiFillEyeInvisible,
