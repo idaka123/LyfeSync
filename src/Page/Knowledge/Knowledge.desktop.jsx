@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import myCursor from '../../assets/cursor/HVCyan_link.cur';
 
 export const KnowLedgeStyled = styled.div`
   position: relative;
@@ -94,7 +95,7 @@ export const TipBlock = styled.div`
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   &:hover {
 
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`};
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
   }
@@ -257,7 +258,7 @@ export const PodcastThumbnails = styled.div`
   align-items: center;
   flex-wrap: no-wrap;
   &:hover {
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
 `;
 
@@ -272,7 +273,7 @@ export const PodcastTitle = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: calc((1.3vw + 1.3vh)/2);
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
   width: 100%;
 `;
@@ -286,7 +287,7 @@ export const PodcastLength = styled.p`
   align-items: flex-start;
   overflow: hidden;
   &:hover{
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
 `;
 
@@ -305,7 +306,7 @@ export const PodcastMore = styled.div`
     font-size:  calc((2.25vw + 2.25vh)/2);
     color: black;
     &:hover{
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
       color: rgb(30,215,96);
     }
   }
@@ -320,7 +321,7 @@ export const PodcastDownload = styled.div`
     font-size: calc((2.25vw + 2.25vh)/2);
     color: black;
     &:hover{
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
     }
   }
 `
@@ -333,7 +334,7 @@ export const PodcastAdd = styled.div`
   svg{
     font-size:  calc((2.25vw + 2.25vh)/2);
     &:hover{
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
     }
   }
   .iconLove {
@@ -375,7 +376,7 @@ export const StyledPodcastCardMore = styled.div`
     transition: all 0.3s ease; 
     &:hover{
       background-color: rgb(62,62,62);
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
     }
   }
   .addToPlaylist{
@@ -406,7 +407,7 @@ export const StyledPodcastCardMore = styled.div`
           color: rgb(234,234,234);
           font-size: calc((1.5vw + 1.5vh)/2);
           &:hover{
-            cursor: pointer;
+            cursor: ${`url(${myCursor}), auto`}!important;
           }
         }
       }
@@ -442,7 +443,7 @@ export const StyledPodcastCardMore = styled.div`
         transition: all 0.3s ease; 
         &:hover{
           background-color: rgb(62,62,62);
-          cursor: pointer;
+          cursor: ${`url(${myCursor}), auto`}!important;
         }
       }
       .createInput{
@@ -467,7 +468,7 @@ export const StyledPodcastCardMore = styled.div`
           font-size:  calc((1.5vw + 1.5vh)/2);
           margin-right: 3%;
           &:hover{
-            cursor: pointer;
+            cursor: ${`url(${myCursor}), auto`}!important;
           }
         }
       }
@@ -503,7 +504,7 @@ export const StyledPodcastCardMore = styled.div`
         align-items: center;
         transition: all 0.3s ease; 
         &:hover{
-          cursor: pointer;
+          cursor: ${`url(${myCursor}), auto`}!important;
        
           background-color: rgb(62,62,62);
         }
@@ -527,7 +528,7 @@ export const PodcastListType = styled.div`
   overflow: hidden;
   height: 100%;
   &:hover {
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
 `;
 
@@ -549,7 +550,7 @@ export const PodcastArrangeTitleIcon = styled.div`
   }
   height: 90%;
   &:hover{
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
 `;
 
@@ -562,7 +563,7 @@ export const PodcastArrangeTitle = styled.p`
   color: black;
   font-weight: 700;
   &:hover{
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
 `;
 
@@ -577,7 +578,7 @@ export const SortBy = styled.div`
     color: black;
 
     &:hover {
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
     }
   }
 `;
@@ -618,7 +619,7 @@ export const PodcastArrangeListElement = styled.li`
   &:hover {
     background-color: black;
     color: white;
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
   padding-top: calc((1vw + 1vh)/2);
   padding-bottom: calc((1vw + 1vh)/2);
@@ -648,7 +649,7 @@ export const PodcastListTypeElement = styled.p`
     transition: color 0.3s ease;
     color: rgb(4 228 84);
     transform: scale(1.1);
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
   }
 `;
 
@@ -712,7 +713,7 @@ export const PodcastShareBlockTitle = styled.div`
         color: red;
       }
       color: red;
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
       transform: scale(1.1);
       transition: all 0.3s ease;
     }
@@ -782,7 +783,7 @@ export const PodcastShareBlockContent = styled.div`
 
         &:hover {
           text-decoration: underline;
-          cursor: pointer;
+          cursor: ${`url(${myCursor}), auto`}!important;
         }
       }
 
@@ -826,7 +827,7 @@ export const PodcastShareBlockContent = styled.div`
             transition: all 0.3s ease;
             transform: scale(1.05);
             color: black;
-            cursor: pointer;
+            cursor: ${`url(${myCursor}), auto`}!important;
           }
         }
       }
@@ -859,7 +860,7 @@ export const PodcastShareBlockSocial = styled.div`
     transform-origin: center;
     
     &:hover{
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
       transition: all 0.3s ease;
       transform: scale(1.2);
     }
@@ -897,7 +898,7 @@ export const PodcastShareCopyButton = styled.div`
     transform-origin: center;
     
     &:hover{
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
       transform: scale(1.05);
     }
     margin-right: 1%;
@@ -944,7 +945,7 @@ export const PodcastInfoBlock = styled.div`
     }
     &:hover{
       transform: scale(1.1);
-      cursor: pointer; 
+      cursor: ${`url(${myCursor}), auto`}!important; 
       transition: all 0.3s ease;
       .close{
         color: red;
@@ -1050,7 +1051,7 @@ export const PodcastInfoBlockDescription = styled.div`
      }
      
      &:hover {
-       cursor: pointer;
+       cursor: ${`url(${myCursor}), auto`}!important;
        transform: scale(1.1);
        transition: all 0.3s ease; 
      }
@@ -1074,7 +1075,7 @@ export const PodcastInfoBlockDescription = styled.div`
      
      &:hover {
        transition: all 0.3s ease;     
-       cursor: pointer;
+       cursor: ${`url(${myCursor}), auto`}!important;
        transform: scale(1.1);
        border-color: white;
        .download{
@@ -1105,7 +1106,7 @@ export const PodcastInfoBlockDescription = styled.div`
 
     &:hover{
       transition: all 0.3s ease;     
-      cursor: pointer;
+      cursor: ${`url(${myCursor}), auto`}!important;
       transform: scale(1.1);
       border-color: white;
       .love{
@@ -1204,7 +1205,7 @@ export const PodcastPlaylistBackButton = styled.div`
   p{
     color: black;
   }
-  cursor: pointer;
+  cursor: ${`url(${myCursor}), auto`}!important;
  }
 `
 export const PodcastPlaylistTitle = styled.div`
@@ -1279,7 +1280,7 @@ export const PodcastPlaylistType = styled.div`
     }
     .addPlaylistIcon{
       &:hover{
-        cursor: pointer;
+        cursor: ${`url(${myCursor}), auto`}!important;
         color: gray;
       }
     }
@@ -1407,7 +1408,7 @@ export const PodcastPlaylistBlockStyled = styled.div`
     }
   }
   &:hover{
-    cursor: pointer;
+    cursor: ${`url(${myCursor}), auto`}!important;
     background-color: rgb(210, 210, 210);
     .playListBlockImage .playListBlockImageBlock .playListBlockImageShowButton{
       background-color: rgba(0, 0, 0, 0.5);
