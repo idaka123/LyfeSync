@@ -3,7 +3,7 @@ import { Img } from "../../Assets/svg";
 export const plannerData = {
     task: {
         name: "task",
-        value: "công việc",
+        value: "task",
         dateZone: [
             {
                 name: "today",
@@ -27,7 +27,7 @@ export const plannerData = {
     },
     routine: {
         name: "routine",
-        value: "thói quen",
+        value: "routine",
         dateZone: [
             {
                 name: "today",
@@ -47,7 +47,7 @@ export const plannerData = {
     },
     goal: {
         name: "goal",
-        value: "mục tiêu",
+        value: "goal",
         dateZone: [
             {
                 name: "all",

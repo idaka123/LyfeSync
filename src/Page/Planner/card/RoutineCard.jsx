@@ -192,10 +192,15 @@ const Card = (p) => {
                 setOption(!option)
             },
             delete: (id) => {
-                let newTask = [...dataSection]; //prevent mutating
-                newTask = newTask.filter(data => data.id !== id)
-                setDateSection(newTask);
-                taskHandle.option.close()
+                const routine = document.querySelector(`[name='${id}']`)
+                routine.style.opacity = "0"
+                
+                setTimeout(() => {
+                    let newTask = [...dataSection]; //prevent mutating
+                    newTask = newTask.filter(data => data.id !== id)
+                    setDateSection(newTask);
+                    taskHandle.option.close()
+                }, 500)
             }
         }
     }
@@ -240,7 +245,7 @@ const Card = (p) => {
     }
 
     return (
-        <TaskCardContainer style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="text-dark">
+        <TaskCardContainer name={id} style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="text-dark">
             <MainTask>
                 <div className={`card-title ${color ?"text-white" : ""}  ${checked ? "blur" : ""}`}>
                     <Title>

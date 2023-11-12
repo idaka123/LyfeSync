@@ -15,11 +15,7 @@ const Setting = () => {
             name: "appearance",
             title: "Hiển thị"
         },
-        {
-            icon: <Icon.background />,
-            name: "test",
-            title: "test"
-        },
+
     ]
 
 
@@ -82,13 +78,15 @@ const MenuList = styled.ul `
     list-style: none;
     @media screen and (min-width: 769px) {
         width: 20%;
+        padding: 28px 10px;
     }
     @media screen and (max-width: 768px) {
         width: 13%;
+        margin: 10px;
     }
     
     height: 100%;
-    margin: 10px;
+    
 `
 
 const ContentWrapper = styled.div `
@@ -107,16 +105,22 @@ const ContentWrapper = styled.div `
 const MenuItem = styled.li`
     display: flex;
     align-items: center;
-    padding: 13px;
     border-radius: 10px;
     
+    @media screen and (min-width: 769px) {
+        padding: 6px 11px;
+    }
+    @media screen and (max-width: 768px) {
+        padding: 10px;
+    }
+
     svg {
         font-size: 3rem;
     }
 
     span {
         margin-left: 20px;
-        font-size: 1.55rem;
+        font-size: 1.3rem;
         font-weight: 600;
     }
 

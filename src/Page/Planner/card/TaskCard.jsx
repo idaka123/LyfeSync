@@ -10,6 +10,7 @@ import TaskContext from "../../../Context/Task.context";
 import SubTask from "./SubTask";
 import language from "../../../Util/language"
 import myCursor from "../../../assets/cursor/HVCyan_link.cur"
+import { motion } from "framer-motion";
 
 const TaskCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p
@@ -325,10 +326,15 @@ const Card = (p) => {
                 setOption(!option)
             },
             delete: (id) => {
-                let newTask = [...dataSection]; //prevent mutating
-                newTask = newTask.filter(data => data.id !== id)
-                setDateSection(newTask);
-                taskHandle.option.close()
+                const task = document.querySelector(`[name='${id}']`)
+                task.style.opacity = "0"
+
+                setTimeout(() => {
+                    let newTask = [...dataSection]; //prevent mutating
+                    newTask = newTask.filter(data => data.id !== id)
+                    setDateSection(newTask);
+                    taskHandle.option.close()
+                }, 500)
             }
         }
     }
@@ -362,7 +368,7 @@ const Card = (p) => {
     
   
     return (
-        <TaskCardContainer style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="text-dark">
+        <TaskCardContainer name={id} style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="task-card text-dark">
             <MainTask>
                 <div className={`card-title ${color ?"text-white" : ""}  ${checked ? "blur" : ""}`}>
                     <Title>
@@ -614,7 +620,7 @@ const DateZoneLabelContainer = styled.div `
 const TaskCardList = styled.div `
 
 `
-const TaskCardContainer = styled.div `
+const TaskCardContainer = styled(motion.div) `
     width: 100%;
     height: auto;
     background-color: #fff;
