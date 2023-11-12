@@ -1,19 +1,19 @@
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
-import { AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai';
+import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters, AiFillTag, AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai'
 import { MdSecurity, MdOutlineAdminPanelSettings, MdNotificationsNone, MdDelete } from 'react-icons/md'
 import { FiUser, FiSettings, FiMenu } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
-import { BsCart2 } from 'react-icons/bs'
+import { BsCart2, BsPlay, BsListTask, BsCardImage } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import { AiOutlineLoading3Quarters, AiFillTag } from 'react-icons/ai'
 import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
 import { ImPlus } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
-import { RiCloseFill } from 'react-icons/ri'
+import { CiPause1 } from 'react-icons/ci'
+import { RiCloseFill, RiDeleteBinLine } from 'react-icons/ri'
+import { GrUploadOption } from 'react-icons/gr'
 
 
 
@@ -42,5 +42,11 @@ export const Icon = {
     tree: SiGumtree,
     setting: FiSettings,
     menu: FiMenu,
-    x: RiCloseFill
+    x: RiCloseFill,
+    Playy: BsPlay,
+    pause: CiPause1,
+    task: BsListTask,
+    background: BsCardImage,
+    bin: RiDeleteBinLine,
+    upload: GrUploadOption
 }

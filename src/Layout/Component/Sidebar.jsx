@@ -7,13 +7,15 @@ import styled from "styled-components";
 import DeviceContext from "../../Context/Device.context";
 import paths from "../../Routes/path";
 import Overlay from "./Overlay";
+import myCursor from "../../assets/HVCyan_link.cur";
 
 const Sidebar = (p) => {
     const { isopen, toggle, isOpenOvelay, setIsOpenOverlay } = p
 
     const menuItems = [
         { label: 'Trang chủ', icon: Icon.home, link: paths.home},
-        { label: 'Tác vụ', icon: Icon.setting, link: paths.planner},
+        { label: 'Tác vụ', icon: Icon.task, link: paths.planner},
+        { label: 'Cài đặt', icon: Icon.setting, link: paths.setting},
     ];
 
    
@@ -38,11 +40,11 @@ const Sidebar = (p) => {
         }
     };
 
-    const hdleClickOverLay = () => {
-        setIsOpenOverlay(false)
-        toggle(false)
+    // const hdleClickOverLay = () => {
+    //     setIsOpenOverlay(false)
+    //     toggle(false)
 
-    }
+    // }
 
     const [select, setSelect] = useState()
 
@@ -126,6 +128,9 @@ const SidebarMenu = styled.ul`
 
 const SidebarMenuItem = styled(motion.li)`
     
+    a {
+        cursor: url(${myCursor}), auto;
+    }
   &.active{
     border-radius: 10px!important;
     z-index: 99;
@@ -133,6 +138,7 @@ const SidebarMenuItem = styled(motion.li)`
     a {
       color: #ffffff!important;
       background: var(--main-gradient);
+
     }
   }
 
@@ -159,5 +165,10 @@ const SidebarLink = styled(Link)`
             width: 100%;
             font-size: 18px;
         }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
     }
 `;

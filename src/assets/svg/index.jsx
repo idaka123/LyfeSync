@@ -24,7 +24,12 @@ import {
   edit,
   deleteIcon,
   plus,
-  plusCircle
+  plusCircle,
+  routineDone,
+  routineMiss,
+  status,
+  pause2,
+  play2
 } from './svg.jsx'
 
 const Img = {
@@ -52,7 +57,12 @@ const Img = {
   edit,
   deleteIcon,
   plus,
-  plusCircle
+  plusCircle,
+  routineDone,
+  routineMiss,
+  status,
+  pause2,
+  play2
 }
 
 export { Img }

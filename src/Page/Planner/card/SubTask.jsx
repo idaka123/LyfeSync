@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Input from "../../../Component/Input"
 import { Img } from "../../../Assets/svg";
+import myCursor from '../../../assets/HVCyan_link.cur';
 
 const SubTask = (p) => {
     const { color, title, done, updateSubCheck, id, deleteSubTask } = p
@@ -76,7 +77,7 @@ const SubTask = (p) => {
             </div>
         </div>
 
-        <div className="option">
+        <div className="option pointer-cursor">
             <span onClick={openEdit}><Img.edit/></span>
             <span name={id} onClick={handleDel}><Img.deleteIcon/></span>
         </div>
@@ -98,7 +99,7 @@ const SubTaskContainer = styled.div `
 
             svg {
                 width: 16px;
-                cursor: pointer;
+                cursor: url(${myCursor}), auto;
             }
         }
 
@@ -111,7 +112,7 @@ const SubTaskContainer = styled.div `
     .option {
         display: flex;
         svg {
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
             width: 15px;
             margin-left: 10px;
         }

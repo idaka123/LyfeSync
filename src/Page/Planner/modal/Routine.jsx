@@ -1,9 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ModalContext from "../../../Context/Modal.context";
-import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
-import { dateConvert, isDateString } from "../../../Util/util";
+import { convertDates, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
@@ -14,6 +13,9 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
+import RoutineContext from "../../../Context/Routine.context";
+import SwitchButton from "../../../Component/SwitchButton";
+import myCursor from '../../../assets/HVCyan_link.cur';
 
 const relatedArea = [
     {
@@ -64,30 +66,12 @@ const Routine = (p) => {
     const { dataInput, setDataInput, mode, areaData } = p
     
     const { modal, closeModal }  = useContext(ModalContext)
-    const { task, setTask, loading }  = useContext(TaskContext)
+    const { setRoutine }  = useContext(RoutineContext)
     const [valid, setValid] = useState(true)
     const fp = useRef(null);
 
     const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
     // const [dataInput, setDataInput] = useState(data)
-    const radioData = [
-        {
-            id: "today",
-            value: "Nay"
-        },
-        {
-            id: "tomorrow",
-            value: "Mai"
-        },
-        {
-            id: "someday",
-            value: "Ngày nào đó"
-        },
-        {
-            id: "specific-day",
-            value: "Chọn ngày"
-        },
-    ]
 
     const [area, setArea] = useState(areaData)
     
@@ -128,6 +112,9 @@ const Routine = (p) => {
         })
     }
 
+    const handleChooseDateRoutine = (date) => {
+        setDataInput({...dataInput, dateDone: date.map(date => date.toString()) })
+    }
 
     const deadlineHdle = {
         openFP: () => { // open flatpicker
@@ -215,11 +202,11 @@ const Routine = (p) => {
     
             if(valid){
                 setValid(true)
-                await setTask(prevData => {
+                await setRoutine(prevData => {
                     if(mode === "edit") {
                         const newData = prevData.map(data => {
                             if(data.id === modal.content.id) {
-                                return {...dataInput, id: data.id, sub: data.sub }
+                                return {...dataInput, id: data.id}
                             } else {
                                 return data
                             }
@@ -233,7 +220,7 @@ const Routine = (p) => {
     
                             newData.deadline = today.toString()
                         }
-                        return [...prevData, {...newData, id: nanoid(), sub: [] }]
+                        return [...prevData, {...newData, id: nanoid(), active: true}]
                     }
                 })
                 closeModal()
@@ -244,6 +231,10 @@ const Routine = (p) => {
             const { data } = p
             const Image = Img[data]
             return <Image/>
+        }
+
+        const handleCheckStatus = () => {
+            setDataInput({...dataInput, active: !dataInput.active })
         }
 
         const checkValid = () => {
@@ -332,47 +323,51 @@ const Routine = (p) => {
         
         </ModalSectionContent>
 
-{/* 
-        <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
-            <Deadline>
-            {mode === "edit" && secOpen.deadline 
-                ? (
-                    <EditSection name="deadline" onClick={openSec} isedit={secOpen.deadline}>
-                    {isDateString(dataInput.deadline) 
-                        ? dateConvert(dataInput.deadline)
-                        : radioData.find(radio => radio.id === dataInput.deadline)?.value ?? "Chọn thời hạn"}
-                    </EditSection>
-                ) : (
-                    <Fragment>
-                    <Ratio>
-                        {radioData && radioData.map(radio =>{
-                            let isChecked = false
-                            if(mode === "edit") {
-                                if(dataInput.deadline === radio.id) isChecked = true
-                                if(isDateString(dataInput.deadline) && radio.id === "specific-day") isChecked = true
-                            }
-                        return (
-                        <label key={radio.id} htmlFor={radio.id}onClick={(e) => deadlineHdle.choseType(e, mode)}>
-                            <input type="radio" id={radio.id} name="radio" defaultChecked={mode === "edit" ? isChecked : radio.id === "today" && "checked"} />
-                            <span>{radio.value}</span>
-                        </label>
-                        )})}
-                    </Ratio>
-                    <div className="flat-picker-wrapper">
-                        <Flatpickr
-                        ref={fp}
-                        options={{
-                            inline: true,
-                            minDate: "today",
-                        }}
-                        value={isDateString(dataInput.deadline) ? new Date(dataInput.deadline) : null}
-                        onChange={(date) => deadlineHdle.choseDateFP(date)}
-                        />
-                    </div>
-                    </Fragment>
-                )}
-            </Deadline>
-        </ModalSectionContent> */}
+        {/* STATUS */}
+        {modal.type === "routine" &&
+        <ModalSectionContent 
+            title="Trạng thái"
+            name="status"
+            Icon={Img.status}
+            plus={mode === "edit" ? false : secOpen.note}
+            openSec={openSec}>
+            
+            <div className="status-wrapper">
+               {dataInput.active 
+                ? <p style={{color: "red"}}>Dừng Hoạt Động</p>    
+                : <p style={{color: "green"}}>Tiếp tục Hoạt Động</p>
+                }
+                <SwitchButton
+                    handleCheckStatus={handleCheckStatus}
+                    defaultValue={dataInput.active}
+                />
+            </div>
+            
+        </ModalSectionContent>}
+
+        {/* date DONE */}
+        {
+        dataInput.dateDone && 
+        <ModalSectionContent title="Ngày hoàn thành" Icon={Img.deadline} >
+            <DateDone>
+                <Fragment>
+                <div className="flat-picker-wrapper">
+                    <Flatpickr
+                    ref={fp}
+                    options={{
+                        mode: "multiple",
+                        inline: true,
+                        maxDate: "today",
+                    }}
+                    value={convertDates(dataInput.dateDone)}
+                    onChange={handleChooseDateRoutine}
+                    />
+                </div>
+                </Fragment>
+            </DateDone>
+        </ModalSectionContent>
+        }
+
 
         {/* NOTE */}
         <ModalSectionContent 
@@ -477,7 +472,7 @@ const EditSectionContainer = styled.div `
         svg {
             margin-left: 10px;
             width: 14px;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
         }
 
         &:hover {
@@ -563,7 +558,7 @@ const Label = styled.div`
 
     &.click-able {
         
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
         &:hover {
             svg {
                 transition: all .3s ease-in-out;
@@ -587,7 +582,7 @@ const Label = styled.div`
 const RelateAres = styled.div `
     text-align: center;
     color: #b8c2cc!important;
-    cursor: pointer;
+    cursor: url(${myCursor}), auto;
     width: 25%;
 
     svg {
@@ -614,64 +609,6 @@ const Deadline = styled.div`
     }
 `
 
-const Ratio = styled.div`
-
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: row;
-    label {
-    display: flex;
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 0.375em;
-    /* Accessible outline */
-    /* Remove comment to use */ 
-    /*
-        &:focus-within {
-            outline: .125em solid #00005c;
-        }
-    */
-    input {
-        position: absolute;
-        left: -9999px;
-        &:checked + span {
-        background-color: mix(#fff, #10163A, 84%);
-        &:before {
-            box-shadow: inset 0 0 0 0.3375em #10163A;
-        }
-        }
-    }
-    span {
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        padding: 0.375em 0.75em 0.375em 0.375em;
-        border-radius: 99em; // or something higher...
-        transition: 0.25s ease;
-        &:hover {
-        background-color: mix(#fff, #10163A, 84%);
-        }
-        &:before {
-        display: flex;
-        flex-shrink: 0;
-        content: "";
-        background-color: #fff;
-        width: 1.1em;
-        height: 1.1em;
-        border-radius: 50%;
-        margin-right: 0.375em;
-        transition: 0.25s ease;
-        box-shadow: inset 0 0 0 0.125em #10163A;
-        }
-    }
-    }
-
-
-`
 const ModalSectionContentStyle = styled.div `
         margin-top: 18px;
 
@@ -698,6 +635,15 @@ const ModalSectionContentStyle = styled.div `
             .ql-container {
             height: auto!important;
         }}
+
+
+        .status-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
         
     `
 
@@ -707,3 +653,15 @@ const Validate = styled.p`
 
 `
  
+const DateDone = styled.div`
+    text-align: center;
+    
+    .flat-picker-wrapper {
+        justify-content: center;
+
+    }
+
+    input.flatpickr-input {
+        display: none!important;
+    }
+`

@@ -3,44 +3,60 @@ import styled from "styled-components";
 import { plannerData } from "./Planner.data";
 import TaskSection from "./TaskSection";
 import Button from "../../Component/Button";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import TaskContext from "../../Context/Task.context";
 import RoutineContext from "../../Context/Routine.context";
 import TaskCard from "./card/TaskCard";
 import RoutineCard from "./card/RoutineCard";
 import ModalContext from "../../Context/Modal.context";
+import GoalContext from "../../Context/Goal.context";
+import GoalCard from "./card/GoalCard";
+import Loading from "../../Component/Loadding";
 
-const PlannerDesktop = (p) => {
-    const {  } = p
-    const section = Object.keys(plannerData)
+const PlannerDesktop = () => {
+    const [taskDateZone, setTaskDateZone] = useState("today")
+    const [routineDateZone, setRoutineDateZone] = useState("today")
+    const [goalDateZone, setGoalDateZone] = useState("today")
+    const { task, setTask, loading:taskLoad }  = useContext(TaskContext)
+    const { routine, setRoutine, loading:routineLoad }  = useContext(RoutineContext)
+    const { goal, setGoal, loading:goalLoad }  = useContext(GoalContext)
     
- 
+    useEffect(() => {
+        console.log("taskLoad", taskLoad)
+    }, [taskLoad]);
 
     return ( 
         <>
-         {section && section.map((sec, idx) => {
-                return (
-                    <SectionContent key={idx} sec={sec} idx={idx}/>
-                )
-            })}
-                
+            <SectionContent sec="task" loading={taskLoad} 
+                            dataSection={task} setDateSection={setTask} 
+                            setDateZone={setTaskDateZone}>
+               <TaskCard dataSection={task} setDateSection={setTask} dateZone={taskDateZone} />
+            </SectionContent>
+
+            <SectionContent sec="routine" loading={routineLoad} 
+                            dataSection={routine} setDateSection={setRoutine} 
+                            setDateZone={setRoutineDateZone} >
+               <RoutineCard dataSection={routine} setDateSection={setRoutine} dateZone={routineDateZone}/>
+            </SectionContent>
+
+            <SectionContent sec="goal" loading={goalLoad} 
+                            dataSection={goal} setDateSection={setGoal} 
+                            setDateZone={setGoalDateZone}>
+               <GoalCard dataSection={goal} setDateSection={setGoal} dateZone={goalDateZone}/>
+            </SectionContent>
+\
         </>
      );
 }
 
 const SectionContent = (p) => {
-    const { sec, idx } = p
-
-    const { task, loading, setTask }  = useContext(TaskContext)
-    const { routine, setRoutine, loading:routineLoading }  = useContext(RoutineContext)
-
-    const [dateZone, setDateZone] = useState("today")
+    const { sec, idx, dataSection, children, setDateZone, loading } = p
 
     const { openModal }  = useContext(ModalContext)
 
     const onClickCreateTaskbtn = e => {
         const name = e.target.getAttribute("name")
-        openModal(name)
+        openModal(name, null, name)
     }
 
     return (
@@ -51,27 +67,28 @@ const SectionContent = (p) => {
         setDateZone={setDateZone}
         >
         {
-        sec === "task" && task && task.length > 0
-        ?<TaskCard dataSection={task} setDateSection={setTask} dateZone={dateZone}/>:
-        sec === "routine" && routine && routine.length > 0
-        ?<RoutineCard dataSection={routine} setDateSection={setRoutine} dateZone={dateZone}/> 
-        :<Fragment>
-            <ImgMotivation>
-                <img src={plannerData[sec]?.empty?.img} alt="" />
-            </ImgMotivation> 
-
-            <TextMotivation>
-                <p>{plannerData[sec]?.empty?.text1}</p>
-                <p>{plannerData[sec]?.empty?.text2}</p>
-                <p>{plannerData[sec]?.empty?.text3}</p>
-            </TextMotivation>
-            
-            <Button title={`Tạo ${sec}`} onClick={onClickCreateTaskbtn} 
-                    name={sec}
-                    className="text-center"
-                    style={{marginTop: "16px"}}/>
-        </Fragment>
+           loading ? <Loading/> :
+            <Fragment>
+            {   dataSection.length > 0 ?
+                children :
+                <Fragment>
+                    <ImgMotivation>
+                        <img src={plannerData[sec]?.empty?.img} alt="" />
+                    </ImgMotivation> 
         
+                    <TextMotivation>
+                        <p>{plannerData[sec]?.empty?.text1}</p>
+                        <p>{plannerData[sec]?.empty?.text2}</p>
+                        <p>{plannerData[sec]?.empty?.text3}</p>
+                    </TextMotivation>
+                    
+                    <Button title={`Tạo ${sec}`} onClick={onClickCreateTaskbtn} 
+                            name={sec}
+                            className="text-center"
+                            style={{marginTop: "16px"}}/>
+                </Fragment>
+            }
+            </Fragment>
         }
     </TaskSection>     
     )

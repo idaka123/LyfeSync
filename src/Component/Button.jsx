@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-
+import myCursor from '../assets/HVCyan_link.cur';
+import { Icon } from "../Assets/icon";
 /* 
 Example:
     <Button
@@ -22,11 +23,12 @@ const Button = (p) => {
     return (
         <Container className={className} style={style}>
             <motion.button
+            style={{cursor: `url(${myCursor}), auto`}}
                 name={name}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={hleClick}
-            >
+            >   
                 {title}
             </motion.button>            
         </Container>
@@ -38,7 +40,6 @@ export default Button;
 const Container = styled.div`
 
     button{
-        cursor: pointer;
         width: 150px;
         height: 29px;
         transform: none;
@@ -48,5 +49,9 @@ const Container = styled.div`
         transform: none;
         color: white;
         font-size: 1.3rem;
+    }
+
+    svg {
+        color: white
     }
 `

@@ -8,6 +8,8 @@ import ModalContext, { ModalProvider } from "../../Context/Modal.context";
 import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
 import { RoutineProvider } from "../../Context/Routine.context";
+import { GoalProvider } from "../../Context/Goal.context";
+import myCursor from "../../assets/HVCyan_link.cur";
 
 const Planner = () => {
 
@@ -29,14 +31,14 @@ const Planner = () => {
     
     const Mobile = () => {
         return (
-            <Container>
+            <Container >
                 <PlannerMobile selectTab={selectTab} tab={tab} />
             </Container>
     )}
 
     const Desktop = () => {
         return (
-            <Container style={{paddingTop: "40px"}}> 
+            <Container style={{paddingTop: "40px", paddingBottom: "150px"}}> 
                 <PlannerDesktop/>
             </Container>
         );
@@ -46,13 +48,15 @@ const Planner = () => {
         <AnimatePresence mode="wait">
             <TaskProvider>
                 <RoutineProvider>
-                    <ModalProvider>
-                        <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
-                                    animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
-                            <TaskModal />
-                            {device === "desktop" ? <Desktop /> : <Mobile /> }
-                        </motion.div>
-                    </ModalProvider>
+                    <GoalProvider>
+                        <ModalProvider>
+                            <motion.div initial={{ opacity: 0,  scale: .75, transition: { duration: .5 } }}
+                                        animate={{ opacity: 1, scale: 1, transition: { duration: .25 } }}>
+                                <TaskModal />
+                                {device === "desktop" ? <Desktop /> : <Mobile /> }
+                            </motion.div>
+                        </ModalProvider>
+                    </GoalProvider>
                 </RoutineProvider>
             </TaskProvider> 
         </AnimatePresence>
@@ -70,10 +74,15 @@ const Container = styled(motion.div)`
     padding-left: 25px;
     display: flex;
 
+    section h2 {
+        white-space: nowrap;
+
+    }
+
     section h2.title {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 900;
-        font-family: fantasy;
+        /* font-family: fantasy; */
         display: flex;
         align-items: center;
         .icon-wrap {
@@ -81,7 +90,7 @@ const Container = styled(motion.div)`
             line-height: 30px;
             font-size: 43px;
             position: relative;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
             transition: all 0.3s ease-in-out;
 
             &:hover {

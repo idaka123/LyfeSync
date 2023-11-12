@@ -1,9 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ModalContext from "../../../Context/Modal.context";
-import TaskContext from "../../../Context/Task.context";
 import DOMPurify from "dompurify";
-import { convertDates, dateConvert, isDateString } from "../../../Util/util";
+import {  dateConvert, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input";
@@ -14,8 +13,8 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
+import GoalContext from "../../../Context/Goal.context";
 import myCursor from "../../../assets/HVCyan_link.cur"
-
 const relatedArea = [
     {
         name: "health",
@@ -60,35 +59,36 @@ const relatedArea = [
 
 ]
 
-const Task = (p) => {
+const radioData = [
+    {
+        id: "today",
+        value: "Nay"
+    },
+    {
+        id: "tomorrow",
+        value: "Mai"
+    },
+    {
+        id: "someday",
+        value: "Ngày nào đó"
+    },
+    {
+        id: "specific-day",
+        value: "Chọn ngày"
+    },
+]
+
+const Goal = (p) => {
 
     const { dataInput, setDataInput, mode, areaData } = p
     
     const { modal, closeModal }  = useContext(ModalContext)
-    const { task, setTask, loading }  = useContext(TaskContext)
+    const { setGoal }  = useContext(GoalContext)
     const [valid, setValid] = useState(true)
     const fp = useRef(null);
 
     const sanitizedHTML = DOMPurify.sanitize(dataInput.note);
     // const [dataInput, setDataInput] = useState(data)
-    const radioData = [
-        {
-            id: "today",
-            value: "Nay"
-        },
-        {
-            id: "tomorrow",
-            value: "Mai"
-        },
-        {
-            id: "someday",
-            value: "Ngày nào đó"
-        },
-        {
-            id: "specific-day",
-            value: "Chọn ngày"
-        },
-    ]
 
     const [area, setArea] = useState(areaData)
     
@@ -128,7 +128,6 @@ const Task = (p) => {
             deadline: true
         })
     }
-
 
     const deadlineHdle = {
         openFP: () => { // open flatpicker
@@ -207,54 +206,53 @@ const Task = (p) => {
         setDataInput({...dataInput, area: newData })
     }
 
-    // submit
-    const handleSave = async () => {
-        console.log("dataInput", dataInput)
-        const valid = checkValid()
-
-        console.log(valid)
-
-        if(valid){
-            setValid(true)
-            await setTask(prevData => {
-                if(mode === "edit") {
-                    const newData = prevData.map(data => {
-                        if(data.id === modal.content.id) {
-                            return {...dataInput, id: data.id, sub: data.sub }
-                        } else {
-                            return data
+        // submit
+        const handleSave = async () => {
+            console.log("dataInput", dataInput)
+            const valid = checkValid()
+    
+            console.log(valid)
+    
+            if(valid){
+                setValid(true)
+                await setGoal(prevData => {
+                    if(mode === "edit") {
+                        const newData = prevData.map(data => {
+                            if(data.id === modal.content.id) {
+                                return {...dataInput, id: data.id }
+                            } else {
+                                return data
+                            }
+                        })
+                        return newData
+                    } else {
+                        const newData = {...dataInput}
+                        if(typeof(newData.deadline) === "undefined") {
+                            const today = new Date()
+                            today.setHours(23,59,59,0)
+    
+                            newData.deadline = today.toString()
                         }
-                    })
-                    return newData
-                } else {
-                    const newData = {...dataInput}
-                    if(typeof(newData.deadline) === "undefined") {
-                        const today = new Date()
-                        today.setHours(23,59,59,0)
-
-                        newData.deadline = today.toString()
+                        return [...prevData, {...newData, id: nanoid(), target: "0" }]
                     }
-                    return [...prevData, {...newData, id: nanoid(), sub: [] }]
-                }
-            })
-
-            closeModal()
+                })
+                closeModal()
+            }
         }
-    }
-
-    const Area = (p) => {
-        const { data } = p
-        const Image = Img[data]
-        return <Image/>
-    }
-
-    const checkValid = () => {
-        if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
-            setValid(false)
-            return false
+    
+        const Area = (p) => {
+            const { data } = p
+            const Image = Img[data]
+            return <Image />
         }
-        return true
-    }
+
+        const checkValid = () => {
+            if(typeof(dataInput.title) === "undefined" || dataInput.title.trim() === "") {
+                setValid(false)
+                return false
+            }
+            return true
+        }
 
     return ( 
     <Content>           
@@ -334,9 +332,9 @@ const Task = (p) => {
         
         </ModalSectionContent>
 
-        {/* DEADLINE */}
+         {/* DEADLINE */}
         
-        <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
+         <ModalSectionContent title="Thời hạn" Icon={Img.deadline} >
             <Deadline>
             {mode === "edit" && secOpen.deadline 
                 ? (
@@ -377,6 +375,7 @@ const Task = (p) => {
             </Deadline>
         </ModalSectionContent>
         
+
         {/* NOTE */}
         <ModalSectionContent 
             title="Ghi chú"
@@ -451,7 +450,7 @@ const EditSection = (p) => {
         </EditSectionContainer>
     )
 }
-export default Task;
+export default Goal;
 
 
 
@@ -480,7 +479,6 @@ const EditSectionContainer = styled.div `
         svg {
             margin-left: 10px;
             width: 14px;
-            cursor: url(${myCursor}), auto;
         }
 
         &:hover {
@@ -566,7 +564,7 @@ const Label = styled.div`
 
     &.click-able {
         
-            cursor: url(${myCursor}), auto;
+        cursor: url(${myCursor}), auto;
         &:hover {
             svg {
                 transition: all .3s ease-in-out;
@@ -589,8 +587,8 @@ const Label = styled.div`
 
 const RelateAres = styled.div `
     text-align: center;
-    color: #b8c2cc!important
-            cursor: url(${myCursor}), auto;
+    color: #b8c2cc!important;
+    cursor: url(${myCursor}), auto;
     width: 25%;
 
     svg {
@@ -625,8 +623,8 @@ const Ratio = styled.div`
     justify-content: center;
     flex-direction: row;
     label {
-    display: flex
-            cursor: url(${myCursor}), auto;
+    display: flex;
+    cursor: url(${myCursor}), auto;
     font-weight: 500;
     position: relative;
     overflow: hidden;
@@ -702,7 +700,6 @@ const ModalSectionContentStyle = styled.div `
             height: auto!important;
         }}
         
-
     `
 
 const Validate = styled.p`
@@ -711,3 +708,15 @@ const Validate = styled.p`
 
 `
  
+const DateDone = styled.div`
+    text-align: center;
+    
+    .flat-picker-wrapper {
+        justify-content: center;
+
+    }
+
+    input.flatpickr-input {
+        display: none!important;
+    }
+`

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Icon } from "../../Assets/icon";
+import myCursor from '../../assets/HVCyan_link.cur';
 
 const Header = (p) => {
     const { toggleSideBar } = p
@@ -7,7 +8,7 @@ const Header = (p) => {
     return ( 
         <Container>
             <div className="header">
-                <div className="icon-wrapper" onClick={toggleSideBar}>
+                <div className="icon-wrapper" style={{cursor: `url(${myCursor}), auto`}} onClick={toggleSideBar}>
                     <Icon.menu />
                 </div>
             </div>
@@ -30,7 +31,6 @@ const Container = styled.div`
             padding: 0.5rem;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
             svg{
                 font-size: 20px
             }

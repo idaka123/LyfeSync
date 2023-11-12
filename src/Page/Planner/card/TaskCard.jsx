@@ -3,12 +3,13 @@ import Tippy from '@tippyjs/react/headless';
 import { Img } from "../../../Assets/svg";
 import Input from "../../../Component/Input"
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
-import { compareDates, dateConvert } from "../../../Util/util"
+import {  convertDates, dateConvert } from "../../../Util/util"
 import { nanoid } from 'nanoid'
 import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
 import SubTask from "./SubTask";
 import language from "../../../Util/language"
+import myCursor from "../../../assets/HVCyan_link.cur"
 
 const TaskCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p
@@ -37,7 +38,7 @@ const TaskCard = (p) => {
             const today = new Date();
             const overDueTasks = dataSection.filter((task) => {
                 const deadline = new Date(task.deadline);
-                return deadline < today;
+                return convertDates([deadline])[0] < convertDates([today])[0]
             });
     
             const todayTasks = filterTasksByDeadline(dataSection, today);
@@ -61,8 +62,8 @@ const TaskCard = (p) => {
             }
     
             const someDayTasks = dataSection.filter((task) => {
-                const deadline = new Date(task.deadline);
-                return deadline > dateAfterTomorrow;
+                
+                return task.deadline === "someday";
             });
     
             setDateType({
@@ -116,6 +117,8 @@ const TaskCard = (p) => {
                                             area={data.area}
                                             note={data.note}
                                             subTask={data.sub}
+                                            dataSection={dataSection}
+                                            setDateSection={setDateSection}
                                             />
                                     )
                                 })}
@@ -179,6 +182,8 @@ const TaskCard = (p) => {
                                         area={data.area}
                                         note={data.note}
                                         subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
                                         />
                                 )
                             })}
@@ -196,6 +201,8 @@ const TaskCard = (p) => {
                                         area={data.area}
                                         note={data.note}
                                         subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
                                         />
                                 )
                             })}
@@ -213,6 +220,8 @@ const TaskCard = (p) => {
                                         area={data.area}
                                         note={data.note}
                                         subTask={data.sub}
+                                        dataSection={dataSection}
+                                        setDateSection={setDateSection}
                                         />
                                 )
                             })}
@@ -255,7 +264,8 @@ const Card = (p) => {
         subTask = [],
         id,
         dataSection,
-        setDateSection } = p
+        setDateSection,
+        } = p
     // const { task, setTask }  = useContext(TaskContext)
     const { openModal }  = useContext(ModalContext)
 
@@ -299,7 +309,7 @@ const Card = (p) => {
                 note,
                 id
             }
-            openModal(title, data)
+            openModal(title, data, "task")
         },
         check: () => { // Check task
             setChecked(!checked)
@@ -378,17 +388,18 @@ const Card = (p) => {
                 <div className={`card-option ${color ?"text-white" : ""}`}>
                     <Tippy
                         interactive
+                        content="Tooltip"
                         render={attrs => (
                             <Option {...attrs} 
                                 taskId={id} 
                                 openDetail={taskHandle.open} 
                                 deleteTask={taskHandle.option.delete}
-                                deadline={deadline}/>
+                                deadline={deadline}
+                                setOption={setOption}/>
                         )}
                         visible={option}
                         onClickOutside={taskHandle.option.close}
-                        offset={[30, -20]}
-
+                        offset={[10, 0]}
                         >
                         <OptionBtnCon className="mr-5" style={{position: "relative"}} onClick={taskHandle.option.toggle}>
                             <Img.option/>
@@ -465,17 +476,8 @@ const AddSubTask = (p) => {
 
 
 const Option = (p) => {
-    const { openDetail, deleteTask, taskId, deadline } = p
-    const [current, setCurrent] = useState()
-
-    useEffect(() => {
-        const compare = compareDates(new Date(), new Date(deadline))
-
-        if(compare === 0 ) {
-            setCurrent("today")
-        }
-
-    }, [taskId, deadline]);
+    const { openDetail, deleteTask, taskId, deadline, setOption } = p
+    const { setTask }  = useContext(TaskContext)
 
     const listOption = [
         {
@@ -483,7 +485,12 @@ const Option = (p) => {
             value: "Hôm nay",
             icon: "deadline",
             handleClick: () => {
-                
+                setTask(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    newRoutine[index].deadline = new Date();
+                    return newRoutine
+                })
             }
         },
         {
@@ -491,7 +498,15 @@ const Option = (p) => {
             value: "Mai",
             icon: "deadline",
             handleClick: () => {
-                console.log("123")
+                setTask(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    newRoutine[index].deadline = tomorrow;
+                    return newRoutine
+                })
+                
             }
         },
         {
@@ -499,7 +514,12 @@ const Option = (p) => {
             value: "Ngày nào đó",
             icon: "deadline",
             handleClick: () => {
-                console.log("123")
+                setTask(prev => {
+                    const newRoutine = [...prev]
+                    const index = newRoutine.map(e => e.id).indexOf(taskId);
+                    newRoutine[index].deadline = "someday";
+                    return newRoutine
+                })
             }
         },
         {
@@ -508,6 +528,7 @@ const Option = (p) => {
             icon: "edit",
             handleClick: () => {
                 openDetail()
+                setOption(false)
             }
         },
         {
@@ -523,6 +544,8 @@ const Option = (p) => {
     const Icon = (p) => {
         const {icon} = p
         const Image = Img[icon]
+
+        if(Image)
         return <Image/>
     }
 
@@ -530,7 +553,11 @@ const Option = (p) => {
         <OptionContainer>
          {listOption && listOption.map((item, idx) => { 
             return(
-            <li key={idx} onClick={item.handleClick} className={current === item.name ? "disable" : ""}>
+            <li key={idx} onClick={item.handleClick} className={
+                (convertDates([new Date()])[0] === convertDates([deadline])[0] && item.name === "today")
+                || convertDates([new Date().setDate(new Date().getDate() + 1)])[0] === convertDates([deadline])[0] && item.name === "tomorrow"
+                || deadline === "someday" && item.name === "someDay"
+                ? "disable" : ""}>
                 <Icon icon={item.icon}/>
                 <span className="ml-7">{item.value}</span>
             </li>
@@ -544,7 +571,14 @@ export default TaskCard;
 
 
 const Container = styled.div `
-
+    padding-top: 20px;
+    height: 70vh;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    
+    &::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
 `
 
 
@@ -562,7 +596,6 @@ const DateZoneLabelContainer = styled.div `
 
     .label {
         font-weight: 700;
-        /* cursor: pointer; */
 
         span {
             font-size: 1.5rem;
@@ -621,7 +654,7 @@ const MainTask =styled.div `
 
         span {
             font-size: 1.2rem;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
             &:nth-child(2), &:nth-child(1) {
                 svg {
                     width: 17.8px;
@@ -646,7 +679,7 @@ const MainTask =styled.div `
 const OptionBtnCon = styled.div `
     svg {
         width: 17.8px;
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
     }
 `
 const SubTaskList = styled.div `
@@ -661,7 +694,7 @@ const Title = styled.div `
         line-height: 1;
         svg {
             width: 17px;
-            cursor: pointer;
+            cursor: url(${myCursor}), auto;
         }
     }
 
@@ -718,7 +751,7 @@ const OptionContainer = styled.ul `
     li {
         user-select: none;
         display: flex;
-        cursor: pointer;
+        cursor: url(${myCursor}), auto;
         align-items: center;
         border-radius: 5px;
         padding: 5px 9px;
@@ -728,6 +761,7 @@ const OptionContainer = styled.ul `
 
         &.disable {
             cursor: not-allowed;
+            pointer-events: none;
             user-select: none;
             opacity: 0.5;
         }

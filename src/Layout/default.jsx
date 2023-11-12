@@ -1,23 +1,23 @@
 
 import styled from "styled-components";
 import Sidebar from "./Component/Sidebar";
-import Overlay from "./Component/Overlay";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
-import OverlayContext, { OverlayProvider } from "../Context/overlay.context";
-import ModalContext, { ModalProvider } from "../Context/Modal.context";
-
+import { OverlayProvider } from "../Context/overlay.context";
+import AppearanceContext, { AppearanceProvider } from "../Context/Appearance.context";
 
 const DefaultLayout = ( p ) => {
     const { children } = p
 
     return (
-    <OverlayProvider>
-        {/* <ModalProvider> */}
-            <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
-        {/* </ModalProvider> */}
-    </OverlayProvider>
+    <AppearanceProvider>
+        <OverlayProvider>
+            {/* <ModalProvider> */}
+                <DefaultLayoutComponent>{children}</DefaultLayoutComponent>
+            {/* </ModalProvider> */}
+        </OverlayProvider>
+    </AppearanceProvider>
     )
 }
 
@@ -25,37 +25,37 @@ const DefaultLayoutComponent = (p) => {
     const { children } = p
 
     const { device } = useContext(DeviceContext)
+    const { appearance } = useContext(AppearanceContext)
 
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [isOpenOvelay, setIsOpenOverlay] = useState(false)
-
 
     const openSideBar = () => {
         setIsOpenMenu(true)
         setIsOpenOverlay(true)
     }
-
     const toggleSideBar = (boolen) => {
         return () => {
             setIsOpenMenu(boolen)
-            // boolen 
-            //     ? openOverlay()
-            //     : closeOverlay()
         }
     }
 
     return (
-        <DftLaySty device={device} > 
-            {device === "mobile" && <Header toggleSideBar={openSideBar}/>}
-            <div className="body">
-                <Sidebar
-                        isopen={isOpenMenu} toggle={toggleSideBar}
-                        isOpenOvelay={isOpenOvelay} setIsOpenOverlay={setIsOpenOverlay}/>
-                <div className="page-content">
-                    {children}
+       <Fragment>
+            <Background background={appearance.url}/>
+            <DftLaySty device={device} > 
+                {device === "mobile" && <Header toggleSideBar={openSideBar}/>}
+                
+                <div className="body">
+                    <Sidebar
+                            isopen={isOpenMenu} toggle={toggleSideBar}
+                            isOpenOvelay={isOpenOvelay} setIsOpenOverlay={setIsOpenOverlay}/>
+                    <div className="page-content">
+                        {children}
+                    </div>
                 </div>
-            </div>
-        </DftLaySty>
+            </DftLaySty>
+       </Fragment>
     )
 }
  
@@ -63,7 +63,7 @@ export default DefaultLayout;
 
 const DftLaySty = styled.div`
    
-    background-color: #f7f7f7;
+    background-color: transparent;
     height: 100vh;
     width: 100vw;
     position: relative;
@@ -89,3 +89,17 @@ const DftLaySty = styled.div`
 
 `
 
+const Background = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .5;
+    background-image: ${({background}) => `url(${background})`};
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    opacity: .4;
+`

@@ -1,6 +1,7 @@
 const paths = {
     home: "/",
     planner: "/planner",
+    setting: "/setting",
     noPage: "*"
 }
 
