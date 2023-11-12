@@ -1,31 +1,63 @@
 {
     "background": [
         {
-            "name": "fuji",
+            "name": "Fuji",
             "url": "src/assets/photos/fuji.jpg"
         },
         {
-            "name": "sunset",
+            "name": "Sunset",
             "url": "src/assets/photos/sunset.jpg"
         },
         {
-            "name": "forest",
+            "name": "Forest",
             "url": "src/assets/photos/forest.jpeg"
         },
         {
-            "name": "moon",
+            "name": "Moon",
             "url": "src/assets/photos/moon.jpeg"
         },
         {
-            "name": "songoku",
+            "name": "Songoku",
             "url": "src/assets/photos/songoku.jpeg"
         },
         {
-            "name": "tanjirou",
+            "name": "Tanjirou",
             "url": "src/assets/photos/tanjirou.jpeg"
         },
         {
-            "name": "temple",
+            "name": "Sky",
+            "url": "src/assets/photos/sky.jpeg"
+        },
+        {
+            "name": "Dark soul",
+            "url": "src/assets/photos/dark-soul.jpeg"
+        },
+        {
+            "name": "Groot",
+            "url": "src/assets/photos/groot.jpeg"
+        },
+        {
+            "name": "Spiderman",
+            "url": "src/assets/photos/spiderman.jpeg"
+        },
+        {
+            "name": "Sunrise",
+            "url": "src/assets/photos/sunrise.jpeg"
+        },
+        {
+            "name": "Win 10",
+            "url": "src/assets/photos/win-10.jpeg"
+        },
+        {
+            "name": "Win 11",
+            "url": "src/assets/photos/win-11.jpeg"
+        },
+        {
+            "name": "Win XP",
+            "url": "src/assets/photos/winxp.jpeg"
+        },
+        {
+            "name": "Temple",
             "url": "src/assets/photos/temple.jpeg"
         }
         

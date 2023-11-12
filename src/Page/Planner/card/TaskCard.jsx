@@ -9,7 +9,7 @@ import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
 import SubTask from "./SubTask";
 import language from "../../../Util/language"
-import myCursor from "../../../assets/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/HVCyan_link.cur"
 
 const TaskCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p

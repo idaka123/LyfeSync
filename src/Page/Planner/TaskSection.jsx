@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 import { plannerData } from "./Planner.data";
 import ModalContext from "../../Context/Modal.context";
-import myCursor from '../../assets/HVCyan_link.cur';
+import myCursor from '../../assets/cursor/HVCyan_link.cur';
 
 const TaskSection = (p) => {
 
