@@ -15,7 +15,7 @@ import { KnowledgeContext } from '../Knowledge';
 
 // Asset imports
 import { Social } from '../../../assets/svg/onlineSvg'
-import { Icon } from '../../../assets/icon';
+import { Icon } from "../../../Assets/icon";
 import { ANIMATIONS } from "../utils/animationConstants";
 
 const PodcastShare = ({

@@ -17,7 +17,7 @@ import {
 import PodcastCardMore from "./PodcastCardMore";
 
 // Asset imports
-import { Icon } from "../../../assets/icon";
+import { Icon } from "../../../Assets/icon";
 import { ANIMATIONS } from "../utils/animationConstants";
 
 const PodcastCard = ({

@@ -24,7 +24,7 @@ import { KnowledgeContext } from "../Knowledge";
 import { customNumberSort, customStringSort } from "../utils/customSort";
 
 // Asset imports
-import { Icon } from "../../../assets/icon";
+import { Icon } from '../../../Assets/icon';
 import { ANIMATIONS } from "../utils/animationConstants";
 
 
