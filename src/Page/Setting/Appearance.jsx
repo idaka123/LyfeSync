@@ -4,7 +4,6 @@ import data from "../../assets/photos/background.json"
 import { useContext, useState } from "react";
 import AppearanceContext from "../../Context/Appearance.context";
 import DeviceContext from "../../Context/Device.context";
-import Button from "../../Component/Button";
 
 const Appearance = () => {
     
@@ -17,6 +16,22 @@ const Appearance = () => {
             name: data.name
         })
     }
+
+    const handleInputBG = (e) => {
+        const file = e.target.files[0];
+        previewFile(file);
+    }
+
+    const previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setAppearance({
+                url: reader.result,
+                name: file.name
+            });
+        };
+      };
 
     return ( 
         <Container>
@@ -50,16 +65,28 @@ const Appearance = () => {
             </PreviewSection>
 
             <Content>
-                <WithoutBackground className="pointer-cursor" onClick={() => handleClickPhoto({url: "", name: ""})}>
+                <WithoutBackground className={`pointer-cursor ${appearance.url === "" && "active"}`} onClick={() => handleClickPhoto({url: "", name: ""})}>
                     <div className="title-wrapper">
                         <Icon.bin />
                         {device === "desktop" && <span>Không cần hình nền</span>}
                     </div>
                 </WithoutBackground>
+                <UploadBackground className="pointer-cursor" onClick={() => handleClickPhoto({url: "", name: ""})}>
+                    <input 
+                        type="file"
+                        style={{display: "none"}}
+                        accept=".jpg,.png,.jpeg" 
+                        onChange={handleInputBG}/>
+                        <div className="title-wrapper">
+                            <Icon.upload />
+                            {device === "desktop" && <span>Chọn ảnh từ máy</span>}
+                        </div>
+                </UploadBackground>
 
                 {dataAppearance && dataAppearance.map((data, idx) => {
                     return (
-                        <Background onClick={() => handleClickPhoto(data)} url={data.url} key={idx} className="pointer-cursor">
+                        <Background onClick={() => handleClickPhoto(data)} url={data.url} key={idx}
+                                    className={`pointer-cursor ${appearance.name === data.name && "active"} `}>
                         </Background>
                     )
                 })
@@ -108,6 +135,7 @@ const PreviewSection = styled.div `
     width: 100%;
     display: flex;
     border-bottom: 1px solid #cfcfcf;
+    padding: 10px;
 `
 
 const PreviewImg = styled.div `
@@ -173,10 +201,13 @@ const WithoutBackground = styled.div `
     align-items: center;
     border: 1px dashed;
     transition: all 0.3s ease-in-out;
-
+    /* flex-direction: row; */
+    position: relative;
     .title-wrapper {
         display: flex;
         align-items: center;
+        flex-direction: column;
+        gap: 10px;
         @media screen and (max-width: 768px) {
             flex-direction: column;
         }
@@ -187,14 +218,67 @@ const WithoutBackground = styled.div `
 
         span {
             margin-left: 10px;
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
+            text-align: center;
         }
 
     }
 
     &:hover {
-        border: 2px solid;
+        border: 1px solid;
+    
+    }
+
+    &.active {
+        &::after {
+            content: "";
+            position: absolute;
+            border: 4px solid #1973C5;
+            width: 100%;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 10px;
+        }
+    }
+`
+
+const UploadBackground = styled.label `
+    width: 20%;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed;
+    transition: all 0.3s ease-in-out;
+    /* flex-direction: row; */
+
+    .title-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        svg {
+            font-size: 2rem;
+        }
+
+        span {
+            margin-left: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+    }
+
+    &:hover {
+        border: 1px solid;
     
     }
 `
@@ -212,6 +296,7 @@ const WithoutBackgroundPR = styled.div `
     .title-wrapper {
         display: flex;
         align-items: center;
+        gap: 10px;
         @media screen and (max-width: 768px) {
             flex-direction: column;
         }
@@ -222,8 +307,9 @@ const WithoutBackgroundPR = styled.div `
 
         span {
             margin-left: 10px;
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 600;
+            text-align: center;
         }
 
     }
@@ -245,6 +331,19 @@ const Background = styled.div `
     background-size: cover;
     border-radius: 10px;
     border: 2px solid #585A5C;
+    position: relative;
     
 
+    &.active {
+        &::before {
+            content: "";
+            position: absolute;
+            border: 4px solid #1973C5;
+            width: 100%;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 10px;
+        }
+    }
 `

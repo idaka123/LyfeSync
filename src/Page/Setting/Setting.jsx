@@ -68,7 +68,7 @@ const BoxContent = styled.div `
     }
     @media screen and (max-width: 768px) {
     }
-    height: 95vh;
+    height: 90vh;
     width: 100%;
     background-color: #fdfdfd;
     
