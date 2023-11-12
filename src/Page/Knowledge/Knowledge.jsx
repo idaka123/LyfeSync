@@ -67,11 +67,6 @@ const Knowledge = () => {
         {isPodcastInfoDisplay && <PodcastInfo />}
         {isPodcastPlaylistDisplay && <PodcastPlayList />}
         {!isPodcastPlaylistDisplay && <KnowLedgeBlock />}
-        <PageIcon>
-          <div>
-            <img src="https://s.net.vn/jHbG" alt="" />
-          </div>
-        </PageIcon>
       </KnowLedgeStyled>
     </KnowledgeContext.Provider>
   );

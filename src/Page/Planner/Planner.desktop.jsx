@@ -44,7 +44,6 @@ const PlannerDesktop = () => {
                             setDateZone={setGoalDateZone}>
                <GoalCard dataSection={goal} setDateSection={setGoal} dateZone={goalDateZone}/>
             </SectionContent>
-\
         </>
      );
 }
