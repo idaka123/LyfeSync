@@ -16,7 +16,7 @@ const mockData = [
     },
     {
         "id": nanoid(),
-        "target": "0",
+        "target": "80",
         "title": "Junior",
         "color": "#372408",
         "area": [
