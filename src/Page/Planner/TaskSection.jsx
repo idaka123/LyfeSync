@@ -1,8 +1,7 @@
 import { motion } from "framer-motion"
 import { useContext, useState } from "react"
 import styled from "styled-components"
-
-import { plannerData } from "./Planner.data";
+import plannerData from "./Planner.json";
 import ModalContext from "../../Context/Modal.context";
 import myCursor from '../../assets/cursor/HVCyan_link.cur';
 
