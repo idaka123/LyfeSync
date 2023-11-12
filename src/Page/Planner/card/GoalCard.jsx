@@ -6,7 +6,7 @@ import { useState, useEffect, Fragment, useContext } from "react";
 import { dateConvert } from "../../../Util/util"
 import ModalContext from "../../../Context/Modal.context";
 import GoalContext from "../../../Context/Goal.context";
-import myCursor from '../../../assets/HVCyan_link.cur';
+import myCursor from '../../../assets/cursor/HVCyan_link.cur';
 
 
 const GoalCard = (p) => {
