@@ -6,14 +6,33 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
 import { BsCart2, BsPlay, BsListTask, BsCardImage } from 'react-icons/bs'
-import { BsHeart } from 'react-icons/bs'
-import { MdKeyboardArrowDown } from 'react-icons/md'
-import { BiMessageAltDetail, BiHomeAlt2 } from 'react-icons/bi'
-import { ImPlus } from 'react-icons/im'
-import { SiGumtree } from 'react-icons/si'
 import { CiPause1 } from 'react-icons/ci'
 import { RiCloseFill, RiDeleteBinLine } from 'react-icons/ri'
 import { GrUploadOption } from 'react-icons/gr'
+import { BsFillPlayFill, BsShareFill } from 'react-icons/bs'
+import { BsHeart } from 'react-icons/bs'
+import { MdKeyboardArrowDown, MdPause } from 'react-icons/md'
+import { BiMessageAltDetail, BiHomeAlt2, BiSolidRightArrowAlt, BiCaretLeft, BiCaretLeftCircle, BiSolidCaretLeftCircle, BiCaretRightCircle, BiLeftArrow, BiLeftArrowAlt } from 'react-icons/bi'
+import { ImPlus } from 'react-icons/im'
+import { SiGumtree } from 'react-icons/si'
+import { BiLibrary } from 'react-icons/bi';
+import { FaShare } from 'react-icons/fa';
+import { MdFavorite } from 'react-icons/md';
+import { BiCheckCircle } from 'react-icons/bi';
+import { ImLibrary } from 'react-icons/im';
+import { FaFacebookMessenger } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
+import { BiLogoGmail } from 'react-icons/bi';
+import { MdMoreHoriz } from 'react-icons/md'
+import { BiSolidDownload } from 'react-icons/bi';
+import { MdAdd } from 'react-icons/md';
+import { BiCheck } from 'react-icons/bi';
+import { BiCaretRight } from 'react-icons/bi';
+import { BiRightArrowCircle } from 'react-icons/bi';
+import { BiListUl } from 'react-icons/bi';
+import { MdCreate } from 'react-icons/md';
+import { MdPodcasts } from 'react-icons/md';
 
 
 
@@ -48,5 +67,27 @@ export const Icon = {
     task: BsListTask,
     background: BsCardImage,
     bin: RiDeleteBinLine,
-    upload: GrUploadOption
+    upload: GrUploadOption,
+    list: BiLibrary,
+    play: BsFillPlayFill,
+    pause: MdPause,
+    share: FaShare,
+    love: MdFavorite,
+    addOutline: MdAdd,
+    checkCircle: BiCheckCircle,
+    check: BiCheck,
+    rightArrow: BiCaretRight,
+    leftArrow: BiSolidCaretLeftCircle,
+    back: BiLeftArrowAlt,
+    library: ImLibrary,
+    facebook: FaFacebook,
+    messenger: FaFacebookMessenger,
+    instagram: FaInstagram,
+    gmail: BiLogoGmail,
+    more: MdMoreHoriz,
+    download: BiSolidDownload,
+    send: BiRightArrowCircle,
+    playlist: BiListUl,
+    podcast: MdPodcasts,
+    addplaylist: MdCreate,
 }
