@@ -39,6 +39,9 @@ const GlobalStyles = createGlobalStyle`
         cursor: ${`url(${myCursor}), auto`}!important;
     }
     body {
+        ::-webkit-scrollbar{
+            width: 0px;
+        }
         color: #626262;
         text-rendering: optimizeSpeed;
         background-color: #FCFCFC;
