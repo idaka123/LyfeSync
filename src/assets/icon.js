@@ -1,38 +1,18 @@
 import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters, AiFillTag, AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai'
-import { MdSecurity, MdOutlineAdminPanelSettings, MdNotificationsNone, MdDelete } from 'react-icons/md'
+import { MdSecurity, MdOutlineAdminPanelSettings, MdNotificationsNone, MdDelete, MdFavorite, MdKeyboardArrowDown, MdPause, MdAdd, MdCreate, MdPodcasts, MdMoreHoriz } from 'react-icons/md'
 import { FiUser, FiSettings, FiMenu } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown } from 'react-icons/io'
-import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
-import { BsCart2, BsPlay, BsListTask, BsCardImage } from 'react-icons/bs'
+import { BsCart2, BsPlay, BsListTask, BsCardImage, BsFillPlayFill, BsHeart } from 'react-icons/bs'
 import { CiPause1 } from 'react-icons/ci'
 import { RiCloseFill, RiDeleteBinLine } from 'react-icons/ri'
 import { GrUploadOption } from 'react-icons/gr'
-import { BsFillPlayFill, BsShareFill } from 'react-icons/bs'
-import { BsHeart } from 'react-icons/bs'
-import { MdKeyboardArrowDown, MdPause } from 'react-icons/md'
-import { BiMessageAltDetail, BiHomeAlt2, BiSolidRightArrowAlt, BiCaretLeft, BiCaretLeftCircle, BiSolidCaretLeftCircle, BiCaretRightCircle, BiLeftArrow, BiLeftArrowAlt } from 'react-icons/bi'
-import { ImPlus } from 'react-icons/im'
+import { BiMessageAltDetail, BiHomeAlt2, BiSolidCaretLeftCircle, BiLeftArrowAlt, BiSolidDownload, BiRightArrowCircle, BiCaretRight, BiCheck, BiListUl, BiLogoGmail, BiCheckCircle, BiLibrary } from 'react-icons/bi'
+import { ImPlus, ImLibrary } from 'react-icons/im'
 import { SiGumtree } from 'react-icons/si'
-import { BiLibrary } from 'react-icons/bi';
-import { FaShare } from 'react-icons/fa';
-import { MdFavorite } from 'react-icons/md';
-import { BiCheckCircle } from 'react-icons/bi';
-import { ImLibrary } from 'react-icons/im';
-import { FaFacebookMessenger } from 'react-icons/fa';
-import { FaFacebook } from 'react-icons/fa';
-import { FaInstagram } from 'react-icons/fa';
-import { BiLogoGmail } from 'react-icons/bi';
-import { MdMoreHoriz } from 'react-icons/md'
-import { BiSolidDownload } from 'react-icons/bi';
-import { MdAdd } from 'react-icons/md';
-import { BiCheck } from 'react-icons/bi';
-import { BiCaretRight } from 'react-icons/bi';
-import { BiRightArrowCircle } from 'react-icons/bi';
-import { BiListUl } from 'react-icons/bi';
-import { MdCreate } from 'react-icons/md';
-import { MdPodcasts } from 'react-icons/md';
+import { FaFacebookMessenger, FaInstagram, FaFacebook, FaShare, FaFacebookF } from 'react-icons/fa';
+
 
 
 
