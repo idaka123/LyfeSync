@@ -27,7 +27,7 @@ export const KnowLedgeBlockStyled = styled.div`
   width: 100%;
   height: 100%;
   overflow: scroll;
-  background-color: white;
+  background-color: transparent;
   display: grid;
   grid-template: 3% 90% / 3% 69% 25%;
 `;
