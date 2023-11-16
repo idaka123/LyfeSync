@@ -79,7 +79,7 @@ const DateZone = styled.div`
         margin-right: 1.5rem;
         color: #626262;
         font-weight: 500;
-        /* font-family: fantasy; */
+        font-family: fantasy;
         font-weight: 600;
         transition: all 0.3s ease-in-out;
 

@@ -80,11 +80,12 @@ const Container = styled(motion.div)`
     }
 
     section h2.title {
-        font-size: 30px;
+        font-size: 45px;
         font-weight: 900;
-        /* font-family: fantasy; */
         display: flex;
         align-items: center;
+        font-family: fantasy;
+        padding-top: 17px;
         .icon-wrap {
             display: block;
             line-height: 30px;

@@ -1,5 +1,5 @@
 import { Icon } from "../../assets/icon";
-
+import { Img } from "../../assets/svg/index"
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -67,7 +67,7 @@ const Sidebar = (p) => {
                 onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
                 <div className="logo">
                     <LogoWrapper>
-                        <img src="https://s.net.vn/jHbG" alt="" />
+                        <Img.logo />
                     </LogoWrapper>
                 </div>
 
@@ -169,9 +169,9 @@ const LogoWrapper = styled.div `
     justify-content: center;
     align-items: center;
 
-    img {
-        width: 100%;
-        padding: 10px;
+    svg {
+        width: 85%;
+        padding-top: 10px;
         max-width: 70px;
     }
 `

@@ -10,18 +10,21 @@ Example:
 */
 
 const Input = (p) => {
-    const { value = "", name, onInput, onKeyDown, inputStyle, className, focusborder = "true", placeholder, plhdercolor } = p
+    const { id, value = "", name, onInput, onKeyDown, inputStyle, className, focusborder = "true", placeholder, plhdercolor, onBlur, autoFocus } = p
 
     return ( 
         <Container style={inputStyle} focusborder ={focusborder} plhdercolor={plhdercolor}>
             <input 
+                id={id}
                 value={value}
                 type="text"
                 name={name}
                 spellCheck="false"
                 placeholder={placeholder}
                 onInput={onInput}
+                onBlur={onBlur}
                 onKeyDown={onKeyDown}
+                autoFocus={autoFocus}
                 className={className} />
         </Container>
      );
