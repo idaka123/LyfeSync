@@ -40,7 +40,8 @@ const PodcastList = ({
     setIsPodcastInfoDisplay, playListDataFilter,
     setPlayListDataFilter,
     isPodcastPlaylistDisplay,
-    setIsPodcastPlaylistDisplay
+    setIsPodcastPlaylistDisplay,
+    device,
   } = useContext(KnowledgeContext);
   const timeoutId = useRef(null);
   const [podcastCardAnimation, setPodcastCardAnimation] = useState(false);
@@ -55,6 +56,7 @@ const PodcastList = ({
   const [podcastType, setPostcastType] = useState(podcastsType[0].title);
   const [isPodcastMoreDisplay, setIsPodcastMoreDisplay] = useState({ isDisplay: null, id: 1 });
   const [isDisplayAddPlaylist, setIsDisplayAddPlaylist] = useState(null);
+  const [isPodcastListScroll, setIsPodcastListScroll] = useState('scroll');
 
   const handleMouseDown = (e) => {
     setStartX(e.clientX);
@@ -166,7 +168,7 @@ const PodcastList = ({
           <p onClick={handleSortByClick}>{sortbyValue}</p>
         </SortBy>
         <SortByIcon>
-          <i onClick={handleSortByClick} className="fas fa-caret-down iconArrowDown" style={{ color: "black" }}></i>
+          <Icon.arrowDown onClick={handleSortByClick} className="iconArrowDown" style={{ color: "black" }} />
         </SortByIcon>
         {isDisplayArrangeList && (
           <PodcastArrangeList>
@@ -182,7 +184,9 @@ const PodcastList = ({
         )}
       </PodcastArrange>
       {podcastsDataFilter.length !== 0 ?
-        <PodcastCardList>
+        <PodcastCardList
+          style={{ overflowY: `${isPodcastListScroll}` }}
+        >
           {podcastsDataFilter.map((value, index) => (
             <React.Fragment key={value.id}>
               <PodcastCard
@@ -216,6 +220,8 @@ const PodcastList = ({
                 podcastCardAnimation={podcastCardAnimation}
                 setPodcastCardAnimation={setPodcastCardAnimation}
                 podcastType={podcastType}
+                isPodcastListScroll={isPodcastListScroll}
+                setIsPodcastListScroll={setIsPodcastListScroll}
               >
               </PodcastCard>
             </React.Fragment>
