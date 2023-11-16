@@ -21,10 +21,11 @@ const TaskSection = (p) => {
     }
 
     const handleClickAdd = (e) => {
-        const name = e.target.getAttribute("name")
+        const name = e.currentTarget.getAttribute("name")
+        console.log("name", name)
         openModal(name, null, name)
-        // localStorage.setItem("tab", name)
     }
+    
     return (
     <Task 
         // drag
@@ -34,8 +35,8 @@ const TaskSection = (p) => {
         // dragElastic={0.5}
         >
         <h2 className="select-none text-dark title">{plannerData[data].value}
-            <div className="icon-wrap" name={plannerData[data].name}>
-                <span onClick={handleClickAdd} ><Icon.plus /></span>
+            <div className="icon-wrap" >
+                <span name={plannerData[data].name} onClick={handleClickAdd} ><Icon.plus /></span>
             </div>
         </h2>
         <DateZone >
