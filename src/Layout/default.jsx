@@ -64,7 +64,7 @@ export default DefaultLayout;
 const DftLaySty = styled.div`
    
     background-color: transparent;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     position: relative;
 
@@ -82,7 +82,7 @@ const DftLaySty = styled.div`
             }
 
             @media (min-width: 769px) {
-                height: 100vh;
+                height: 100dvh;
             }
         }
     }
@@ -96,7 +96,7 @@ const Background = styled.div`
     z-index: -1;
     opacity: .5;
     background-image: ${({background}) => `url(${background})`};
-    min-height: 100vh;
+    min-height: 100dvh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

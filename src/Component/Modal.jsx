@@ -93,7 +93,7 @@ export default Modal;
 
 const Container = styled(motion.div)` 
     right: 0;
-    height: 100vh;
+    height: 100dvh;
     z-index: 1002;
     background-color: #ffffff;
     position: fixed;

@@ -360,7 +360,7 @@ export default RoutineCard;
 
 const Container = styled.div `
     padding-top: 20px;
-    height: 70vh;
+    height: 70dvh;
     overflow-y: scroll;
     scrollbar-width: none; 
     
