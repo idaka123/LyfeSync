@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Icon } from "../../assets/icon";
-import data from "../../assets/photos/background.json"
+import { data } from "../../assets/photos/background.js"
 import { useContext, useEffect, useState } from "react";
 import AppearanceContext from "../../Context/Appearance.context";
 import DeviceContext from "../../Context/Device.context";
 
 const Appearance = () => {
 
-    const [dataAppearance] = useState(data.background)
+    const [dataAppearance] = useState(data)
     const { appearance, setAppearance } = useContext(AppearanceContext)
     const { device } = useContext(DeviceContext)
     const handleClickPhoto = (data) => {

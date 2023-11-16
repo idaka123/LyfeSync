@@ -13,13 +13,13 @@ import RoutineContext from "../../Context/Routine.context";
 import RoutineCard from "./card/RoutineCard";
 import GoalContext from "../../Context/Goal.context";
 import GoalCard from "./card/GoalCard";
-
+import Skeleton from "./card/Skeleton";
 
 const PlannerMobile = (p) => {
     const { selectTab, tab } = p
-    const { task, loading, setTask }  = useContext(TaskContext)
-    const { routine, loading:routineLoading, setRoutine }  = useContext(RoutineContext)
-    const { goal, setGoal }  = useContext(GoalContext)
+    const { task, loading:taskLoad, setTask }  = useContext(TaskContext)
+    const { routine, loading:routineLoad, setRoutine }  = useContext(RoutineContext)
+    const { goal, setGoal, loading:goalLoad }  = useContext(GoalContext)
     // const selectTab = (e) => {
     //     const name = e.target.getAttribute("name")
     //     setTab(name)
@@ -47,22 +47,27 @@ const PlannerMobile = (p) => {
                 })}
                 </TabList> 
             </Header>
-            {loading 
-                ? <Loading /> 
-                : <TaskSectionMobile 
-                    tab={tab} 
-                    data={
-                        tab === "task" ? task : 
-                        tab === "routine" ? routine :
-                        tab === "goal" && goal
-                        } // separate between each tab with it own data
-                    setDateSection={
-                        tab === "task" ? setTask :
-                        tab === "routine" ? setRoutine :
-                        tab === "goal" && setGoal
-                    
-                    }
-                   />
+            { 
+                tab === "task" ? taskLoad ? <Loading /> :
+                    <TaskSectionMobile 
+                        tab={tab} 
+                        data={task}
+                        setDateSection={setTask}
+                    />:
+                
+                tab === "routine" ? routineLoad ? <Loading /> :
+                    <TaskSectionMobile 
+                        tab={tab} 
+                        data={routine}
+                        setDateSection={setRoutine}
+                    />:
+                tab === "goa" && goalLoad ? <Loading /> :
+                    <TaskSectionMobile 
+                        tab={tab} 
+                        data={goal}
+                        setDateSection={setGoal}
+                    />
+                
             }
         </Container>
      );

@@ -77,7 +77,7 @@ const Modal = (p) => {
             <Title>
                 <h1>{modal.title}</h1>
                 <Icon.x onClick={hdleToggle}  style={{cursor: `url(${myCursor}), auto`}}/>
-            </Title> 
+            </Title>
            {isDataLoaded ? children: <Loading />}
         </Container> 
         <Overlay onClick={hdleClickOverLay} 

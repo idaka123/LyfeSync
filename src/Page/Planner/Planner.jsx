@@ -85,7 +85,7 @@ const Container = styled(motion.div)`
         display: flex;
         align-items: center;
         font-family: fantasy;
-        padding-top: 17px;
+        padding-top: 30px;
         .icon-wrap {
             display: block;
             line-height: 30px;
