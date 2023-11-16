@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import OverlayContext from "./Overlay.context";
+import DeviceContext from "./Device.context";
 // import OverlayContext from "./Overlay.context";
 
 const ModalContext = createContext()
@@ -8,6 +9,7 @@ export const ModalProvider = (p) => {
     const { children } = p
 
     const { closeOverlay, openOverlay } = useContext(OverlayContext)
+    const { device } = React.useContext(DeviceContext)
 
     const [modal, setModal] = React.useState({
         isOpen: false,
@@ -18,7 +20,7 @@ export const ModalProvider = (p) => {
       const [isDataLoaded, setIsDataLoaded] = React.useState(false);
       
       const openModal = (title = null, content = null, type = null) => {
-        openOverlay()
+        device !== "mobile" && openOverlay()
         setModal({
           isOpen: true,
           title,
@@ -30,7 +32,7 @@ export const ModalProvider = (p) => {
     
       const closeModal = () => {
         console.log("close modal")
-        closeOverlay()
+        device !== "mobile" && closeOverlay()
         setModal({
           isOpen: false,
           content: null,

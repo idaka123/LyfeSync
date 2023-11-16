@@ -23,10 +23,12 @@ const SubTask = (p) => {
         fontSize: "1.2rem"
     }
 
-    const handleCheck = (e) => {
+    const handleCheck = (e, customID = null) => {
         setChecked(!checked)
-
-        const id = e.currentTarget.id
+        let id 
+        if(customID !== null) 
+            id = customID
+        else id = e.currentTarget.id
         updateSubCheck(id, !checked)
     }
 
@@ -62,23 +64,29 @@ const SubTask = (p) => {
             <div className={`title ${checked ? "line-through" : ""}`}>
                 {edit
                 ? <Input
+                    id={id}
                     value={value}
                     onInput={handleInput}
                     onKeyDown={handleKeyDown}
+                    autoFocus={true}
                     name="title"
                     className={`${color ? "text-white" : ""}`}
                     inputStyle={inputStyle}
                     plhdercolor={`${color ? "var(--white-text)": "var(--black-text)"}`}
                     focusborder="false"
+                    onBlur={() => { 
+                        closeEdit()
+                    }}
                 />
-                : value
+                : 
+                <label onClick={(e) => handleCheck(e, id)} className="pointer-cursor" htmlFor={id}>{value}</label>
                 }
             
             </div>
         </div>
 
         <div className="option pointer-cursor">
-            <span onClick={openEdit}><Img.edit/></span>
+            {!edit && <span onClick={openEdit}><Img.edit/></span>}
             <span name={id} onClick={handleDel}><Img.deleteIcon/></span>
         </div>
     </SubTaskContainer>
@@ -106,6 +114,10 @@ const SubTaskContainer = styled.div `
         .title {
             margin-left: .6rem;
             font-size: 1.3rem;
+
+            label {
+                font-size: 1.45rem;
+            }
         }
     }
 

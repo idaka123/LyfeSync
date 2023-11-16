@@ -18,7 +18,7 @@ const Modal = (p) => {
         console.log("listen event opening modal")
         window.addEventListener('modalOpening', openingModal);
         window.addEventListener('modalClosing', () => {
-            setIsOpenOverlay(false)
+            device !== "mobile" && setIsOpenOverlay(false)
         });
 
         
@@ -51,7 +51,7 @@ const Modal = (p) => {
     };
 
     const openingModal = () => { // prepare a lazy loading waiting for the animation loaded
-        setIsOpenOverlay(true)
+        device !== "mobile" && setIsOpenOverlay(true)
         setTimeout(() => {
             setIsDataLoaded(true);
         }, 500); 
