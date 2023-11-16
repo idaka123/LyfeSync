@@ -9,7 +9,7 @@ import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
 import { RoutineProvider } from "../../Context/Routine.context";
 import { GoalProvider } from "../../Context/Goal.context";
-import myCursor from "../../assets/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/HVCyan_link.cur";
 
 const Planner = () => {
 
@@ -38,7 +38,7 @@ const Planner = () => {
 
     const Desktop = () => {
         return (
-            <Container style={{paddingTop: "40px", paddingBottom: "150px"}}> 
+            <Container style={{paddingTop: "40px"}}> 
                 <PlannerDesktop/>
             </Container>
         );

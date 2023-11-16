@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { plannerData } from "./Planner.data";
+import plannerData from "./Planner.json";
 import TaskSection from "./TaskSection";
 import Button from "../../Component/Button";
 import { Fragment, useContext, useEffect, useState } from "react";
