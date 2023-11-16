@@ -37,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1.5;
         letter-spacing: .01rem;
         cursor: ${`url(${myCursor}), auto`}!important;
+        min-height: -webkit-fill-available;
     }
     body {
         ::-webkit-scrollbar{
@@ -47,6 +48,7 @@ const GlobalStyles = createGlobalStyle`
         background-color: #FCFCFC;
         font-family: Montserrat,Helvetica,Arial,sans-serif;
         font-weight: 400;
+        min-height: -webkit-fill-available;
     }
     a {
         color: var(--text-color);
