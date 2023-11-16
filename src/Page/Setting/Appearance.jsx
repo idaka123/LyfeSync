@@ -178,7 +178,7 @@ const PreviewInfor = styled.div`
 
 const Content = styled.div`
     width: 100%;
-    height: 50vh;
+    height: 50dvh;
     padding: 20px;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
