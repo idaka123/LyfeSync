@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
-import { Img } from "../../../Assets/svg";
+import { Img } from "../../../assets/svg";
 import Input from "../../../Component/Input"
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
 import {  convertDates, dateConvert } from "../../../Util/util"

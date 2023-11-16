@@ -9,7 +9,7 @@ import {
 import { KnowledgeContext } from "../Knowledge";
 import PodcastPlaylistBlock from "./PodcastPlaylistBlock";
 import { playlistsData, playlistsDataByLS } from "../Knowledge.data";
-import { Icon } from "../../../Assets/icon";
+import { Icon } from "../../../assets/icon";
 import { ANIMATIONS } from "../utils/animationConstants";
 import search from "../utils/search";
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Icon } from "../../Assets/icon";
+import { Icon } from "../../assets/icon";
 import data from "../../assets/photos/background.json"
 import { useContext, useEffect, useState } from "react";
 import AppearanceContext from "../../Context/Appearance.context";
