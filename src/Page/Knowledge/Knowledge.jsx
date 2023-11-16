@@ -1,13 +1,13 @@
 // React related imports
 import { useState, createContext } from 'react';
+import { useContext } from 'react';
 
 // Component imports
 import KnowLedgeBlock from './Components/KnowledgeBlock';
 import PodcastShare from './Components/PodcastShare';
 import PodcastInfo from './Components/PodcastInfo';
 import PodcastPlayList from './Components/PodcastPlaylist';
-import { PageIcon } from './Knowledge.desktop';
-
+import DeviceProvider from '../../Context/Device.context'
 // Style and data imports
 import { KnowLedgeStyled } from './Knowledge.desktop';
 import { podcastsData, playlistsData } from './Knowledge.data';
@@ -15,6 +15,7 @@ import { podcastsData, playlistsData } from './Knowledge.data';
 export const KnowledgeContext = createContext();
 
 const Knowledge = () => {
+  const { device } = useContext(DeviceProvider);
   const [isPlayingId, setIsPlayingId] = useState({ isPlaying: false, id: null });
   const [isFavourite, setIsFavourite] = useState({ id: -1, isFavourite: false })
   const [podcastsDataFilter, setPodcastsDataFilter] = useState(podcastsData);
@@ -59,6 +60,7 @@ const Knowledge = () => {
     setPlayListDataFilter,
     isPodcastPlaylistDisplay,
     setIsPodcastPlaylistDisplay,
+    device,
   }
   return (
     <KnowledgeContext.Provider value={shareValue}>

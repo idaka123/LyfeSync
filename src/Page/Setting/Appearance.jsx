@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Icon } from "../../assets/icon"
+import { Icon } from "../../Assets/icon";
 import data from "../../assets/photos/background.json"
 import { useContext, useEffect, useState } from "react";
 import AppearanceContext from "../../Context/Appearance.context";
 import DeviceContext from "../../Context/Device.context";
 
 const Appearance = () => {
-    
+
     const [dataAppearance] = useState(data.background)
     const { appearance, setAppearance } = useContext(AppearanceContext)
     const { device } = useContext(DeviceContext)
@@ -31,9 +31,9 @@ const Appearance = () => {
                 name: file.name
             });
         };
-      };
+    };
 
-    return ( 
+    return (
         <Container>
             <TitleWrapper>
                 <h2>Thay đổi hình nền</h2>
@@ -41,52 +41,52 @@ const Appearance = () => {
 
             <PreviewSection>
                 <PreviewImg>
-                {appearance && appearance.url === "" ?
-                    <WithoutBackgroundPR>
-                        <div className="title-wrapper">
-                            <Icon.bin />
-                            <span>Không cần hình nền</span>
-                        </div>
-                    </WithoutBackgroundPR> :
-                   <PrImg url={appearance.url}/>
-                }
+                    {appearance && appearance.url === "" ?
+                        <WithoutBackgroundPR>
+                            <div className="title-wrapper">
+                                <Icon.bin />
+                                <span>Không cần hình nền</span>
+                            </div>
+                        </WithoutBackgroundPR> :
+                        <PrImg url={appearance.url} />
+                    }
                 </PreviewImg>
 
                 <PreviewInfor>
                     <div className="name">
                         {appearance && appearance.url === "" ?
-                        <p>Không có hình nền</p>
-                        :<p>{appearance.name}</p>
+                            <p>Không có hình nền</p>
+                            : <p>{appearance.name}</p>
                         }
                     </div>
 
-                    
+
                 </PreviewInfor>
             </PreviewSection>
 
             <Content>
-                <WithoutBackground className={`pointer-cursor ${appearance.url === "" && "active"}`} onClick={() => handleClickPhoto({url: "", name: ""})}>
+                <WithoutBackground className={`pointer-cursor ${appearance.url === "" && "active"}`} onClick={() => handleClickPhoto({ url: "", name: "" })}>
                     <div className="title-wrapper">
                         <Icon.bin />
                         {device === "desktop" && <span>Không cần hình nền</span>}
                     </div>
                 </WithoutBackground>
-                <UploadBackground className="pointer-cursor" onClick={() => handleClickPhoto({url: "", name: ""})}>
-                    <input 
+                <UploadBackground className="pointer-cursor" onClick={() => handleClickPhoto({ url: "", name: "" })}>
+                    <input
                         type="file"
-                        style={{display: "none"}}
-                        accept=".jpg,.png,.jpeg" 
-                        onChange={handleInputBG}/>
-                        <div className="title-wrapper">
-                            <Icon.upload />
-                            {device === "desktop" && <span>Chọn ảnh từ máy</span>}
-                        </div>
+                        style={{ display: "none" }}
+                        accept=".jpg,.png,.jpeg"
+                        onChange={handleInputBG} />
+                    <div className="title-wrapper">
+                        <Icon.upload />
+                        {device === "desktop" && <span>Chọn ảnh từ máy</span>}
+                    </div>
                 </UploadBackground>
 
                 {dataAppearance && dataAppearance.map((data, idx) => {
                     return (
                         <Background onClick={() => handleClickPhoto(data)} url={data.url} key={idx}
-                                    className={`pointer-cursor ${appearance.name === data.name && "active"} `}>
+                            className={`pointer-cursor ${appearance.name === data.name && "active"} `}>
                         </Background>
                     )
                 })
@@ -95,15 +95,12 @@ const Appearance = () => {
 
             </Content>
         </Container>
-     );
+    );
 }
- 
-
-
 
 export default Appearance;
 
-const Container = styled.div `
+const Container = styled.div`
     width: 100%;
     height: 100%;
 
@@ -112,7 +109,7 @@ const Container = styled.div `
     --content-height: 55%;
 `
 
-const TitleWrapper = styled.div `
+const TitleWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,7 +130,7 @@ const TitleWrapper = styled.div `
     }
 `
 
-const PreviewSection = styled.div `
+const PreviewSection = styled.div`
     height: var(--preview-height);
     width: 100%;
     display: flex;
@@ -141,7 +138,7 @@ const PreviewSection = styled.div `
     padding: 10px;
 `
 
-const PreviewImg = styled.div `
+const PreviewImg = styled.div`
 
     width: 40%;
     height: 100%;
@@ -149,8 +146,8 @@ const PreviewImg = styled.div `
 
 `
 
-const PrImg = styled.div `
-    background-image: ${({url}) => `url(${url})`};
+const PrImg = styled.div`
+    background-image: ${({ url }) => `url(${url})`};
     min-height: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -159,7 +156,7 @@ const PrImg = styled.div `
     border: 2px solid #585A5C;
 `
 
-const PreviewInfor = styled.div `
+const PreviewInfor = styled.div`
     height: 100%;
     width: 60%;
     padding: 54px 0px;
@@ -179,7 +176,7 @@ const PreviewInfor = styled.div `
     }
 `
 
-const Content = styled.div `
+const Content = styled.div`
     width: 100%;
     height: 50vh;
     padding: 20px;
@@ -195,7 +192,7 @@ const Content = styled.div `
     }
 `
 
-const WithoutBackground = styled.div `
+const WithoutBackground = styled.div`
     width: 20%;
     height: 100px;
     border-radius: 10px;
@@ -247,7 +244,7 @@ const WithoutBackground = styled.div `
     }
 `
 
-const UploadBackground = styled.label `
+const UploadBackground = styled.label`
     width: 20%;
     height: 100px;
     border-radius: 10px;
@@ -286,7 +283,7 @@ const UploadBackground = styled.label `
     }
 `
 
-const WithoutBackgroundPR = styled.div `
+const WithoutBackgroundPR = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -324,10 +321,10 @@ const WithoutBackgroundPR = styled.div `
     
 `
 
-const Background = styled.div `
+const Background = styled.div`
     width: 20%;
     padding-top: 10px;
-    background-image: ${({url}) => `url(${url})`};
+    background-image: ${({ url }) => `url(${url})`};
     height: 100px;
     background-repeat: no-repeat;
     background-position: center;

@@ -19,6 +19,7 @@ import PodcastCardMore from "./PodcastCardMore";
 // Asset imports
 import { Icon } from "../../../Assets/icon";
 import { ANIMATIONS } from "../utils/animationConstants";
+import Tippy from "@tippyjs/react/headless";
 
 const PodcastCard = ({
   id,
@@ -52,9 +53,12 @@ const PodcastCard = ({
   isDisplayAddPlaylist,
   setIsDisplayAddPlaylist,
   podcastCardAnimation,
+  device,
+  setIsPodcastListScroll,
 }) => {
   const { FADE_IN } = ANIMATIONS;
   const [cardPosition, setCardPosition] = useState(null);
+  const [showCardMore, setShowCardMore] = useState(false);
   const [isDisplayCreatePlaylist, setIsDisplayCreatePlaylist] = useState(null);
   // Event Handlers
   const handleMouseEnter = () => setIsHoverId(id);
@@ -69,6 +73,7 @@ const PodcastCard = ({
       isPlaying: prev.id !== id || !prev.isPlaying,
       id,
     }));
+    console.log(device)
   }
 
   const handleAddClick = id => {
@@ -126,7 +131,6 @@ const PodcastCard = ({
   };
 
   const handlePodcastMoreDisplay = () => {
-    console.log(1);
     setIsPodcastMoreDisplay(prev => ({
       isDisplay: false,
       id
@@ -139,7 +143,7 @@ const PodcastCard = ({
     const distanceFromBottomOfViewport = window.innerHeight - cardRect.bottom;
     const temp = distanceFromBottomOfViewport - window.innerHeight * 0.2;
 
-    setCardPosition(temp >= window.innerHeight * 0.2 ? (window.innerHeight * 0.075) : (-window.innerHeight * 0.3));
+    setCardPosition(temp >= window.innerHeight * 0.2 ? -window.innerHeight*0.08 : window.innerHeight*0.3);
 
     setIsPodcastMoreDisplay(prev => ({
       isDisplay: prev.id !== id || !prev.isDisplay,
@@ -148,7 +152,9 @@ const PodcastCard = ({
     setIsDisplayCreatePlaylist(false);
     setIsDisplayAddPlaylist(true);
     setPodcastInfo({ id, title, author, length, thumbnail, description, date, downloadUrl });
+    setShowCardMore(true);
   }
+
 
   // Styles
   const cardStyled = isPlayingId.id === id ? { backgroundColor: "black", zIndex: 2 } :
@@ -209,33 +215,47 @@ const PodcastCard = ({
               <Icon.checkCircle style={optionIconStyled} className="iconCheck" onClick={() => handleRemoveClick(id)} />
             )}
           </PodcastAdd>
-          <PodcastMore onClick={(event) => { handleMoreClick(event, id, title, author, length, thumbnail, description, date, downloadUrl) }} >
-            <Icon.more style={optionIconStyled} />
-          </PodcastMore>
+          <Tippy
+            onShow={() => setIsPodcastListScroll("hidden")}
+            onHide={() => setIsPodcastListScroll("scroll")}
+            arrow={false}
+            render={() => (
+              <PodcastCardMore
+                className="PodcastCardMore"
+                id={id}
+                title={title}
+                author={author}
+                length={length}
+                thumbnail={thumbnail}
+                url={url}
+                downloadUrl={downloadUrl}
+                playlist={playlist}
+                cardPosition={cardPosition}
+                isPodcastMoreDisplay={isPodcastMoreDisplay}
+                setIsPodcastMoreDisplay={setIsPodcastMoreDisplay}
+                isDisplayCreatePlaylist={isDisplayCreatePlaylist}
+                isDisplayAddPlaylist={isDisplayAddPlaylist}
+                setIsDisplayAddPlaylist={setIsDisplayAddPlaylist}
+                setIsDisplayCreatePlaylist={setIsDisplayCreatePlaylist}
+                setIsPodcastShareDisplay={setIsPodcastShareDisplay}
+                setPodcastShare={setPodcastShare}
+                podcastsDataFilter={podcastsDataFilter}
+                setPodcastsDataFilter={setPodcastsDataFilter}
+              />
+            )}
+            interactive={true}
+            visible={isPodcastMoreDisplay.isDisplay && isPodcastMoreDisplay.id === id}
+            onClickOutside={() => setIsPodcastMoreDisplay(prev => ({
+              isDisplay: false,
+              id,
+            }))}
+            offset={[20, cardPosition]}
+          >
+            <PodcastMore onClick={(event) => { handleMoreClick(event, id, title, author, length, thumbnail, description, date, downloadUrl) }} >
+              <Icon.more style={optionIconStyled} />
+            </PodcastMore>
+          </Tippy>
         </PodcastOption>
-        {isPodcastMoreDisplay.isDisplay && isPodcastMoreDisplay.id === id &&
-          <PodcastCardMore
-            id={id}
-            title={title}
-            author={author}
-            length={length}
-            thumbnail={thumbnail}
-            url={url}
-            downloadUrl={downloadUrl}
-            playlist={playlist}
-            isPodcastMoreDisplay={isPodcastMoreDisplay}
-            setIsPodcastMoreDisplay={setIsPodcastMoreDisplay}
-            isDisplayCreatePlaylist={isDisplayCreatePlaylist}
-            isDisplayAddPlaylist={isDisplayAddPlaylist}
-            setIsDisplayAddPlaylist={setIsDisplayAddPlaylist}
-            setIsDisplayCreatePlaylist={setIsDisplayCreatePlaylist}
-            cardPosition={cardPosition}
-            setIsPodcastShareDisplay={setIsPodcastShareDisplay}
-            setPodcastShare={setPodcastShare}
-            podcastsDataFilter={podcastsDataFilter}
-            setPodcastsDataFilter={setPodcastsDataFilter}
-          />
-        }
       </StyledPodcastCard >
     </>
   );

@@ -6,7 +6,7 @@ export const KnowLedgeStyled = styled.div`
   width: 100%;
   height: 100%; 
   user-select: none; 
-
+  cursor: default;
 `;
 
 export const PageIcon = styled.div`
@@ -193,13 +193,12 @@ export const StyledPodcastCard = styled.div`
   width: 100%;
   height: 16%;
   margin-bottom: calc((0.7vw + 0.7vh)/2);
-  font-weight: 700;
-  transition: background-color 0.5s ease; 
+  font-weight: 700; 
   z-index: 0;
   &:hover{
     z-index: 1; 
     background-color: black;
-    }
+  }
 `;
 
 export const PodcastCardId = styled.p`
@@ -221,7 +220,7 @@ export const PodcastCardList = styled.div`
   border-radius: calc((2vw + 2vh)/2);
   border: 2px solid #cbcbcb;
   padding: calc((1vw + 1vh)/2);
-  overflow-y: scroll;
+  overflow-y: hidden;
   &::-webkit-scrollbar {
     width: 0px;
   }
@@ -1291,13 +1290,14 @@ export const PodcastPlayListContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  padding-left: 2%;   
-  width: 100%; 
+  width: 91vw; 
+  padding-left: 1%;
+  margin: 0;
 `
 export const PodcastPlaylistBlockStyled = styled.div`
   width: calc((21vw + 21vh)/2); 
   height: calc((30vw + 30vh)/2); 
-  margin: 1%;
+  margin: calc((1vw + 1vh)/2);
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: calc((1vw + 1vh)/2);
   background-color:  rgb(235, 235, 235);

@@ -5,13 +5,13 @@ import search from "../utils/search";
 import { KnowledgeContext } from "../Knowledge";
 import { useContext } from "react";
 import { ANIMATIONS } from "../utils/animationConstants";
+
 const PodcastCardMore = ({
   isDisplayAddPlaylist,
   setIsDisplayAddPlaylist,
   isDisplayCreatePlaylist,
   setIsDisplayCreatePlaylist,
   setIsPodcastMoreDisplay,
-  cardPosition,
   setIsPodcastShareDisplay,
   setPodcastShare,
   id,
@@ -20,6 +20,7 @@ const PodcastCardMore = ({
   length,
   thumbnail,
   url,
+  cardPosition,
   playlist,
   downloadUrl,
   podcastsDataFilter,
@@ -91,8 +92,8 @@ const PodcastCardMore = ({
 
   return (
     <StyledPodcastCardMore
+      id="myElement"
       className={`podcastCardMore ${FADE_IN}`}
-      style={{ top: cardPosition }}
     >
       {isDisplayAddPlaylist ? (
         <>
