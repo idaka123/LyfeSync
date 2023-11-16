@@ -12,7 +12,9 @@ const GlobalStyles = createGlobalStyle`
         --second-color: #FDBD3E;
         --modal-header: 65px;
         --white-text: #ffff;
-        --black-text: #1e1e1e
+        --black-text: #1e1e1e;
+        --skeleton-first: #FFFFFF;
+        --skeleton-second: #E7EDF1;
     }
     
     *, *:before, *:after {

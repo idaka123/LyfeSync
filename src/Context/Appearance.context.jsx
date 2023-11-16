@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import data from "../assets/photos/background.json"
+import { data } from "../assets/photos/background.js"
 
 const AppearanceContext = createContext()
 

@@ -72,7 +72,7 @@ const DateZone = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 5px;
+    padding-top: 20px;
     line-height: 2;
 
     span {

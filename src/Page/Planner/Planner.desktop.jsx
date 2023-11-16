@@ -11,7 +11,11 @@ import RoutineCard from "./card/RoutineCard";
 import ModalContext from "../../Context/Modal.context";
 import GoalContext from "../../Context/Goal.context";
 import GoalCard from "./card/GoalCard";
-import Loading from "../../Component/Loadding";
+import Skeleton from "./card/Skeleton";
+
+import task from '../../assets/svg/task.svg'
+import routine from '../../assets/svg/routine.svg'
+import goal from '../../assets/svg/goal.svg'
 
 const PlannerDesktop = () => {
     const [taskDateZone, setTaskDateZone] = useState("today")
@@ -66,13 +70,17 @@ const SectionContent = (p) => {
         setDateZone={setDateZone}
         >
         {
-           loading ? <Loading/> :
+           loading ? <Skeleton/> :
             <Fragment>
             {   dataSection.length > 0 ?
                 children :
                 <Fragment>
                     <ImgMotivation>
-                        <img src={plannerData[sec]?.empty?.img} alt="" />
+                        <img src={
+                            sec === "task" ? task :
+                            sec === "routine" ? routine :
+                            sec === "goal" && goal
+                        } alt=""/>
                     </ImgMotivation> 
         
                     <TextMotivation>
@@ -101,7 +109,7 @@ const ImgMotivation = styled.div`
     width: 100%;
 
     img {
-        max-width: 250px;
+        max-width: 350px;
         width: 100%;
     }
 `
