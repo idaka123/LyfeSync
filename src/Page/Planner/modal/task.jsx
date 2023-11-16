@@ -14,7 +14,7 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
-import myCursor from "../../../assets/cursor/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/Labrador_Retriever.cur"
 
 const relatedArea = [
     {
