@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import OverlayContext from "./overlay.context";
-// import OverlayContext from "./overlay.context";
+import OverlayContext from "./Overlay.context";
+// import OverlayContext from "./Overlay.context";
 
 const ModalContext = createContext()
 
