@@ -324,7 +324,7 @@ const Routine = (p) => {
         </ModalSectionContent>
 
         {/* STATUS */}
-        {modal.type === "routine" &&
+        {modal.type === "routine" && mode !== "add" &&
         <ModalSectionContent 
             title="Trạng thái"
             name="status"
