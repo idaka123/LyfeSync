@@ -39,7 +39,7 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1.5;
         letter-spacing: .01rem;
         cursor: ${`url(${myCursor}), auto`}!important;
-        min-height: -webkit-fill-available;
+        height: -webkit-fill-available;
     }
     body {
         ::-webkit-scrollbar{

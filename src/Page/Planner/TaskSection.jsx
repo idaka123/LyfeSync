@@ -4,6 +4,7 @@ import styled from "styled-components"
 import plannerData from "./Planner.json";
 import ModalContext from "../../Context/Modal.context";
 import myCursor from '../../assets/cursor/HVCyan_link.cur';
+import { Icon } from "../../assets/icon"
 
 const TaskSection = (p) => {
 
@@ -33,8 +34,9 @@ const TaskSection = (p) => {
         // dragElastic={0.5}
         >
         <h2 className="select-none text-dark title">{plannerData[data].value}
-            <span className="icon-wrap" onClick={handleClickAdd} name={plannerData[data].name}> &nbsp;+ 
-            </span>
+            <div className="icon-wrap" name={plannerData[data].name}>
+                <span onClick={handleClickAdd} ><Icon.plus /></span>
+            </div>
         </h2>
         <DateZone >
             {plannerData[data].dateZone && plannerData[data].dateZone.map(date => {    
@@ -65,6 +67,20 @@ const Task = styled(motion.section)`
     h2.title {
         letter-spacing: 4px;
         line-height: 0;
+    }
+
+    .icon-wrap {
+        margin-left: 10px;
+        span {
+            display: flex;
+            position: relative;
+            top: -10px;
+            justify-content: center;
+            width: 31px;
+            svg {
+                font-size: 2.4rem;
+            }
+        }
     }
 `
 
