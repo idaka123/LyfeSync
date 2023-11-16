@@ -96,7 +96,7 @@ const Background = styled.div`
     z-index: -1;
     opacity: .5;
     background-image: ${({background}) => `url(${background})`};
-    min-height: 100dvh;
+    min-height: 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
