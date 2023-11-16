@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Icon } from "../../assets/icon";
-import myCursor from '../../assets/cursor/HVCyan_link.cur';
+import myCursor from '../../assets/cursor/Labrador_Retriever.cur';
 
 const Header = (p) => {
     const { toggleSideBar } = p

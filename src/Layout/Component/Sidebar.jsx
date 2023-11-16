@@ -7,7 +7,7 @@ import styled from "styled-components";
 import DeviceContext from "../../Context/Device.context";
 import paths from "../../Routes/path";
 import Overlay from "./Overlay";
-import myCursor from "../../assets/cursor/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/Labrador_Retriever.cur";
 
 const Sidebar = (p) => {
     const { isopen, toggle, isOpenOvelay, setIsOpenOverlay } = p

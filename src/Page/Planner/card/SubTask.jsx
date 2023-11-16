@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Input from "../../../Component/Input"
 import { Img } from "../../../assets/svg";
-import myCursor from '../../../assets/cursor/HVCyan_link.cur';
+import myCursor from '../../../assets/cursor/Labrador_Retriever.cur';
 
 const SubTask = (p) => {
     const { color, title, done, updateSubCheck, id, deleteSubTask } = p

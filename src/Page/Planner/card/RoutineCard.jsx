@@ -6,7 +6,7 @@ import { useState, useEffect, Fragment, useContext } from "react";
 import { getRecentSevenDates, updateRecentDates } from "../../../Util/util"
 import ModalContext from "../../../Context/Modal.context";
 import RoutineContext from "../../../Context/Routine.context";
-import myCursor from "../../../assets/cursor/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/Labrador_Retriever.cur"
 
 const RoutineCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p

@@ -15,7 +15,7 @@ import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import RoutineContext from "../../../Context/Routine.context";
 import SwitchButton from "../../../Component/SwitchButton";
-import myCursor from '../../../assets/cursor/HVCyan_link.cur';
+import myCursor from '../../../assets/cursor/Labrador_Retriever.cur';
 
 const relatedArea = [
     {

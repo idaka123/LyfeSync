@@ -9,7 +9,7 @@ import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
 import { RoutineProvider } from "../../Context/Routine.context";
 import { GoalProvider } from "../../Context/Goal.context";
-import myCursor from "../../assets/cursor/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/Labrador_Retriever.cur";
 
 const Planner = () => {
 

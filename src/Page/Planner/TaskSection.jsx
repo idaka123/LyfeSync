@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 import styled from "styled-components"
 import plannerData from "./Planner.json";
 import ModalContext from "../../Context/Modal.context";
-import myCursor from '../../assets/cursor/HVCyan_link.cur';
+import myCursor from '../../assets/cursor/Labrador_Retriever.cur';
 import { Icon } from "../../assets/icon"
 
 const TaskSection = (p) => {
