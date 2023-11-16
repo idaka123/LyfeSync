@@ -4,7 +4,7 @@ import Sidebar from "./Component/Sidebar";
 import { Fragment, useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
-import { OverlayProvider } from "../Context/overlay.context";
+import { OverlayProvider } from "../Context/Overlay.context";
 import AppearanceContext, { AppearanceProvider } from "../Context/Appearance.context";
 
 const DefaultLayout = ( p ) => {
