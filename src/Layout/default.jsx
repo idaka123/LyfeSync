@@ -78,7 +78,7 @@ const DftLaySty = styled.div`
             width: 100%;
 
             @media (max-width: 768px) {
-                height: calc(100vh - var(--header-ht));
+                height: calc(100dvh - var(--header-ht));
             }
 
             @media (min-width: 769px) {
@@ -96,7 +96,7 @@ const Background = styled.div`
     z-index: -1;
     opacity: .5;
     background-image: ${({background}) => `url(${background})`};
-    min-height: 100vh;
+    min-height: 100lvh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
