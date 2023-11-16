@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Input from "../../../Component/Input"
-import { Img } from "../../../Assets/svg";
+import { Img } from "../../../assets/svg";
 import myCursor from '../../../assets/cursor/HVCyan_link.cur';
 
 const SubTask = (p) => {

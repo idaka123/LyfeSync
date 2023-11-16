@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Icon } from "/src/Assets/icon.js";
+import { Icon } from "/src/assets/icon.js";
 import React, { Fragment, useEffect, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import ModalContext from "../Context/Modal.context";

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import TaskSection from "./TaskSection";
 import plannerData from "./Planner.json";
 import Button from "../../Component/Button";
-import { Img } from "../../Assets/svg";
+import { Img } from "../../assets/svg";
 import TaskCard from "./card/TaskCard";
 import TaskContext from "../../Context/Task.context";
 import Loading from "../../Component/Loadding";

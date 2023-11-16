@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
-import { Img } from "../../../Assets/svg";
-import { Icon } from "../../../Assets/icon";
+import { Img } from "../../../assets/svg";
+import { Icon } from "../../../assets/icon";
 import { useState, useEffect, Fragment, useContext } from "react";
 import { getRecentSevenDates, updateRecentDates } from "../../../Util/util"
 import ModalContext from "../../../Context/Modal.context";

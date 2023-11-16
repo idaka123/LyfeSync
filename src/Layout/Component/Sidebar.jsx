@@ -1,4 +1,4 @@
-import { Icon } from "../../Assets/icon";
+import { Icon } from "../../assets/icon";
 
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";

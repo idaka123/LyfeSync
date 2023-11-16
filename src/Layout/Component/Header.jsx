@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Icon } from "../../Assets/icon";
+import { Icon } from "../../assets/icon";
 import myCursor from '../../assets/cursor/HVCyan_link.cur';
 
 const Header = (p) => {
