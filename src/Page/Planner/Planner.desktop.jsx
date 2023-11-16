@@ -16,6 +16,7 @@ import Skeleton from "./card/Skeleton";
 import task from '../../assets/svg/task.svg'
 import routine from '../../assets/svg/routine.svg'
 import goal from '../../assets/svg/goal.svg'
+import Loading from "../../Component/Loadding";
 
 const PlannerDesktop = () => {
     const [taskDateZone, setTaskDateZone] = useState("today")
@@ -70,7 +71,7 @@ const SectionContent = (p) => {
         setDateZone={setDateZone}
         >
         {
-           loading ? <Skeleton/> :
+           loading ? <Loading/> :
             <Fragment>
             {   dataSection.length > 0 ?
                 children :

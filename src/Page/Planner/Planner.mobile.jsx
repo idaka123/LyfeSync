@@ -48,20 +48,20 @@ const PlannerMobile = (p) => {
                 </TabList> 
             </Header>
             { 
-                tab === "task" ? taskLoad ? <Skeleton /> :
+                tab === "task" ? taskLoad ? <Loading /> :
                     <TaskSectionMobile 
                         tab={tab} 
                         data={task}
                         setDateSection={setTask}
                     />:
                 
-                tab === "routine" ? routineLoad ? <Skeleton /> :
+                tab === "routine" ? routineLoad ? <Loading /> :
                     <TaskSectionMobile 
                         tab={tab} 
                         data={routine}
                         setDateSection={setRoutine}
                     />:
-                tab === "goa" && goalLoad ? <Skeleton /> :
+                tab === "goa" && goalLoad ? <Loading /> :
                     <TaskSectionMobile 
                         tab={tab} 
                         data={goal}

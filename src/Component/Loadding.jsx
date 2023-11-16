@@ -3,13 +3,13 @@ import styled from 'styled-components'
 const Loading = () => {
   return (
     <Container>
-        <TaskCardContainer >
-              <div className="card-title">
-                <FakeLine style={{width: "300px", borderRadius: "5px", height: "18px"}}></FakeLine>
-                <FakeLine style={{width: "250px", height: "18px", marginTop: "10px"}}></FakeLine>
-                <FakeLine style={{width: "200px", height: "18px", marginTop: "10px"}}></FakeLine>
-              </div>
-        </TaskCardContainer>
+      <div className="a" style={{"--n": 5}}>
+        <div className="dot" style={{"--i": 0}}></div>
+        <div className="dot" style={{"--i": 1}}></div>
+        <div className="dot" style={{"--i": 2}}></div>
+        <div className="dot" style={{"--i": 3}}></div>
+        <div className="dot" style={{"--i": 4}}></div>
+      </div>
     </Container>
   )
 }
@@ -17,41 +17,75 @@ const Loading = () => {
 export default Loading
 
 const Container = styled.div`
-  
-`
+  #btn--yp {
+  box-sizing: content-box;
+  position: fixed;
+  z-index: 9;
+  bottom: 1em;
+  right: 1em;
+  border: solid 1em transparent;
+  width: 4.625em;
+  height: 3.25em;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/2017/icon-yp.svg) 50%/cover content-box;
+  font: 16px/1.25 trebuchet ms, sans-serif;
+  text-indent: 200vw;
+  text-shadow: none;
+  filter: grayscale(1) drop-shadow(0 0 1px #e8e0e0);
+  transition: 0.5s;
+  white-space: nowrap;
+}
+#btn--yp:before {
+  box-sizing: inherit;
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  margin: 1em -0.5em;
+  padding: 0.5em;
+  width: 100%;
+  border-radius: 5px;
+  background: #e8e0e0;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0vw;
+  white-space: normal;
+  animation: float 1s ease-in-out infinite alternate;
+  content: attr(data-txt);
+}
+#btn--yp:hover, #btn--yp:focus {
+  outline: none;
+  filter: grayscale(0) drop-shadow(0 0 1px crimson);
+}
 
-const TaskCardContainer = styled.div `
-    width: 100%;
-    height: auto;
-    background-color: #fff;
-    border-radius: 16px;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.08);
-    padding: 1.4rem 1.3rem;
-    transition: all .3s ease-in-out;
-    display: flex;
+@keyframes float {
+  to {
+    transform: translateY(0.75em);
+  }
+}
+  padding-top: 66px;
+  color: #ccc;
+  text-align: center;
 
-    .card-title{
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-    }
 
-`
+.dot {
+  background: #000000;
+}
+.dot, .dot:after {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  animation: a 1.5s calc(((var(--i) + var(--o, 0))/var(--n) - 1)*1.5s) infinite;
+}
+.dot:after {
+  --o: 1;
+  background: currentcolor;
+  content: "";
+}
 
-const FakeLine = styled.div ` 
-
-    @keyframes shine-lines {
-      0% {
-        background-position: -100px;
-      }
-      to {
-        background-position: 600px;
-      }
-    }
-
-    background-color: var(--skeleton-second);
-    border-radius: 5px;
-    background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
-    animation: shine-lines 1.6s infinite linear;
+@keyframes a {
+  0%, 50% {
+    transform: scale(0);
+  }
+}
 `
