@@ -78,7 +78,7 @@ const DftLaySty = styled.div`
             width: 100%;
 
             @media (max-width: 768px) {
-                height: calc(100dvh - var(--header-ht));
+                height: calc(100svh - var(--header-ht));
             }
 
             @media (min-width: 769px) {
