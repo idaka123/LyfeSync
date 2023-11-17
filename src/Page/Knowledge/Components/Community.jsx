@@ -16,7 +16,7 @@ import updateContent from "../utils/updateContent";
 import random from "../utils/random";
 
 
-const Community = () => {
+const Community = ({ device }) => {
   const { FLIP_IN, FLIP_OUT, FADE_IN } = ANIMATIONS;
   const QUOTE_UPDATE_TIMEOUT = 10000;
   const QUOTE_ANIMATION_DURATION = 8500;
@@ -52,8 +52,8 @@ const Community = () => {
 
   return (
     <>
-      <CommunityBlockTitle className={``}><b>community</b></CommunityBlockTitle>
-      <CommunityBlockContent className={`
+      <CommunityBlockTitle device={device} className={``}><b>community</b></CommunityBlockTitle>
+      <CommunityBlockContent device={device} className={`
         ${isFlipOutAnimated ? `${FLIP_OUT} animate__slow ` : ""} 
         ${isFlipInAnimated ? `${FLIP_IN} animate__slow` : ""}
       `}>

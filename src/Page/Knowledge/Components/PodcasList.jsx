@@ -1,5 +1,6 @@
 // React related imports
 import React, { useRef, useState, useEffect, useContext } from 'react';
+import Tippy from '@tippyjs/react/headless';
 
 // Component imports
 import {
@@ -136,18 +137,20 @@ const PodcastList = ({
 
 
   return (
-    <StyledPodcastList className={``}>
+    <StyledPodcastList className={``} device={device}>
       <PodcastListType
         ref={podCastListTypeRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onWheel={handleWheel}
+        device={device}
       >
         {podcastsType.map(index => (
           <PodcastListTypeElement
             key={index.id}
             onClick={() => handleTypeClick(index.title)}
+            device={device}
             style={
               index.title === podcastType
                 ? { color: "rgb(4 228 84)", transform: "scale(1.1)" } : {}
@@ -159,29 +162,41 @@ const PodcastList = ({
       </PodcastListType>
       <PodcastArrange>
         <PodcastArrangeTitleIcon onClick={handleArrangeTitleClick}>
-          <Icon.list className="iconList"></Icon.list>
+          <Icon.list className="iconList" device={device}></Icon.list>
         </PodcastArrangeTitleIcon>
-        <PodcastArrangeTitle onClick={handleArrangeTitleClick}>
+        <PodcastArrangeTitle onClick={handleArrangeTitleClick} device={device}>
           Danh sách Playlist
         </PodcastArrangeTitle>
-        <SortBy>
-          <p onClick={handleSortByClick}>{sortbyValue}</p>
-        </SortBy>
-        <SortByIcon>
-          <Icon.arrowDown onClick={handleSortByClick} className="iconArrowDown" style={{ color: "black" }} />
+        <Tippy
+          render={() => (
+            <PodcastArrangeList>
+              {podcastsArrangeData.map(index => (
+                <PodcastArrangeListElement
+                  key={index.id}
+                  onClick={handleArrangeElementClick}
+                >
+                  {index.title}
+                </PodcastArrangeListElement>
+              ))}
+            </PodcastArrangeList>
+          )
+          }
+          interactive={true}
+          visible={isDisplayArrangeList}
+          onClickOutside={() => setIsDisplayArrangeList(false)}
+
+          offset={() => {
+            if (device === "desktop") return [window.innerHeight * 0.1 + window.innerWidth * 0.1];
+            return [window.innerHeight * 0.1 + window.innerWidth * 0.1, -(window.innerHeight * 0.01 + window.innerWidth * 0.01)]
+          }}
+        >
+          <SortBy device={device}>
+            <p onClick={handleSortByClick}>{sortbyValue}</p>
+          </SortBy>
+        </Tippy>
+        <SortByIcon device={device}>
+          <Icon.arrowDown className="iconArrowDown" style={{ color: "black" }} />
         </SortByIcon>
-        {isDisplayArrangeList && (
-          <PodcastArrangeList>
-            {podcastsArrangeData.map(index => (
-              <PodcastArrangeListElement
-                key={index.id}
-                onClick={handleArrangeElementClick}
-              >
-                {index.title}
-              </PodcastArrangeListElement>
-            ))}
-          </PodcastArrangeList>
-        )}
       </PodcastArrange>
       {podcastsDataFilter.length !== 0 ?
         <PodcastCardList
@@ -222,6 +237,7 @@ const PodcastList = ({
                 podcastType={podcastType}
                 isPodcastListScroll={isPodcastListScroll}
                 setIsPodcastListScroll={setIsPodcastListScroll}
+                device={device}
               >
               </PodcastCard>
             </React.Fragment>

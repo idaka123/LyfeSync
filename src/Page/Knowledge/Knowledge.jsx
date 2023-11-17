@@ -69,7 +69,6 @@ const Knowledge = () => {
         {isPodcastInfoDisplay && <PodcastInfo />}
         {isPodcastPlaylistDisplay && <PodcastPlayList />}
         {!isPodcastPlaylistDisplay && <KnowLedgeBlock />}
-        {console.log(device)}
       </KnowLedgeStyled>
     </KnowledgeContext.Provider>
   );

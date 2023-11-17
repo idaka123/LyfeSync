@@ -9,7 +9,7 @@ import { wisdomsData } from "../Knowledge.data";
 import random from "../utils/random";
 import { ANIMATIONS } from "../utils/animationConstants";
 
-const Wisdom = () => {
+const Wisdom = ({ device }) => {
   const { FADE_IN } = ANIMATIONS;
   const maxWisdom = 13;
   const minWisdom = 0;
@@ -20,10 +20,10 @@ const Wisdom = () => {
 
   return (
     <>
-      <WisdomBlockTitle className={``}>
+      <WisdomBlockTitle device={device} className={``}>
         <b>wisdom</b>
       </WisdomBlockTitle>
-      <WisdomBlockContent className={`${FADE_IN}`}>
+      <WisdomBlockContent device={device} className={`${FADE_IN}`}>
         <blockquote>
           {wisdom.content}
           <br></br>

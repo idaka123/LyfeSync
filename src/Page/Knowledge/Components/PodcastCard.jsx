@@ -143,7 +143,7 @@ const PodcastCard = ({
     const distanceFromBottomOfViewport = window.innerHeight - cardRect.bottom;
     const temp = distanceFromBottomOfViewport - window.innerHeight * 0.2;
 
-    setCardPosition(temp >= window.innerHeight * 0.2 ? -window.innerHeight*0.08 : window.innerHeight*0.3);
+    setCardPosition(temp >= window.innerHeight * 0.2 ? -(window.innerHeight * 0.03 + window.innerWidth * 0.03) : (window.innerHeight * 0.108 + window.innerWidth * 0.108));
 
     setIsPodcastMoreDisplay(prev => ({
       isDisplay: prev.id !== id || !prev.isDisplay,
@@ -158,7 +158,7 @@ const PodcastCard = ({
 
   // Styles
   const cardStyled = isPlayingId.id === id ? { backgroundColor: "black", zIndex: 2 } :
-    cardId === id ? { border: "2px solid black", zIndex: 3 } : {};
+    cardId === id ? { border: "2px solid black", zIndex: 3 } : {}
 
   const optionIconStyled = isPlayingId.id === id ? { color: "white" } :
     isHoverId === id ? { color: "rgb(122,122,122)" } : {};
@@ -181,9 +181,10 @@ const PodcastCard = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={cardStyled}
+        device={device}
       >
-        <PodcastCardId style={podcastIdStyled}>{order}</PodcastCardId>
-        <PodcastThumbnails onClick={handlePlaying}>
+        <PodcastCardId style={podcastIdStyled} device={device}>{order}</PodcastCardId>
+        <PodcastThumbnails onClick={handlePlaying} device={device}>
           {isPlayingId.id === id ? (
             isHoverId === id ? (
               isPlayingId.isPlaying ? <Icon.pause /> : <Icon.play />
@@ -198,7 +199,7 @@ const PodcastCard = ({
             <img src={thumbnail} alt="thumbnail" />
           )}
         </PodcastThumbnails>
-        <PodcastTitle style={podcastTitleStyled} onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date, downloadUrl)}>
+        <PodcastTitle device={device} style={podcastTitleStyled} onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date, downloadUrl)}>
           <p>{title}</p>
         </PodcastTitle>
         <PodcastLength style={podcastAuthorStyled} onClick={() => handleInfoClick(id, title, author, length, thumbnail, description, date, downloadUrl)}>
