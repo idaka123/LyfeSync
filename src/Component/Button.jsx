@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import myCursor from '../assets/HVCyan_link.cur';
+import myCursor from '../assets/cursor/HVCyan_link.cur';
 import { Icon } from "../Assets/icon";
 /* 
 Example:

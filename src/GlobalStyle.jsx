@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import myCursor from './assets/HVCyan_link.cur';
+import myCursor from './assets/cursor/HVCyan_link.cur';
 const variants = [...Array(50).keys()].map(i => i + 1); // generates an array [1, 2, ..., 50]
 
 

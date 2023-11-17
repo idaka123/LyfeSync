@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Icon } from "../../Assets/icon";
 import data from "../../assets/photos/background.json"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppearanceContext from "../../Context/Appearance.context";
 import DeviceContext from "../../Context/Device.context";
 
@@ -178,7 +178,7 @@ const PreviewInfor = styled.div`
 
 const Content = styled.div`
     width: 100%;
-    height: auto;
+    height: 50vh;
     padding: 20px;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */

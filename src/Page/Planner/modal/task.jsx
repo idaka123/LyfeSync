@@ -14,7 +14,7 @@ import Button from "../../../Component/Button";
 import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
-import myCursor from "../../../assets/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/HVCyan_link.cur"
 
 const relatedArea = [
     {
@@ -589,8 +589,8 @@ const Label = styled.div`
 
 const RelateAres = styled.div `
     text-align: center;
-    color: #b8c2cc!important
-            cursor: url(${myCursor}), auto;
+    color: #b8c2cc!important;
+    cursor: url(${myCursor}), auto;
     width: 25%;
 
     svg {

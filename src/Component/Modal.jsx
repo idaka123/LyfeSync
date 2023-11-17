@@ -6,7 +6,7 @@ import DeviceContext from "../Context/Device.context";
 import ModalContext from "../Context/Modal.context";
 import Loading from "./Loadding"
 import Overlay from "../Layout/Component/Overlay";
-import myCursor from '../assets/HVCyan_link.cur';
+import myCursor from '../assets/cursor/HVCyan_link.cur';
 
 const Modal = (p) => {
     const { children, data } = p

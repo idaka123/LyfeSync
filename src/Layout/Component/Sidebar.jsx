@@ -7,18 +7,19 @@ import styled from "styled-components";
 import DeviceContext from "../../Context/Device.context";
 import paths from "../../Routes/path";
 import Overlay from "./Overlay";
-import myCursor from "../../assets/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/HVCyan_link.cur";
 
 const Sidebar = (p) => {
     const { isopen, toggle, isOpenOvelay, setIsOpenOverlay } = p
 
     const menuItems = [
-        { label: 'Trang chủ', icon: Icon.home, link: paths.home },
-        { label: 'Tác vụ', icon: Icon.task, link: paths.planner },
-        { label: 'Tri thức', icon: Icon.library, link: paths.knowledge },
-        { label: 'Cài đặt', icon: Icon.setting, link: paths.setting },
+        { name: "home", label: 'Trang chủ', icon: Icon.home, link: paths.home },
+        { name: "task", label: 'Tác vụ', icon: Icon.task, link: paths.planner },
+        { name: "knowledge", label: 'Tri thức', icon: Icon.library, link: paths.knowledge },
+        { name: "setting", label: 'Cài đặt', icon: Icon.setting, link: paths.setting },
     ];
 
+    const menuSetting = menuItems.find(item => item.name === "setting")
 
 
     const { device } = useContext(DeviceContext)
@@ -64,10 +65,17 @@ const Sidebar = (p) => {
                 animate={isopen ? 'open' : 'closed'}
                 variants={SideStyle}
                 onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
-                <div className="logo"></div>
+                <div className="logo">
+                    <LogoWrapper>
+                        <img src="https://s.net.vn/jHbG" alt="" />
+                    </LogoWrapper>
+                </div>
 
                 <SidebarMenu>
-                    {menuItems.map((menuItem, idx) => (
+                    {menuItems.map((menuItem, idx) => {
+
+                    if(menuItem.name !== "setting")
+                    return (
                         <SidebarMenuItem key={idx}
                             onClick={() => handleSelect(menuItem.link)}
                             className={select === menuItem.link && 'active'}
@@ -88,7 +96,31 @@ const Sidebar = (p) => {
                                     transition={{ duration: .2 }}
                                 >{menuItem.label}</motion.span>
                             </SidebarLink>
-                        </SidebarMenuItem>))}
+                        </SidebarMenuItem>
+                    )})}
+
+                     <SidebarMenuItemSetting
+                        onClick={() => handleSelect(menuSetting.link)}
+                        className={select === menuSetting.link && 'active'}
+                        whileHover={{
+                            x: "5px",
+                            transition: {
+                                duration: 1,
+                                type: "spring"
+                            }
+                        }} >
+                        
+                        <SidebarLink to={menuSetting.link}>
+                            {<div className="icon-wrapper">
+                                <menuSetting.icon className="icon" />
+                            </div>}
+                            {/*  this may cause broken UI in item in sidebar when font-size change */}
+                            <motion.span initial={{ opacity: 0, width: 0, height: 0 }}
+                                animate={isopen ? { opacity: 1, marginLeft: "23px", width: "100%", height: "25px" } : { opacity: 0, width: 0, height: 0 }}
+                                transition={{ duration: .2 }}
+                            >{menuSetting.label}</motion.span>
+                        </SidebarLink>
+                    </SidebarMenuItemSetting>
                 </SidebarMenu>
             </SideCon>
             <Overlay
@@ -121,14 +153,30 @@ const SideCon = styled(motion.div)`
     }
 `
 
-const SidebarMenu = styled.ul`
-  list-style: none;
-  padding: 0 10px;
-  margin: 0;
-  overflow: hidden;
+const SidebarMenu = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    height: 92%;
 `;
 
-const SidebarMenuItem = styled(motion.li)`
+const LogoWrapper = styled.div `
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 100%;
+        padding: 10px;
+        max-width: 70px;
+    }
+`
+
+const SidebarMenuItem = styled(motion.div)`
     
     a {
         cursor: url(${myCursor}), auto;
@@ -136,15 +184,39 @@ const SidebarMenuItem = styled(motion.li)`
   &.active{
     border-radius: 10px!important;
     z-index: 99;
-    box-shadow: 0 0 10px 1px rgba(30,30,30,.7);
     a {
-      color: #ffffff!important;
-      background: var(--main-gradient);
+        box-shadow: 0 0 10px 1px rgba(30,30,30,.7);
+        color: #ffffff!important;
+        background: var(--main-gradient);
+
+    }
+  }
+`
+const SidebarMenuItemSetting = styled(motion.div)`
+
+    position: absolute;
+    bottom: 0px;
+    padding: 10px;
+    right: 0;
+    left: 0px;
+
+    a {
+        cursor: url(${myCursor}), auto;
+    }
+  &.active{
+    border-radius: 10px!important;
+    z-index: 99;
+    a {
+        box-shadow: 0 0 10px 1px rgba(30,30,30,.7);
+        color: #ffffff!important;
+        background: var(--main-gradient);
 
     }
   }
 
 `;
+
+
 
 const SidebarLink = styled(Link)`
     text-decoration: none;
@@ -156,6 +228,7 @@ const SidebarLink = styled(Link)`
     font-weight: 600;
     position: relative;
     justify-content: flex-start;
+    height: 45px;
 
     .icon-wrapper {
         height: 17px;

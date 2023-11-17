@@ -14,7 +14,7 @@ import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import GoalContext from "../../../Context/Goal.context";
-import myCursor from "../../../assets/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/HVCyan_link.cur"
 const relatedArea = [
     {
         name: "health",
