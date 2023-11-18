@@ -16,7 +16,7 @@ import updateContent from "../utils/updateContent";
 import { TipBlock, TipImage, TipParagraph, TipTitle } from "../Knowledge.desktop";
 
 
-const Tip = () => {
+const Tip = ({ device }) => {
   const { BOUNCE_IN, BOUNCE_OUT } = ANIMATIONS;
   const maxTips = 6;
   const minTips = 0;
@@ -61,10 +61,11 @@ const Tip = () => {
 
   return (
     <Fragment>
-      <TipTitle>
+      <TipTitle device={device}>
         <b>tip</b>
       </TipTitle>
       <TipBlock
+        device={device}
         className={`
           ${isBounceInAnimated ? BOUNCE_IN : ""}
           ${isBounceOutAnimated ? BOUNCE_OUT : ""}
@@ -73,6 +74,7 @@ const Tip = () => {
         onClick={handleTipBlockClick}
       >
         <TipParagraph
+          device={device}
           ref={tipParagraphRef}
           onWheel={handleWheel}
         >
