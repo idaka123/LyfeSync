@@ -20,7 +20,6 @@ const PodcastCardMore = ({
   length,
   thumbnail,
   url,
-  cardPosition,
   playlist,
   downloadUrl,
   podcastsDataFilter,

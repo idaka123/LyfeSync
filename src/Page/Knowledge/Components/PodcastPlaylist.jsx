@@ -34,6 +34,7 @@ const PodcastPlayList = () => {
   const [playlistSearchData, setPlaylistSearchData] = useState(playListDataFilter);
   const [playlistSearchDataByLS, setPlaylistSearchDataByLS] = useState(playlistsDataByLS);
   const [countNewPlaylist, setCountNewPlaylist] = useState(1);
+  const [isRename, setIsRename] = useState({ value: false, id: -1 });
 
   const handlePodcastPlaylistButton = () => {
     setIsPodcastPlaylistDisplay(false);
@@ -59,15 +60,17 @@ const PodcastPlayList = () => {
 
   const searchInputStyled = isTitleSearchInputFocus ? { border: "2px solid black", color: "black" } : {};
 
-  const renderPodcastPlaylistContent = (data, displayDeleteButton) => {
-    return data.map((value) => {
+  const renderPodcastPlaylistContent = (data, displayDeleteButton, displayRenameButton) => {
+    return data.map((value, index) => {
       let temp = 0;
+      let id;
       let name;
       let image = "https://i.pinimg.com/originals/e2/84/bd/e284bdf1d4bb3ecbac814138dcc3db6a.png";
       let numberPodcast;
       let description = "Chào mừng đến với không gian Podcast của bạn! Playlist này chờ đợi để được lấp đầy bởi những chương trình podcast thú vị mà bạn chọn lựa. Từ hội thoại sâu sắc, phân tích chuyên sâu đến câu chuyện giải trí, tạo nên một bộ sưu tập đa dạng mà bạn có thể thưởng thức bất cứ lúc nào. Hãy bắt đầu khám phá và tự do thêm vào những series và tập podcast yêu thích để không bao giờ lỡ mất một khoảnh khắc nào!";
-      if (displayDeleteButton === true) {
+      if (displayDeleteButton === true || displayRenameButton === true) {
         name = value;
+        id = index;
         playlistsData.map(index => {
           if (index.name === value) {
             description = index.description;
@@ -95,16 +98,20 @@ const PodcastPlayList = () => {
       }
       return (
         <PodcastPlaylistBlock
+          id={id}
           key={name}
           name={name}
           image={image}
           numberPodcast={numberPodcast}
           description={description}
           displayDeleteButton={displayDeleteButton}
+          displayRenameButton={displayRenameButton}
           playListDataFilter={playListDataFilter}
           setPlayListDataFilter={setPlayListDataFilter}
           podcastsDataFilter={podcastsDataFilter}
           setPodcastsDataFilter={setPodcastsDataFilter}
+          isRename={isRename}
+          setIsRename={setIsRename}
         />
       );
     });
@@ -157,10 +164,10 @@ const PodcastPlayList = () => {
         titleSearchInputValue ? (
           <Fragment>
             <PodcastPlayListContent>
-              {renderPodcastPlaylistContent(playlistSearchData, true)}
+              {renderPodcastPlaylistContent(playlistSearchData, true, true)}
             </PodcastPlayListContent>
             <PodcastPlayListContent>
-              {renderPodcastPlaylistContent(playlistSearchDataByLS, false)}
+              {renderPodcastPlaylistContent(playlistSearchDataByLS, false, false)}
             </PodcastPlayListContent>
           </Fragment>
         ) : (
@@ -175,7 +182,7 @@ const PodcastPlayList = () => {
               </div>
             </PodcastPlaylistType>
             <PodcastPlayListContent className={`${FADE_IN_UP}`}>
-              {renderPodcastPlaylistContent(playListDataFilter, true)}
+              {renderPodcastPlaylistContent(playListDataFilter, true, true)}
             </PodcastPlayListContent>
             <PodcastPlaylistType className={`${FADE_IN_UP}`}>
               <div className="listTypeIcon">
@@ -184,7 +191,7 @@ const PodcastPlayList = () => {
               <p>Tạo bởi LFM</p>
             </PodcastPlaylistType>
             <PodcastPlayListContent className={`${FADE_IN_UP}`}>
-              {renderPodcastPlaylistContent(playlistsDataByLS, false)}
+              {renderPodcastPlaylistContent(playlistsDataByLS, false, false)}
             </PodcastPlayListContent>
           </Fragment>
         )

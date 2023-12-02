@@ -1445,7 +1445,6 @@ export const PodcastPlaylistBlockStyled = styled.div`
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: calc((1vw + 1vh)/2);
   background-color:  rgb(235, 235, 235);
-  transition: all 0.5s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1504,6 +1503,11 @@ export const PodcastPlaylistBlockStyled = styled.div`
             color: red;
           }
         }
+        .renameButton{
+          &:hover{
+            color: black;
+          }
+        }
       }
     }
   }
@@ -1520,18 +1524,38 @@ export const PodcastPlaylistBlockStyled = styled.div`
         color: black;
       }
       .titleName{
-        width: 60%;
+        width: 70%;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         font-weight: bold;
         font-size: calc((1.5vw + 1.5vh)/2); 
       }
+      .titleInputBlock{
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        input{
+          width: 70%;
+          outline: none;
+          border: none;
+          background-color: rgb(235, 235, 235);
+          font-size: calc((1.5vw + 1.5vh)/2); 
+          font-weight: bold;
+        }
+        p{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30%;
+          font-size: calc((1vw + 1vh)/2); 
+        }
+      }
       .titleNumberPodcast{
         display: flex;
         align-items: center;
         justify-content: end;
-        width: 40%; 
+        width: 30%; 
         font-size: calc((0.9vw + 0.9vh)/2); 
       }
     }
@@ -1556,6 +1580,9 @@ export const PodcastPlaylistBlockStyled = styled.div`
     background-color: rgb(210, 210, 210);
     .playListBlockImage .playListBlockImageBlock .playListBlockImageShowButton{
       background-color: rgba(0, 0, 0, 0.5);
+    }
+    .playListBlockInfo .titleInputBlock input{
+      background-color: rgb(210, 210, 210);
     }
   }
 `
