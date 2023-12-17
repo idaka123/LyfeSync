@@ -483,14 +483,16 @@ export const playlistsDataByLS = [
     name: `Made for you`,
     image: "https://natalieschumann.files.wordpress.com/2020/09/screen-shot-2020-09-14-at-9.47.14-am.png",
     number: random(25, 50),
-    description: " Một danh sách chọn lựa podcast dành riêng cho bạn, nơi mỗi bản nhạc được tuyển chọn theo phong cách của bạn."
+    description: " Một danh sách chọn lựa podcast dành riêng cho bạn, nơi mỗi bản nhạc được tuyển chọn theo phong cách của bạn.",
+    color: "#cedf77, #000000"
   },
   {
     id: 2,
     name: `Daily mix`,
     image: "https://yt3.googleusercontent.com/ytc/AOPolaSZQhaCmdTw47JKixwHpUZgEZ4lUm6YS-nbxxHXaA=s900-c-k-c0x00ffffff-no-rj",
     number: random(25, 50),
-    description: `Tận hưởng một danh sách phối hợp hàng ngày được cá nhân hóa, cung cấp một loạt các podcast phong phú giúp bạn cập nhật thông tin, mở mang kiến thức và giải trí. Với 100 tập được lựa chọn kỹ càng, mỗi ngày bạn sẽ được thưởng thức những câu chuyện, bài học và tiếng cười mới, phù hợp với gu thưởng thức đa dạng của mình. Dù bạn đang tìm kiếm cảm hứng, giải trí hay muốn tìm hiểu sâu hơn về một chủ đề nào đó, "Daily Mix" sẽ là người bạn đồng hành không thể thiếu trong ngày mới của bạn.`
+    description: `Tận hưởng một danh sách phối hợp hàng ngày được cá nhân hóa, cung cấp một loạt các podcast phong phú giúp bạn cập nhật thông tin, mở mang kiến thức và giải trí. Với 100 tập được lựa chọn kỹ càng, mỗi ngày bạn sẽ được thưởng thức những câu chuyện, bài học và tiếng cười mới, phù hợp với gu thưởng thức đa dạng của mình. Dù bạn đang tìm kiếm cảm hứng, giải trí hay muốn tìm hiểu sâu hơn về một chủ đề nào đó, "Daily Mix" sẽ là người bạn đồng hành không thể thiếu trong ngày mới của bạn.`,
+    color: "#d3c0b2, #1c1f26"
   },
   {
     id: 3,
@@ -499,21 +501,24 @@ export const playlistsDataByLS = [
     number: random(25, 50),
     description: `
     Chìm đắm vào thế giới của cảm xúc với playlist 'In my feels'. Đây là nơi chứa đựng những podcast làm rung động trái tim bạn, từ những câu chuyện tình yêu đẹp đến những bản nhạc buồn, từ những bài thơ chạm đến tâm hồn đến những cuộc trò chuyện chân thành về các khía cạnh sâu sắc của cuộc sống. Mỗi tập sẽ là một hành trình khám phá nội tâm, một không gian để bạn cảm nhận, suy ngẫm và tìm thấy sự đồng cảm. Hãy để 'In my feels' đồng hành cùng bạn trong những khoảnh khắc yên bình hoặc khi bạn cần một người bạn đồng cảm.
-    `
+    `,
+    color: "#ff5733, #00a6a6"
   },
   {
     id: 4,
     name: "Soulful Escapes",
     image: "https://i.pinimg.com/736x/b0/1b/ff/b01bffa201e78c0f1c65a9925a496e8b.jpg",
     number: random(25, 50),
-    description: `Khám phá hành trình của cảm xúc qua âm nhạc với playlist "Soulful Escapes". Mỗi bản nhạc được chọn lựa cẩn thận để nâng niu trái tim và tâm hồn bạn, từ giai điệu nhẹ nhàng cho đến những ca khúc sâu lắng, tất cả đều hòa quyện để tạo nên khoảnh khắc thư giãn tuyệt vời.`
+    description: `Khám phá hành trình của cảm xúc qua âm nhạc với playlist "Soulful Escapes". Mỗi bản nhạc được chọn lựa cẩn thận để nâng niu trái tim và tâm hồn bạn, từ giai điệu nhẹ nhàng cho đến những ca khúc sâu lắng, tất cả đều hòa quyện để tạo nên khoảnh khắc thư giãn tuyệt vời.`,
+    color: "#242c3b, #d87144"
   },
   {
     id: 5,
     name: `Discover daily`,
     image: "https://i.pinimg.com/originals/f3/72/1b/f3721b282fa7009f1abf9d9abe9c3dff.png",
     number: random(25, 50),
-    description: `Khám phá một thế giới tri thức mới mỗi ngày với "Discover Daily". Từ sự kiện thời sự quốc tế, câu chuyện văn hóa địa phương, triết lý sống, cho đến những bí ẩn khoa học - playlist này đem đến cái nhìn toàn diện, sâu rộng qua lăng kính của những người kể chuyện và chuyên gia hàng đầu.`
+    description: `Khám phá một thế giới tri thức mới mỗi ngày với "Discover Daily". Từ sự kiện thời sự quốc tế, câu chuyện văn hóa địa phương, triết lý sống, cho đến những bí ẩn khoa học - playlist này đem đến cái nhìn toàn diện, sâu rộng qua lăng kính của những người kể chuyện và chuyên gia hàng đầu.`,
+    color: "#9a2628, #363636"
   },
   {
     id: 6,
@@ -521,15 +526,15 @@ export const playlistsDataByLS = [
     image: "https://i.pinimg.com/originals/60/8b/77/608b7725a06433fd6dea6c1777e13a0c.png",
     number: random(25, 50),
     description: `Mở rộng tầm nhìn và trí tuệ của bạn với "Horizon Expanders". Tập hợp những cuộc đối thoại, bài giảng, và thảo luận đa dạng từ mọi lĩnh vực như kinh doanh, nghệ thuật, khoa học, và sức khỏe, playlist này sẽ trở thành nguồn cảm hứng không ngừng cho đam mê và sự hiểu biết của bạn.`,
-
+    color: "#74624b, #6b707e"
   },
   {
     id: 7,
     name: `Insight Hour`,
     image: "https://i.pinimg.com/originals/39/4b/bd/394bbdcdffaf656bbd986ef48c434c8d.png",
     number: random(25, 50),
-    description: ` "Insight Hour" là nơi gặp gỡ của những ý tưởng đột phá và những cuộc trò chuyện sâu sắc. Mỗi tập sẽ đưa bạn đi từ sự am hiểu về tự phát triển đến những khám phá khoa học mới nhất, giúp bạn mở mang đầu óc và trái tim.`,
-
+    description: `"Insight Hour" là nơi gặp gỡ của những ý tưởng đột phá và những cuộc trò chuyện sâu sắc. Mỗi tập sẽ đưa bạn đi từ sự am hiểu về tự phát triển đến những khám phá khoa học mới nhất, giúp bạn mở mang đầu óc và trái tim.`,
+    color: "#f5e2ed, #000000"
   },
   {
     id: 8,
@@ -537,7 +542,7 @@ export const playlistsDataByLS = [
     image: "https://i.pinimg.com/originals/6a/a6/90/6aa690b048e7e0c22228be0a361ddb90.png",
     number: random(25, 50),
     description: `Đắm chìm trong thế giới của sự sáng tạo và cảm hứng với "Innovate & Inspire". Các tập trong playlist này sẽ nói về những đổi mới đang thay đổi ngành công nghiệp, các phát minh mới và những người tiên phong đang vẽ nên tương lai.`,
-
+    color: "#e6c5bc , #193448"
   },
   {
     id: 9,
@@ -545,7 +550,7 @@ export const playlistsDataByLS = [
     image: "https://i.pinimg.com/originals/4a/c1/32/4ac132e384be17db171aea4480f24c52.png",
     number: random(25, 50),
     description: `"Mind & Body Talks" là sự kết hợp giữa khoa học, triết lý và thực hành tốt nhất cho tinh thần và thể chất. Tìm hiểu các phương pháp mới để chăm sóc bản thân qua một loạt các bài thảo luận và hướng dẫn từ các chuyên gia.`,
-
+    color: "#f9fbfb, #586138"
   },
   {
     id: 10,
@@ -553,9 +558,10 @@ export const playlistsDataByLS = [
     image: "https://i.pinimg.com/originals/3e/f9/a9/3ef9a9d7fbec9e1c48f90058f98eccbf.png",
     number: random(25, 50),
     description: ` "Cultural Digest" đem đến cho bạn một cái nhìn toàn diện về những phát triển nổi bật trong lĩnh vực văn hóa, từ nghệ thuật, âm nhạc, đến lịch sử và nhiều hơn nữa. Cùng khám phá và trân trọng những điều làm nên sự phong phú của nhân loại.`,
-
+    color: "#f5f5f5,#000000"
   },
-]
+];
+
 
 export const playlistsData = [
   {

@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { PodcastPlaylistBlockStyled } from "../Knowledge.desktop";
 import { ANIMATIONS } from "../utils/animationConstants";
+import { useEffect } from "react";
 
 const PodcastPlaylistBlock = ({
+  id,
+  color,
   name,
   image,
   description,
@@ -11,7 +14,12 @@ const PodcastPlaylistBlock = ({
   playListDataFilter,
   setPlayListDataFilter,
   podcastsDataFilter,
-  setPodcastsDataFilter
+  setPodcastsDataFilter,
+  isPodcastShowPlaylistDisplay,
+  setIsPodcastShowPlaylistDisplay,
+  podcastPlaylistShowData,
+  setPodcastPlaylistShowData,
+  setIsPodcastPlaylistDisplay
 }) => {
   const [isHovered, setIsHovered] = useState(null);
   const { FADE_OUT_DOWN, FADE_IN_UP } = ANIMATIONS;
@@ -33,6 +41,18 @@ const PodcastPlaylistBlock = ({
     });
     setPodcastsDataFilter(updatedData);
   }
+  const handleShowPlaylistClick = (name) => {
+    setIsPodcastShowPlaylistDisplay(true);
+    setIsPodcastPlaylistDisplay(false);
+    setPodcastPlaylistShowData(prev => ({
+      image: image,
+      title: description,
+      number: numberPodcast,
+      name: name,
+      color: color,
+    }));
+
+  }
   return (
     <PodcastPlaylistBlockStyled
       onMouseEnter={handlePodcastPlaylistMouseEnter}
@@ -43,7 +63,10 @@ const PodcastPlaylistBlock = ({
           style={{ backgroundImage: `url(${image})` }}
         >
           <div className="playListBlockImageShowButton">
-            <div className={`button showButton ${isHovered ? FADE_IN_UP : FADE_OUT_DOWN} `} >
+            <div
+              className={`button showButton ${isHovered ? FADE_IN_UP : FADE_OUT_DOWN} `}
+              onClick={() => handleShowPlaylistClick(name)}
+            >
               Show Playlist
             </div>
             {displayDeleteButton &&
