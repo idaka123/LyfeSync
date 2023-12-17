@@ -1503,11 +1503,6 @@ export const PodcastPlaylistBlockStyled = styled.div`
             color: red;
           }
         }
-        .renameButton{
-          &:hover{
-            color: black;
-          }
-        }
       }
     }
   }
@@ -1587,3 +1582,64 @@ export const PodcastPlaylistBlockStyled = styled.div`
   }
 `
 
+export const PodcastShowPlaylistStyled = styled.div`
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: white;
+  z-index: 7;  
+  .closeIcon{
+    z-index: 8;
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: calc((2.5vw + 2.5vh)/2); 
+    height: calc((2.5vw + 2.5vh)/2); 
+    border-radius: 50%;
+    &:hover{
+      cursor: pointer;
+      svg{
+        color: red;
+      }
+    }
+  }
+`
+export const PodcastShowPlayllistHeaderStyled = styled.div`
+    width: 100%;
+    height: 40vh;
+    background: linear-gradient(to bottom, rgb(160,160,152), rgb(82,82,77));
+    display: flex;
+    margin-bottom: 1%;
+    padding-bottom: 2%;
+    .headerImage{
+      width: 25%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      img{
+        width: calc((22vw + 22vh)/2); 
+        height: calc((22vw + 22vh)/2); 
+      }
+    }
+    .headerInfo{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 70%;
+      p{
+        font-size:  calc((1.5vw + 1.5vh)/2); 
+        color: white;
+      }
+      .child2{
+        font-size: calc((8vw + 8vh)/2); 
+        font-weight: bold;
+      }
+      .child3{
+        font-size:  calc((1.25vw + 1.25vh)/2); 
+      }
+    }
+`

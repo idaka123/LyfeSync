@@ -7,11 +7,12 @@ import KnowLedgeBlock from './Components/KnowledgeBlock';
 import PodcastShare from './Components/PodcastShare';
 import PodcastInfo from './Components/PodcastInfo';
 import PodcastPlayList from './Components/PodcastPlaylist';
+import PodcastShowPlaylist from './Components/PodcastShowPlaylist';
 import DeviceProvider from '../../Context/Device.context'
 // Style and data imports
 import { KnowLedgeStyled } from './Knowledge.desktop';
 import { podcastsData, playlistsData } from './Knowledge.data';
-
+import random from './utils/random';
 export const KnowledgeContext = createContext();
 
 const Knowledge = () => {
@@ -41,6 +42,15 @@ const Knowledge = () => {
     downloadUrl: null,
   })
   const [isPodcastPlaylistDisplay, setIsPodcastPlaylistDisplay] = useState(false);
+  const [isPodcastShowPlaylistDisplay, setIsPodcastShowPlaylistDisplay] = useState(false);
+  const [podcastPlaylistShowData, setPodcastPlaylistShowData] = useState(
+    {
+      name: null,
+      image: null,
+      title: null,
+      number: null,
+    }
+  );
   const shareValue = {
     isPlayingId,
     setIsPlayingId,
@@ -61,6 +71,10 @@ const Knowledge = () => {
     isPodcastPlaylistDisplay,
     setIsPodcastPlaylistDisplay,
     device,
+    isPodcastShowPlaylistDisplay,
+    setIsPodcastShowPlaylistDisplay,
+    podcastPlaylistShowData,
+    setPodcastPlaylistShowData,
   }
   return (
     <KnowledgeContext.Provider value={shareValue}>
@@ -68,7 +82,8 @@ const Knowledge = () => {
         {isPodcastShareDisplay && < PodcastShare />}
         {isPodcastInfoDisplay && <PodcastInfo />}
         {isPodcastPlaylistDisplay && <PodcastPlayList />}
-        {!isPodcastPlaylistDisplay && <KnowLedgeBlock />}
+        {isPodcastShowPlaylistDisplay && !isPodcastPlaylistDisplay && <PodcastShowPlaylist />}
+        {!isPodcastPlaylistDisplay && !isPodcastShowPlaylistDisplay && <KnowLedgeBlock />}
       </KnowLedgeStyled>
     </KnowledgeContext.Provider>
   );

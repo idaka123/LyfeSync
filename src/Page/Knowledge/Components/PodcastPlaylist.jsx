@@ -27,6 +27,10 @@ const PodcastPlayList = () => {
     setPlayListDataFilter,
     podcastsDataFilter,
     setPodcastsDataFilter,
+    isPodcastShowPlaylistDisplay,
+    setIsPodcastShowPlaylistDisplay,
+    podcastPlaylistShowData,
+    setPodcastPlaylistShowData
   } = useContext(KnowledgeContext);
 
   const [isTitleSearchInputFocus, setIsTilteSearchInputFocus] = useState(false);
@@ -60,15 +64,17 @@ const PodcastPlayList = () => {
 
   const searchInputStyled = isTitleSearchInputFocus ? { border: "2px solid black", color: "black" } : {};
 
-  const renderPodcastPlaylistContent = (data, displayDeleteButton, displayRenameButton) => {
+  const renderPodcastPlaylistContent = (data, displayDeleteButton) => {
     return data.map((value, index) => {
       let temp = 0;
       let id;
       let name;
       let image = "https://i.pinimg.com/originals/e2/84/bd/e284bdf1d4bb3ecbac814138dcc3db6a.png";
       let numberPodcast;
+      let color;
       let description = "Chào mừng đến với không gian Podcast của bạn! Playlist này chờ đợi để được lấp đầy bởi những chương trình podcast thú vị mà bạn chọn lựa. Từ hội thoại sâu sắc, phân tích chuyên sâu đến câu chuyện giải trí, tạo nên một bộ sưu tập đa dạng mà bạn có thể thưởng thức bất cứ lúc nào. Hãy bắt đầu khám phá và tự do thêm vào những series và tập podcast yêu thích để không bao giờ lỡ mất một khoảnh khắc nào!";
-      if (displayDeleteButton === true || displayRenameButton === true) {
+      if (displayDeleteButton === true) {
+        color = "#ffff, #000"
         name = value;
         id = index;
         playlistsData.map(index => {
@@ -87,6 +93,7 @@ const PodcastPlayList = () => {
 
         numberPodcast = countNumberPodcast();
       } else {
+        color = value.color;
         name = value.name;
         image = value.image;
         description = value.description;
@@ -102,16 +109,21 @@ const PodcastPlayList = () => {
           key={name}
           name={name}
           image={image}
+          color={color}
           numberPodcast={numberPodcast}
           description={description}
           displayDeleteButton={displayDeleteButton}
-          displayRenameButton={displayRenameButton}
           playListDataFilter={playListDataFilter}
           setPlayListDataFilter={setPlayListDataFilter}
           podcastsDataFilter={podcastsDataFilter}
           setPodcastsDataFilter={setPodcastsDataFilter}
           isRename={isRename}
           setIsRename={setIsRename}
+          isPodcastShowPlaylistDisplay={isPodcastShowPlaylistDisplay}
+          setIsPodcastShowPlaylistDisplay={setIsPodcastShowPlaylistDisplay}
+          podcastPlaylistShowData={podcastPlaylistShowData}
+          setPodcastPlaylistShowData={setPodcastPlaylistShowData}
+          setIsPodcastPlaylistDisplay={setIsPodcastPlaylistDisplay}
         />
       );
     });
@@ -164,10 +176,10 @@ const PodcastPlayList = () => {
         titleSearchInputValue ? (
           <Fragment>
             <PodcastPlayListContent>
-              {renderPodcastPlaylistContent(playlistSearchData, true, true)}
+              {renderPodcastPlaylistContent(playlistSearchData, true)}
             </PodcastPlayListContent>
             <PodcastPlayListContent>
-              {renderPodcastPlaylistContent(playlistSearchDataByLS, false, false)}
+              {renderPodcastPlaylistContent(playlistSearchDataByLS, false)}
             </PodcastPlayListContent>
           </Fragment>
         ) : (
@@ -191,7 +203,7 @@ const PodcastPlayList = () => {
               <p>Tạo bởi LFM</p>
             </PodcastPlaylistType>
             <PodcastPlayListContent className={`${FADE_IN_UP}`}>
-              {renderPodcastPlaylistContent(playlistsDataByLS, false, false)}
+              {renderPodcastPlaylistContent(playlistsDataByLS, false)}
             </PodcastPlayListContent>
           </Fragment>
         )
