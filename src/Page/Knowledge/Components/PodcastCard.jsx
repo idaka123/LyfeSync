@@ -17,7 +17,7 @@ import {
 import PodcastCardMore from "./PodcastCardMore";
 
 // Asset imports
-import { Icon } from "../../../Assets/icon";
+import { Icon } from "../../../assets/icon";
 import { ANIMATIONS } from "../utils/animationConstants";
 import Tippy from "@tippyjs/react/headless";
 

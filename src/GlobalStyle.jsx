@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import myCursor from './assets/cursor/HVCyan_link.cur';
+import myCursor from './assets/cursor/Labrador_Retriever.cur';
 const variants = [...Array(50).keys()].map(i => i + 1); // generates an array [1, 2, ..., 50]
 
 
@@ -12,7 +12,9 @@ const GlobalStyles = createGlobalStyle`
         --second-color: #FDBD3E;
         --modal-header: 65px;
         --white-text: #ffff;
-        --black-text: #1e1e1e
+        --black-text: #1e1e1e;
+        --skeleton-first: #FFFFFF;
+        --skeleton-second: #E7EDF1;
     }
     
     *, *:before, *:after {
@@ -37,6 +39,7 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1.5;
         letter-spacing: .01rem;
         cursor: ${`url(${myCursor}), auto`}!important;
+        height: -webkit-fill-available;
     }
     body {
         ::-webkit-scrollbar{
@@ -47,6 +50,7 @@ const GlobalStyles = createGlobalStyle`
         background-color: #FCFCFC;
         font-family: Montserrat,Helvetica,Arial,sans-serif;
         font-weight: 400;
+        min-height: -webkit-fill-available;
     }
     a {
         color: var(--text-color);

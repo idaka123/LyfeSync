@@ -1,7 +1,7 @@
 import Modal from "../../../Component/Modal";
 import { useContext, useEffect, useRef, useState } from "react";
 import ModalContext from "../../../Context/Modal.context";
-import Task from "./Task";
+import Task from "./task";
 import Routine from "./Routine";
 import Goal from "./Goal";
 

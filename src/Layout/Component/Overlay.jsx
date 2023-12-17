@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import myCursor from "../../assets/cursor/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/Labrador_Retriever.cur";
 
 const overlayVariant = {
     hidden: { opacity: 0, visibility: "hidden" },
@@ -38,7 +38,7 @@ const Container = styled(motion.div) `
     background-color: #44ffff;
     top: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: rgba(0,0,0,.2);
     z-index: ${({zIndex}) => zIndex ? zIndex : "1000"};
     -webkit-transition: all .3s ease;

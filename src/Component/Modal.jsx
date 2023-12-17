@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Icon } from "/src/Assets/icon.js";
+import { Icon } from "/src/assets/icon.js";
 import React, { Fragment, useEffect, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import ModalContext from "../Context/Modal.context";
 import Loading from "./Loadding"
 import Overlay from "../Layout/Component/Overlay";
-import myCursor from '../assets/cursor/HVCyan_link.cur';
+import myCursor from '../assets/cursor/Labrador_Retriever.cur';
 
 const Modal = (p) => {
     const { children, data } = p
@@ -18,7 +18,7 @@ const Modal = (p) => {
         console.log("listen event opening modal")
         window.addEventListener('modalOpening', openingModal);
         window.addEventListener('modalClosing', () => {
-            setIsOpenOverlay(false)
+            device !== "mobile" && setIsOpenOverlay(false)
         });
 
         
@@ -51,7 +51,7 @@ const Modal = (p) => {
     };
 
     const openingModal = () => { // prepare a lazy loading waiting for the animation loaded
-        setIsOpenOverlay(true)
+        device !== "mobile" && setIsOpenOverlay(true)
         setTimeout(() => {
             setIsDataLoaded(true);
         }, 500); 
@@ -77,7 +77,7 @@ const Modal = (p) => {
             <Title>
                 <h1>{modal.title}</h1>
                 <Icon.x onClick={hdleToggle}  style={{cursor: `url(${myCursor}), auto`}}/>
-            </Title> 
+            </Title>
            {isDataLoaded ? children: <Loading />}
         </Container> 
         <Overlay onClick={hdleClickOverLay} 
@@ -93,7 +93,7 @@ export default Modal;
 
 const Container = styled(motion.div)` 
     right: 0;
-    height: 100vh;
+    height: 100dvh;
     z-index: 1002;
     background-color: #ffffff;
     position: fixed;

@@ -9,7 +9,7 @@ import TaskModal from "./modal/Modal";
 import { TaskProvider } from "../../Context/Task.context";
 import { RoutineProvider } from "../../Context/Routine.context";
 import { GoalProvider } from "../../Context/Goal.context";
-import myCursor from "../../assets/cursor/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/Labrador_Retriever.cur";
 
 const Planner = () => {
 
@@ -80,11 +80,12 @@ const Container = styled(motion.div)`
     }
 
     section h2.title {
-        font-size: 30px;
+        font-size: 45px;
         font-weight: 900;
-        /* font-family: fantasy; */
         display: flex;
         align-items: center;
+        font-family: fantasy;
+        padding-top: 30px;
         .icon-wrap {
             display: block;
             line-height: 30px;

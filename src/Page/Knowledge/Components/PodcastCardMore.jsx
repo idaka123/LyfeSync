@@ -1,5 +1,5 @@
 import { StyledPodcastCardMore } from "../Knowledge.desktop";
-import { Icon } from "../../../Assets/icon";
+import { Icon } from "../../../assets/icon";
 import { useState, useEffect } from "react";
 import search from "../utils/search";
 import { KnowledgeContext } from "../Knowledge";

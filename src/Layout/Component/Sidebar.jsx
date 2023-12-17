@@ -1,5 +1,5 @@
-import { Icon } from "../../Assets/icon";
-
+import { Icon } from "../../assets/icon";
+import { Img } from "../../assets/svg/index"
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import styled from "styled-components";
 import DeviceContext from "../../Context/Device.context";
 import paths from "../../Routes/path";
 import Overlay from "./Overlay";
-import myCursor from "../../assets/cursor/HVCyan_link.cur";
+import myCursor from "../../assets/cursor/Labrador_Retriever.cur";
 
 const Sidebar = (p) => {
     const { isopen, toggle, isOpenOvelay, setIsOpenOverlay } = p
@@ -67,7 +67,7 @@ const Sidebar = (p) => {
                 onMouseEnter={toggle(true)} onMouseLeave={toggle(false)}>
                 <div className="logo">
                     <LogoWrapper>
-                        <img src="https://s.net.vn/jHbG" alt="" />
+                        <Img.logo />
                     </LogoWrapper>
                 </div>
 
@@ -141,7 +141,7 @@ const SideCon = styled(motion.div)`
     overflow: hidden;
     position: absolute;
     top: 0;
-    height: 100vh;
+    height: 100dvh;
     max-width: 375px;
     background-color: #FFFFFF;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -169,9 +169,9 @@ const LogoWrapper = styled.div `
     justify-content: center;
     align-items: center;
 
-    img {
-        width: 100%;
-        padding: 10px;
+    svg {
+        width: 85%;
+        padding-top: 10px;
         max-width: 70px;
     }
 `

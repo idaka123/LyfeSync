@@ -3,7 +3,8 @@ import { useContext, useState } from "react"
 import styled from "styled-components"
 import plannerData from "./Planner.json";
 import ModalContext from "../../Context/Modal.context";
-import myCursor from '../../assets/cursor/HVCyan_link.cur';
+import myCursor from '../../assets/cursor/Labrador_Retriever.cur';
+import { Icon } from "../../assets/icon"
 
 const TaskSection = (p) => {
 
@@ -20,10 +21,11 @@ const TaskSection = (p) => {
     }
 
     const handleClickAdd = (e) => {
-        const name = e.target.getAttribute("name")
+        const name = e.currentTarget.getAttribute("name")
+        console.log("name", name)
         openModal(name, null, name)
-        // localStorage.setItem("tab", name)
     }
+    
     return (
     <Task 
         // drag
@@ -33,8 +35,9 @@ const TaskSection = (p) => {
         // dragElastic={0.5}
         >
         <h2 className="select-none text-dark title">{plannerData[data].value}
-            <span className="icon-wrap" onClick={handleClickAdd} name={plannerData[data].name}> &nbsp;+ 
-            </span>
+            <div className="icon-wrap" >
+                <span name={plannerData[data].name} onClick={handleClickAdd} ><Icon.plus /></span>
+            </div>
         </h2>
         <DateZone >
             {plannerData[data].dateZone && plannerData[data].dateZone.map(date => {    
@@ -66,20 +69,34 @@ const Task = styled(motion.section)`
         letter-spacing: 4px;
         line-height: 0;
     }
+
+    .icon-wrap {
+        margin-left: 10px;
+        span {
+            display: flex;
+            position: relative;
+            top: -10px;
+            justify-content: center;
+            width: 31px;
+            svg {
+                font-size: 2.4rem;
+            }
+        }
+    }
 `
 
 const DateZone = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 5px;
+    padding-top: 20px;
     line-height: 2;
 
     span {
         margin-right: 1.5rem;
         color: #626262;
         font-weight: 500;
-        /* font-family: fantasy; */
+        font-family: fantasy;
         font-weight: 600;
         transition: all 0.3s ease-in-out;
 

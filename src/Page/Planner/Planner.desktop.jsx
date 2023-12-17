@@ -11,6 +11,11 @@ import RoutineCard from "./card/RoutineCard";
 import ModalContext from "../../Context/Modal.context";
 import GoalContext from "../../Context/Goal.context";
 import GoalCard from "./card/GoalCard";
+import Skeleton from "./card/Skeleton";
+
+import task from '../../assets/svg/task.svg'
+import routine from '../../assets/svg/routine.svg'
+import goal from '../../assets/svg/goal.svg'
 import Loading from "../../Component/Loadding";
 
 const PlannerDesktop = () => {
@@ -72,7 +77,11 @@ const SectionContent = (p) => {
                 children :
                 <Fragment>
                     <ImgMotivation>
-                        <img src={plannerData[sec]?.empty?.img} alt="" />
+                        <img src={
+                            sec === "task" ? task :
+                            sec === "routine" ? routine :
+                            sec === "goal" && goal
+                        } alt=""/>
                     </ImgMotivation> 
         
                     <TextMotivation>
@@ -101,7 +110,7 @@ const ImgMotivation = styled.div`
     width: 100%;
 
     img {
-        max-width: 250px;
+        max-width: 350px;
         width: 100%;
     }
 `

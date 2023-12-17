@@ -12,7 +12,7 @@ import { KnowledgeContext } from "../Knowledge";
 
 // Asset imports
 import { ANIMATIONS } from "../utils/animationConstants";
-import { Icon } from "../../../Assets/icon";
+import { Icon } from "../../../assets/icon";
 
 
 const PodcastInfo = ({

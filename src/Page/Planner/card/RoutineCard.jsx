@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
-import { Img } from "../../../Assets/svg";
-import { Icon } from "../../../Assets/icon";
+import { Img } from "../../../assets/svg";
+import { Icon } from "../../../assets/icon";
 import { useState, useEffect, Fragment, useContext } from "react";
 import { getRecentSevenDates, updateRecentDates } from "../../../Util/util"
 import ModalContext from "../../../Context/Modal.context";
 import RoutineContext from "../../../Context/Routine.context";
-import myCursor from "../../../assets/cursor/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/Labrador_Retriever.cur"
 
 const RoutineCard = (p) => {
     const { dataSection, setDateSection, dateZone } = p
@@ -360,7 +360,7 @@ export default RoutineCard;
 
 const Container = styled.div `
     padding-top: 20px;
-    height: 70vh;
+    height: 70dvh;
     overflow-y: scroll;
     scrollbar-width: none; 
     

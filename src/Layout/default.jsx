@@ -4,7 +4,7 @@ import Sidebar from "./Component/Sidebar";
 import { Fragment, useContext, useState } from "react";
 import DeviceContext from "../Context/Device.context";
 import Header from "./Component/Header";
-import { OverlayProvider } from "../Context/overlay.context";
+import { OverlayProvider } from "../Context/Overlay.context";
 import AppearanceContext, { AppearanceProvider } from "../Context/Appearance.context";
 
 const DefaultLayout = ( p ) => {
@@ -64,7 +64,7 @@ export default DefaultLayout;
 const DftLaySty = styled.div`
    
     background-color: transparent;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     position: relative;
 
@@ -78,11 +78,11 @@ const DftLaySty = styled.div`
             width: 100%;
 
             @media (max-width: 768px) {
-                height: calc(100vh - var(--header-ht));
+                height: calc(100svh - var(--header-ht));
             }
 
             @media (min-width: 769px) {
-                height: 100vh;
+                height: 100dvh;
             }
         }
     }
@@ -96,7 +96,7 @@ const Background = styled.div`
     z-index: -1;
     opacity: .5;
     background-image: ${({background}) => `url(${background})`};
-    min-height: 100vh;
+    min-height: 100lvh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

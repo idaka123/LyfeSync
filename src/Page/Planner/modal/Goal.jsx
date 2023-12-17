@@ -4,7 +4,7 @@ import ModalContext from "../../../Context/Modal.context";
 import DOMPurify from "dompurify";
 import {  dateConvert, isDateString } from "../../../Util/util";
 import { nanoid } from "nanoid";
-import { Img } from "../../../Assets/svg";
+import { Img } from "../../../assets/svg";
 import Input from "../../../Component/Input";
 import Flatpickr from "react-flatpickr";
 import ReactQuill from 'react-quill';
@@ -14,7 +14,7 @@ import 'react-quill/dist/quill.snow.css';
 import "flatpickr/dist/themes/light.css";
 import "flatpickr/dist/flatpickr.css";
 import GoalContext from "../../../Context/Goal.context";
-import myCursor from "../../../assets/cursor/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/Labrador_Retriever.cur"
 const relatedArea = [
     {
         name: "health",

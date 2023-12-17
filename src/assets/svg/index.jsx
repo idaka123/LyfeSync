@@ -29,7 +29,8 @@ import {
   routineMiss,
   status,
   pause2,
-  play2
+  play2,
+  logo
 } from './svg.jsx'
 
 const Img = {
@@ -62,7 +63,8 @@ const Img = {
   routineMiss,
   status,
   pause2,
-  play2
+  play2,
+  logo
 }
 
 export { Img }

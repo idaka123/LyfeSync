@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import myCursor from '../../assets/cursor/HVCyan_link.cur';
+import myCursor from '../../assets/cursor/Labrador_Retriever.cur';
 
 export const KnowLedgeStyled = styled.div`
   position: relative;

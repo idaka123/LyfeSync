@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
-import { Img } from "../../../Assets/svg";
+import { Img } from "../../../assets/svg";
 import Input from "../../../Component/Input"
 import { useState, useEffect, Fragment, useContext, useMemo } from "react";
 import {  convertDates, dateConvert } from "../../../Util/util"
@@ -9,7 +9,7 @@ import ModalContext from "../../../Context/Modal.context";
 import TaskContext from "../../../Context/Task.context";
 import SubTask from "./SubTask";
 import language from "../../../Util/language"
-import myCursor from "../../../assets/cursor/HVCyan_link.cur"
+import myCursor from "../../../assets/cursor/Labrador_Retriever.cur"
 import { motion } from "framer-motion";
 
 const TaskCard = (p) => {
@@ -265,7 +265,7 @@ const Card = (p) => {
         subTask = [],
         id,
         dataSection,
-        setDateSection,
+        setDateSection
         } = p
     // const { task, setTask }  = useContext(TaskContext)
     const { openModal }  = useContext(ModalContext)
@@ -336,7 +336,9 @@ const Card = (p) => {
                     taskHandle.option.close()
                 }, 500)
             }
-        }
+        },
+        // selectWhenClick: (id) => {
+        // }
     }
 
     const subTaskHandle = {
@@ -368,7 +370,10 @@ const Card = (p) => {
     
   
     return (
-        <TaskCardContainer name={id} style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} className="task-card text-dark">
+        <TaskCardContainer 
+                // onClick={() => taskHandle.selectWhenClick(id)} 
+                name={id} style={color != null ? {backgroundColor: color} : {backgroundColor: "#FFFFF"}} 
+                className={`task-card text-dark `}>
             <MainTask>
                 <div className={`card-title ${color ?"text-white" : ""}  ${checked ? "blur" : ""}`}>
                     <Title>
@@ -423,7 +428,7 @@ const Card = (p) => {
                 })}
                 </SubTaskList>
 
-                <AddSubTask color={color} AddSub={subTaskHandle.add} placeholder={sub.length > 0 ? "": "Thêm subtask"}/>    
+                <AddSubTask id={id} color={color} AddSub={subTaskHandle.add} placeholder={sub.length > 0 ? "": "Thêm subtask"}/>    
             </Fragment>}
 
         </TaskCardContainer>
@@ -431,7 +436,7 @@ const Card = (p) => {
 }
 
 const AddSubTask = (p) => {
-    const { color, AddSub, placeholder } = p
+    const { id, color, AddSub, placeholder } = p
 
     const [value, setValue] = useState("")
 
@@ -447,30 +452,44 @@ const AddSubTask = (p) => {
         setValue(value)
     }
 
+    const saveSubTask = () => {
+        const newData = {
+            "id": nanoid(),
+            "title": value,
+            "done": false
+        }
+        AddSub(newData)
+        setValue("")
+    }
+
     const handleAddSubTask = (event) => {
         if (event.key === 'Enter') {
-            const newData = {
-                "id": nanoid(),
-                "title": value,
-                "done": false
-            }
-            AddSub(newData)
-            setValue("")
+            saveSubTask()
         }
     }
+
+    useEffect(() => {
+        const plusIcon = document.querySelector(`.${id}.plus`)
+        const input = document.querySelector(`.subtask-input.${id}`)
+
+        plusIcon.addEventListener("click", () => {
+            input.focus()
+        })
+    }, []);
 
     return (
         <AddSubTaskContainer className={`${color ? "text-white" : ""}`}>
             { value ==="" 
-                ? <Img.plus/>
-                : <Img.plusCircle/>
+                ? <span className={`${id} plus`}><Img.plus/></span>
+                : <span onClick={saveSubTask}><Img.plusCircle/></span>
             }
             <Input 
+                id={id}
                 value={value}
                 onInput={handleInput}
                 onKeyDown={handleAddSubTask}
                 name="title"
-                className={`${color ? "text-white" : ""}`}
+                className={`${color ? "text-white" : ""} subtask-input ${id}`}
                 inputStyle={inputStyle}
                 placeholder={placeholder}
                 plhdercolor={`${color ? "var(--white-text)": "var(--black-text)"}`}
@@ -578,7 +597,7 @@ export default TaskCard;
 
 const Container = styled.div `
     padding-top: 20px;
-    height: 70vh;
+    height: 70dvh;
     overflow-y: scroll;
     scrollbar-width: none; 
     
@@ -632,6 +651,10 @@ const TaskCardContainer = styled(motion.div) `
     
     &:hover {
         box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.06);
+    }
+
+    &.active {
+        border: 1.5px solid #626060;
     }
  
 `
@@ -735,8 +758,13 @@ const AddSubTaskContainer = styled.div `
     align-items: center;
     gap: 8px;
 
-    svg {
-        width: 18px;
+    span {
+        display: flex;
+        align-items: center;
+
+        svg {
+            width: 18px;
+        }
     }
 `
 const OptionContainer = styled.ul `
