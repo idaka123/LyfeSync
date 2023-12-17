@@ -13,7 +13,6 @@ const Sidebar = (p) => {
     const { isopen, toggle, isOpenOvelay, setIsOpenOverlay } = p
 
     const menuItems = [
-        { name: "home", label: 'Trang chủ', icon: Icon.home, link: paths.home },
         { name: "task", label: 'Tác vụ', icon: Icon.task, link: paths.planner },
         { name: "knowledge", label: 'Tri thức', icon: Icon.library, link: paths.knowledge },
         { name: "setting", label: 'Cài đặt', icon: Icon.setting, link: paths.setting },

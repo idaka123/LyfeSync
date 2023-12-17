@@ -1,5 +1,4 @@
 import DefaultLayout from "../Layout/default"
-import Home from "../Page/Home"
 import Planner from "../Page/Planner/Planner"
 import Knowledge from '../Page/Knowledge/Knowledge'
 import NoPage from "../Page/NoPage"
@@ -8,12 +7,6 @@ import Setting from "../Page/Setting/Setting"
 
 
 export const routes = [
-    {
-        name: "home",
-        page: <DefaultLayout><Home /></DefaultLayout>,
-        path: paths.home,
-        exact: true,
-    },
     {
         name: "planner",
         page: <DefaultLayout><Planner /></DefaultLayout>,

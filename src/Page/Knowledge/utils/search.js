@@ -7,7 +7,7 @@ const search = (value, valueArray) => {
     return temp === aLength;
   }
   const result = valueArray.filter(index => {
-    return compare(value.toLowerCase(), index.toLowerCase());
+    return compare(value.toLowerCase().trim(), index.toLowerCase().trim());
   })
   return result;
 }
