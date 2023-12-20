@@ -1613,7 +1613,6 @@ export const PodcastShowPlayllistHeaderStyled = styled.div`
     height: 40vh;
     background: linear-gradient(to bottom, rgb(160,160,152), rgb(82,82,77));
     display: flex;
-    margin-bottom: 1%;
     padding-bottom: 2%;
     .headerImage{
       width: 25%;
